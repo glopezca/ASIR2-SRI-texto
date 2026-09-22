@@ -1,33 +1,16 @@
+# 🌍⚡ UT5 · SERVIDORES WEB (HTTP) ⚡🌍
 
-> 🔬 **VERSIÓN V2 · REVISIÓN TÉCNICA 2026-09-18**
+### RA3 · Administración de servidores Web.
+
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
 >
-> Se ha realizado una segunda pasada sobre los bloques de código y las configuraciones prácticas. Añadida la instalación explícita del plugin `python3-certbot-apache` antes de utilizar Certbot.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
-> ⚠️ La validación automática cubre sintaxis y configuraciones aisladas; la validación extremo a extremo > de Cisco Packet Tracer, WSL2 y una VM real de Ubuntu 26.04 Server requiere ejecutar el laboratorio en esos entornos.
+> ### 🎯 Resultado de aprendizaje trabajado
+>
+> **RA3.** Administra servidores Web aplicando criterios de configuración y asegurando el funcionamiento del servicio.
 
-::: {align="center"}
-# 🌐⚡ UT5 · SERVIDORES WEB (HTTP) ⚡🌐
-
-### 🕸️ Del navegador al servidor · HTTP · HTTPS · Apache · Virtual Hosts · Proxy
-
-``` text
-╔══════════════════════════════════════════════════════════════════╗
-║                                                                  ║
-║             🌐 SERVICIOS WEB · CLIENTE ↔ SERVIDOR               ║
-║                                                                  ║
-║       HTTP 📡   HTTPS 🔐   Apache 🪶   Nginx 🚀   Proxy 🔀      ║
-║                                                                  ║
-║    🧪 Packet Tracer · WSL2 · VirtualBox + Ubuntu 26.04 Server   ║
-║                                                                  ║
-╚══════════════════════════════════════════════════════════════════╝
-```
-
-**SERVICIOS DE RED E INTERNET · CFGS ASIR**
-
-**Material docente actualizado · 2026.09**
-:::
-
-------------------------------------------------------------------------
+---
 
 > 🎯 **MISIÓN DE LA UT**
 >
@@ -43,7 +26,7 @@
 
 > ⚠️ **Actualización tecnológica**
 >
-> El capítulo original trabaja con Apache 2.2, IIS 7.5, Zentyal y
+> En versiones anteriores del material trabaja con Apache 2.2, IIS 7.5, Zentyal y
 > ejemplos de sistemas operativos de la época. Se conserva su estructura
 > conceptual, pero las prácticas se trasladan al entorno actual:
 >
@@ -56,7 +39,7 @@
 > La documentación actual de Ubuntu instala Apache mediante
 > `apt install apache2` y organiza la configuración en `apache2.conf`,
 > `ports.conf`, `mods-*`, `conf-*` y `sites-*`.
-> citeturn3search2turn3search1
+> 
 
 ------------------------------------------------------------------------
 
@@ -881,7 +864,7 @@ de multiplexación y transporte.
 
 # ⚡ 23. HTTP/2 y HTTP/3
 
-El capítulo original se centra en HTTP/1.x. En una infraestructura
+En versiones anteriores del material se centra en HTTP/1.x. En una infraestructura
 actual conviene conocer la evolución.
 
 ``` text
@@ -1087,7 +1070,7 @@ curl http://localhost/
 ```
 
 Ubuntu documenta `apache2` como el servidor HTTP actual disponible
-mediante APT. citeturn3search2
+mediante APT. 
 
 ------------------------------------------------------------------------
 
@@ -1127,7 +1110,7 @@ sites-available
 sites-enabled
 ```
 
-Ubuntu documenta esta organización explícitamente. citeturn3search2
+Ubuntu documenta esta organización explícitamente. 
 
 ------------------------------------------------------------------------
 
@@ -1181,7 +1164,7 @@ DocumentRoot /srv/www/asir
 
 Ubuntu utiliza `/var/www/html` como DocumentRoot del sitio
 predeterminado, aunque podemos crear estructuras propias como
-`/srv/www/...`. citeturn3search1
+`/srv/www/...`. 
 
 ------------------------------------------------------------------------
 
@@ -1420,7 +1403,7 @@ permiten servir sitios diferentes desde una misma IP.
 
 Apache documenta los Virtual Hosts basados en nombre como una forma de
 alojar varios sitios sobre una misma dirección IP.
-citeturn3search3turn3search11
+
 
 ------------------------------------------------------------------------
 
@@ -1453,7 +1436,7 @@ sudo apachectl -S
 ```
 
 Este comando permite inspeccionar cómo Apache interpreta los Virtual
-Hosts. citeturn3search3
+Hosts. 
 
 ------------------------------------------------------------------------
 
@@ -1496,7 +1479,7 @@ sudo apache2ctl configtest
 ```
 
 Ubuntu proporciona `a2enmod` y `a2dismod` para administrar módulos
-dinámicos. citeturn3search0
+dinámicos. 
 
 ------------------------------------------------------------------------
 
@@ -1568,7 +1551,7 @@ curl -k https://localhost/
 ```
 
 El módulo `mod_ssl` proporciona HTTPS en Apache; Ubuntu documenta
-también el VirtualHost SSL predeterminado. citeturn3search0
+también el VirtualHost SSL predeterminado. 
 
 ------------------------------------------------------------------------
 
@@ -1710,7 +1693,7 @@ Apache registra por defecto:
 ```
 
 Ubuntu documenta `CustomLog` y `ErrorLog` para controlar estos
-registros. citeturn3search1
+registros. 
 
 Observa:
 
@@ -2063,7 +2046,7 @@ APACHE
 Apache y OpenSSL actuales soportan Virtual Hosts basados en nombre con
 SNI. La selección del VirtualHost SSL utiliza el nombre indicado durante
 el handshake TLS cuando está disponible.
-citeturn3search8turn3search10
+
 
 ------------------------------------------------------------------------
 
@@ -2084,7 +2067,7 @@ certificado emitido por una CA
 Para una infraestructura pública actual, estudia ACME y Let's Encrypt.
 
 Ubuntu documenta Certbot como cliente ACME recomendado para obtener
-certificados de Let's Encrypt. citeturn3search4
+certificados de Let's Encrypt. 
 
 Ejemplo conceptual:
 
@@ -2540,7 +2523,7 @@ apache2ctl configtest → sintaxis
 ```
 
 Ubuntu documenta estas utilidades y la organización modular de Apache.
-citeturn3search0turn3search1
+
 
 ------------------------------------------------------------------------
 
@@ -2568,7 +2551,7 @@ HTTPS
 
 Ubuntu documenta Certbot y los plugins para Apache y Nginx como
 mecanismos para obtener y configurar certificados ACME.
-citeturn3search4
+
 
 ### No confundir
 
@@ -3007,67 +2990,6 @@ d)  El puerto de HTTP.
 
 ------------------------------------------------------------------------
 
-# 🔄 71. Correspondencia con el capítulo original
-
-  -----------------------------------------------------------------------
-  Capítulo original                   UT5 actualizada
-  ----------------------------------- -----------------------------------
-  5.1 Introducción                    Introducción a la Web
-
-  5.2 WWW                             WWW e Internet
-
-  5.3 W3C y estándares Web            Estándares y evolución
-
-  5.4 Componentes y funcionamiento    Arquitectura cliente/servidor
-
-  5.5 URIs y URLs                     Identificación de recursos
-
-  5.6 Páginas, sitios y aplicaciones  Arquitecturas web
-
-  5.7 Servidores web                  Apache + comparación Nginx
-
-  5.8 Clientes web                    Navegadores + curl
-
-  5.9 Proxies web                     Proxy y reverse proxy
-
-  5.10 HTTP                           HTTP/1.x + evolución HTTP/2/3
-
-  5.11 MIME                           Content-Type
-
-  5.12 Seguridad                      Seguridad Web
-
-  5.13 HTTPS                          TLS + certificados
-
-  5.14 Virtual Hosting                IP/nombre/puerto + SNI
-
-  Apache 2.2 Linux                    **Apache 2.4 en Ubuntu 26.04**
-
-  IIS 7.5 Windows                     **Se estudia conceptualmente; no
-                                      plataforma principal**
-
-  Zentyal                             Se elimina como plataforma
-                                      principal
-
-  Prácticas Apache                    Se mantienen y actualizan
-
-  Prácticas IIS                       Se sustituyen por Apache/Nginx
-
-  Prácticas HTTPS                     Certificados de laboratorio + ACME
-
-  PHP/MySQL                           Se sustituye por aplicación de
-                                      laboratorio y reverse proxy
-
-  Monitorización y logs               Se mantiene y amplía
-
-  Alojamiento Internet                Se mantiene como arquitectura
-                                      conceptual
-  -----------------------------------------------------------------------
-
-El índice original confirma la secuencia 5.1--5.14 y las secciones
-posteriores de prácticas, resumen, test y comprobación del aprendizaje.
-citeturn4search0
-
-------------------------------------------------------------------------
 
 # 🧱 72. Evolución tecnológica
 
@@ -3099,7 +3021,7 @@ posteriores de prácticas, resumen, test y comprobación del aprendizaje.
 
 La configuración moderna de Apache en Ubuntu se apoya en módulos,
 Virtual Hosts y ficheros separados para sitios y configuraciones.
-citeturn3search0turn3search1
+
 
 ------------------------------------------------------------------------
 
@@ -3149,85 +3071,3 @@ DIAGNÓSTICO
 
 ------------------------------------------------------------------------
 
-# 📖 74. Referencias
-
-### Fuente principal
-
-**Garceta --- Servicios de Red e Internet**, capítulo 5: **«Servidores
-Web (HTTP)»**.
-
-La estructura original incluye WWW, estándares W3C, componentes y
-funcionamiento, URIs/URLs, páginas y aplicaciones web, servidores,
-clientes, proxies, HTTP, MIME, seguridad, HTTPS, alojamiento virtual,
-prácticas, resumen, test y comprobación del aprendizaje.
-citeturn4search0
-
-El programa asociado al libro fija para esta unidad objetivos como
-instalar y configurar servidores web, activar módulos, crear sitios
-virtuales, configurar autenticación y control de acceso, instalar
-certificados, establecer comunicaciones seguras, monitorizar y analizar
-registros. citeturn1view0
-
-### Documentación técnica actual
-
--   Ubuntu Server --- instalación de Apache2. citeturn3search2
--   Ubuntu Server --- configuración de Apache2 y Virtual Hosts.
-    citeturn3search1
--   Ubuntu Server --- módulos Apache2 y HTTPS. citeturn3search0
--   Apache HTTP Server --- Virtual Hosts.
-    citeturn3search3turn3search9
--   Apache HTTP Server --- SSL/TLS. citeturn3search6
--   Ubuntu Server --- certificados TLS/ACME. citeturn3search4
--   Ubuntu Server --- configuración de Nginx. citeturn3search7
-
-------------------------------------------------------------------------
-
-::: {align="center"}
-## 🌐 UT5 · SERVIDORES WEB
-
-``` text
-          DNS
-           │
-           ▼
-       TCP / QUIC
-           │
-           ▼
-      HTTP / HTTPS
-           │
-     ┌─────┴─────┐
-     │           │
-   Apache      Nginx
-     │           │
-     └─────┬─────┘
-           ▼
-      VIRTUAL HOSTS
-           │
-           ▼
-       APLICACIÓN
-           │
-           ▼
-        📜 LOGS
-           │
-           ▼
-       🧠 DIAGNÓSTICO
-```
-
-**NO SOLO PUBLICAR UNA WEB.\
-ADMINISTRAR EL SERVICIO WEB.**
-
-**FIN DE LA UT5**
-:::
-
-
----
-
-# 🐳 Laboratorio Docker Compose · Anexo IV
-
-La arquitectura `cliente → Nginx → Apache` de las prácticas de reverse proxy está disponible en [`docker/ut5`](docker/ut5/).
-
-```bash
-cd docker/ut5
-docker compose up -d
-curl http://localhost:8080/
-docker compose logs -f nginx
-```

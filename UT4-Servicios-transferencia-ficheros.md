@@ -1,33 +1,16 @@
-
-> 🔬 **VERSIÓN V2 · REVISIÓN TÉCNICA 2026-09-18**
->
-> Se ha realizado una segunda pasada sobre los bloques de código y las configuraciones prácticas. Revisado el `chroot_local_user=YES`: la práctica ahora evita una raíz FTP escribible por el usuario y utiliza `/upload` para las subidas.
->
-> ⚠️ La validación automática cubre sintaxis y configuraciones aisladas; la validación extremo a extremo > de Cisco Packet Tracer, WSL2 y una VM real de Ubuntu 26.04 Server requiere ejecutar el laboratorio en esos entornos.
-
-::: {align="center"}
 # 📂⚡ UT4 · SERVICIOS DE TRANSFERENCIA DE FICHEROS ⚡📂
 
-### 🔄 Mover información entre sistemas · FTP · FTPS · TFTP · SFTP · SCP
+### RA4 · Transferencia de archivos.
 
-``` text
-╔══════════════════════════════════════════════════════════════════╗
-║                                                                  ║
-║     📂 TRANSFERENCIA DE FICHEROS · CLIENTE ↔ SERVIDOR           ║
-║                                                                  ║
-║       FTP 🔓   FTPS 🔐   TFTP ⚡   SFTP 🛡️   SCP 📦             ║
-║                                                                  ║
-║    🧪 Packet Tracer · WSL2 · VirtualBox + Ubuntu 26.04 Server   ║
-║                                                                  ║
-╚══════════════════════════════════════════════════════════════════╝
-```
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
+>
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
+>
+> ### 🎯 Resultado de aprendizaje trabajado
+>
+> **RA4.** Administra servicios de transferencia de archivos asegurando y limitando el acceso a la información.
 
-**SERVICIOS DE RED E INTERNET · CFGS ASIR**
-
-**Material docente actualizado · 2026.09**
-:::
-
-------------------------------------------------------------------------
+---
 
 > 🎯 **MISIÓN DE LA UT**
 >
@@ -44,7 +27,7 @@
 
 > ⚠️ **Actualización tecnológica**
 >
-> El manual original fue escrito cuando FTP, navegadores con soporte
+> En versiones anteriores del material fue escrito cuando FTP, navegadores con soporte
 > FTP, Windows Server 2008, FileZilla Server y `vsftpd` eran
 > herramientas habituales. La arquitectura conceptual se conserva, pero
 > las prácticas se trasladan a:
@@ -56,7 +39,7 @@
 > Para transferencias seguras se da especial importancia a **SFTP/SCP
 > sobre OpenSSH**. Ubuntu recomienda utilizar SFTP para transferencias
 > seguras y advierte que FTP transmite credenciales y datos sin cifrar.
-> citeturn1search1turn1search0
+> 
 
 ------------------------------------------------------------------------
 
@@ -155,7 +138,7 @@ Existen diferentes soluciones.
 >
 > SFTP es un protocolo de transferencia que funciona sobre SSH. FTPS es
 > FTP protegido mediante TLS. Son tecnologías diferentes. Ubuntu
-> documenta explícitamente esta diferencia. citeturn1search1
+> documenta explícitamente esta diferencia. 
 
 ------------------------------------------------------------------------
 
@@ -210,7 +193,7 @@ OpenSSH / sshd
 diseñado para transferir ficheros entre sistemas conectados mediante
 TCP/IP.
 
-El capítulo original lo presenta como un servicio cliente/servidor con
+En versiones anteriores del material lo presenta como un servicio cliente/servidor con
 operaciones de listado, descarga, subida y administración de ficheros.
 
 ``` text
@@ -402,7 +385,7 @@ El usuario no debería poder escapar de su árbol autorizado.
 
 En `vsftpd`, el aislamiento de usuarios locales puede configurarse
 mediante directivas como `chroot_local_user`. La configuración se
-realiza en `/etc/vsftpd.conf`. citeturn0search1
+realiza en `/etc/vsftpd.conf`. 
 
 ------------------------------------------------------------------------
 
@@ -428,7 +411,7 @@ gFTP
 
 ### 🌐 Navegadores
 
-El manual original utilizaba navegadores como clientes FTP.
+En versiones anteriores del material utilizaba navegadores como clientes FTP.
 
 > ⚠️ **Actualización importante**
 >
@@ -809,7 +792,7 @@ FTP tradicional
 ```
 
 Ubuntu advierte expresamente que FTP es inseguro para transferencias que
-requieran protección de credenciales o datos. citeturn1search1
+requieran protección de credenciales o datos. 
 
 ------------------------------------------------------------------------
 
@@ -901,13 +884,13 @@ La distinción es importante porque afecta a:
 > ecosistema SSH.
 
 Ubuntu documenta SFTP como transferencia de ficheros sobre un transporte
-SSH cifrado. citeturn1search3
+SSH cifrado. 
 
 ------------------------------------------------------------------------
 
 # ⚡ 26. FXP
 
-El capítulo original incluye **FXP --- File eXchange Protocol**.
+En versiones anteriores del material incluye **FXP --- File eXchange Protocol**.
 
 La idea es:
 
@@ -1146,7 +1129,7 @@ sudo apt install vsftpd
 ```
 
 y utiliza `/etc/vsftpd.conf` como fichero principal de configuración.
-citeturn1search1turn0search0
+
 
 ------------------------------------------------------------------------
 
@@ -1229,7 +1212,7 @@ connect_from_port_20=YES
 > ```
 >
 > La documentación de Ubuntu mantiene la referencia de configuración de
-> `vsftpd`. citeturn0search1
+> `vsftpd`. 
 
 ------------------------------------------------------------------------
 
@@ -1309,7 +1292,7 @@ permisos restantes lo permitan.
 
 La documentación de `vsftpd` identifica, entre otros, `STOR`, `DELE`,
 `RNFR`, `RNTO`, `MKD` y `RMD` como operaciones afectadas por
-`write_enable`. citeturn0search1
+`write_enable`. 
 
 Prueba:
 
@@ -1382,7 +1365,7 @@ El directorio predeterminado de `ftp` en Ubuntu es:
 ```
 
 Ubuntu documenta este directorio como raíz FTP predeterminada para el
-usuario anónimo. citeturn1search1
+usuario anónimo. 
 
 Crea:
 
@@ -1453,7 +1436,7 @@ pasv_max_port=40100
 
 En la documentación de `vsftpd`, `pasv_min_port` y `pasv_max_port`
 permiten restringir el rango utilizado para conexiones PASV, lo que
-facilita el diseño del firewall. citeturn0search1
+facilita el diseño del firewall. 
 
 Comprueba:
 
@@ -1550,7 +1533,7 @@ sudo tail -f /var/log/vsftpd.log
 ```
 
 La documentación de `vsftpd` contempla `xferlog_enable` y el registro de
-transferencias en `/var/log/vsftpd.log`. citeturn0search1
+transferencias en `/var/log/vsftpd.log`. 
 
 ------------------------------------------------------------------------
 
@@ -1610,7 +1593,7 @@ Para nuevas prácticas de transferencia segura utilizaremos **OpenSSH**.
 
 Ubuntu documenta OpenSSH como la implementación habitual de SSH en
 Ubuntu y proporciona herramientas para control remoto y transferencia
-segura de datos. citeturn1search0
+segura de datos. 
 
 Instalación:
 
@@ -1662,7 +1645,7 @@ SFTP
        └── operaciones de fichero
 ```
 
-OpenSSH proporciona el subsistema `sftp-server`. citeturn0search3
+OpenSSH proporciona el subsistema `sftp-server`. 
 
 ------------------------------------------------------------------------
 
@@ -1701,7 +1684,7 @@ sftp> bye
 ```
 
 El cliente `sftp` realiza las operaciones sobre un transporte SSH
-cifrado. citeturn1search3
+cifrado. 
 
 ------------------------------------------------------------------------
 
@@ -1729,7 +1712,7 @@ scp -r proyecto/ alumno@192.168.10.10:/home/alumno/
 
 La implementación moderna de OpenSSH utiliza SFTP como protocolo de
 transferencia para `scp`, manteniendo la autenticación y seguridad de
-SSH. citeturn0search7
+SSH. 
 
 > ⚠️ Esto es importante para explicar la evolución de `scp`: no conviene
 > enseñar únicamente la idea histórica de «protocolo SCP independiente»
@@ -1764,7 +1747,7 @@ sftp alumno@192.168.10.10
 ```
 
 Ubuntu recomienda Ed25519 como algoritmo de generación de claves SSH en
-su documentación actual. citeturn1search0
+su documentación actual. 
 
 ------------------------------------------------------------------------
 
@@ -1853,7 +1836,7 @@ y la documentación oficial de OpenSSH antes de aplicar la configuración.
 > sudo sshd -t
 > ```
 >
-> citeturn1search0
+> 
 
 ------------------------------------------------------------------------
 
@@ -2451,7 +2434,7 @@ Ideas fundamentales:
 9.  TFTP utiliza UDP y proporciona una funcionalidad mínima.
 10. SFTP funciona sobre SSH.
 11. SCP permite copias mediante SSH; OpenSSH moderno utiliza SFTP como
-    transporte para `scp`. citeturn0search7
+    transporte para `scp`. 
 12. `vsftpd` permite estudiar en profundidad FTP, usuarios, permisos,
     aislamiento y conexiones pasivas.
 13. OpenSSH proporciona una solución segura para transferencia de
@@ -2647,7 +2630,7 @@ SSH proporciona un canal seguro para:
 -   administración remota;
 -   transferencia de ficheros.
 
-Ubuntu utiliza OpenSSH como implementación habitual. citeturn1search0
+Ubuntu utiliza OpenSSH como implementación habitual. 
 
 ------------------------------------------------------------------------
 
@@ -2658,7 +2641,7 @@ sobre SSH.
 
 **SCP** se utiliza tradicionalmente para copiar ficheros entre sistemas.
 En OpenSSH moderno, `scp` utiliza SFTP como protocolo de transferencia.
-citeturn0search7
+
 
 ------------------------------------------------------------------------
 
@@ -2702,9 +2685,9 @@ Un procedimiento razonable sería:
 
 # 📝 70. Test de repaso
 
-El capítulo original contiene un test de 10 preguntas. Algunas
+En versiones anteriores del material contiene un test de 10 preguntas. Algunas
 cuestiones dependen de detalles concretos de la terminología y
-configuración utilizada en el manual original.
+configuración utilizada en el material previo.
 
 Para esta versión actualizada se propone este test:
 
@@ -2802,35 +2785,6 @@ d)  `data_min` / `data_max`
 
 ------------------------------------------------------------------------
 
-# 📚 72. Correspondencia con el capítulo original
-
-  Capítulo original            UT4 actualizada
-  ---------------------------- --------------------------------------
-  Servicios de transferencia   Transferencia de ficheros
-  FTP                          FTP + arquitectura actual
-  Clientes FTP                 CLI + clientes gráficos
-  Servidores FTP               `vsftpd`
-  Tipos de acceso              Anónimo + autenticado
-  Conexiones FTP               Control + datos
-  Modo activo                  Activo + NAT/firewall
-  Modo pasivo                  PASV + rango de puertos
-  Tipos de transferencia       ASCII + binario
-  Seguridad                    Análisis crítico de FTP
-  FTPS                         TLS
-  FXP                          Transferencia servidor-servidor
-  TFTP                         UDP/69 + laboratorio Cisco
-  SFTP/SCP                     OpenSSH
-  FileZilla                    Cliente gráfico complementario
-  FileZilla Server Windows     Sustituido por `vsftpd`
-  `vsftpd`                     **Se mantiene y actualiza**
-  Zentyal                      Se elimina como plataforma principal
-  IIS FTP                      Se trata como tecnología histórica
-  Windows 2008                 Sustituido por Ubuntu 26.04
-  Navegador FTP                **Eliminado como práctica actual**
-  Wireshark                    Se mantiene y amplía
-  Prácticas                    Packet Tracer + WSL2 + VirtualBox
-
-------------------------------------------------------------------------
 
 # 🔄 73. Evolución tecnológica
 
@@ -2860,7 +2814,7 @@ d)  `data_min` / `data_max`
 Ubuntu mantiene `vsftpd` como servidor FTP, pero su documentación actual
 advierte que FTP no debe utilizarse para transferencias que necesiten
 confidencialidad y remite a SFTP/OpenSSH para ese propósito.
-citeturn1search1
+
 
 ------------------------------------------------------------------------
 
@@ -2943,69 +2897,3 @@ DIAGNÓSTICO
 
 ------------------------------------------------------------------------
 
-# 📖 76. Referencias
-
-### Fuente principal
-
-**Garceta --- Servicios de Red e Internet**, capítulo 4: **«Servicios de
-transferencia de ficheros»**.
-
-El índice del manual sitúa el capítulo en las páginas 155--194 e incluye
-FTP, servidores y clientes, tipos de acceso, conexiones y modos,
-transferencia, seguridad, FTPS, FXP, TFTP, SFTP/SCP, prácticas, resumen
-y test de repaso. fileciteturn23file0L21-L23
-
-El capítulo original establece como objetivos instalar y configurar
-servidores de transferencia, configurar acceso anónimo, crear usuarios y
-grupos, establecer límites y comprobar los modos activo y pasivo.
-fileciteturn25file0L11-L13
-
-### Documentación actual
-
--   Ubuntu Server --- configuración de FTP con `vsftpd`.
-    citeturn1search1
--   Ubuntu Server --- OpenSSH Server. citeturn1search0
--   Ubuntu/Manpages --- `vsftpd` y `vsftpd.conf`.
-    citeturn0search0turn0search1
--   OpenSSH --- `sftp-server`. citeturn0search3
--   OpenSSH --- `scp`. citeturn0search7
-
-------------------------------------------------------------------------
-
-::: {align="center"}
-## 📂 UT4 · TRANSFERENCIA DE FICHEROS
-
-``` text
-FTP ────────► comprender
-FTPS ───────► proteger con TLS
-TFTP ───────► simplificar
-SFTP ───────► proteger con SSH
-SCP ────────► copiar con SSH
-
-             🧠
-      NO SOLO TRANSFERIR
-       SINO COMPRENDER
-```
-
-**FIN DE LA UT4**
-:::
-
-
----
-
-# 🐳 Laboratorio Docker Compose · Anexo IV
-
-La práctica de transferencia se puede reproducir con [`docker/ut4`](docker/ut4/), que proporciona FTP y SSH/SFTP.
-
-```bash
-cd docker/ut4
-docker compose up -d
-docker compose exec client nc -vz fileserver 21
-docker compose exec client nc -vz fileserver 22
-```
-
-Para SFTP:
-
-```bash
-docker compose exec client sftp -P 22 alumno@fileserver
-```

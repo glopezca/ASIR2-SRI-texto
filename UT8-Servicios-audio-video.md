@@ -1,44 +1,18 @@
-<div align="center">
+# 🎧📺⚡ UT8 · SERVICIOS DE AUDIO Y VÍDEO ⚡🎧
 
-# 🎧📺 UT8 · SERVICIOS DE AUDIO Y VÍDEO 📺🎧
+### RA7 y RA8 · Servicios de audio y vídeo.
 
-### 🌐 Multimedia · Códecs · Streaming · Podcast · VoIP · Videoconferencia
-
-```text
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║                 🎧  SERVICIOS DE AUDIO Y VÍDEO  📺                  ║
-║                                                                      ║
-║     AUDIO ──► CÓDEC ──► STREAMING ──► CLIENTE                     ║
-║        │                         │                                   ║
-║      PODCAST                  HLS / RTMP                            ║
-║                                  │                                   ║
-║                                  ▼                                   ║
-║                         ┌────────────────┐                           ║
-║                         │ SERVIDOR MEDIA │                           ║
-║                         └───────┬────────┘                           ║
-║                                 │                                    ║
-║                 ┌───────────────┼───────────────┐                    ║
-║                 ▼               ▼               ▼                    ║
-║              🎵 Audio         🎬 Vídeo       🎥 Directo              ║
-║                                                                      ║
-║  🧪 Cisco Packet Tracer · WSL2 · VirtualBox + Ubuntu 26.04 Server   ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
-```
-
-**SERVICIOS DE RED E INTERNET · CFGS ASIR**
-
-**Material docente actualizado · 2026**
-
-</div>
-
-> 🔬 **VERSIÓN V2 · REVISIÓN TÉCNICA 2026-09-18**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
 >
-> Se ha realizado una segunda pasada sobre los bloques de código y las configuraciones prácticas. Corregida la publicación FFmpeg→Icecast (`icecast://`), sustituido el placeholder de RTMP por `libnginx-mod-rtmp` y reforzada la configuración HLS con MIME types y `nginx -t`.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
-> ⚠️ La validación automática cubre sintaxis y configuraciones aisladas; la validación extremo a extremo > de Cisco Packet Tracer, WSL2 y una VM real de Ubuntu 26.04 Server requiere ejecutar el laboratorio en esos entornos.
-
+> ### 🎯 Resultados de aprendizaje trabajados
+>
+> **RA7.** Administra servicios de audio identificando las necesidades de distribución y adaptando los formatos.
+>
+> **RA8.** Administra servicios de vídeo identificando las necesidades de distribución y adaptando los formatos.
+>
+> La UT8 se divide conceptualmente en los servicios de audio y de vídeo para mantener la correspondencia curricular.
 
 ---
 
@@ -91,7 +65,7 @@ La estructura de referencia para esta unidad gira alrededor de:
 La organización coincide con índices publicados para el módulo que incluyen
 formatos multimedia, reproducción, streaming, distribución/suscripción,
 VoIP, videoconferencia y bloques finales de prácticas, resumen y evaluación.
-citeturn0search11turn0search2
+
 
 > 🔄 **Actualización tecnológica**
 >
@@ -920,7 +894,7 @@ FUENTE
 ```
 
 Icecast utiliza **mountpoints** para identificar streams independientes. Un
-mismo servidor puede alojar varios streams. citeturn1search4
+mismo servidor puede alojar varios streams. 
 
 ---
 
@@ -950,7 +924,7 @@ Icecast
 
 La documentación de Icecast describe los mountpoints como identificadores
 únicos de cada broadcast/stream y permite configurar parámetros específicos
-por mountpoint. citeturn1search4turn1search5
+por mountpoint. 
 
 ---
 
@@ -1006,7 +980,7 @@ logging
 
 La documentación de Icecast organiza la configuración en límites,
 autenticación, relays, mountpoints, rutas, logging y seguridad.
-citeturn1search0turn1search5
+
 
 ---
 
@@ -1340,7 +1314,7 @@ Arquitectura:
 
 HLS permite distribuir vídeo utilizando HTTP y playlists `.m3u8`. Nginx
 dispone además de un módulo HLS específico para determinados escenarios de
-ficheros multimedia. citeturn2search1
+ficheros multimedia. 
 
 ---
 
@@ -1363,7 +1337,7 @@ RTMP SERVER
 ```
 
 El módulo `nginx-rtmp-module` proporciona soporte para RTMP y puede generar
-HLS/DASH según la configuración. citeturn2search0turn2search6
+HLS/DASH según la configuración. 
 
 ---
 
@@ -1453,7 +1427,7 @@ rtmp {
 
 El esquema anterior pertenece al modelo habitual del módulo
 `nginx-rtmp-module`: una aplicación `live`, entrada RTMP y generación HLS.
-citeturn2search0
+
 
 > 🔐 Para producción deben añadirse controles de publicación, autenticación,
 > límites, TLS en la distribución HTTP y una política de acceso adecuada.
@@ -3429,27 +3403,6 @@ d) bitrate
 
 ---
 
-# 🔄 105. Correspondencia conceptual
-
-| Contenido de la unidad | Actualización práctica |
-|---|---|
-| Formatos multimedia | MP3, AAC, Opus, FLAC, MP4, WebM, MKV |
-| Códecs | H.264, H.265, VP9, AV1, AAC, Opus |
-| Reproducción | VLC + navegador |
-| Streaming | VOD + Live |
-| Servidores de audio | **Icecast** |
-| Codificación | **FFmpeg** |
-| Streaming vídeo | **Nginx + RTMP** |
-| Distribución vídeo | **HLS** |
-| Podcast | RSS + enclosure |
-| VoIP | SIP + RTP |
-| Videoconferencia | WebRTC + arquitectura multimedia |
-| Análisis | Wireshark/tcpdump |
-| Cliente de pruebas | WSL2 |
-| Servidor | **VirtualBox + Ubuntu 26.04 Server** |
-| Red/simulación | Cisco Packet Tracer |
-
----
 
 # 🧪 106. Secuencia recomendada de laboratorio
 
@@ -3538,88 +3491,3 @@ DIAGNÓSTICO
 
 ---
 
-# 📖 108. Referencias
-
-### Estructura curricular
-
-La unidad de **Servicios de audio y vídeo** incluye como bloques principales
-formatos multimedia, herramientas de reproducción, streaming, distribución y
-suscripción, VoIP y videoconferencia. citeturn0search11turn0search2
-
-### Icecast
-
-La documentación de Icecast describe los mountpoints, fuentes, clientes,
-límites y configuración específica de cada stream. citeturn1search4turn1search5
-
-### Nginx / RTMP
-
-El módulo RTMP de Nginx proporciona funcionalidades para streaming RTMP y
-puede trabajar con HLS y DASH según la implementación utilizada.
-citeturn2search0turn2search6
-
-### HLS
-
-La documentación de Nginx describe HLS mediante playlists `.m3u8` y
-segmentos, y especifica los formatos/códecs compatibles con su módulo HLS
-concreto. citeturn2search1
-
----
-
-<div align="center">
-
-# 🎧📺 UT8 · SERVICIOS DE AUDIO Y VÍDEO 📺🎧
-
-```text
-                 🎵 AUDIO
-                    │
-                  CÓDEC
-                    │
-                 ICECAST
-                    │
-                    ▼
-                   VLC
-
-                 🎬 VÍDEO
-                    │
-                  CÓDEC
-                    │
-                  RTMP
-                    │
-                 NGINX
-                    │
-                  HLS
-                    │
-                    ▼
-                 VLC / WEB
-
-             📞 SIP + RTP · 🎥 WebRTC
-```
-
-**CODIFICAR · TRANSMITIR · REPRODUCIR · DIAGNOSTICAR**
-
-**FIN DE LA UT8**
-
-</div>
-
-
----
-
-# 🐳 Laboratorio Docker Compose · Anexo IV
-
-Los pipelines multimedia reproducibles están en [`docker/ut8`](docker/ut8/):
-
-```text
-FFmpeg → Icecast
-FFmpeg → RTMP → Nginx → HLS
-```
-
-Ejecutar:
-
-```bash
-cd docker/ut8
-docker compose up -d
-curl http://localhost:8000/
-curl http://localhost:8088/hls/ut8.m3u8
-```
-
-Las fuentes se generan con FFmpeg (`lavfi`), por lo que no es necesario copiar archivos multimedia al repositorio.

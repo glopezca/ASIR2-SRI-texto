@@ -1,34 +1,16 @@
+# 🌐⚡ UT3 · SERVICIO DNS ⚡🌐
 
-> 🔬 **VERSIÓN V2 · REVISIÓN TÉCNICA 2026-09-18**
+### RA1 · Resolución de nombres.
+
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
 >
-> Se ha realizado una segunda pasada sobre los bloques de código y las configuraciones prácticas. Revisados BIND9, zonas directa/inversa y comandos `named-checkconf`/`named-checkzone`; no se detectaron errores de sintaxis en los bloques ejecutables.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
-> ⚠️ La validación automática cubre sintaxis y configuraciones aisladas; la validación extremo a extremo > de Cisco Packet Tracer, WSL2 y una VM real de Ubuntu 26.04 Server requiere ejecutar el laboratorio en esos entornos.
+> ### 🎯 Resultado de aprendizaje trabajado
+>
+> **RA1.** Administra servicios de resolución de nombres, analizándolos y garantizando la seguridad del servicio.
 
-::: {align="center"}
-# 🌐⚡ UT3 · SERVICIO DE NOMBRES DE DOMINIO (DNS) ⚡🌐
-
-### 🧭 De una dirección IP a un nombre... y del nombre a la dirección
-
-``` text
-╔══════════════════════════════════════════════════════════════════╗
-║                                                                  ║
-║       🌐 DNS · NOMBRES · ZONAS · REGISTROS · RESOLUCIÓN         ║
-║                                                                  ║
-║    🔎 RECURSIVO   🔁 ITERATIVO   🗂️ BIND9   🛡️ DNSSEC          ║
-║                                                                  ║
-╚══════════════════════════════════════════════════════════════════╝
-```
-
-**SERVICIOS DE RED E INTERNET · CFGS ASIR**
-
-`Cisco Packet Tracer` · `WSL2 + Ubuntu 26.04` ·
-`VirtualBox + Ubuntu 26.04 Server`
-
-**Material docente actualizado · 2026.09**
-:::
-
-------------------------------------------------------------------------
+---
 
 > 🎯 **MISIÓN DE LA UT**
 >
@@ -162,7 +144,7 @@ jerárquicamente.
 
 ICANN describe el DNS como una jerarquía que comienza en la raíz y se
 estructura mediante delegaciones hacia los dominios de nivel superior.
-citeturn0search1turn0search2
+
 
 ``` text
                          .
@@ -177,7 +159,7 @@ estructura mediante delegaciones hacia los dominios de nivel superior.
 ```
 
 La raíz contiene información de referencia hacia los TLD; no contiene
-todos los registros de todos los dominios finales. citeturn0search8
+todos los registros de todos los dominios finales. 
 
 ------------------------------------------------------------------------
 
@@ -333,7 +315,7 @@ La zona padre mantiene información que permite encontrar los servidores
 autoritativos de la zona hija.
 
 La delegación es un elemento fundamental de la arquitectura DNS
-jerárquica. citeturn0search2
+jerárquica. 
 
 ------------------------------------------------------------------------
 
@@ -344,7 +326,7 @@ TLD.
 
 Actualmente existen **13 identidades de servidores raíz**, operadas por
 distintos operadores, que se sirven mediante una infraestructura global
-de más de 1500 instancias. citeturn0search6turn0search8
+de más de 1500 instancias. 
 
 ``` text
 CLIENTE
@@ -476,7 +458,7 @@ dig +trace www.example.com
 
 `dig` es una herramienta específica para interrogar servidores DNS y es
 una de las herramientas habituales de diagnóstico de DNS.
-citeturn1search0
+
 
 ------------------------------------------------------------------------
 
@@ -499,7 +481,7 @@ named.conf.local
 named.conf.default-zones
 ```
 
-Ubuntu documenta esta estructura para BIND9. citeturn0search5
+Ubuntu documenta esta estructura para BIND9. 
 
 ------------------------------------------------------------------------
 
@@ -540,7 +522,7 @@ Envía consultas a otros servidores DNS.
 
 Ubuntu documenta que BIND9 puede funcionar simultáneamente como caché,
 primary y secondary dependiendo de las zonas que sirva.
-citeturn0search5
+
 
 ------------------------------------------------------------------------
 
@@ -561,7 +543,7 @@ www.example.es.   3600   IN   A   192.0.2.10
 ```
 
 BIND9 utiliza registros de recursos para describir las características
-de una zona. citeturn1search2
+de una zona. 
 
 ------------------------------------------------------------------------
 
@@ -1014,7 +996,7 @@ Una tabla:
 ```
 
 Ubuntu documenta BIND9 como servidor DNS y mantiene su configuración
-bajo `/etc/bind`. citeturn0search5
+bajo `/etc/bind`. 
 
 Instalación:
 
@@ -1037,7 +1019,7 @@ named -v
 
 En Ubuntu 26.04 LTS el paquete `bind9` pertenece a la rama BIND 9.20.24
 en los repositorios publicados para `resolute`.
-citeturn1search3turn1search13
+
 
 ------------------------------------------------------------------------
 
@@ -1074,7 +1056,7 @@ options {
 > un ejemplo de laboratorio.
 
 Ubuntu documenta el uso de `forwarders` en BIND9 para un servidor caché.
-citeturn0search5
+
 
 ### Verificación
 
@@ -1167,7 +1149,7 @@ sudo named-checkzone asir.test /etc/bind/db.asir.test
 `named-checkconf` comprueba la sintaxis de la configuración de `named`,
 pero no sustituye a la comprobación de las zonas. `named-checkzone`
 comprueba la sintaxis e integridad de un fichero de zona antes de
-cargarlo. citeturn0search9turn1search0
+cargarlo. 
 
 Finalmente:
 
@@ -1315,7 +1297,7 @@ El servidor secundario obtiene los datos de la zona desde el primary.
 
 Ubuntu documenta esta función de BIND9: el primary obtiene los datos de
 zona desde un fichero local y el secondary obtiene los datos desde otro
-servidor autoritativo. citeturn0search5
+servidor autoritativo. 
 
 ### Objetivos
 
@@ -1374,7 +1356,7 @@ PRIMARY                         SECONDARY
 ```
 
 En BIND9, TSIG utiliza claves compartidas para autenticar determinadas
-comunicaciones y operaciones. citeturn1search0
+comunicaciones y operaciones. 
 
 ### Idea fundamental
 
@@ -1475,7 +1457,7 @@ DS
 ```
 
 BIND9 proporciona herramientas y políticas específicas para firmar zonas
-y mantener sus claves. citeturn0search3turn0search7
+y mantener sus claves. 
 
 ``` text
 Zona DNS
@@ -1496,13 +1478,13 @@ Zona DNS
 > ⚠️ **DNSSEC no cifra las consultas DNS.**
 >
 > Su objetivo es proporcionar autenticidad e integridad de los datos
-> DNS, no confidencialidad del tráfico. citeturn0search13
+> DNS, no confidencialidad del tráfico. 
 
 ------------------------------------------------------------------------
 
 # 🧨 46. Amenazas DNS
 
-Entre los problemas de seguridad tratados en el capítulo original se
+Entre los problemas de seguridad tratados en el material previo se
 encuentran:
 
 -   DNS spoofing.
@@ -2079,14 +2061,14 @@ NSEC/NSEC3
 ```
 
 No cifra las consultas DNS: su objetivo es validar los datos y proteger
-la cadena de confianza. citeturn0search3turn0search13
+la cadena de confianza. 
 
 ------------------------------------------------------------------------
 
 # 📝 55. Test de repaso --- respuestas
 
-El capítulo original incluye además un test de 10 preguntas.
-fileciteturn16file0L1-L10
+En versiones anteriores del material incluye además un test de 10 preguntas.
+
 
 ### Respuestas
 
@@ -2103,7 +2085,7 @@ El capítulo original incluye además un test de 10 preguntas.
      9      **a**
     10      **a**
 
-> ⚠️ **Nota sobre la pregunta 6 del material original**
+> ⚠️ **Nota sobre la pregunta 6 del material previo**
 >
 > La redacción presenta un problema: las opciones mostradas pueden ser
 > compatibles con el funcionamiento normal de servidores DNS que
@@ -2177,128 +2159,4 @@ El alumno debe identificar:
 
 ------------------------------------------------------------------------
 
-# 🔄 57. Correspondencia con el capítulo original
 
-  -----------------------------------------------------------------------
-  Capítulo original                   UT3 actualizada
-  ----------------------------------- -----------------------------------
-  Sistemas de nombres planos y        Jerarquía DNS
-  jerárquicos                         
-
-  Historia de DNS                     Arquitectura y evolución
-
-  Características y utilidad          Funciones DNS
-
-  Espacio de nombres                  Árbol, dominios, TLD y FQDN
-
-  ICANN / TLD / registradores         Delegación y administración
-
-  Servidores de nombres               Primary, secondary, cache,
-                                      forwarder
-
-  Zonas                               Zonas directas e inversas
-
-  Consultas                           Recursivas e iterativas
-
-  Cache y TTL                         Caché, TTL positivo y negativo
-
-  Resolución inversa                  `in-addr.arpa`
-
-  RR                                  SOA, NS, A, AAAA, CNAME, MX, SRV,
-                                      PTR
-
-  Transferencias                      AXFR / IXFR
-
-  DNS dinámico                        DDNS
-
-  Seguridad DNS                       ACL, TSIG, DNSSEC
-
-  Whois                               Se trata como herramienta
-                                      histórica/complementaria
-
-  BIND9                               **BIND9 actual en Ubuntu 26.04**
-
-  Windows Server 2008                 Sustituido por VirtualBox + Ubuntu
-                                      26.04 Server
-
-  Zentyal                             Eliminado como plataforma principal
-
-  Dnsmasq                             Se mantiene como tecnología
-                                      complementaria
-
-  Wireshark                           Análisis de tráfico DNS
-
-  nslookup / host / dig               Herramientas actuales de
-                                      diagnóstico
-  -----------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-# 📚 58. Referencias técnicas
-
-### Fuente principal
-
-Capítulo 3, **«Servicio de nombres de dominio (DNS)»**, del manual
-*Servicios de Red e Internet* proporcionado por el departamento. El
-capítulo original cubre jerarquía, dominios, servidores, zonas,
-resolución, caché, registros, transferencias, DNS dinámico, seguridad y
-numerosas prácticas. fileciteturn7file0L21-L25
-fileciteturn10file0L19-L27
-
-### Documentación actual
-
--   Ubuntu Server --- DNS/BIND9. citeturn0search5
--   Ubuntu 26.04 --- paquete BIND9 9.20.x.
-    citeturn1search3turn1search13
--   BIND 9 --- configuración y ficheros de zona. citeturn1search2
--   BIND 9 --- `dig`, `named-checkconf`, `named-checkzone` y `rndc`.
-    citeturn1search0
--   BIND 9 --- DNSSEC. citeturn0search3
--   ICANN --- sistema de servidores raíz. citeturn0search8
--   ICANN --- delegación DNS. citeturn0search2
-
-------------------------------------------------------------------------
-
-# 🏆 Resultado esperado
-
-Al finalizar esta UT, el alumno debería poder enfrentarse a una
-situación real como:
-
-> **«Un cliente tiene conectividad IP, pero no puede resolver
-> `www.asir.test`. ¿Cómo demostrarías si el problema está en el cliente,
-> el resolver, BIND9, la zona, el registro, la delegación, la caché o la
-> comunicación con otro servidor DNS?»**
-
-La respuesta correcta no debe consistir únicamente en «reiniciar BIND».
-
-Debe poder demostrarse mediante:
-
-``` text
-        🔎 dig
-          +
-      🧰 herramientas
-          +
-      🗂️ configuración
-          +
-       📜 logs
-          +
-      📡 Wireshark
-          =
-    🧠 DIAGNÓSTICO DNS
-```
-
-
----
-
-# 🐳 Laboratorio Docker Compose · Anexo IV
-
-La zona `asir.test` y BIND9 se despliegan mediante [`docker/ut3`](docker/ut3/).
-
-```bash
-cd docker/ut3
-docker compose up -d
-docker compose exec client dig @dns www.asir.test +short
-docker compose exec client dig @dns asir.test SOA
-```
-
-La imagen valida `named-checkconf` y `named-checkzone` durante su construcción.

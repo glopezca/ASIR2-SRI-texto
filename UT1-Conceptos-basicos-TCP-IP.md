@@ -1,34 +1,16 @@
-
-> 🔬 **VERSIÓN V2 · REVISIÓN TÉCNICA 2026-09-18**
->
-> Se ha realizado una segunda pasada sobre los bloques de código y las configuraciones prácticas. Corregido un placeholder (`<gateway>`) que se interpretaba como redirección de shell; se usa la puerta de enlace del laboratorio.
->
-> ⚠️ La validación automática cubre sintaxis y configuraciones aisladas; la validación extremo a extremo > de Cisco Packet Tracer, WSL2 y una VM real de Ubuntu 26.04 Server requiere ejecutar el laboratorio en esos entornos.
-
-::: {align="center"}
 # 🌐⚡ UT1 · CONCEPTOS BÁSICOS DE TCP/IP ⚡🌐
 
-### 🖧 De los paquetes a los servicios de red
+### Fundamentos de direccionamiento, transporte, encaminamiento, NAT/PAT y modelo cliente/servidor.
 
-``` text
-╔══════════════════════════════════════════════════════════════════╗
-║                                                                  ║
-║        🌐  TCP/IP  ·  IPv4  ·  ROUTING  ·  TCP/UDP  🌐          ║
-║                                                                  ║
-║             🔄 NAT / PAT     🐧 LINUX     🧪 LABS                ║
-║                                                                  ║
-╚══════════════════════════════════════════════════════════════════╝
-```
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
+>
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
+>
+> ### 🎯 Función curricular
+>
+> Unidad de fundamentos y prerrequisitos para interpretar los resultados de aprendizaje del módulo.
 
-**SERVICIOS DE RED E INTERNET · CFGS ASIR**
-
-`Packet Tracer` · `WSL2 + Ubuntu 26.04` ·
-`VirtualBox + Ubuntu 26.04 Server`
-
-**Material docente actualizado · 2026.09**
-:::
-
-------------------------------------------------------------------------
+---
 
 > 🎯 **MISIÓN DE LA UT**
 >
@@ -1065,7 +1047,7 @@ Los más importantes para SRI son:
 
 La documentación de VirtualBox distingue explícitamente estos modos,
 incluyendo NAT, bridge, red interna y host-only.
-citeturn1search33turn1search7
+
 
 ### Recomendación para prácticas
 
@@ -1096,7 +1078,7 @@ En VirtualBox:
 # 🛠️ 22. Ubuntu Server 26.04 y Netplan
 
 Ubuntu 26.04 LTS utiliza Netplan para la configuración de red y
-actualiza Netplan a la serie 1.2. citeturn2search0turn2search4
+actualiza Netplan a la serie 1.2. 
 
 Una configuración estática sencilla puede ser:
 
@@ -1139,7 +1121,7 @@ ip route
 WSL2 permite ejecutar una distribución Linux integrada con Windows sin
 utilizar una VM tradicional completa. Microsoft recomienda
 `wsl --install` para instalaciones actuales y las nuevas instalaciones
-se configuran normalmente como WSL 2. citeturn0search0turn0search7
+se configuran normalmente como WSL 2. 
 
 Instalación:
 
@@ -1161,7 +1143,7 @@ VERSION 2
 ```
 
 Ubuntu 26.04 LTS dispone de soporte/documentación específica para WSL.
-citeturn2search10
+
 
 ## 23.1. Qué prácticas son adecuadas para WSL2
 
@@ -1671,7 +1653,7 @@ ip route | grep default
 La infraestructura de filtrado de Ubuntu se basa en Netfilter; `ufw` es
 la herramienta de firewall de alto nivel habitual, mientras que
 `nftables` permite trabajar de forma más directa con las reglas.
-citeturn2search8
+
 
 ## Comprobación
 
@@ -2252,73 +2234,4 @@ cliente hasta que llega al servidor**, indicando:
 
 ------------------------------------------------------------------------
 
-# 🔄 36. Correspondencia entre el material original y la versión actualizada
 
-  Contenido del manual              Tratamiento en esta UT
-  --------------------------------- -------------------------------------------
-  Arquitectura TCP/IP               Mantener y actualizar
-  Cliente/servidor                  Mantener
-  Servicios de red                  Mantener
-  IPv4                              Mantener y ampliar con CIDR
-  Clases IPv4                       Tratar como contexto histórico
-  Direcciones especiales            Mantener y actualizar
-  Encaminamiento                    Mantener y llevar a Linux/Cisco
-  TCP/UDP                           Mantener y reforzar con análisis práctico
-  NAT/PAT                           Mantener y actualizar
-  Virtualización                    Mantener y adaptar a VirtualBox actual
-  Prácticas con sistemas antiguos   Sustituir por Ubuntu 26.04
-  Windows Server 2008               Eliminar como plataforma de laboratorio
-  IPCop                             Eliminar como plataforma principal
-  Wireshark                         Mantener
-  Zentyal                           No necesario para esta UT
-  Redes Cisco                       Incorporar Packet Tracer
-  Linux                             Actualizar a Ubuntu 26.04
-  WSL2                              Incorporar como tercer entorno
-
-------------------------------------------------------------------------
-
-# 📚 37. Referencias técnicas
-
--   [Ubuntu 26.04 LTS --- Release
-    Notes](https://documentation.ubuntu.com/release-notes/26.04/)
--   [Ubuntu Server ---
-    documentación](https://documentation.ubuntu.com/server/)
--   [Microsoft Learn --- instalación de
-    WSL](https://learn.microsoft.com/es-es/windows/wsl/install)
--   [Microsoft Learn --- comandos básicos de
-    WSL](https://learn.microsoft.com/es-es/windows/wsl/basic-commands)
--   [Cisco Networking Academy --- Packet
-    Tracer](https://www.netacad.com/resources/lab-downloads)
--   [Oracle VirtualBox --- User
-    Manual](https://www.virtualbox.org/manual/)
-
-------------------------------------------------------------------------
-
-## Nota sobre la actualización
-
-Esta UT conserva la **secuencia conceptual del capítulo 1 del manual**,
-pero sustituye procedimientos dependientes de tecnologías antiguas por
-prácticas basadas en herramientas actuales.
-
-El capítulo original dedica una parte importante de sus prácticas a la
-construcción de redes virtuales, configuración IP, routing, NAT y
-comprobación de conectividad. La actualización mantiene esos objetivos,
-pero los implementa mediante Packet Tracer, WSL2 y Ubuntu Server +
-VirtualBox.
-
-
----
-
-# 🐳 Laboratorio Docker Compose · Anexo IV
-
-La práctica reproducible de cliente/servidor de esta UT puede ejecutarse también mediante [`docker/ut1`](docker/ut1/).
-
-```bash
-cd docker/ut1
-docker compose up -d
-docker compose exec client ping -c 3 server
-docker compose exec client nc -vz server 8080
-docker compose exec client curl http://server:8080/
-```
-
-> Packet Tracer continúa siendo el entorno para routing, NAT/PAT y simulación L2/L3. Docker proporciona aquí un laboratorio reproducible de transporte y servicios.

@@ -1,11 +1,32 @@
+# VS Code
+.vscode/
+
+# WSL/Linux
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Environment / secrets
 .env
 .env.*
 !.env.example
 *.key
 *.pem
-*.crt
-*.p12
-*.pfx
-__pycache__/
+id_rsa
+id_ed25519
+
+# Docker local state
+.docker/
+
+# Temporary lab output
+logs/
+*.log
+captures/
+
+# OS files
 .DS_Store
-.vscode/*.code-workspace
+Thumbs.db

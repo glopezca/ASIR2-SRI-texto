@@ -1,5 +1,38 @@
 # 🐳 ANEXO II · Docker, Docker Compose y Kubernetes con WSL2
 
+> **Versión integral v4 · CFGS ASIR · Servicios de Red e Internet**
+>
+> Guía autónoma para pasar de la ejecución de un contenedor a la administración de infraestructuras multicontenedor y una introducción sólida a Kubernetes.
+
+## 🎯 Propósito y método
+
+El objetivo no es memorizar comandos. El alumnado debe relacionar **proceso, imagen, contenedor, red, DNS, puerto, volumen, servicio y orquestación**.
+
+```text
+CONCEPTO → COMANDO → EXPERIMENTO → OBSERVACIÓN → DIAGNÓSTICO → DOCUMENTACIÓN
+```
+
+## 🧭 Entorno
+
+```text
+Windows 11
+   ├── Docker Desktop
+   │      └── Docker Engine / Compose
+   ├── Visual Studio Code
+   │      └── WSL2 + Ubuntu 26.04
+   └── opcional: Kubernetes local
+```
+
+Los proyectos se almacenarán preferentemente en `~/sri/` dentro de WSL2.
+
+## 🧪 Estado de validación
+
+Los ejemplos se han revisado estáticamente y se ha comprobado la coherencia de sus configuraciones. El entorno de generación no dispone de Docker Engine ni de un Codespace ejecutable, por lo que **no se afirma una prueba extremo a extremo que no se haya podido ejecutar**. La matriz final de pruebas se incluye en el Anexo IV.
+
+---
+
+# 🐳 ANEXO II · Docker, Docker Compose y Kubernetes con WSL2
+
 > **Entorno de trabajo:** Windows 11 + WSL2 + Ubuntu 26.04 + Docker Desktop + Visual Studio Code  
 > **Nivel:** CFGS ASIR · Servicios en Red e Internet  
 > **Propósito:** aprender a crear, ejecutar, inspeccionar, conectar, publicar, diagnosticar y orquestar servicios de red mediante contenedores.
@@ -2537,3 +2570,36 @@ Y, sobre todo:
 
 Esta versión se ha contrastado con la documentación oficial actual de Docker, Kubernetes, Nginx y Microsoft. Entre otros aspectos, se han verificado el backend WSL2 de Docker Desktop, Compose, publicación de puertos, acceso mediante `exec`, redes, Pods, `kubectl`, `port-forward` y el flujo VS Code + WSL2.
 
+
+
+---
+
+# 🧪 Prácticas progresivas adicionales de la v4
+
+## Práctica A · Del proceso al puerto
+
+1. Ejecuta Nginx sin publicar puertos.
+2. Comprueba el proceso principal.
+3. Comprueba la escucha interna.
+4. Publícalo como `8080:80`.
+5. Demuestra la diferencia entre puerto interno y puerto publicado.
+
+**Tiempo:** 35 min.
+
+## Práctica B · Red privada
+
+Crea `proxy` y `app` con Compose. Publica únicamente `proxy`. Demuestra que `proxy` puede alcanzar `app` mediante DNS interno sin publicar el puerto de `app`.
+
+**Tiempo:** 50 min.
+
+## Práctica C · Diagnóstico deliberado
+
+Introduce tres errores: puerto incorrecto, nombre de servicio incorrecto y volumen mal montado. Diagnostica cada uno con `ps`, `logs`, `inspect`, `exec`, `network inspect` y pruebas de cliente.
+
+**Tiempo:** 60 min.
+
+## Práctica D · Primer contacto con Kubernetes
+
+Crea un Pod Nginx, entra mediante `kubectl exec`, consulta logs, elimínalo y repite mediante un Deployment. Explica por qué el segundo comportamiento es diferente.
+
+**Tiempo:** 60 min.

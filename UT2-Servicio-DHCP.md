@@ -1,34 +1,16 @@
+# 📡⚡ UT2 · SERVICIO DHCP ⚡📡
 
-> 🔬 **VERSIÓN V2 · REVISIÓN TÉCNICA 2026-09-18**
+### RA2 · Configuración automática de red.
+
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
 >
-> Se ha realizado una segunda pasada sobre los bloques de código y las configuraciones prácticas. Corregidos los fragmentos JSON para que sean JSON válido y añadida la comprobación nativa `kea-dhcp4 -t`.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
-> ⚠️ La validación automática cubre sintaxis y configuraciones aisladas; la validación extremo a extremo > de Cisco Packet Tracer, WSL2 y una VM real de Ubuntu 26.04 Server requiere ejecutar el laboratorio en esos entornos.
+> ### 🎯 Resultado de aprendizaje trabajado
+>
+> **RA2.** Administra servicios de configuración automática, identificándolos y verificando la correcta asignación de los parámetros.
 
-::: {align="center"}
-# 🌐⚡ UT2 · SERVICIO DHCP ⚡🌐
-
-### 🧩 De una red configurada a una red que se configura sola
-
-``` text
-╔══════════════════════════════════════════════════════════════════╗
-║                                                                  ║
-║          📡 DHCP  ·  IP  ·  DNS  ·  GATEWAY  ·  LEASES          ║
-║                                                                  ║
-║       🔄 DORA       🧷 RESERVAS       🌉 RELAY       🛡️ HA       ║
-║                                                                  ║
-╚══════════════════════════════════════════════════════════════════╝
-```
-
-**SERVICIOS DE RED E INTERNET · CFGS ASIR**
-
-`Cisco Packet Tracer` · `WSL2 + Ubuntu 26.04` ·
-`VirtualBox + Ubuntu 26.04 Server`
-
-**Material docente actualizado · 2026.09**
-:::
-
-------------------------------------------------------------------------
+---
 
 > 🎯 **MISIÓN DE LA UT**
 >
@@ -38,7 +20,7 @@
 
 > 💡 **Actualización importante**
 >
-> El material original utiliza principalmente **ISC DHCP** y ejemplos
+> El material previo utiliza principalmente **ISC DHCP** y ejemplos
 > basados en Windows Server 2008 y Debian. En esta versión se conserva
 > la arquitectura conceptual del capítulo, pero las prácticas Linux se
 > trasladan a **Kea DHCP**. ISC declaró ISC DHCP *End of Life* en 2022 y
@@ -206,7 +188,7 @@ Si están en redes diferentes:
 
 # 🏷️ 4. Asignación de direcciones
 
-El material original distingue tres mecanismos.
+El material previo distingue tres mecanismos.
 
 ## 4.1. Asignación manual o reserva
 
@@ -661,7 +643,7 @@ MySQL/MariaDB o PostgreSQL, según la arquitectura desplegada.
 
 # 🛡️ 22. Varios servidores DHCP
 
-El material original introduce el funcionamiento con varios servidores
+El material previo introduce el funcionamiento con varios servidores
 DHCP.
 
 Puede utilizarse para:
@@ -679,7 +661,7 @@ conflictivas.
 
 # 🔄 23. Alta disponibilidad y DHCP Failover
 
-El capítulo original introduce **DHCP Failover Protocol**.
+En versiones anteriores del material introduce **DHCP Failover Protocol**.
 
 La tecnología ha evolucionado. En el laboratorio actual se distinguirán:
 
@@ -811,7 +793,7 @@ ip helper-address 192.168.30.10
 ```
 
 Cisco documenta `ip helper-address` como mecanismo para reenviar
-broadcasts UDP, incluidos BOOTP y DHCP. citeturn3search0turn3search8
+broadcasts UDP, incluidos BOOTP y DHCP. 
 
 ### Evidencias
 
@@ -833,7 +815,7 @@ Instalar y configurar un servidor DHCP moderno utilizando Kea.
 
 Ubuntu 26.04 proporciona el paquete `kea-dhcp4-server`; el catálogo de
 paquetes de Ubuntu muestra la rama 3.0.x para 26.04 LTS.
-citeturn1search0
+
 
 ### Topología
 
@@ -869,7 +851,7 @@ sudo apt install kea-dhcp4-server
 ```
 
 El paquete `kea-dhcp4-server` está disponible para Ubuntu 26.04 LTS.
-citeturn1search0
+
 
 ------------------------------------------------------------------------
 
@@ -922,7 +904,7 @@ Una configuración mínima puede seguir esta estructura:
 
 La estructura `interfaces-config`, `lease-database`, `valid-lifetime` y
 `subnet4/pools` corresponde a la configuración DHCPv4 documentada por
-Kea. citeturn2search2
+Kea. 
 
 > 🔎 **Importante:** adapta el nombre de interfaz (`enp0s8`) a la
 > interfaz real de la máquina.
@@ -1027,7 +1009,7 @@ Ejemplo:
 6.  Comprobar que continúa recibiendo `.50`.
 
 La documentación de Kea permite reservas mediante `hw-address`,
-`client-id`, DUID y otros identificadores. citeturn2search11
+`client-id`, DUID y otros identificadores. 
 
 ------------------------------------------------------------------------
 
@@ -1450,13 +1432,13 @@ petición y la reenvía al servidor DHCP.
 ### 10. ¿Qué función cumple `ip helper-address`?
 
 Configura en Cisco el destino al que se reenvían determinadas difusiones
-UDP, incluidas las peticiones DHCP. citeturn3search0
+UDP, incluidas las peticiones DHCP. 
 
 ### 11. ¿Qué información permite determinar la subred?
 
 En un escenario con relay Cisco, el campo **giaddr** permite al servidor
 identificar la red desde la que procede la petición y seleccionar el
-ámbito correspondiente. citeturn3search1
+ámbito correspondiente. 
 
 ### 12. ¿Qué es un pool DHCP?
 
@@ -1492,12 +1474,12 @@ systemd y utilizarlos para diagnosticar errores.
 ### 18. ¿Qué software sustituye actualmente a ISC DHCP?
 
 **Kea DHCP**. ISC declaró ISC DHCP EOL en 2022 y recomienda migrar a
-Kea. citeturn0search0turn0search2
+Kea. 
 
 ### 19. ¿Qué estructura utiliza Kea DHCPv4 para definir subredes?
 
 La estructura `subnet4`, que contiene las subredes DHCPv4 y puede
-incluir `pools` y opciones asociadas. citeturn2search2
+incluir `pools` y opciones asociadas. 
 
 ### 20. ¿Por qué WSL2 no es la plataforma principal para una topología DHCP de
 
@@ -1566,115 +1548,4 @@ Entrega:
 
 ------------------------------------------------------------------------
 
-# 🧩 41. Correspondencia con el capítulo original
 
-  -----------------------------------------------------------------------
-  Material original                   Versión actualizada
-  ----------------------------------- -----------------------------------
-  DHCP y configuración automática     DHCP y configuración automática
-
-  Servidor/cliente DHCP               Servidor/cliente DHCP
-
-  Asignaciones                        Asignaciones y reservas
-
-  Ámbitos y rangos                    Subredes y pools
-
-  Exclusiones                         Exclusiones/diseño de pools
-
-  Reservas                            Host reservations
-
-  Lease time                          Lease time
-
-  Mensajes DHCP                       DORA + análisis Wireshark
-
-  Varios servidores                   Redundancia y HA
-
-  DHCP relay                          Cisco relay + `ip helper-address`
-
-  DHCP Failover                       HA moderno + concepto de
-                                      redundancia
-
-  ISC DHCP                            **Kea DHCP**
-
-  Windows Server 2008                 **Packet Tracer / Ubuntu 26.04
-                                      Server**
-
-  Debian + `dhcpd`                    **VirtualBox + Ubuntu 26.04
-                                      Server + Kea**
-
-  Zentyal                             Se conserva el concepto, se
-                                      sustituye por plataformas actuales
-
-  Wireshark                           Wireshark
-
-  BOOTP                               Se mantiene como antecedente
-                                      histórico
-  -----------------------------------------------------------------------
-
-------------------------------------------------------------------------
-
-# 📚 42. Referencias y actualización técnica
-
-### Fuente principal
-
--   *Servicios de Red e Internet*, capítulo 2: **Servicios de
-    configuración automática de red (DHCP)**, manual proporcionado por
-    el departamento. El capítulo original cubre DHCP, asignaciones,
-    concesiones, clientes, servidores, mensajes, relay, failover,
-    seguridad y prácticas. fileciteturn4file0L15-L24 Las prácticas
-    originales incluyen Windows Server, Linux, failover, Wireshark,
-    relay y Zentyal. fileciteturn6file0L14-L23
-    fileciteturn7file0L14-L17
-
-### Actualización técnica
-
--   **ISC --- ISC DHCP:** ISC declaró ISC DHCP *End of Life* en 2022 y
-    recomienda Kea para nuevas implantaciones.
-    citeturn0search0turn0search3
--   **ISC --- Kea DHCP:** Kea es la implementación moderna de ISC para
-    DHCPv4 y DHCPv6 y admite reservas, distintos backends y mecanismos
-    de alta disponibilidad. citeturn0search2
--   **Ubuntu:** Ubuntu 26.04 LTS proporciona `kea-dhcp4-server` 3.0.3.
-    citeturn1search0
--   **Kea DHCPv4:** la configuración se organiza mediante `Dhcp4`,
-    `interfaces-config`, `lease-database`, `subnet4`, `pools` y
-    opciones. citeturn2search2
--   **Cisco:** `ip helper-address` permite reenviar broadcasts UDP,
-    incluidos DHCP, hacia un servidor DHCP remoto. citeturn3search0
-
-> 🔄 **Criterio de actualización**
->
-> Se conserva la estructura conceptual del capítulo original, pero se
-> sustituyen las tecnologías obsoletas de las prácticas por herramientas
-> actuales. La diferencia más importante es la sustitución de **ISC DHCP
-> por Kea DHCP**: no se trata de cambiar únicamente nombres de paquetes,
-> sino de adaptar también el modelo de configuración.
-
-------------------------------------------------------------------------
-
-## 🧭 Resultado esperado
-
-Al terminar esta UT, el alumno debería poder responder a esta pregunta:
-
-> **«Un equipo se conecta a una red y no tiene dirección IP. ¿Qué ocurre
-> exactamente desde que comienza a solicitar configuración hasta que
-> obtiene una concesión, y cómo demostrarías dónde está el problema si
-> falla?»**
-
-Si puede responderla **teóricamente, con comandos y observando los
-paquetes**, la unidad se ha comprendido.
-
-
----
-
-# 🐳 Laboratorio Docker Compose · Anexo IV
-
-La configuración Kea de esta UT está disponible en [`docker/ut2`](docker/ut2/). Docker se utiliza para validar el fichero real de configuración; el intercambio DHCP broadcast se practica en una LAN/Packet Tracer o VM adecuada.
-
-```bash
-cd docker/ut2
-docker compose build
-docker compose run --rm kea-config
-```
-
-La comprobación equivalente a la práctica tradicional es `kea-dhcp4 -t /etc/kea/kea-dhcp4.conf`.

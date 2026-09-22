@@ -1,37 +1,14 @@
-<div align="center">
+# ✉️⚡ UT6 · SERVICIOS DE CORREO ELECTRÓNICO ⚡✉️
 
-# ✉️⚡ UT6 · LOS SERVICIOS DE CORREO ELECTRÓNICO ⚡✉️
+### RA5 · Administración de servidores de correo.
 
-### 📬 Del mensaje al buzón · SMTP · POP3 · IMAP · MIME · TLS · SPAM
-
-```text
-╔══════════════════════════════════════════════════════════════════╗
-║                                                                  ║
-║              ✉️ CORREO ELECTRÓNICO · END-TO-END                ║
-║                                                                  ║
-║   📨 MUA  →  📤 SMTP  →  🌐 Internet  →  📥 Buzón  →  📬 MUA   ║
-║                                                                  ║
-║       SMTP 📤       POP3 📥       IMAP 📂       MIME 📎         ║
-║                                                                  ║
-║    🔐 TLS · 🛡️ seguridad · 🦠 malware · 🗑️ spam · 🧪 análisis  ║
-║                                                                  ║
-║    Packet Tracer · WSL2 · VirtualBox + Ubuntu 26.04 Server      ║
-║                                                                  ║
-╚══════════════════════════════════════════════════════════════════╝
-```
-
-**SERVICIOS DE RED E INTERNET · CFGS ASIR**
-
-**Material docente actualizado · 2026.09**
-
-</div>
-
-> 🔬 **VERSIÓN V2 · REVISIÓN TÉCNICA 2026-09-18**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
 >
-> Se ha realizado una segunda pasada sobre los bloques de código y las configuraciones prácticas. Revisados los bloques Bash y el cliente `neomutt`; no se detectaron errores de sintaxis. La unidad no contiene una configuración de Dovecot que requiera adaptación en esta versión.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
-> ⚠️ La validación automática cubre sintaxis y configuraciones aisladas; la validación extremo a extremo > de Cisco Packet Tracer, WSL2 y una VM real de Ubuntu 26.04 Server requiere ejecutar el laboratorio en esos entornos.
-
+> ### 🎯 Resultado de aprendizaje trabajado
+>
+> **RA5.** Administra servidores de correo electrónico, aplicando criterios de configuración y garantizando la seguridad del servicio.
 
 ---
 
@@ -2871,24 +2848,6 @@ d) `hostnamectl`
 
 ---
 
-# 🔄 74. Correspondencia con el capítulo original
-
-| Capítulo original | UT6 actualizada |
-|---|---|
-| 6.1 Introducción | Arquitectura moderna del correo |
-| 6.2 Protocolos involucrados | SMTP, POP3, IMAP |
-| 6.2.1 Formatos de mensajes | RFC 5322 + MIME |
-| 6.2.2 Transferencia de correo | MUA/MSA/MTA/MDA + DNS MX |
-| 6.2.3 Seguridad y privacidad | TLS, autenticación y E2EE |
-| 6.2.4 Protección frente a virus | Antimalware y análisis de adjuntos |
-| 6.2.5 Correo basura | Spam + SPF/DKIM/DMARC |
-| 6.3 Cliente de correo | Configuración práctica |
-| 6.3.1 Windows | Conceptos transferibles a clientes gráficos |
-| 6.3.2 Linux | **WSL2 + Ubuntu 26.04** |
-| Ejercicios | Laboratorios actualizados |
-| Test | Test actualizado + solucionario |
-
----
 
 # 🧪 75. Entornos de laboratorio
 
@@ -3076,102 +3035,3 @@ DIAGNÓSTICO
 
 ---
 
-# 📖 79. Referencias
-
-### Fuente principal
-
-**Fco. José Molina Robles — _Servicios de Red e Internet (Grado Superior)_**,
-Grupo Editorial RA-MA.
-
-El índice del libro sitúa:
-
-```text
-CAPÍTULO 5 → Terminal remoto
-CAPÍTULO 6 → Los servicios de correo electrónico
-CAPÍTULO 7 → Servidores de correo electrónico
-```
-
-y el capítulo 6 comienza en la página 179. citeturn2view0
-
-La estructura del capítulo 6 comprende introducción, protocolos involucrados,
-formatos de mensajes, transferencia, seguridad y privacidad, protección frente
-a virus, spam y configuración de clientes Windows/Linux. citeturn0search2
-
-### Estándares utilizados para la actualización
-
-- **RFC 5322** — formato de los mensajes de Internet.
-- **RFC 6409** — Message Submission.
-- **RFC 8314** — TLS para submission y acceso al correo.
-- **RFC 2045** — MIME.
-
-RFC 5322 define la estructura de cabeceras y cuerpo del mensaje; MIME extiende
-el formato para transportar diferentes tipos de contenido. citeturn1search1turn1search4
-
-RFC 6409 separa el servicio de Message Submission del relay y establece
-normalmente el puerto 587 para submission. citeturn1search0
-
-RFC 8314 documenta TLS para POP3, IMAP y SMTP Submission y define, entre otros,
-los puertos 993 para IMAPS, 995 para POP3S y 465 para submission con TLS
-implícito. citeturn1search2turn1search3
-
----
-
-<div align="center">
-
-## ✉️ UT6 · LOS SERVICIOS DE CORREO ELECTRÓNICO
-
-```text
-                 DNS
-                  │
-                  ▼
-             ┌────────┐
-             │   MX   │
-             └───┬────┘
-                 │
-                 ▼
-               SMTP
-                 │
-          ┌──────┴──────┐
-          │             │
-        IMAP           POP3
-          │             │
-          └──────┬──────┘
-                 ▼
-                MUA
-                 │
-        ┌────────┼────────┐
-        │        │        │
-       TLS      MIME     SPAM
-        │        │        │
-        └────────┼────────┘
-                 ▼
-             🛡️ CORREO
-```
-
-**NO SOLO ENVIAR UN CORREO.  
-ENTENDER TODO EL SISTEMA QUE LO HACE POSIBLE.**
-
-**FIN DE LA UT6**
-
-</div>
-
-
----
-
-# 🐳 Laboratorio Docker Compose · Anexo IV
-
-El laboratorio reproducible de correo está en [`docker/ut6`](docker/ut6/) y utiliza `docker-mailserver` para integrar Postfix y Dovecot.
-
-```bash
-cd docker/ut6
-docker compose up -d
-docker compose exec mailserver setup email add alumno@asir.test 'ASIR-Lab-2026!'
-```
-
-Pruebas TLS:
-
-```bash
-openssl s_client -connect localhost:2993
-openssl s_client -connect localhost:2995
-openssl s_client -connect localhost:2587 -starttls smtp
-```

@@ -1,19 +1,14 @@
-# 💬 UT7 · Servicios de mensajería instantánea, noticias y listas de distribución
+# 💬⚡ UT7 · MENSAJERÍA, NOTICIAS Y LISTAS DE DISTRIBUCIÓN ⚡💬
 
-> **Servicios de Red e Internet · CFGS ASIR**
->
-> 📚 Unidad reconstruida a partir del **capítulo 7 de _Servicios de Red e Internet_ (Garceta)**, manteniendo su estructura conceptual y actualizando la parte práctica para un laboratorio basado en **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
->
-> 🧭 **Objetivo:** comprender cómo funcionan los servicios de comunicación síncrona y asíncrona y ser capaces de desplegar, probar, diagnosticar y documentar servicios XMPP, IRC, listas de distribución y NNTP.
->
-> ⚠️ **Nota de actualización:** algunas tecnologías y clientes citados en la edición original del libro han quedado obsoletos o han cambiado de función. En esos casos se conserva el concepto didáctico y se propone una implementación actualizada.
+### RA6 · Mensajería instantánea, noticias y listas de distribución.
 
-> 🔬 **VERSIÓN V2 · REVISIÓN TÉCNICA 2026-09-18**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
 >
-> Se ha realizado una segunda pasada sobre los bloques de código y las configuraciones prácticas. Añadida la comprobación oficial `prosodyctl check config` antes de reiniciar Prosody 13.x.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
-> ⚠️ La validación automática cubre sintaxis y configuraciones aisladas; la validación extremo a extremo > de Cisco Packet Tracer, WSL2 y una VM real de Ubuntu 26.04 Server requiere ejecutar el laboratorio en esos entornos.
-
+> ### 🎯 Resultado de aprendizaje trabajado
+>
+> **RA6.** Administra servicios de mensajería instantánea, noticias y listas de distribución, verificando y asegurando el acceso de los usuarios.
 
 ---
 
@@ -81,7 +76,7 @@ Podemos distinguir, de forma general:
                                       LISTAS       NNTP
 ```
 
-El capítulo original agrupa tres familias:
+En versiones anteriores del material agrupa tres familias:
 
 - 💬 mensajería instantánea;
 - 📋 listas de distribución;
@@ -304,7 +299,7 @@ El libro cita servidores como:
 - ejabberd;
 - otros servidores Jabber/XMPP.
 
-Para el laboratorio actual se propone **Prosody**, porque Ubuntu 26.04 dispone del paquete correspondiente en sus repositorios. citeturn0search10
+Para el laboratorio actual se propone **Prosody**, porque Ubuntu 26.04 dispone del paquete correspondiente en sus repositorios. 
 
 Openfire sigue siendo una alternativa interesante si se quiere trabajar con una interfaz de administración web.
 
@@ -371,9 +366,9 @@ Para laboratorio resulta especialmente útil un cliente CLI porque permite obser
 
 # 3.3 🖥️ Servidor IRC
 
-El capítulo original propone **InspIRCd**.
+En versiones anteriores del material propone **InspIRCd**.
 
-Actualmente sigue existiendo como servidor IRC modular y Ubuntu dispone de paquetes de InspIRCd en sus repositorios. citeturn0search8
+Actualmente sigue existiendo como servidor IRC modular y Ubuntu dispone de paquetes de InspIRCd en sus repositorios. 
 
 ### Arquitectura
 
@@ -590,7 +585,7 @@ Actualmente muchos lectores clásicos de noticias han quedado obsoletos, por lo 
 
 El libro utiliza **Leafnode** en sus prácticas.
 
-Para un laboratorio actual también puede estudiarse **INN (InterNetNews)**, que sigue siendo un servidor NNTP relevante y dispone de empaquetado para distribuciones Ubuntu. citeturn0search11
+Para un laboratorio actual también puede estudiarse **INN (InterNetNews)**, que sigue siendo un servidor NNTP relevante y dispone de empaquetado para distribuciones Ubuntu. 
 
 ### Arquitectura
 
@@ -748,7 +743,7 @@ timed out     → filtrado, ruta incorrecta o host inaccesible
 
 # 🧪 Práctica 7.3 · Desplegar XMPP con Prosody
 
-> **Actualización de la práctica original:** el libro propone Openfire/Jabber. En Ubuntu 26.04 utilizaremos Prosody para disponer de una práctica reproducible basada en paquetes de la distribución. Ubuntu 26.04 publica Prosody 13.x en sus repositorios. citeturn0search10
+> **Actualización de la práctica original:** el libro propone Openfire/Jabber. En Ubuntu 26.04 utilizaremos Prosody para disponer de una práctica reproducible basada en paquetes de la distribución. Ubuntu 26.04 publica Prosody 13.x en sus repositorios. 
 
 ### 1. Instalar
 
@@ -856,7 +851,7 @@ sudo apt update
 sudo apt install inspircd
 ```
 
-Ubuntu dispone de InspIRCd como paquete de su distribución. citeturn0search8
+Ubuntu dispone de InspIRCd como paquete de su distribución. 
 
 Comprobar:
 
@@ -1726,7 +1721,7 @@ Ese es el objetivo real de la **UT7**.
 
 **Fuente principal:** _Servicios de Red e Internet_, capítulo 7: **«Servicios de mensajería instantánea, noticias y listas de distribución»**.
 
-La estructura conceptual conserva los apartados del capítulo original:
+La estructura conceptual conserva los apartados del material previo:
 
 - 7.1 Servicios de mensajería instantánea
 - 7.2 Chats
@@ -1741,20 +1736,3 @@ La estructura conceptual conserva los apartados del capítulo original:
 La edición original propone, entre otras prácticas, **OpenFire/XMPP, InspIRCd, Mailman y Leafnode**. En esta adaptación se mantiene el objetivo de cada práctica, pero se actualiza el laboratorio a **Ubuntu 26.04**, sustituyendo cuando procede herramientas obsoletas por alternativas actuales o dejando explícita la diferencia histórica.
 
 > **Uso docente:** material destinado al entorno académico del departamento y a prácticas controladas de laboratorio.
-
-
----
-
-# 🐳 Laboratorio Docker Compose · Anexo IV
-
-Los tres servicios de esta UT disponen de un stack reproducible en [`docker/ut7`](docker/ut7/): Prosody/XMPP, InspIRCd/IRC e INN/NNTP.
-
-```bash
-cd docker/ut7
-docker compose up -d
-docker compose exec client nc -z xmpp 5222
-docker compose exec client nc -z irc 6667
-docker compose exec client nc -z nntp 8119
-```
-
-El puerto 8119 es deliberado en el laboratorio portable; el puerto tradicional NNTP continúa siendo TCP/119.

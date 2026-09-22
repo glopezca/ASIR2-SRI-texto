@@ -188,8 +188,8 @@ La integración permite utilizar Docker directamente desde la terminal de Ubuntu
 
 | Acción | Windows/Linux |
 |---|---|
-| Terminal | `Ctrl+\`` |
-| Dividir editor | `Ctrl+\\` |
+| Terminal | ``Ctrl+` `` |
+| Dividir editor | `Ctrl+\` |
 | Grupo editor 1 | `Ctrl+1` |
 | Grupo editor 2 | `Ctrl+2` |
 | Command Palette | `Ctrl+Shift+P` |

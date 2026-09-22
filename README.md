@@ -934,7 +934,7 @@ para integrar comprobaciones automáticas mediante GitHub Actions.
 # 🗂️ Estructura completa del repositorio
 
 ```text
-sri-asir/
+ASIR2-SRI-texto/
 │
 ├── README.md
 │

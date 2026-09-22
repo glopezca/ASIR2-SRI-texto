@@ -675,7 +675,7 @@ Se recomienda utilizar `.gitignore`.
 # 📁 Estructura recomendada del repositorio
 
 ```text
-sri/
+ASIR2-SRI-texto/
 │
 ├── README.md
 │

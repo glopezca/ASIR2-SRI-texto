@@ -2,7 +2,7 @@
 
 ### RA3 · Administración de servidores Web.
 
-> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v5 · 2026**
 >
 > Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
@@ -75,6 +75,9 @@
                 🔐 SEGURIDAD
                      │
           TLS · permisos · logs
+┌──────────────────────────────────────────────────────────────────────┐
+│ 🧪 ITINERARIOS · I Packet Tracer · II WSL2 · III VirtualBox · IV Compose │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
 ------------------------------------------------------------------------
@@ -155,6 +158,10 @@ Por eso un administrador de sistemas debe entender tanto el protocolo
 como la infraestructura que lo soporta.
 
 ------------------------------------------------------------------------
+
+> 🧭 **ANTES DE EMPEZAR · Web y HTTP**
+>
+> La Web combina recursos identificados mediante URI/URL, clientes que realizan peticiones y servidores que devuelven respuestas. Más adelante formalizaremos este intercambio mediante HTTP.
 
 # 🌍 2. WWW
 
@@ -275,6 +282,10 @@ https://www.ejemplo.test:443/alumnos/ut5/index.html?grupo=asir#inicio
 La estructura conceptual ayuda a interpretar cualquier URL.
 
 ------------------------------------------------------------------------
+
+> 🧭 **ANTES DE EMPEZAR · Página, sitio y aplicación web**
+>
+> Una página es un recurso concreto; un sitio agrupa recursos relacionados; una aplicación web añade lógica de aplicación y normalmente genera o procesa información dinámica. Esta distinción será importante al configurar servidores y proxies.
 
 # 🏠 6. Páginas, sitios y aplicaciones
 
@@ -421,6 +432,10 @@ curl -vk https://192.168.10.10/
 
 ------------------------------------------------------------------------
 
+> 🧭 **ANTES DE EMPEZAR · Proxy directo y proxy inverso**
+>
+> Un proxy actúa como intermediario entre clientes y otros servicios. En un **proxy directo** el cliente utiliza el proxy para salir hacia otros destinos; en un **proxy inverso** los clientes acceden al proxy como punto de entrada hacia servidores internos.
+
 # 🔀 9. Proxies web
 
 Un proxy se sitúa entre cliente y servidor.
@@ -448,6 +463,10 @@ Puede utilizarse para:
 -   proxy inverso.
 
 ------------------------------------------------------------------------
+
+> 🧭 **ANTES DE EMPEZAR · Proxy inverso**
+>
+> Un proxy inverso recibe peticiones de los clientes y las reenvía hacia uno o varios servidores internos. Permite separar el punto de entrada público de las aplicaciones y centralizar funciones como TLS, control de acceso o balanceo.
 
 # 🔄 10. Proxy directo y reverse proxy
 
@@ -481,7 +500,23 @@ Nginx y Apache pueden utilizarse en arquitecturas de reverse proxy.
 
 ------------------------------------------------------------------------
 
+> 🧭 **ANTES DE EMPEZAR · HTTP**
+>
+> HTTP utiliza un modelo de **petición y respuesta**. El cliente solicita un recurso mediante una petición y el servidor devuelve una respuesta con código de estado, cabeceras y, cuando corresponde, un cuerpo. Esta estructura será la base para entender `curl`, navegadores, virtual hosts y APIs.
+
 # 📡 11. HTTP
+### 📊 Herramientas HTTP que utilizaremos
+
+| Necesidad | Comando | Información útil |
+|---|---|---|
+| Petición básica | `curl http://host/` | Cuerpo de respuesta |
+| Cabeceras | `curl -I http://host/` | Cabeceras de respuesta |
+| Detalle de intercambio | `curl -v http://host/` | Conexión, petición y respuesta |
+| Seguir redirecciones | `curl -L http://host/` | Cadena de `3xx` |
+| Método concreto | `curl -X OPTIONS URL` | Método solicitado |
+| Enviar datos | `curl -d 'a=b' URL` | Petición con cuerpo |
+| TLS | `curl -vk https://host/` | Diagnóstico TLS en laboratorio |
+
 
 **HTTP --- Hypertext Transfer Protocol** es un protocolo de aplicación
 basado en un modelo petición/respuesta.
@@ -1015,6 +1050,10 @@ Para producción se utiliza una CA reconocida o una CA corporativa que
 los clientes confíen explícitamente.
 
 ------------------------------------------------------------------------
+
+> 🧭 **ANTES DE EMPEZAR · HTTPS y TLS**
+>
+> HTTPS es HTTP protegido mediante TLS. TLS aporta confidencialidad e integridad y permite autenticar al servidor mediante certificados. En el laboratorio utilizaremos certificados controlados y aprenderemos a distinguir un certificado válido de uno simplemente útil para hacer pruebas.
 
 # 🧪 28. HTTPS de laboratorio
 
@@ -2347,6 +2386,84 @@ Relaciona las UT anteriores:
 ```
 
 ------------------------------------------------------------------------
+
+
+# 🐳 Itinerario IV · Docker Compose
+
+> **Cuadro de contexto · Reverse proxy y red interna**
+> 
+> Un **reverse proxy** recibe peticiones del cliente y las reenvía a una aplicación interna. En Compose podemos representar esta arquitectura separando el frontend del backend en redes distintas. El cliente sólo necesita acceder al proxy.
+
+### Arquitectura
+
+```text
+                 HOST
+             localhost:8080
+                    │
+                    ▼
+             ┌───────────┐
+             │   Nginx   │
+             │   proxy   │
+             └─────┬─────┘
+                   │ backend
+                   ▼
+             ┌───────────┐
+             │    app    │
+             │   :8000   │
+             └───────────┘
+```
+
+### `compose.yaml`
+
+```yaml
+services:
+  proxy:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - frontend
+      - backend
+
+  app:
+    image: python:3-alpine
+    command: ["python", "-m", "http.server", "8000", "--bind", "0.0.0.0"]
+    working_dir: /srv
+    volumes:
+      - ./app:/srv:ro
+    expose:
+      - "8000"
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
+```
+
+### Práctica
+
+```bash
+docker compose config
+docker compose up -d
+docker compose ps
+curl http://localhost:8080
+docker compose logs -f proxy
+docker compose exec app sh
+docker compose down
+```
+
+### `ports` frente a `expose`
+
+| Directiva | Función |
+|---|---|
+| `ports` | publica el servicio hacia el host |
+| `expose` | documenta/hace disponible el puerto para la comunicación interna del servicio |
+
+**Resultado esperado:** acceder al backend a través de Nginx sin publicar directamente el puerto 8000 de la aplicación.
+
 
 # 🧪 61. PRÁCTICA FINAL --- «Publica dos sitios seguros»
 

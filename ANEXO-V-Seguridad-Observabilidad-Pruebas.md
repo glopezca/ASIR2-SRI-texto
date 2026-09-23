@@ -1,6 +1,6 @@
 # 🛡️ ANEXO VI · Seguridad, observabilidad, pruebas y troubleshooting
 
-> **Versión integral v4 · CFGS ASIR**
+> **Versión integral v5 · CFGS ASIR**
 
 ## 1. 🎯 Método profesional
 

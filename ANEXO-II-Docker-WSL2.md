@@ -1,38 +1,5 @@
 # 🐳 ANEXO II · Docker, Docker Compose y Kubernetes con WSL2
 
-> **Versión integral v4 · CFGS ASIR · Servicios de Red e Internet**
->
-> Guía autónoma para pasar de la ejecución de un contenedor a la administración de infraestructuras multicontenedor y una introducción sólida a Kubernetes.
-
-## 🎯 Propósito y método
-
-El objetivo no es memorizar comandos. El alumnado debe relacionar **proceso, imagen, contenedor, red, DNS, puerto, volumen, servicio y orquestación**.
-
-```text
-CONCEPTO → COMANDO → EXPERIMENTO → OBSERVACIÓN → DIAGNÓSTICO → DOCUMENTACIÓN
-```
-
-## 🧭 Entorno
-
-```text
-Windows 11
-   ├── Docker Desktop
-   │      └── Docker Engine / Compose
-   ├── Visual Studio Code
-   │      └── WSL2 + Ubuntu 26.04
-   └── opcional: Kubernetes local
-```
-
-Los proyectos se almacenarán preferentemente en `~/sri/` dentro de WSL2.
-
-## 🧪 Estado de validación
-
-Los ejemplos se han revisado estáticamente y se ha comprobado la coherencia de sus configuraciones. El entorno de generación no dispone de Docker Engine ni de un Codespace ejecutable, por lo que **no se afirma una prueba extremo a extremo que no se haya podido ejecutar**. La matriz final de pruebas se incluye en el Anexo IV.
-
----
-
-# 🐳 ANEXO II · Docker, Docker Compose y Kubernetes con WSL2
-
 > **Entorno de trabajo:** Windows 11 + WSL2 + Ubuntu 26.04 + Docker Desktop + Visual Studio Code  
 > **Nivel:** CFGS ASIR · Servicios en Red e Internet  
 > **Propósito:** aprender a crear, ejecutar, inspeccionar, conectar, publicar, diagnosticar y orquestar servicios de red mediante contenedores.
@@ -254,6 +221,19 @@ Un proceso dentro de un contenedor puede escuchar en un puerto, pero eso **no im
 
 ---
 
+
+### 📊 Mapa rápido de los objetos de Docker
+
+| Objeto | Qué representa | Se crea con | Se consulta con | Se elimina con |
+|---|---|---|---|---|
+| **Imagen** | Plantilla inmutable para crear contenedores | `docker pull` / `docker build` | `docker image ls` | `docker image rm` |
+| **Contenedor** | Instancia ejecutable de una imagen | `docker run` | `docker ps -a` | `docker rm` |
+| **Red** | Segmento lógico que conecta contenedores | `docker network create` | `docker network ls` | `docker network rm` |
+| **Volumen** | Almacenamiento persistente gestionado por Docker | `docker volume create` | `docker volume ls` | `docker volume rm` |
+| **Registro** | Servicio que almacena y distribuye imágenes | `docker login` / `docker push` | `docker pull` | depende del registro |
+
+> 🧠 **Regla mental:** primero identificamos el objeto que queremos administrar y después elegimos el comando. Un `container` no es una `image`, y una `network` no es un `port`.
+
 # 🪟 5. Entorno de trabajo: Windows + WSL2 + Docker Desktop
 
 Para este material utilizaremos:
@@ -433,6 +413,21 @@ Todavía no podremos acceder desde el navegador mediante `localhost:8080`, porqu
 
 ---
 
+
+### 📊 Ciclo de vida mínimo de un contenedor
+
+| Fase | Comando | Pregunta que responde |
+|---|---|---|
+| Crear y arrancar | `docker run -d --name web nginx` | ¿Puedo ejecutar la imagen? |
+| Ver activos | `docker ps` | ¿Qué contenedores están ejecutándose? |
+| Ver todos | `docker ps -a` | ¿Qué contenedores existen aunque estén parados? |
+| Consultar logs | `docker logs web` | ¿Qué está diciendo el proceso? |
+| Entrar | `docker exec -it web sh` | ¿Qué ocurre desde dentro? |
+| Parar | `docker stop web` | ¿Puedo detenerlo correctamente? |
+| Eliminar | `docker rm web` | ¿Puedo limpiar el recurso? |
+
+La secuencia **crear → observar → inspeccionar → intervenir → detener → eliminar** será reutilizada durante las prácticas.
+
 # 🔌 9. Puertos: una distinción fundamental
 
 Hay que distinguir:
@@ -474,6 +469,19 @@ HOST:8080 → CONTENEDOR:80
 No al revés.
 
 ---
+
+
+### 📊 Tres niveles que no deben confundirse
+
+| Nivel | Ejemplo | Significado |
+|---|---|---|
+| Proceso | Nginx escucha en `80/TCP` | El proceso acepta conexiones dentro de su entorno de red |
+| Contenedor | `80/TCP` | Puerto donde el proceso es accesible dentro de la red del contenedor |
+| Host | `8080/TCP` | Puerto que Docker publica mediante `-p 8080:80` |
+
+```text
+cliente → host:8080 → publicación Docker → contenedor:80 → proceso Nginx
+```
 
 # 🚪 10. Publicar un puerto
 
@@ -613,6 +621,18 @@ se conecta al proceso principal del contenedor.
 Para administración y diagnóstico normal, `exec` suele ser la opción adecuada.
 
 ---
+
+
+### 📊 `exec`, `run` y `attach`: tres operaciones distintas
+
+| Comando | Qué hace | Cuándo utilizarlo |
+|---|---|---|
+| `docker exec -it web sh` | Ejecuta una shell **dentro de un contenedor existente** | Diagnóstico e inspección |
+| `docker compose exec web sh` | Igual, pero seleccionando un servicio Compose | Diagnóstico en Compose |
+| `docker run --rm -it alpine sh` | Crea un contenedor temporal y abre una shell | Pruebas aisladas |
+| `docker attach web` | Conecta con el proceso principal del contenedor | Casos concretos; no es el sustituto habitual de `exec` |
+
+> 💡 Para el diagnóstico cotidiano, piensa primero en **`exec`**. `run` crea una instancia nueva; `attach` conecta con el proceso principal que ya existe.
 
 # 📜 13. Logs
 
@@ -801,6 +821,19 @@ comunicación entre contenedores
 
 ---
 
+
+### 📊 Red, DNS y publicación de puertos
+
+| Necesidad | Mecanismo | Ejemplo |
+|---|---|---|
+| Conectar dos contenedores | `network` | `docker network create red-sri` |
+| Resolver otro servicio por nombre | DNS interno Docker | `curl http://web:80` |
+| Exponer un servicio al host | `ports` / `-p` | `8080:80` |
+| Mantener un servicio solo interno | Red sin `ports` | `db:5432` accesible desde otros servicios |
+| Diagnosticar la red | `inspect`, `ping`, `curl`, `ss` | comprobar configuración y conectividad |
+
+> 🧠 **Idea clave:** dentro de una red Docker, los servicios se buscan por **nombre**. No es necesario averiguar manualmente la IP del contenedor para una comunicación normal entre servicios.
+
 # 🧭 18. DNS interno de Docker
 
 En una red Docker definida por el usuario, los contenedores pueden localizarse por nombre.
@@ -834,7 +867,83 @@ Esto constituye un puente directo con los contenidos de DNS de SRI.
 
 ---
 
-# 🏗️ 19. Dockerfile
+# 🏗️ 19. Dockerfile: construir imágenes de forma reproducible
+
+> 🧭 **ANTES DE CONTINUAR · ¿Dónde encaja Dockerfile?**
+>
+> Hasta ahora hemos utilizado imágenes ya construidas y hemos aprendido a crear y administrar contenedores con la CLI de Docker. El siguiente paso consiste en responder a otra pregunta: **¿cómo construimos nuestra propia imagen cuando la imagen disponible no contiene exactamente lo que necesitamos?**
+>
+> Para eso utilizamos un `Dockerfile`: un fichero de instrucciones que permite construir una imagen de forma reproducible. **Dockerfile no es un contenedor, ni es una alternativa a Compose.** Cumplen funciones diferentes y complementarias:
+>
+> ```text
+> Docker CLI
+>    │  administra recursos y ejecuta contenedores
+>    ▼
+> Dockerfile ──► imagen personalizada ──► contenedor
+>                                      \
+>                                       │
+>                                       ▼
+>                                  Docker Compose
+>                              organiza varios servicios
+> ```
+>
+> En términos prácticos:
+>
+> - **Docker CLI**: operación directa. Creamos, arrancamos, detenemos, inspeccionamos y diagnosticamos recursos.
+> - **Dockerfile**: construcción de una **imagen personalizada**. Describe qué debe contener esa imagen y cómo debe iniciarse.
+> - **Docker Compose**: definición y ejecución de una **infraestructura formada por varios servicios**, indicando redes, volúmenes, puertos, dependencias y, cuando sea necesario, cómo construir las imágenes mediante `Dockerfile`.
+>
+> ### 📊 Docker CLI → Dockerfile → Docker Compose
+>
+> | Elemento | Pregunta que responde | Ejemplo | Resultado principal |
+> |---|---|---|---|
+> | **Docker CLI** | «¿Qué quiero hacer ahora con Docker?» | `docker run`, `docker exec`, `docker logs` | Opera sobre recursos Docker |
+> | **Dockerfile** | «¿Cómo construyo mi propia imagen?» | `docker build` → imagen |
+> | **Docker Compose** | «¿Cómo defino y levanto esta infraestructura?» | `compose.yaml` + `docker compose up` | Conjunto reproducible de servicios |
+>
+> ### 🔗 Cómo se relacionan
+>
+> Una imagen puede proceder de un registro o construirse localmente:
+>
+> ```text
+>                 ┌───────────────┐
+>                 │ Dockerfile    │
+>                 └───────┬───────┘
+>                         │ docker build
+>                         ▼
+>                    ┌─────────┐
+>                    │ Imagen  │◄──────── registro
+>                    └────┬────┘
+>                         │
+>                    docker run
+>                         │
+>                         ▼
+>                   ┌──────────┐
+>                   │Contenedor│
+>                   └──────────┘
+>
+>              compose.yaml
+>                    │
+>             docker compose up
+>                    │
+>          ┌─────────┴─────────┐
+>          ▼                   ▼
+>       servicio web       servicio db
+>       (imagen)            (imagen)
+> ```
+>
+> **Idea clave:** Compose puede utilizar una imagen existente mediante `image:` o pedir que se construya mediante `build:` a partir de un `Dockerfile`. Por tanto, es habitual encontrar ambos ficheros en el mismo proyecto.
+>
+> ### 🧩 Ejemplo de proyecto completo
+>
+> ```text
+> proyecto-web/
+> ├── compose.yaml
+> ├── Dockerfile
+> └── index.html
+> ```
+>
+> `Dockerfile` construye la imagen de la aplicación y `compose.yaml` decide cómo se ejecutará junto con los demás servicios.
 
 Un `Dockerfile` describe cómo construir una imagen.
 
@@ -907,6 +1016,21 @@ docker compose up -d
 ```
 
 ---
+
+
+### 📊 De la operación a la imagen y a la infraestructura
+
+| Necesidad | Docker CLI | Dockerfile | Docker Compose |
+|---|---|---|---|
+| Ejecutar un contenedor | `docker run` | — | `docker compose up` |
+| Construir una imagen | `docker build` | `FROM`, `RUN`, `COPY`, `CMD`, etc. | `build:` |
+| Publicar puertos | `-p 8080:80` | — | `ports:` |
+| Definir redes | `--network red` | — | `networks:` |
+| Definir persistencia | `-v datos:/data` | Puede preparar rutas, pero no administra el volumen | `volumes:` |
+| Entrar en un contenedor | `docker exec` | — | `docker compose exec` |
+| Levantar una infraestructura | Varios comandos | Construye imágenes | `docker compose up -d` |
+
+> 💡 **No son tres formas equivalentes de hacer lo mismo.** Docker CLI administra recursos, Dockerfile construye imágenes y Docker Compose describe y coordina servicios relacionados. En un proyecto real pueden utilizarse conjuntamente.
 
 # 📄 21. `compose.yaml`
 
@@ -1476,6 +1600,23 @@ docker context use
 > ⚠️ `docker system prune` puede eliminar recursos que todavía necesites. No debe ejecutarse como una solución genérica a cualquier problema.
 
 ---
+
+
+### 📊 Comandos básicos que conviene dominar primero
+
+| Objetivo | Comando | Resultado esperado |
+|---|---|---|
+| Crear/arrancar | `docker run -d --name web nginx` | Contenedor ejecutándose |
+| Listar | `docker ps` | Contenedores activos |
+| Inspeccionar | `docker inspect web` | Configuración detallada |
+| Ver logs | `docker logs web` | Salida del proceso |
+| Entrar | `docker exec -it web sh` | Shell dentro del contenedor |
+| Ver puertos | `docker port web` | Mapeos host → contenedor |
+| Ver redes | `docker network ls` | Redes disponibles |
+| Parar | `docker stop web` | Contenedor detenido |
+| Eliminar | `docker rm web` | Recurso eliminado |
+
+La lista completa que aparece a continuación funciona como referencia de consulta; esta tabla es la **ruta de aprendizaje recomendada**.
 
 # 🐙 33. Navaja suiza de Docker Compose
 
@@ -2571,10 +2712,9 @@ Y, sobre todo:
 Esta versión se ha contrastado con la documentación oficial actual de Docker, Kubernetes, Nginx y Microsoft. Entre otros aspectos, se han verificado el backend WSL2 de Docker Desktop, Compose, publicación de puertos, acceso mediante `exec`, redes, Pods, `kubectl`, `port-forward` y el flujo VS Code + WSL2.
 
 
-
 ---
 
-# 🧪 Prácticas progresivas adicionales de la v4
+# 🧪 Prácticas progresivas adicionales de la v5
 
 ## Práctica A · Del proceso al puerto
 

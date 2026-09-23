@@ -1,6 +1,6 @@
 # 🐙 ANEXO III · Git, GitHub, Codespaces y Visual Studio Code
 
-> **Versión integral v4 · CFGS ASIR**
+> **Versión integral v5 · CFGS ASIR**
 
 ## 1. 🎯 Objetivos
 
@@ -78,6 +78,21 @@ git push
 ```
 
 Revisar siempre el diff antes del commit.
+
+
+### 📊 Git: ciclo mínimo de trabajo
+
+| Acción | Comando | Qué significa |
+|---|---|---|
+| Comprobar estado | `git status` | Qué ha cambiado |
+| Preparar cambios | `git add .` | Pasar cambios al área de preparación |
+| Crear versión | `git commit -m "mensaje"` | Registrar un conjunto coherente de cambios |
+| Descargar cambios | `git pull` | Integrar cambios del remoto |
+| Publicar | `git push` | Enviar commits al remoto |
+| Consultar historial | `git log --oneline` | Ver evolución del proyecto |
+| Ver diferencias | `git diff` | Analizar cambios antes del commit |
+
+> 🧠 La secuencia pedagógica es **modificar → revisar → `status` → `diff` → `add` → `commit` → `push`**.
 
 ## 7. 🌿 Ramas
 

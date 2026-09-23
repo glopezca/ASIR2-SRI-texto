@@ -2,7 +2,7 @@
 
 ### RA6 · Mensajería instantánea, noticias y listas de distribución.
 
-> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v5 · 2026**
 >
 > Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
@@ -84,6 +84,10 @@ En versiones anteriores del material agrupa tres familias:
 
 ---
 
+> 🧭 **ANTES DE EMPEZAR · Mensajería instantánea**
+>
+> En este contexto, mensajería instantánea significa intercambio de mensajes y estado de presencia mediante un servicio de red. Se diferencia del correo porque la interacción está orientada a comunicación inmediata y normalmente mantiene una sesión de usuario activa.
+
 # 2. 💬 Servicios de mensajería instantánea
 
 ## 2.1 Características y funcionamiento
@@ -163,7 +167,22 @@ Están controlados por un proveedor concreto y pueden limitar la interoperabilid
 
 ---
 
+> 🧭 **ANTES DE EMPEZAR · XMPP**
+>
+> XMPP es un protocolo basado en XML. Para entender su funcionamiento basta inicialmente con distinguir tres tipos de **stanza** —`message`, `presence` e `iq`— y comprender el identificador de usuario **JID**.
+
 # 2.3 🔗 Jabber / XMPP
+### 📊 XMPP: elementos que debes distinguir
+
+| Elemento | Qué representa | Ejemplo conceptual |
+|---|---|---|
+| JID | Identidad de usuario/entidad | `ana@ejemplo.org` |
+| `message` | Mensaje | Texto enviado a otro usuario |
+| `presence` | Estado/presencia | Disponible, ausente |
+| `iq` | Consulta/respuesta | Petición de información |
+| Servidor | Gestiona sesiones y rutas | Prosody |
+| Cliente | Interfaz del usuario | Gajim, Dino, etc. |
+
 
 **XMPP (Extensible Messaging and Presence Protocol)** es un protocolo abierto basado en XML para mensajería, presencia y comunicación entre entidades.
 
@@ -305,6 +324,10 @@ Openfire sigue siendo una alternativa interesante si se quiere trabajar con una 
 
 ---
 
+> 🧭 **ANTES DE EMPEZAR · IRC y canales**
+>
+> IRC organiza la conversación mediante servidores y canales. Un canal es un espacio lógico al que se incorporan clientes y en el que se aplican reglas de operación y permisos.
+
 # 3. 💬 Chats
 
 El chat es una forma de comunicación interactiva, normalmente basada en conversaciones entre múltiples usuarios.
@@ -398,6 +421,10 @@ Asignar operadores y probar:
 - usuarios conectados.
 
 ---
+
+> 🧭 **ANTES DE EMPEZAR · Lista de distribución**
+>
+> Una lista de distribución utiliza normalmente infraestructura de correo para distribuir mensajes a un conjunto gestionado de miembros. Por eso una lista no debe confundirse con un alias simple: incorpora miembros, políticas de publicación, moderación y distribución.
 
 # 4. 📋 Listas de distribución
 
@@ -504,6 +531,10 @@ En un laboratorio actual es preferible estudiar **Mailman 3** como evolución mo
 
 ---
 
+> 🧭 **ANTES DE EMPEZAR · NNTP y noticias**
+>
+> Los servicios de noticias representan un modelo de publicación y consulta de mensajes organizados en grupos. A diferencia del chat, el contenido está pensado para permanecer disponible y ser consultado posteriormente.
+
 # 5. 📰 Servicios de noticias
 
 Los servicios de noticias permiten publicar mensajes en **grupos de noticias**.
@@ -605,7 +636,16 @@ Para un laboratorio actual también puede estudiarse **INN (InterNetNews)**, que
 
 # 6. 🧪 Arquitectura de laboratorio
 
-La unidad se trabajará con tres entornos.
+La unidad se trabajará mediante cuatro itinerarios complementarios: simulación de red con Packet Tracer, herramientas y clientes en WSL2, servidores completos en VirtualBox y despliegues reproducibles con Docker Compose.
+
+```text
+              🧪 ITINERARIOS DE PRÁCTICAS
+                       │
+       ┌───────────────┼───────────────┬───────────────┐
+       ▼               ▼               ▼               ▼
+ Packet Tracer       WSL2          VirtualBox      Docker Compose
+ simulación       clientes/tools    servidores      servicios
+```
 
 ## 6.1 Cisco Packet Tracer
 
@@ -687,6 +727,71 @@ NNTP  → 119/TCP
 ```
 
 ---
+
+
+### 📊 Protocolos y herramientas: no confundir capas
+
+| Tecnología | Papel | Herramienta/cliente de referencia | Evidencia útil |
+|---|---|---|---|
+| XMPP | Mensajería y presencia | cliente XMPP / Prosody | conexión, JID, `message`, `presence` |
+| IRC | Chat basado en canales | `irssi` / cliente IRC | conexión, `JOIN`, mensajes |
+| NNTP | Noticias | cliente NNTP | conexión y grupos |
+| Listas | Distribución por correo | MTA/MDA + gestor de listas | mensaje, moderación, entrega |
+
+> 🧠 El protocolo determina **cómo se intercambia la información**; el cliente es la herramienta que utiliza el usuario para interactuar con ese protocolo.
+
+# 🐳 Itinerario IV · Docker Compose
+
+> **Cuadro de contexto · Mensajería multicontenedor**
+> 
+> Una infraestructura de mensajería puede componerse de varios servicios independientes. Compose permite levantar el servidor XMPP, el servidor IRC y clientes de prueba dentro de una red aislada, manteniendo separados los servicios y sus puertos.
+
+### Arquitectura
+
+```text
+                 red-comunica
+             ┌───────┼───────┐
+             ▼       ▼       ▼
+           XMPP     IRC    cliente
+             │       │
+          5222/TCP 6667/TCP
+```
+
+### Organización
+
+```text
+services:
+  xmpp:
+  irc:
+  cliente:
+networks:
+  comunica:
+```
+
+Las imágenes de Prosody e InspIRCd deben fijarse a versiones compatibles con la práctica. No se publicarán servicios de mensajería reales en Internet durante el laboratorio.
+
+### Secuencia
+
+```bash
+docker compose config
+docker compose up -d
+docker compose ps
+docker compose logs -f xmpp
+docker compose exec cliente sh
+docker compose down
+```
+
+### Tabla de referencia
+
+| Servicio | Puerto habitual | Concepto clave |
+|---|---:|---|
+| XMPP | 5222/TCP | cliente-servidor |
+| XMPP | 5269/TCP | federación servidor-servidor |
+| IRC | 6667/TCP | conexión tradicional sin TLS |
+| IRC TLS | 6697/TCP | conexión cifrada habitual |
+
+**Resultado esperado:** identificar el servicio por puerto, resolver su nombre mediante DNS interno de Compose y analizar una conexión desde un contenedor cliente.
+
 
 # 7. 🧪 Prácticas
 

@@ -2,7 +2,7 @@
 
 ### RA2 · Configuración automática de red.
 
-> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v5 · 2026**
 >
 > Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
@@ -54,6 +54,9 @@
               │            │            │
          Packet Tracer   Ubuntu 26.04   Wireshark
                           + Kea
+┌──────────────────────────────────────────────────────────────────────┐
+│ 🧪 ITINERARIOS · I Packet Tracer · II WSL2 · III VirtualBox · IV Compose │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
 ------------------------------------------------------------------------
@@ -151,6 +154,10 @@ DHCP centraliza esta configuración.
 > clientes.
 
 ------------------------------------------------------------------------
+
+> 🧭 **ANTES DE EMPEZAR · Arquitectura DHCP**
+>
+> DHCP no es solamente «un servidor que entrega IP». Intervienen clientes, servidores, ámbitos de direcciones, opciones, concesiones y, cuando existen varias redes, agentes relay. Conviene conocer estos componentes antes de configurar el servicio.
 
 # 🧱 3. Componentes del servicio DHCP
 
@@ -359,6 +366,10 @@ Ejemplos:
 
 ------------------------------------------------------------------------
 
+> 🧭 **ANTES DE EMPEZAR · DORA y broadcast**
+>
+> Un cliente que todavía no conoce su configuración necesita localizar un servidor. Por eso el intercambio inicial utiliza mensajes DHCP y mecanismos de difusión. La secuencia **Discover → Offer → Request → ACK (DORA)** describe el proceso básico de obtención de una concesión IPv4.
+
 # 🔄 9. Funcionamiento DHCP: DORA
 
 La secuencia clásica para obtener una concesión IPv4 se resume mediante
@@ -492,7 +503,21 @@ UDP 68  ◄──── DHCP ─────────── UDP 67
 
 ------------------------------------------------------------------------
 
+> 🧭 **ANTES DE EMPEZAR · DHCP Relay**
+>
+> Los routers separan dominios de broadcast. Por ello, un cliente DHCP situado en otra subred no puede depender de que su difusión atraviese el router como si fuera tráfico IP normal. Un **DHCP relay** recibe la petición y la reenvía hacia el servidor, conservando la información necesaria para identificar la red del cliente.
+
 # 🌉 17. DHCP Relay
+### 📊 DORA de un vistazo
+
+| Mensaje | Origen → destino | Finalidad |
+|---|---|---|
+| DHCPDISCOVER | Cliente → broadcast/relay | Localizar servidores DHCP |
+| DHCPOFFER | Servidor → cliente/relay | Proponer una configuración |
+| DHCPREQUEST | Cliente → servidor/broadcast | Solicitar la concesión elegida |
+| DHCPACK | Servidor → cliente | Confirmar la concesión |
+| DHCPNAK | Servidor → cliente | Rechazar la solicitud |
+
 
 Un broadcast DHCP no atraviesa routers de forma normal.
 
@@ -855,6 +880,61 @@ El paquete `kea-dhcp4-server` está disponible para Ubuntu 26.04 LTS.
 
 ------------------------------------------------------------------------
 
+> 🧭 **ANTES DE EMPEZAR · Kea**
+>
+> Kea es la plataforma DHCP moderna de ISC que utilizaremos en Ubuntu. Su configuración es estructurada y basada en JSON, y su arquitectura difiere de la antigua configuración de ISC DHCP. No conviene trasladar literalmente ejemplos de `dhcpd.conf`.
+
+
+# 🐳 Itinerario IV · Docker Compose
+
+> **Cuadro de contexto · ¿Por qué Docker Compose en DHCP?**
+> 
+> DHCP depende de **broadcasts, interfaces de red y acceso al segmento L2**. Por ello, un Compose convencional no reproduce por sí solo una LAN completa como lo hace VirtualBox o Packet Tracer. En esta UT utilizaremos Compose para practicar la configuración y validación del servicio en una red de laboratorio controlada, mientras que las pruebas que necesiten broadcast real o relay se mantienen en los itinerarios anteriores.
+
+### Objetivo
+
+Construir un laboratorio reproducible con **Kea DHCPv4** y un cliente de pruebas, aprendiendo qué parte de la práctica es apropiada para contenedores y qué parte requiere una red virtual completa.
+
+### Laboratorio
+
+```yaml
+services:
+  kea:
+    image: ubuntu:26.04
+    command: ["sleep", "infinity"]
+
+  cliente:
+    image: ubuntu:26.04
+    command: ["sleep", "infinity"]
+
+networks:
+  dhcp-lab:
+```
+
+Este es deliberadamente un **esqueleto de laboratorio**: la configuración real de Kea se montará como fichero y la red deberá adaptarse al modo de pruebas elegido. No se debe asumir que dos contenedores conectados a una red bridge proporcionan automáticamente las mismas condiciones que dos máquinas conectadas a una LAN Ethernet real.
+
+### Trabajo
+
+1. Crear el `compose.yaml`.
+2. Montar la configuración de Kea mediante un volumen de solo lectura.
+3. Validar la configuración con `kea-dhcp4 -t`.
+4. Consultar los logs del servicio.
+5. Documentar qué elementos de DHCP pueden probarse dentro de Compose y cuáles requieren VirtualBox/Packet Tracer.
+
+### Comandos
+
+```bash
+docker compose config
+docker compose up -d
+docker compose ps
+docker compose logs -f kea
+docker compose exec kea sh
+docker compose down
+```
+
+**Resultado esperado:** una infraestructura reproducible que permita estudiar configuración, logs y ciclo de vida de Kea sin confundir una red de contenedores con una LAN DHCP real.
+
+
 # 🛠️ 28. Configuración básica de Kea
 
 El fichero de configuración DHCPv4 contiene un objeto `Dhcp4`.
@@ -1192,6 +1272,18 @@ Permite estudiar los registros del servicio.
 Permite analizar el intercambio DHCP paquete a paquete.
 
 ------------------------------------------------------------------------
+
+
+### 📊 Diagnóstico DHCP: qué herramienta usar
+
+| Pregunta | Herramienta | Qué buscar |
+|---|---|---|
+| ¿Tengo dirección IP? | `ip addr` | Dirección y estado de la interfaz |
+| ¿Qué ruta uso? | `ip route` | Ruta por defecto y red local |
+| ¿Escucha el servidor? | `ss -lunp` | UDP/67 en el servidor |
+| ¿Qué concesiones existen? | logs/base de datos de Kea | Lease y cliente |
+| ¿Qué mensajes circulan? | Wireshark / `tcpdump` | Discover, Offer, Request, ACK |
+| ¿Funciona el servicio? | `systemctl status` / `journalctl` | Estado y errores |
 
 # 🚨 35. Errores frecuentes
 

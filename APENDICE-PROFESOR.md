@@ -1,6 +1,6 @@
 # 👨‍🏫 APÉNDICE · Materiales para el profesor
 
-> **Versión integral v4 · CFGS ASIR · Servicios de Red e Internet**
+> **Versión integral v5 · CFGS ASIR · Servicios de Red e Internet**
 
 Este apéndice contiene instrumentos de evaluación y propuestas de laboratorio alineados con las ocho UT y con los resultados de aprendizaje del módulo.
 
@@ -339,7 +339,7 @@ El proyecto debe incluir:
 
 # 6. 📚 Sobre las preguntas de evaluación del material de referencia
 
-El repositorio v4 utiliza el material de referencia para determinar **contenidos, objetivos y bloques de evaluación**, pero las preguntas de este apéndice están **reformuladas y ampliadas** para el currículo y las tecnologías actuales. No se reproduce aquí de forma literal un banco completo de preguntas del libro de referencia.
+El repositorio v5 utiliza el material de referencia para determinar **contenidos, objetivos y bloques de evaluación**, pero las preguntas de este apéndice están **reformuladas y ampliadas** para el currículo y las tecnologías actuales. No se reproduce aquí de forma literal un banco completo de preguntas del libro de referencia.
 
 La cobertura de evaluación se mantiene mediante bloques equivalentes:
 

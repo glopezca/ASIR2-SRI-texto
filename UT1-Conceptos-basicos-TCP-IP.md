@@ -2,7 +2,7 @@
 
 ### Fundamentos de direccionamiento, transporte, encaminamiento, NAT/PAT y modelo cliente/servidor.
 
-> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v5 · 2026**
 >
 > Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
@@ -31,10 +31,10 @@
 >                              │
 >                         🔄 NAT / PAT
 >                              │
->                 ┌────────────┼────────────┐
->                 │            │            │
->              🧪 Packet     🐧 WSL2     🖥️ VirtualBox
->              Tracer       + Ubuntu     + Ubuntu Server
+>                 ┌────────────┬────────────┬────────────┬────────────┐
+>                 │            │            │            │
+>              🧪 Packet     🐧 WSL2     🖥️ VirtualBox  🐳 Compose
+>              Tracer       + Ubuntu     + Ubuntu Server  + Docker
 > ```
 >
 > 💡 **Idea guía:** no estudiaremos la red solo para memorizar
@@ -105,6 +105,10 @@ preguntas como:
 ------------------------------------------------------------------------
 
 # 🧱 2. Arquitectura TCP/IP
+
+> 🧭 **ANTES DE EMPEZAR · Modelo por capas**
+>
+> Antes de estudiar TCP/IP conviene entender una idea que aparecerá durante todo el módulo: una comunicación de red se divide en **capas**, y cada capa ofrece servicios a la superior. No necesitamos memorizar todavía todos los detalles del modelo OSI; basta con entender que esta separación permite analizar una comunicación por partes.
 
 ## 2.1. El modelo TCP/IP
 
@@ -538,6 +542,10 @@ directamente.
 
 ------------------------------------------------------------------------
 
+> 🧭 **ANTES DE EMPEZAR · Tabla de encaminamiento**
+>
+> Un host no envía todos los paquetes directamente a su destino. Consulta una **tabla de rutas** para decidir por qué interfaz y hacia qué siguiente salto debe enviar cada paquete. Este concepto será imprescindible en DHCP relay, DNS, servidores y máquinas virtuales.
+
 # 🗺️ 8. Tabla de encaminamiento
 
 Cada host dispone de información que le permite decidir por dónde enviar
@@ -666,6 +674,19 @@ En ASIR es importante distinguir el concepto de **routing** del de
 ------------------------------------------------------------------------
 
 # 🐧 10. Comandos Linux para estudiar el encaminamiento
+### 📊 Tabla rápida de diagnóstico de red
+
+| Necesidad | Comando | Qué observar |
+|---|---|---|
+| Interfaces y direcciones | `ip addr` | Interfaces, estado e IPv4/IPv6 |
+| Tabla de rutas | `ip route` | Red destino, gateway e interfaz |
+| Ruta hacia un destino | `ip route get IP` | Interfaz y siguiente salto elegidos |
+| Vecinos | `ip neigh` | ARP/NDP y estado de vecinos |
+| Sockets | `ss -lntup` | Procesos escuchando y protocolos |
+| Conectividad | `ping IP` | Alcance IP y latencia |
+| Camino | `tracepath IP` | Saltos y MTU |
+| Captura | `sudo tcpdump -ni INTERFAZ` | Paquetes que realmente circulan |
+
 
 ## 🌐 Mostrar interfaces
 
@@ -728,6 +749,10 @@ sudo apt install iputils-tracepath
 ```
 
 ------------------------------------------------------------------------
+
+> 🧭 **ANTES DE EMPEZAR · Transporte**
+>
+> Hasta ahora hemos hablado de equipos y direcciones IP. Ahora introducimos una segunda dimensión: un mismo equipo puede ofrecer muchos servicios simultáneamente. Los **puertos TCP y UDP** permiten identificar esos servicios.
 
 # 🚚 11. Nivel de transporte
 
@@ -871,6 +896,10 @@ ACK.
 
 ------------------------------------------------------------------------
 
+> 🧭 **ANTES DE EMPEZAR · NAT/PAT**
+>
+> NAT modifica información de direccionamiento cuando un paquete atraviesa un dispositivo intermedio. PAT amplía esta idea permitiendo que múltiples conexiones compartan una dirección mediante la identificación de puertos. Este concepto será útil para comprender redes domésticas, VirtualBox y acceso a servicios.
+
 # 🔄 16. NAT y PAT
 
 ## 16.1. Motivación
@@ -1004,6 +1033,10 @@ Un mismo dispositivo puede realizar ambas funciones, pero son conceptos
 distintos.
 
 ------------------------------------------------------------------------
+
+> 🧭 **ANTES DE EMPEZAR · Redes virtuales**
+>
+> Una máquina virtual no está obligada a aparecer en la red de la misma forma que el equipo físico. El hipervisor puede crear diferentes modos de conexión —NAT, puente o red privada— que determinan qué puede alcanzar la máquina virtual y qué equipos pueden alcanzarla.
 
 # 🧩 20. Virtualización y redes virtuales
 
@@ -1679,7 +1712,7 @@ Analizar qué dirección de origen observa la interfaz WAN.
 
 ------------------------------------------------------------------------
 
-# 🧪 29. PRÁCTICA 5 --- Comparación de los tres entornos
+# 🧪 29. PRÁCTICA 5 --- Comparación de los cuatro itinerarios
 
 ## Objetivo
 
@@ -1707,7 +1740,6 @@ y queremos comprobar la conectividad entre dos hosts.
   Topologías complejas   Excelente                   Limitado                     Excelente
 
 ------------------------------------------------------------------------
-
 # 📡 30. Actividad de análisis de tráfico
 
 ## Objetivo

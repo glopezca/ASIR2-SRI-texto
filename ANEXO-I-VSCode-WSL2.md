@@ -1,6 +1,6 @@
 # 🧰 ANEXO I · Visual Studio Code + WSL2 para administración de servicios
 
-> **Versión integral v4 · CFGS ASIR**
+> **Versión integral v5 · CFGS ASIR**
 
 ## 1. 🎯 Objetivos
 
@@ -13,6 +13,19 @@ Aprender a utilizar VS Code como centro de trabajo para configuración, código,
 - Git;
 - validación de configuraciones;
 - diagnóstico.
+
+
+### 📊 Flujo de trabajo recomendado
+
+| Tarea | Explorador | Editor | Terminal WSL2 |
+|---|---|---|---|
+| Localizar configuración | seleccionar fichero | — | `find`, `ls` |
+| Editar | seleccionar fichero | modificar y guardar | — |
+| Validar sintaxis | — | revisión visual | ejecutar herramienta de validación |
+| Probar servicio | — | consultar configuración | `systemctl`, `curl`, `ss`, `journalctl` |
+| Diagnosticar | localizar logs | comparar ficheros | `grep`, `tail`, `tcpdump` |
+
+> 🧭 La ventana dividida no es un fin en sí mismo: permite **ver el fichero, editarlo y comprobar inmediatamente el efecto en el sistema**.
 
 ## 2. 🖥️ Modelo de trabajo
 

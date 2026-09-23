@@ -2,7 +2,7 @@
 
 ### RA5 · Administración de servidores de correo.
 
-> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v5 · 2026**
 >
 > Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
@@ -78,10 +78,15 @@
                   └────────┬────────┘
                            ▼
                          MUA
+
+                 🧪 I Packet Tracer · II WSL2 · III VirtualBox · IV Docker Compose
 ```
 
 ---
 
+> 🧪 **CUATRO ITINERARIOS DE PRÁCTICAS**
+>
+> **Packet Tracer** para simulación · **WSL2** para herramientas y clientes · **VirtualBox + Ubuntu 26.04 Server** para servidores completos · **Docker Compose** para infraestructuras multicontenedor reproducibles.
 # 🎯 0. Objetivos
 
 Al finalizar esta unidad deberás ser capaz de:
@@ -155,6 +160,10 @@ El sistema está diseñado para que el envío y la lectura sean funciones
 separadas.
 
 ---
+
+> 🧭 **ANTES DE EMPEZAR · Arquitectura del correo**
+>
+> El correo no es un único servicio. Un mensaje puede pasar por un **MUA**, un **MSA**, uno o varios **MTA**, un **MDA** y finalmente un buzón consultado mediante POP3 o IMAP. Separar estos roles evita confundir «servidor de correo» con una única aplicación.
 
 # 🧩 2. Componentes de un sistema de correo
 
@@ -244,6 +253,10 @@ MAILBOX
 ```
 
 ---
+
+> 🧭 **ANTES DE EMPEZAR · Entrega de correo**
+>
+> Para entregar correo entre dominios, el sistema necesita localizar el servidor responsable del dominio destinatario. Aquí reaparece DNS, especialmente el registro **MX**, y el transporte SMTP entre agentes de transferencia.
 
 # 🌐 3. Arquitectura completa
 
@@ -623,20 +636,20 @@ cuando está disponible y actualizado.
 ---
 
 # 📊 14. Tabla de puertos
+### 📊 Protocolos de acceso y transporte de correo
 
 | Servicio | Puerto habitual | Función |
 |---|---:|---|
-| SMTP relay | 25/TCP | Transferencia entre servidores |
-| SMTP Submission | 587/TCP | Envío autenticado desde clientes |
+| SMTP | 25/TCP | Transferencia entre MTAs |
+| Submission | 587/TCP | Envío autenticado desde clientes |
 | SMTPS | 465/TCP | Submission con TLS implícito |
-| POP3 | 110/TCP | Acceso al buzón |
-| POP3S | 995/TCP | POP3 con TLS implícito |
-| IMAP | 143/TCP | Acceso y gestión del buzón |
-| IMAPS | 993/TCP | IMAP con TLS implícito |
+| POP3 | 110/TCP | Descarga de correo |
+| POP3S | 995/TCP | POP3 sobre TLS |
+| IMAP | 143/TCP | Acceso y gestión remota del buzón |
+| IMAPS | 993/TCP | IMAP sobre TLS |
 
-> ⚠️ Los puertos no definen por sí solos el nivel de seguridad.
->
-> Lo importante es el protocolo y cómo se establece y valida TLS.
+> 💡 **Los puertos son convenciones de servicio, no una garantía automática de seguridad.** La seguridad depende también de TLS, autenticación, configuración y política del servidor.
+
 
 ---
 
@@ -725,6 +738,10 @@ Es especialmente adecuado cuando:
 > **IMAP** suele encajar mejor.
 
 ---
+
+> 🧭 **ANTES DE EMPEZAR · Estructura del mensaje**
+>
+> Un mensaje de correo tiene cabeceras y cuerpo, y puede utilizar MIME para representar contenido estructurado y adjuntos. MIME y Base64 son mecanismos de representación, no mecanismos de cifrado.
 
 # 📨 18. Formato de un mensaje
 
@@ -956,6 +973,10 @@ Esto es importante para comprender:
 - trazabilidad.
 
 ---
+
+> 🧭 **ANTES DE EMPEZAR · Seguridad del correo**
+>
+> La seguridad del correo se construye con varias capas: cifrado de transporte, autenticación, validación del dominio emisor y mecanismos antispam/antimalware. Ninguna de ellas resuelve por sí sola todos los problemas.
 
 # 🛡️ 25. Seguridad y privacidad
 
@@ -2903,6 +2924,57 @@ firewall
 ```
 
 ---
+
+
+# 🐳 Itinerario IV · Docker Compose
+
+> **Cuadro de contexto · Laboratorio de correo en contenedores**
+> 
+> El correo electrónico no es un único servicio: intervienen MUA, MSA/Submission, MTA, SMTP y protocolos de acceso como IMAP. Compose resulta útil para representar esta arquitectura en un laboratorio aislado. **Nunca se debe publicar un MTA de prácticas como relay abierto en Internet.**
+
+### Arquitectura didáctica
+
+```text
+cliente ── Submission ──► MTA ── SMTP ──► buzón
+   │                                      │
+   └────────────── IMAP ◄─────────────────┘
+```
+
+### Estructura
+
+```text
+compose.yaml
+├── mail-client
+├── smtp/mta
+├── imap
+└── mailnet
+```
+
+El objetivo del itinerario es reproducir el **flujo lógico** y observar puertos, DNS, logs y conexiones. La configuración concreta de Postfix/Dovecot se mantendrá deliberadamente aislada de Internet.
+
+### Comandos de trabajo
+
+```bash
+docker compose config
+docker compose up -d
+docker compose ps
+docker compose logs -f
+docker compose exec mail-client sh
+docker compose down
+```
+
+### Puertos de referencia
+
+| Servicio | Puerto | Uso |
+|---|---:|---|
+| SMTP | 25/TCP | transferencia entre MTAs |
+| Submission | 587/TCP | envío autenticado de clientes |
+| SMTPS | 465/TCP | Submission sobre TLS |
+| IMAP | 143/TCP | acceso al buzón |
+| IMAPS | 993/TCP | IMAP sobre TLS |
+
+**Resultado esperado:** identificar cada papel del sistema y demostrar mediante logs o herramientas de red qué conexión corresponde a cada protocolo.
+
 
 # 🧠 76. Integración con las UT anteriores
 

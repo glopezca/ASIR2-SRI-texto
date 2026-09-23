@@ -2,7 +2,7 @@
 
 ### RA4 · Transferencia de archivos.
 
-> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v5 · 2026**
 >
 > Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
@@ -68,6 +68,9 @@
        └───────────────┐
                        ▼
                   🛡️ SEGURIDAD
+┌──────────────────────────────────────────────────────────────────────┐
+│ 🧪 ITINERARIOS · I Packet Tracer · II WSL2 · III VirtualBox · IV Compose │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
 ------------------------------------------------------------------------
@@ -187,6 +190,10 @@ OpenSSH / sshd
 
 ------------------------------------------------------------------------
 
+> 🧭 **ANTES DE EMPEZAR · FTP**
+>
+> FTP es peculiar porque utiliza una conexión de **control** y una o más conexiones de **datos**. Esta separación explica por qué aparecen los modos activo y pasivo y por qué FTP puede ser especialmente sensible a NAT y cortafuegos.
+
 # 📡 3. FTP
 
 **FTP --- File Transfer Protocol** es un protocolo de aplicación
@@ -265,6 +272,10 @@ PWD ─────────────────────────�
 > ⚠️ Con FTP tradicional, usuario y contraseña pueden viajar sin cifrar.
 
 ------------------------------------------------------------------------
+
+> 🧭 **ANTES DE EMPEZAR · FTP activo y pasivo**
+>
+> En modo activo, el servidor inicia la conexión de datos hacia el cliente; en modo pasivo, el cliente inicia también la conexión de datos hacia un puerto anunciado por el servidor. Esta diferencia es clave cuando existe NAT o filtrado de tráfico.
 
 # 📦 6. Conexión de datos
 
@@ -424,6 +435,35 @@ En versiones anteriores del material utilizaba navegadores como clientes FTP.
 ------------------------------------------------------------------------
 
 # 🧰 10. Cliente FTP en línea de comandos
+### 📊 FTP frente a SFTP: protocolos y comandos
+
+| Operación | FTP (`ftp`) | SFTP (`sftp`) | Observación |
+|---|---|---|---|
+| Conectar | `ftp servidor` | `sftp usuario@servidor` | SFTP utiliza SSH |
+| Listar | `ls` | `ls` | Sintaxis similar, protocolo distinto |
+| Directorio remoto | `cd dir` | `cd dir` | Cambia el directorio remoto |
+| Directorio local | `lcd dir` | `lcd dir` | Cambia el directorio local |
+| Descargar | `get fichero` | `get fichero` | Copia remoto → local |
+| Descargar varios | `mget *.log` | `mget *.log` | Soporte según cliente |
+| Subir | `put fichero` | `put fichero` | Copia local → remoto |
+| Subir varios | `mput *.txt` | `mput *.txt` | Soporte según cliente |
+| Crear directorio | `mkdir dir` | `mkdir dir` | En el servidor |
+| Borrar remoto | `delete fichero` | `rm fichero` | El nombre del comando cambia |
+| Ayuda | `help` | `help` | Consultar comandos disponibles |
+| Salir | `bye` / `quit` | `bye` / `exit` | Cierra la sesión |
+
+> ⚠️ **La similitud de los comandos no significa que FTP y SFTP sean el mismo protocolo.** FTP utiliza su propia arquitectura de control/datos; SFTP funciona como subsistema de SSH.
+
+### 📊 Comparativa de protocolos de transferencia
+
+| Protocolo | Transporte | Cifrado | Autenticación | Uso típico |
+|---|---|---|---|---|
+| FTP | TCP | ❌ | Usuario/contraseña | Compatibilidad y laboratorios |
+| FTPS | TCP + TLS | ✅ | Usuario/certificados según configuración | FTP protegido con TLS |
+| SFTP | SSH/TCP | ✅ | SSH | Transferencia segura general |
+| SCP | SSH/TCP | ✅ | SSH | Copia directa y automatización |
+| TFTP | UDP | ❌ | Muy limitada | Arranque, firmware, dispositivos |
+
 
 Conectar:
 
@@ -973,6 +1013,10 @@ Puede utilizarse en determinados escenarios para:
 > No proporciona autenticación fuerte ni cifrado.
 
 ------------------------------------------------------------------------
+
+> 🧭 **ANTES DE EMPEZAR · TFTP**
+>
+> TFTP es deliberadamente sencillo: utiliza UDP y carece de mecanismos propios de autenticación comparables a FTP o SSH. Se emplea principalmente en escenarios controlados, como transferencia de firmware o archivos de arranque.
 
 # 🧪 29. PRÁCTICA 4.2 --- TFTP en Cisco Packet Tracer
 
@@ -1615,6 +1659,10 @@ sudo ss -ltnp | grep ':22'
 ```
 
 ------------------------------------------------------------------------
+
+> 🧭 **ANTES DE EMPEZAR · SFTP, SCP y SSH**
+>
+> **SFTP no es FTP protegido con TLS**. SFTP es un protocolo de transferencia que funciona sobre SSH; SCP es otro mecanismo de copia basado en SSH. FTPS, en cambio, protege FTP mediante TLS. Son familias tecnológicas distintas.
 
 # 📂 47. SFTP
 
@@ -2294,6 +2342,58 @@ El alumno debe seleccionar una tecnología para cada caso y justificar:
 -   servidor.
 
 ------------------------------------------------------------------------
+
+
+# 🐳 Itinerario IV · Docker Compose
+
+> **Cuadro de contexto · SFTP dentro de Compose**
+> 
+> SFTP **no es FTP sobre un puerto diferente**: es el subsistema de transferencia de OpenSSH y funciona sobre SSH. En Compose resulta especialmente útil para crear rápidamente un servidor de laboratorio y un cliente, pero nunca deben introducirse credenciales reales.
+
+### Arquitectura
+
+```text
+cliente ───── SSH/SFTP ─────► servidor
+             TCP/22
+```
+
+### Propuesta de laboratorio
+
+El despliegue debe utilizar una imagen de OpenSSH fijada a una versión concreta y una configuración de usuario exclusivamente docente. Los datos de práctica se montarán mediante un volumen.
+
+```text
+compose.yaml
+├── sftp-server
+├── cliente
+└── red-sftp
+```
+
+### Secuencia de trabajo
+
+```bash
+docker compose config
+docker compose up -d
+docker compose ps
+docker compose logs sftp-server
+docker compose exec cliente sh
+docker compose down
+```
+
+Desde el cliente se comprobarán las operaciones equivalentes a las estudiadas en VirtualBox:
+
+```text
+sftp usuario@servidor
+ls
+put fichero.txt
+get fichero.txt
+rm fichero.txt
+bye
+```
+
+> La comparación completa de FTP, FTPS, SFTP, SCP y TFTP, junto con la tabla de comandos FTP/SFTP, aparece en la introducción conceptual de esta UT. Aquí se reutilizan esos conceptos aplicándolos al laboratorio Compose.
+
+**Resultado esperado:** realizar una transferencia SFTP reproducible y explicar por qué la existencia de `put` y `get` no significa que FTP y SFTP sean el mismo protocolo.
+
 
 # 🏆 65. Reto integral
 

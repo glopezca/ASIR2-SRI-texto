@@ -1,6 +1,6 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-## Material docente integral · `ASIR2-SRI-texto` · v4
+## Material docente integral · `ASIR2-SRI-texto` · v5
 
 Material autónomo de estudio, laboratorio y evaluación para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
@@ -130,21 +130,23 @@ Incluye formatos, códecs, contenedores, bitrate, streaming, VOD, directo, FFmpe
 
 # 🧪 4. Laboratorio tecnológico
 
-La guía utiliza tres entornos complementarios.
+La guía utiliza **cuatro itinerarios de prácticas complementarios**. Cada itinerario aborda el mismo servicio desde una perspectiva distinta: simulación, administración Linux, infraestructura virtualizada y contenerización reproducible.
 
 ```text
-                  🧪 LABORATORIO SRI
-                         │
-        ┌────────────────┼────────────────┐
-        │                │                │
-        ▼                ▼                ▼
- Packet Tracer          WSL2          VirtualBox
- simulación             Ubuntu        Ubuntu 26.04
- de red                 26.04         Server
-        │                │                │
-        └────────────────┼────────────────┘
-                         ▼
-                 servicios reales
+                         🧪 LABORATORIO SRI
+                                │
+             ┌──────────────────┼──────────────────┐
+             │                  │                  │                  │
+             ▼                  ▼                  ▼                  ▼
+      🧪 ITINERARIO I    🐧 ITINERARIO II   🖥️ ITINERARIO III   🐳 ITINERARIO IV
+      Packet Tracer       WSL2 + Ubuntu     VirtualBox + Ubuntu    Docker Compose
+      simulación          26.04             26.04 Server           infraestructura
+      de red              herramientas      servidores             reproducible
+             │                  │                  │                  │
+             └──────────────────┴──────────────────┴──────────────────┘
+                                      │
+                                      ▼
+                              servicios de red
 ```
 
 ### Cisco Packet Tracer
@@ -159,9 +161,22 @@ Para herramientas Linux, clientes, scripts, análisis y Docker.
 
 Para servidores completos y prácticas que requieren control de interfaces, servicios, systemd y comportamiento de red independiente.
 
+### Docker Compose
+
+Cuarto itinerario práctico para desplegar infraestructuras reproducibles mediante contenedores. Se utiliza especialmente para experimentar con arquitecturas multicontenedor, redes, puertos, volúmenes, DNS interno y composición de servicios.
+
+### 📊 Los cuatro itinerarios, de un vistazo
+
+| Itinerario | Plataforma | Función principal | Tipo de aprendizaje |
+|---|---|---|---|
+| **I** | Cisco Packet Tracer | Simular topologías y protocolos | Comprender la red |
+| **II** | WSL2 + Ubuntu 26.04 | Ejecutar herramientas y clientes Linux | Observar y experimentar |
+| **III** | VirtualBox + Ubuntu 26.04 Server | Administrar servidores completos | Configurar y diagnosticar |
+| **IV** | Docker Compose | Desplegar la infraestructura de la UT de forma reproducible | Automatizar y desplegar |
+
 ---
 
-# 🐳 5. Anexos
+# 🧪 5. Itinerarios de prácticas
 
 ## [🧰 Anexo I · Visual Studio Code + WSL2](ANEXO-I-VSCode-WSL2.md)
 
@@ -203,11 +218,7 @@ Guía completa de:
 
 Flujo completo desde Git local hasta GitHub y Codespaces.
 
-## [🧱 Anexo IV · Docker Compose para UT1–UT8](ANEXO-IV-Docker-Compose-UT1-UT8.md)
-
-Modelado de las infraestructuras de las ocho UT mediante Compose, con especial atención a redes, puertos, volúmenes, DNS interno y pruebas.
-
-## [📚 Anexo V · Bibliografía y documentación abierta](ANEXO-V-Bibliografia.md)
+## [📚 Anexo IV · Bibliografía y documentación abierta](ANEXO-IV-Bibliografia.md)
 
 Bibliografía temática y enlaces a documentación oficial de:
 
@@ -233,7 +244,7 @@ Bibliografía temática y enlaces a documentación oficial de:
 - Packet Tracer;
 - Wireshark.
 
-## [🛡️ Anexo VI · Seguridad, observabilidad y pruebas](ANEXO-VI-Seguridad-Observabilidad-Pruebas.md)
+## [🛡️ Anexo V · Seguridad, observabilidad y pruebas](ANEXO-V-Seguridad-Observabilidad-Pruebas.md)
 
 Método transversal para diseñar pruebas, observar servicios, introducir incidencias deliberadas y documentar la resolución.
 
@@ -320,7 +331,7 @@ El alumno debe entregar **evidencias**, no sólo afirmar que una práctica funci
 
 # ⚠️ 9. Estado de las pruebas técnicas
 
-La v4 incluye revisión estática y coherencia de los ejemplos. Cuando una práctica depende de un daemon, una VM, Docker Desktop, una red virtual específica o GitHub Codespaces, la ejecución final debe realizarse en el entorno indicado.
+La v5 incluye revisión estática y coherencia de los ejemplos. Cuando una práctica depende de un daemon, una VM, Docker Desktop, una red virtual específica o GitHub Codespaces, la ejecución final debe realizarse en el entorno indicado.
 
 En particular, el entorno de generación de este paquete **no dispone de Docker Engine ni de un Codespace ejecutable**, por lo que no se presenta como ejecutada una validación extremo a extremo que no haya sido posible realizar.
 

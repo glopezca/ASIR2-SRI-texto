@@ -1,6 +1,6 @@
 # 📚 ANEXO V · Bibliografía y documentación técnica abierta
 
-> **Versión integral v4 · CFGS ASIR**
+> **Versión integral v5 · CFGS ASIR**
 
 La documentación oficial del proyecto es la referencia primaria. Las fuentes se agrupan por función didáctica y tecnológica.
 

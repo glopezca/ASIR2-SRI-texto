@@ -2,7 +2,7 @@
 
 ### RA7 y RA8 · Servicios de audio y vídeo.
 
-> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v5 · 2026**
 >
 > Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
@@ -108,9 +108,14 @@ VoIP, videoconferencia y bloques finales de prácticas, resumen y evaluación.
                           │
                           ▼
                          VLC
+        🧪 I Packet Tracer · II WSL2 · III VirtualBox · IV Docker Compose
 ```
 
 ---
+
+> 🧪 **CUATRO ITINERARIOS DE PRÁCTICAS**
+>
+> **Packet Tracer** representa la infraestructura de red; **WSL2** proporciona herramientas de análisis y generación de tráfico; **VirtualBox + Ubuntu 26.04 Server** permite desplegar servidores multimedia completos; **Docker Compose** permite reproducir rápidamente arquitecturas de streaming multicontenedor.
 
 # 🎯 3. Objetivos
 
@@ -146,6 +151,10 @@ Al terminar esta UT deberás poder:
 - Documentar un servicio multimedia reproducible.
 
 ---
+
+> 🧭 **ANTES DE EMPEZAR · Señal digital**
+>
+> Para representar audio digital debemos convertir una señal continua en muestras discretas. Los conceptos de **frecuencia de muestreo, profundidad de bits y bitrate** permiten cuantificar qué información estamos conservando y cuánto ancho de banda/almacenamiento necesitamos.
 
 # 🎵 4. Audio digital
 
@@ -255,6 +264,10 @@ o aproximadamente:
 Esto explica por qué un formato PCM ocupa mucho más que un audio comprimido.
 
 ---
+
+> 🧭 **ANTES DE EMPEZAR · Códec**
+>
+> Un códec es el mecanismo que codifica y/o decodifica contenido audiovisual. No debe confundirse con el contenedor: el códec describe cómo se representa el flujo y el contenedor cómo se empaquetan uno o varios flujos junto con metadatos.
 
 # 🧠 8. Códec
 
@@ -463,6 +476,17 @@ más imágenes por segundo
 ---
 
 # 📊 16. Bitrate de vídeo
+### 📊 Conceptos audiovisuales que no deben confundirse
+
+| Concepto | Responde a | Ejemplo |
+|---|---|---|
+| Códec | ¿Cómo se codifica el flujo? | H.264, AV1, Opus |
+| Contenedor | ¿Cómo se empaquetan los flujos? | MP4, Matroska, WebM |
+| Resolución | ¿Cuántos píxeles tiene cada imagen? | 1920×1080 |
+| FPS | ¿Cuántas imágenes por segundo? | 25 fps |
+| Bitrate | ¿Cuántos bits/s se transmiten? | 4 Mb/s |
+| Latencia | ¿Cuánto tarda en llegar/procesarse? | 2 s |
+
 
 El bitrate indica la cantidad de bits utilizados por unidad de tiempo.
 
@@ -638,6 +662,10 @@ stream en directo
 ```
 
 ---
+
+> 🧭 **ANTES DE EMPEZAR · Streaming**
+>
+> Streaming no significa simplemente «descargar un archivo lentamente». El cliente comienza a reproducir mientras los datos siguen llegando. Esto introduce conceptos nuevos: **buffer, latencia, bitrate sostenido y adaptación a las condiciones de red**.
 
 # 🌊 22. ¿Qué es streaming?
 
@@ -869,6 +897,10 @@ WebRTC   → comunicación multimedia interactiva
 
 ---
 
+> 🧭 **ANTES DE EMPEZAR · Icecast**
+>
+> Icecast es un servidor de streaming de audio. Utilizaremos el concepto de **mountpoint** para identificar el flujo publicado y conectaremos un origen de audio con clientes que consumen ese flujo.
+
 # 🎧 30. Icecast
 
 Icecast es un servidor orientado a streaming, especialmente habitual en
@@ -897,6 +929,20 @@ Icecast utiliza **mountpoints** para identificar streams independientes. Un
 mismo servidor puede alojar varios streams. 
 
 ---
+
+
+### 📊 Herramientas multimedia: función de cada pieza
+
+| Herramienta | Función | Ejemplo de uso |
+|---|---|---|
+| `ffprobe` | Inspeccionar un archivo/stream | códec, bitrate, resolución |
+| `ffmpeg` | Convertir o generar flujo | transcodificación y publicación |
+| VLC | Reproducir/capturar | comprobar el resultado |
+| Icecast | Servir audio en streaming | mountpoint HTTP |
+| Nginx | Servir HTTP/HLS o actuar como reverse proxy | distribución web |
+| `curl` | Probar endpoints HTTP | cabeceras y disponibilidad |
+
+> 🧭 Primero **inspecciona**, después **genera**, luego **publica** y finalmente **comprueba**. Separar estas funciones facilita el diagnóstico.
 
 # 🔌 31. Icecast y mountpoints
 
@@ -1317,6 +1363,10 @@ dispone además de un módulo HLS específico para determinados escenarios de
 ficheros multimedia. 
 
 ---
+
+> 🧭 **ANTES DE EMPEZAR · RTMP**
+>
+> RTMP es un protocolo de ingestión/transporte de vídeo que históricamente ha sido muy utilizado para enviar un flujo desde un codificador hacia un servidor. En esta guía lo utilizaremos como pieza de entrada de una arquitectura que después puede generar HLS.
 
 # 📡 46. RTMP
 
@@ -1773,6 +1823,10 @@ Para el laboratorio se estudiará principalmente como concepto.
 
 ---
 
+> 🧭 **ANTES DE EMPEZAR · VoIP**
+>
+> VoIP transporta comunicaciones de voz mediante redes IP. Separaremos señalización —por ejemplo, SIP— de transporte del medio —por ejemplo, RTP— para entender por qué una llamada puede establecerse correctamente y, aun así, presentar problemas de audio.
+
 # 🎙️ 61. VoIP
 
 VoIP significa:
@@ -1935,6 +1989,10 @@ calidad percibida
 ```
 
 ---
+
+> 🧭 **ANTES DE EMPEZAR · Videoconferencia y WebRTC**
+>
+> Una videoconferencia combina señalización, negociación de capacidades, transporte de medios y mecanismos para atravesar redes intermedias. WebRTC reúne buena parte de estas funciones en un ecosistema pensado para comunicación en tiempo real entre navegadores y aplicaciones.
 
 # 🎥 67. Videoconferencia
 
@@ -2586,6 +2644,65 @@ Arquitectura:
 ```
 
 ---
+
+
+# 🐳 Itinerario IV · Docker Compose
+
+> **Cuadro de contexto · Pipeline multimedia en contenedores**
+> 
+> En una infraestructura multimedia conviene separar **generación/codificación, servidor de distribución y cliente**. Compose permite describir este pipeline y reproducirlo rápidamente.
+
+### Arquitectura
+
+```text
+        FFmpeg
+           │
+     ┌─────┴─────┐
+     ▼           ▼
+  Icecast      RTMP
+     │           │
+     ▼           ▼
+  cliente      Nginx
+                   │
+                  HLS
+                   │
+                cliente
+```
+
+### Servicios
+
+```text
+services:
+  encoder:
+  icecast:
+  rtmp:
+  cliente:
+```
+
+Cada servicio debe disponer únicamente de los puertos que necesite. Los servicios que se comuniquen exclusivamente dentro de Compose no requieren `ports`.
+
+### Puertos de referencia
+
+| Tecnología | Puerto habitual | Función |
+|---|---:|---|
+| Icecast | 8000/TCP | distribución de audio |
+| RTMP | 1935/TCP | ingestión hacia servidor RTMP |
+| HTTP/HLS | 80/443 TCP | distribución de segmentos |
+| RTP | variable/UDP | transporte de medios en tiempo real |
+
+### Secuencia de trabajo
+
+```bash
+docker compose config
+docker compose up -d
+docker compose ps
+docker compose logs -f
+docker compose exec cliente sh
+docker compose down
+```
+
+**Resultado esperado:** identificar qué componente codifica, cuál distribuye y cuál reproduce, y justificar qué puertos deben publicarse frente a los que deben permanecer en la red interna.
+
 
 # 🧪 86. PRÁCTICA 8.21 — Monitorización
 

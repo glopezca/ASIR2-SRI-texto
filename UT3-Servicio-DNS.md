@@ -2,7 +2,7 @@
 
 ### RA1 · Resolución de nombres.
 
-> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v4 · 2026**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v5 · 2026**
 >
 > Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
@@ -62,6 +62,9 @@
                          🛡️ SEGURIDAD
                              │
                    DNSSEC · TSIG · TKEY
+┌──────────────────────────────────────────────────────────────────────┐
+│ 🧪 ITINERARIOS · I Packet Tracer · II WSL2 · III VirtualBox · IV Compose │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
 ------------------------------------------------------------------------
@@ -134,6 +137,10 @@ información de red.
 ```
 
 ------------------------------------------------------------------------
+
+> 🧭 **ANTES DE EMPEZAR · DNS como sistema distribuido**
+>
+> DNS debe entenderse como una **base de datos distribuida y jerárquica**, no como una tabla local de nombres. Los datos están organizados en una jerarquía y distintos servidores pueden ser responsables de distintas partes del espacio de nombres.
 
 # 🧱 2. DNS es una base de datos distribuida
 
@@ -259,6 +266,10 @@ www
 
 ------------------------------------------------------------------------
 
+> 🧭 **ANTES DE EMPEZAR · Dominio frente a zona**
+>
+> En DNS, el nombre que forma parte de la jerarquía y la unidad administrativa que contiene los datos no son necesariamente lo mismo. Por eso distinguiremos **dominio, subdominio, zona y delegación** antes de comenzar a editar archivos de BIND9.
+
 # 🧩 6. Dominio, subdominio y zona
 
 Estos conceptos no deben confundirse.
@@ -352,6 +363,10 @@ ROOT ─────────► .es
 > de la jerarquía.
 
 ------------------------------------------------------------------------
+
+> 🧭 **ANTES DE EMPEZAR · Resolución DNS**
+>
+> Resolver un nombre significa obtener la información necesaria a partir de la jerarquía DNS. En este proceso aparecerán los conceptos de **recursividad, iteración, caché, servidor autoritativo y servidor reenviador**.
 
 # 🔎 9. Resolución de nombres
 
@@ -527,6 +542,19 @@ primary y secondary dependiendo de las zonas que sirva.
 ------------------------------------------------------------------------
 
 # 🧾 15. Registros de recursos --- RR
+### 📊 Registros DNS esenciales
+
+| Registro | Función | Ejemplo conceptual |
+|---|---|---|
+| `A` | Nombre → IPv4 | `www → 192.0.2.10` |
+| `AAAA` | Nombre → IPv6 | `www → 2001:db8::10` |
+| `CNAME` | Alias → nombre canónico | `web → servidor` |
+| `MX` | Servidor de correo del dominio | `dominio → mail.dominio` |
+| `NS` | Servidor autoritativo de una zona | `dominio → ns1.dominio` |
+| `PTR` | IP → nombre | `10.2.0.192 → host` |
+| `SOA` | Información administrativa de la zona | serial, refresh, retry... |
+| `TXT` | Texto asociado al nombre | SPF, verificaciones, etc. |
+
 
 La información DNS se almacena mediante **Resource Records (RR)**.
 
@@ -845,6 +873,18 @@ resolvectl query www.example.com
 
 ------------------------------------------------------------------------
 
+### 📊 Herramientas DNS: una por cada pregunta
+
+| Necesidad | Comando | Para qué sirve |
+|---|---|---|
+| Resolver un nombre rápidamente | `dig A host.ejemplo` | Obtener un registro concreto |
+| Consultar un tipo específico | `dig MX ejemplo` | Ver registros del dominio |
+| Preguntar a un servidor concreto | `dig @IP host.ejemplo` | Aislar el servidor DNS consultado |
+| Resolución inversa | `dig -x IP` | Consultar `PTR` |
+| Ver información básica | `host nombre` | Consulta sencilla |
+| Diagnóstico de servicio | `ss -lunp` | Comprobar escucha en UDP/TCP 53 |
+
+
 # 🔍 29. `dig`
 
 `dig` proporciona información detallada sobre las consultas.
@@ -1022,6 +1062,74 @@ en los repositorios publicados para `resolute`.
 
 
 ------------------------------------------------------------------------
+
+
+# 🐳 Itinerario IV · Docker Compose
+
+> **Cuadro de contexto · ¿Qué añade Compose a DNS?**
+> 
+> En Docker Compose cada servicio obtiene una identidad DNS dentro de la red del proyecto. Esto permite desplegar un servidor BIND9 y uno o varios clientes sin depender de direcciones IP efímeras. El **puerto publicado** es necesario para acceder desde el host; entre contenedores basta normalmente con la red interna.
+
+### Arquitectura
+
+```text
+              dnsnet
+        ┌────────┴────────┐
+        ▼                 ▼
+   ┌─────────┐       ┌─────────┐
+   │  BIND9  │◄─────►│ cliente │
+   │   dns   │       │  test   │
+   └────┬────┘       └─────────┘
+        │
+   host:5353 → 53
+```
+
+### `compose.yaml`
+
+```yaml
+services:
+  dns:
+    image: ubuntu/bind9:latest
+    ports:
+      - "5353:53/udp"
+      - "5353:53/tcp"
+    networks:
+      - dnsnet
+
+  cliente:
+    image: alpine:latest
+    command: ["sleep", "infinity"]
+    networks:
+      - dnsnet
+
+networks:
+  dnsnet:
+```
+
+### Práctica
+
+```bash
+docker compose config
+docker compose up -d
+docker compose ps
+docker compose exec cliente nslookup ejemplo.test dns
+docker compose logs -f dns
+```
+
+Desde el host puede comprobarse el puerto publicado con una herramienta DNS apropiada. Dentro de Compose, el nombre `dns` resuelve mediante el DNS interno de Docker.
+
+### Comparación con VirtualBox
+
+| VirtualBox | Docker Compose |
+|---|---|
+| IP de la VM | nombre del servicio |
+| adaptador de red | network Compose |
+| puerto del servidor | puerto del contenedor |
+| NAT/host-only/bridge | `ports` + red interna |
+| servidor completo | contenedor/imagen |
+
+**Resultado esperado:** consultar DNS desde otro contenedor y demostrar la diferencia entre resolución interna y publicación de puertos.
+
 
 # 🧪 34. PRÁCTICA 3 --- Servidor DNS caché/reenviador
 
@@ -1342,6 +1450,10 @@ Para autenticación puede utilizarse **TSIG**.
 
 ------------------------------------------------------------------------
 
+> 🧭 **ANTES DE EMPEZAR · Autenticación de transferencias DNS**
+>
+> Cuando dos servidores DNS intercambian información administrativa, no basta con que exista conectividad: necesitamos poder autenticar al interlocutor y proteger la integridad del intercambio. **TSIG** proporciona autenticación basada en una clave compartida para operaciones como transferencias de zona.
+
 # 🔑 41. TSIG
 
 TSIG permite autenticar comunicaciones entre servidores DNS mediante una
@@ -1441,6 +1553,10 @@ Investiga y documenta:
 -   cómo se evita que cualquier cliente pueda modificar la zona.
 
 ------------------------------------------------------------------------
+
+> 🧭 **ANTES DE EMPEZAR · DNSSEC**
+>
+> DNSSEC añade autenticación criptográfica de los datos DNS mediante firmas digitales y una cadena de confianza. **No cifra las consultas DNS**: su finalidad principal es permitir validar la autenticidad e integridad de los datos.
 
 # 🛡️ 45. DNSSEC
 

@@ -2,7 +2,7 @@
 
 ### RA5 · Administración de servidores de correo.
 
-> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v5 · 2026**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
 > Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
@@ -52,29 +52,47 @@
 # 🧭 Mapa de la unidad
 
 ```text
-                    ✉️ SISTEMA DE CORREO
-                             │
-                 ┌───────────┴───────────┐
-                 │                       │
-              ENVÍO                   RECEPCIÓN
-                 │                       │
-          SMTP / Submission          IMAP / POP3
-                 │                       │
-                 ▼                       ▼
-                MTA ──► MDA ──► BUZÓN ◄──┘
-                 │
-                 │ DNS / MX
-                 ▼
-          MTA del destinatario
+                         ✉️ CORREO
+                            │
+              ┌─────────────┼─────────────┐
+              │             │             │
+            CREAR         ENVIAR        LEER
+              │             │             │
+             MUA           SMTP       POP3 / IMAP
+              │             │             │
+              └─────────────┼─────────────┘
+                            │
+                         INTERNET
+                            │
+                            ▼
+                    ┌──────────────┐
+                    │ SERVIDOR MX  │
+                    └──────┬───────┘
+                           │
+                         BUZÓN
+                           │
+                  ┌────────┴────────┐
+                  │                 │
+                POP3              IMAP
+                  │                 │
+                  └────────┬────────┘
+                           ▼
+                         MUA
 
-🧪 I Packet Tracer · II WSL2 · III VirtualBox · IV Docker Compose
+                 🧪 I Packet Tracer · II WSL2 · III VirtualBox · IV Docker Compose
 ```
 
 ---
 
-> 🧪 **CUATRO ITINERARIOS DE PRÁCTICAS**
+
+> 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
-> **Packet Tracer** para simulación · **WSL2** para herramientas y clientes · **VirtualBox + Ubuntu 26.04 Server** para servidores completos · **Docker Compose** para infraestructuras multicontenedor reproducibles.
+> **I · Cisco Packet Tracer** — simulación de red y protocolos.  
+> **II · WSL2 + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
+> **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
+> **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
+
+
 # 🎯 0. Objetivos
 
 Al finalizar esta unidad deberás ser capaz de:
@@ -246,6 +264,12 @@ MAILBOX
 >
 > Para entregar correo entre dominios, el sistema necesita localizar el servidor responsable del dominio destinatario. Aquí reaparece DNS, especialmente el registro **MX**, y el transporte SMTP entre agentes de transferencia.
 
+> 🧭 **PREPARACIÓN DIDÁCTICA**
+>
+> 🧭 **ANTES DE EMPEZAR · EL CORREO NO ES UN ÚNICO SERVICIO**
+> 
+> Enviar un mensaje y leer un buzón son operaciones diferentes. Por eso aparecen MUA, MSA, MTA y MDA, además de SMTP, IMAP y POP3. Piensa en el correo como una cadena logística: quien deposita un paquete no es necesariamente quien lo transporta ni quien lo entrega al destinatario.
+
 # 🌐 3. Arquitectura completa
 
 Supongamos:
@@ -336,6 +360,12 @@ asir.test
 El dominio desempeña un papel fundamental en el encaminamiento del correo.
 
 ---
+
+> 🧭 **PREPARACIÓN DIDÁCTICA**
+>
+> 🧭 **ANTES DE EMPEZAR · DNS COMO DIRECTORIO DEL CORREO**
+> 
+> Para entregar correo a un dominio no basta con conocer una dirección IP arbitraria. DNS publica información específica, especialmente mediante registros MX, que permiten localizar los servidores responsables del correo entrante.
 
 # 🌳 5. Correo y DNS
 
@@ -535,6 +565,12 @@ entre MTAs.
 
 ---
 
+> 🧭 **PREPARACIÓN DIDÁCTICA**
+>
+> 🧭 **ANTES DE EMPEZAR · SEGURIDAD DE LA CONEXIÓN**
+> 
+> Antes de estudiar certificados, distingue tres cuestiones: cómo se autentica el usuario, cómo se cifra la conexión y cómo se protege el mensaje una vez almacenado o reenviado. TLS resuelve principalmente la seguridad del canal.
+
 # 🔐 11. TLS en correo
 
 Un cliente de correo debe proteger normalmente:
@@ -638,6 +674,21 @@ cuando está disponible y actualizado.
 
 > 💡 **Los puertos son convenciones de servicio, no una garantía automática de seguridad.** La seguridad depende también de TLS, autenticación, configuración y política del servidor.
 
+
+
+| Servicio | Puerto habitual | Función |
+|---|---:|---|
+| SMTP relay | 25/TCP | Transferencia entre servidores |
+| SMTP Submission | 587/TCP | Envío autenticado desde clientes |
+| SMTPS | 465/TCP | Submission con TLS implícito |
+| POP3 | 110/TCP | Acceso al buzón |
+| POP3S | 995/TCP | POP3 con TLS implícito |
+| IMAP | 143/TCP | Acceso y gestión del buzón |
+| IMAPS | 993/TCP | IMAP con TLS implícito |
+
+> ⚠️ Los puertos no definen por sí solos el nivel de seguridad.
+>
+> Lo importante es el protocolo y cómo se establece y valida TLS.
 
 ---
 
@@ -843,6 +894,12 @@ Las cabeceras `Received` ayudan a reconstruir la ruta del mensaje.
 > confianza y de dónde se hayan añadido las cabeceras.
 
 ---
+
+> 🧭 **PREPARACIÓN DIDÁCTICA**
+>
+> 🧭 **ANTES DE EMPEZAR · MENSAJES MULTIPARTE**
+> 
+> El correo nació como texto, pero actualmente transporta HTML, imágenes y archivos. MIME añade una estructura para describir tipos de contenido y combinar partes dentro de un mismo mensaje.
 
 # 📎 21. MIME
 
@@ -1125,6 +1182,12 @@ DMARC
 
 ---
 
+> 🧭 **PREPARACIÓN DIDÁCTICA**
+>
+> 🧭 **ANTES DE EMPEZAR · AUTENTICIDAD DEL REMITENTE**
+> 
+> SPF, DKIM y DMARC no son mecanismos equivalentes a TLS. Actúan sobre la confianza y autenticación del correo a nivel de dominio y mensaje. Conviene estudiar primero qué problema intenta resolver cada uno.
+
 # 🧬 30. SPF
 
 **SPF — Sender Policy Framework** permite publicar mediante DNS qué servidores
@@ -1229,7 +1292,121 @@ Juntos forman una parte importante de la autenticación moderna del correo.
 
 ---
 
+# 🖥️ Webmail con Roundcube
+
+Roundcube es un **MUA web**: el usuario trabaja desde un navegador, mientras el acceso al buzón se realiza mediante los servicios de correo configurados en el servidor. Esto permite observar una arquitectura real sin instalar un cliente de escritorio en cada equipo.
+
+> 🧭 **IDEA CLAVE · EL NAVEGADOR NO ES EL SERVIDOR DE CORREO**
+>
+> Roundcube es la ventanilla. Detrás siguen existiendo SMTP para enviar y, habitualmente, IMAP para consultar el buzón. Si Roundcube muestra un mensaje, eso no significa que Roundcube almacene por sí mismo el correo.
+
+![Captura didáctica de Roundcube](img/captura-roundcube-didactica.png)
+
+**Captura didáctica.** La interfaz concreta depende de la versión y del tema instalado.
+
+> 🔗 **RELACIÓN CON LAS LISTAS DE DISTRIBUCIÓN**
+>
+> Cuando el objetivo pasa de «leer y enviar correo» a «gestionar una dirección colectiva con suscriptores, moderación y distribución», entramos en el terreno de **Sympa**. Se estudia y practica en la UT7, pero debe entenderse como una aplicación que se apoya en la infraestructura de correo.
+>
+> Consulta la sección **Administración de listas con Sympa** de la UT7 para completar este recorrido.
+
+### Flujo de una operación de lectura
+
+```text
+Navegador
+   │ HTTP/HTTPS
+   ▼
+Roundcube
+   │ IMAP
+   ▼
+Servidor de buzones
+   │
+   ▼
+Buzón del usuario
+```
+
+### Flujo de envío
+
+```text
+Navegador
+   │
+   ▼
+Roundcube ── SMTP Submission ──► MTA
+                                  │
+                                  ▼
+                              destinatario
+```
+
+## 🧪 Práctica 6.X — Recorrido completo con Roundcube
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
+### Objetivo
+
+Relacionar la interfaz web con los protocolos que ya conocemos.
+
+### Procedimiento
+
+1. Comprueba que el servicio IMAP está operativo.
+2. Comprueba el servicio SMTP Submission.
+3. Accede a Roundcube mediante HTTPS.
+4. Inicia sesión con un usuario de laboratorio.
+5. Envía un mensaje a otra cuenta del laboratorio.
+6. Comprueba la recepción mediante IMAP.
+7. Abre las cabeceras del mensaje.
+8. Relaciona cada salto con SMTP, IMAP y DNS.
+
+### Comprobaciones desde Linux
+
+```bash
+ss -lntp
+dig MX ejemplo.test
+curl -I https://webmail.ejemplo.test
+```
+
+### Evidencias
+
+- captura de la sesión de Roundcube;
+- mensaje enviado;
+- mensaje recibido;
+- cabeceras;
+- salida de `ss`;
+- explicación del recorrido completo.
+
 # 🧪 34. PRÁCTICA 6.1 — Correo en Cisco Packet Tracer
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Construye:
 
@@ -1286,6 +1463,24 @@ y comprobar:
 ---
 
 # 🧪 35. PRÁCTICA 6.2 — Analizar el correo en Packet Tracer
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Utiliza:
 
@@ -1320,6 +1515,24 @@ Captura el flujo y explica cada paso.
 ---
 
 # 🧪 36. PRÁCTICA 6.3 — DNS y correo
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 En Ubuntu Server configura una zona de laboratorio:
 
@@ -1354,6 +1567,24 @@ UT6 CORREO
 ---
 
 # 🧪 37. PRÁCTICA 6.4 — Inspeccionar SMTP desde WSL2
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Desde WSL2:
 
@@ -1390,6 +1621,24 @@ no administres.
 ---
 
 # 🧪 38. PRÁCTICA 6.5 — SMTP Submission con TLS
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Con un servidor de laboratorio que proporcione submission:
 
@@ -1425,6 +1674,24 @@ STARTTLS
 ---
 
 # 🧪 39. PRÁCTICA 6.6 — SMTP con TLS implícito
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Prueba:
 
@@ -1452,6 +1719,24 @@ Explica la diferencia:
 ---
 
 # 🧪 40. PRÁCTICA 6.7 — POP3
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Con un servidor POP3 de laboratorio:
 
@@ -1474,6 +1759,24 @@ No introduzcas credenciales reales.
 ---
 
 # 🧪 41. PRÁCTICA 6.8 — IMAP
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Con IMAPS:
 
@@ -1503,6 +1806,24 @@ Comprobar que:
 ---
 
 # 🧪 42. PRÁCTICA 6.9 — Configurar un cliente de correo en WSL2
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Instala un cliente de terminal:
 
@@ -1540,6 +1861,24 @@ Usuario
 ---
 
 # 🧪 43. PRÁCTICA 6.10 — Configuración de cliente gráfico
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Si se dispone de un entorno gráfico Linux:
 
@@ -1575,6 +1914,24 @@ Comprueba:
 ---
 
 # 🧪 44. PRÁCTICA 6.11 — POP3 frente a IMAP
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Configura dos perfiles de laboratorio.
 
@@ -1610,6 +1967,24 @@ de cada protocolo.
 ---
 
 # 🧪 45. PRÁCTICA 6.12 — Analizar cabeceras
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Envía un mensaje de laboratorio y analiza:
 
@@ -1642,6 +2017,24 @@ Dibuja la ruta utilizando exclusivamente las cabeceras `Received`.
 ---
 
 # 🧪 46. PRÁCTICA 6.13 — MIME y adjuntos
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Envía:
 
@@ -1675,6 +2068,24 @@ multipart/mixed
 ---
 
 # 🧪 47. PRÁCTICA 6.14 — Base64 no es cifrado
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Obtén una parte Base64 de un mensaje de laboratorio.
 
@@ -1697,6 +2108,24 @@ Base64 ≠ cifrado
 ---
 
 # 🧪 48. PRÁCTICA 6.15 — DNS MX y encaminamiento
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Consulta:
 
@@ -1726,6 +2155,24 @@ Explica qué debería hacer un MTA para encontrar el siguiente salto.
 ---
 
 # 🧪 49. PRÁCTICA 6.16 — Diagnóstico con `dig`
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Simula un fallo:
 
@@ -1755,6 +2202,24 @@ Relaciona con UT3.
 ---
 
 # 🧪 50. PRÁCTICA 6.17 — Diagnóstico de TLS
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Ejecuta:
 
@@ -1782,6 +2247,24 @@ Provoca o identifica un certificado no confiable y explica el motivo.
 ---
 
 # 🧪 51. PRÁCTICA 6.18 — Captura SMTP con Wireshark
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 En un entorno de laboratorio sin TLS:
 
@@ -1806,6 +2289,24 @@ Observa que SMTP tradicional puede ser legible si no está protegido.
 ---
 
 # 🧪 52. PRÁCTICA 6.19 — Captura IMAP/POP3 con TLS
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Captura:
 
@@ -1837,6 +2338,24 @@ como texto legible?
 ---
 
 # 🧪 53. PRÁCTICA 6.20 — Seguridad del cliente
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Realiza una auditoría de un cliente de correo:
 
@@ -1856,6 +2375,24 @@ Realiza una auditoría de un cliente de correo:
 ---
 
 # 🧪 54. PRÁCTICA 6.21 — Analizar spam
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Crea mensajes de laboratorio con:
 
@@ -1886,6 +2423,24 @@ autenticidad del mensaje.
 ---
 
 # 🧪 55. PRÁCTICA 6.22 — SPF
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Para un dominio de laboratorio, diseña conceptualmente:
 
@@ -1918,6 +2473,24 @@ v=spf1 ...
 ---
 
 # 🧪 56. PRÁCTICA 6.23 — DKIM
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Analiza un mensaje real de un laboratorio o entorno autorizado.
 
@@ -1944,6 +2517,24 @@ Después localiza mediante DNS la clave pública correspondiente al selector.
 ---
 
 # 🧪 57. PRÁCTICA 6.24 — DMARC
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Consulta:
 
@@ -1975,6 +2566,24 @@ Explica por qué DMARC no sustituye a SPF ni DKIM.
 ---
 
 # 🧪 58. PRÁCTICA 6.25 — Flujo completo
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Construye y documenta:
 
@@ -2861,14 +3470,15 @@ d) `hostnamectl`
 # 🧪 75. Entornos de laboratorio
 
 ```text
-┌──────────────────────────────────────────────────────────────────────────┐
-│                         LABORATORIO ASIR                                  │
-├────────────────┬────────────────┬────────────────┬────────────────────────┤
-│ Packet Tracer  │ WSL2           │ VirtualBox     │ Docker Compose         │
-│ SMTP/POP3      │ Cliente CLI    │ Ubuntu Server  │ Infraestructura        │
-│ DNS            │ OpenSSL        │ DNS + correo   │ reproducible           │
-│ simulación     │ dig / nc       │ servidor real  │ servicios aislados     │
-└────────────────┴────────────────┴────────────────┴────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│                    LABORATORIO ASIR                         │
+├─────────────────┬─────────────────┬─────────────────────────┤
+│ Packet Tracer   │ WSL2            │ VirtualBox              │
+│                 │                 │                         │
+│ SMTP/POP3       │ Cliente CLI     │ Ubuntu 26.04 Server    │
+│ DNS             │ OpenSSL         │ DNS + servicios         │
+│ Simulation Mode │ dig / nc        │ infraestructura         │
+└─────────────────┴─────────────────┴─────────────────────────┘
 ```
 
 ### Packet Tracer
@@ -2911,129 +3521,6 @@ firewall
 ```
 
 ---
-
-
-
-
-## 🖥️ Ruta gráfica del servidor · Webmin + Postfix + Dovecot
-
-> 🧭 **Antes de continuar**
-> 
-> El servidor de correo se compone de varios servicios. Webmin dispone de módulos específicos para **Postfix Mail Server** y **Dovecot IMAP/POP3 Server**. La administración gráfica no elimina la necesidad de comprender `main.cf`, `master.cf` y la configuración de Dovecot: sirve para visualizar y modificar de forma guiada parte de esos parámetros.
-
-### Postfix mediante Webmin
-
-1. Accede a **Servers → Postfix Mail Server**.
-2. Revisa **General Options**, dominios locales, relay y opciones del servidor SMTP.
-3. Configura el dominio de laboratorio.
-4. Aplica los cambios.
-5. Contrasta el resultado con `postconf -n` y `postfix check`.
-
-### Dovecot mediante Webmin
-
-1. Accede a **Servers → Dovecot IMAP/POP3 Server**.
-2. Identifica las opciones relacionadas con IMAP/POP3 y autenticación.
-3. Aplica los cambios.
-4. Contrasta desde CLI con `doveconf -n` y `ss -lntp`.
-
-> 💡 **Regla:** si Webmin y la CLI muestran configuraciones distintas, no se debe continuar modificando al azar. Hay que identificar primero qué fichero y qué directiva gobiernan el comportamiento real.
-
-### Cliente gráfico 1 · Roundcube Webmail
-
-Roundcube es un **cliente web**, no un MTA ni un servidor IMAP. Se conecta al servicio de correo existente mediante IMAP y SMTP. La documentación actual de Roundcube recomienda utilizar `public_html` como raíz documental en las versiones recientes y configurar una base de datos y un servidor HTTP/PHP.
-
-#### Instalación orientativa
-
-En una máquina de laboratorio Ubuntu con Nginx, PHP-FPM y MariaDB: instala los prerrequisitos, descarga una versión estable de Roundcube, crea su base de datos y configura `config/config.inc.php`. El instalador web permite comprobar requisitos y generar la configuración. Después de completar la instalación hay que retirar/deshabilitar el instalador y proteger `config`, `temp` y `logs`.
-
-```bash
-# Comprobar requisitos básicos
-php -v
-nginx -v
-mariadb --version
-
-# La instalación de Roundcube se realiza siguiendo la versión estable
-# indicada por la documentación oficial del proyecto.
-```
-
-> ⚠️ **No fijamos aquí una versión concreta ni una lista rígida de paquetes PHP**: Roundcube modifica sus requisitos entre versiones. Antes de instalar, consulta los requisitos de la versión estable elegida.
-
-#### Configuración
-
-En `config/config.inc.php` se definen, entre otros, el servidor IMAP y el servidor SMTP. Una vez configurado, accede desde el navegador a la URL de Roundcube e inicia sesión con una cuenta del servidor.
-
-### Cliente gráfico 2 · Mozilla Thunderbird
-
-Thunderbird permite comprobar el mismo servicio desde un cliente de escritorio. En la configuración manual hay que distinguir claramente **servidor entrante** y **servidor saliente**.
-
-| Función | Protocolo | Puerto habitual | Seguridad |
-|---|---|---:|---|
-| Recepción | IMAP | 143 | STARTTLS |
-| Recepción segura | IMAPS | 993 | TLS |
-| Envío autenticado | Submission | 587 | STARTTLS |
-| Envío con TLS implícito | SMTPS | 465 | TLS |
-
-En Thunderbird: **Añadir cuenta → correo electrónico → configuración manual**. Introduce el servidor IMAP, el puerto, el método de seguridad y autenticación; después configura el servidor SMTP de salida. Comprueba recepción y envío.
-
-### Comparativa de las tres interfaces
-
-| Capa | Herramienta | Qué administra |
-|---|---|---|
-| Servidor SMTP | CLI / Webmin | Postfix |
-| Servidor IMAP/POP3 | CLI / Webmin | Dovecot |
-| Cliente web | Roundcube | Acceso al buzón desde navegador |
-| Cliente escritorio | Thunderbird | Acceso al buzón desde el equipo del usuario |
-
-
-# 🐳 Itinerario IV · Docker Compose
-
-> **Cuadro de contexto · Laboratorio de correo en contenedores**
-> 
-> El correo electrónico no es un único servicio: intervienen MUA, MSA/Submission, MTA, SMTP y protocolos de acceso como IMAP. Compose resulta útil para representar esta arquitectura en un laboratorio aislado. **Nunca se debe publicar un MTA de prácticas como relay abierto en Internet.**
-
-### Arquitectura didáctica
-
-```text
-cliente ── Submission ──► MTA ── SMTP ──► buzón
-   │                                      │
-   └────────────── IMAP ◄─────────────────┘
-```
-
-### Estructura
-
-```text
-compose.yaml
-├── mail-client
-├── smtp/mta
-├── imap
-└── mailnet
-```
-
-El objetivo del itinerario es reproducir el **flujo lógico** y observar puertos, DNS, logs y conexiones. La configuración concreta de Postfix/Dovecot se mantendrá deliberadamente aislada de Internet.
-
-### Comandos de trabajo
-
-```bash
-docker compose config
-docker compose up -d
-docker compose ps
-docker compose logs -f
-docker compose exec mail-client sh
-docker compose down
-```
-
-### Puertos de referencia
-
-| Servicio | Puerto | Uso |
-|---|---:|---|
-| SMTP | 25/TCP | transferencia entre MTAs |
-| Submission | 587/TCP | envío autenticado de clientes |
-| SMTPS | 465/TCP | Submission sobre TLS |
-| IMAP | 143/TCP | acceso al buzón |
-| IMAPS | 993/TCP | IMAP sobre TLS |
-
-**Resultado esperado:** identificar cada papel del sistema y demostrar mediante logs o herramientas de red qué conexión corresponde a cada protocolo.
-
 
 # 🧠 76. Integración con las UT anteriores
 

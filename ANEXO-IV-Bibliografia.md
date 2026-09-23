@@ -1,6 +1,6 @@
-# 📚 ANEXO V · Bibliografía y documentación técnica abierta
+# 📚 ANEXO IV · Bibliografía y documentación técnica abierta
 
-> **Versión integral v5 · CFGS ASIR**
+> **Material docente integral · CFGS ASIR**
 
 La documentación oficial del proyecto es la referencia primaria. Las fuentes se agrupan por función didáctica y tecnológica.
 
@@ -16,7 +16,7 @@ La documentación oficial del proyecto es la referencia primaria. Las fuentes se
 ## 2. 🌐 TCP/IP y RFC
 
 - IETF RFC Editor: https://www.rfc-editor.org/
-- RFC 791 IPv4: https://www.rfc-editor.org/rfc/rfc791
+- RFC 791 IP: https://www.rfc-editor.org/rfc/rfc791
 - RFC 8200 IPv6: https://www.rfc-editor.org/rfc/rfc8200
 - RFC 9293 TCP: https://www.rfc-editor.org/rfc/rfc9293
 - RFC 768 UDP: https://www.rfc-editor.org/rfc/rfc768
@@ -132,6 +132,29 @@ La documentación oficial del proyecto es la referencia primaria. Las fuentes se
 - Cisco Packet Tracer: https://www.netacad.com/courses/packet-tracer
 - Wireshark: https://www.wireshark.org/docs/
 - tcpdump: https://www.tcpdump.org/manpages/tcpdump.1.html
+
+## 🖥️ Interfaces web de administración y correo
+
+### Webmin
+
+- Webmin — introducción: https://webmin.com/docs/intro/
+- Instalación y acceso: https://webmin.com/download/
+- Configuración de red: https://webmin.com/docs/modules/network-configuration/
+- Webmin CLI: https://webmin.com/docs/reference/webmin-command-line/
+
+### Roundcube
+
+- Sitio oficial: https://roundcube.net/
+- Capturas oficiales de la interfaz: https://roundcube.net/screens/
+- Documentación y proyecto: https://roundcube.net/about/
+
+### Sympa
+
+- Sitio oficial: https://www.sympa.community/
+- Manual: https://www.sympa.community/manual/
+- Interfaz web para listmasters: https://www.sympa.community/manual/admin/web-interface.html
+- Configuración de la interfaz web: https://www.sympa.community/gpldoc/man/sympa_config.5.html
+- Integración con servidor HTTP: https://www.sympa.community/manual/install/configure-http-server.html
 
 ## 15. 📌 Criterio de actualización
 

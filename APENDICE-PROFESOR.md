@@ -1,6 +1,6 @@
 # 👨‍🏫 APÉNDICE · Materiales para el profesor
 
-> **Versión integral v5 · CFGS ASIR · Servicios de Red e Internet**
+> **Material docente integral · CFGS ASIR · Servicios de Red e Internet**
 
 Este apéndice contiene instrumentos de evaluación y propuestas de laboratorio alineados con las ocho UT y con los resultados de aprendizaje del módulo.
 
@@ -62,7 +62,7 @@ D. Para permitir que solicitudes DHCP atraviesen segmentos de red donde el broad
 
 ## UT3 · DNS
 
-**7. ¿Qué registro se utiliza habitualmente para asociar un nombre con una dirección IPv4?**
+**7. ¿Qué registro se utiliza habitualmente para asociar un nombre con una dirección IP?**
 
 A. MX
 B. AAAA
@@ -258,7 +258,7 @@ ping -c 4 SERVIDOR
 
 **Entorno:** VirtualBox + Ubuntu Server.
 
-Instala Kea DHCPv4, configura una subred de laboratorio, un pool y una reserva. Valida la configuración antes de reiniciar el servicio y demuestra una concesión correcta.
+Instala Kea DHCP, configura una subred de laboratorio, un pool y una reserva. Valida la configuración antes de reiniciar el servicio y demuestra una concesión correcta.
 
 **Duración:** 1 h 45 min.
 
@@ -339,13 +339,13 @@ El proyecto debe incluir:
 
 # 6. 📚 Sobre las preguntas de evaluación del material de referencia
 
-El repositorio v5 utiliza el material de referencia para determinar **contenidos, objetivos y bloques de evaluación**, pero las preguntas de este apéndice están **reformuladas y ampliadas** para el currículo y las tecnologías actuales. No se reproduce aquí de forma literal un banco completo de preguntas del libro de referencia.
+El repositorio  utiliza el material de referencia para determinar **contenidos, objetivos y bloques de evaluación**, pero las preguntas de este apéndice están **reformuladas y ampliadas** para el currículo y las tecnologías actuales. No se reproduce aquí de forma literal un banco completo de preguntas del libro de referencia.
 
 La cobertura de evaluación se mantiene mediante bloques equivalentes:
 
 | UT | Contenidos evaluados |
 |---|---|
-| UT1 | arquitectura TCP/IP, IPv4/IPv6, subredes, transporte, puertos, NAT/PAT, routing y virtualización |
+| UT1 | arquitectura TCP/IP, IP/IPv6, subredes, transporte, puertos, NAT/PAT, routing y virtualización |
 | UT2 | DHCP, DORA, concesiones, reservas, opciones, relay, DHCPv6 y seguridad |
 | UT3 | DNS, zonas, registros, resolución, BIND9, delegación, transferencia de zona y seguridad |
 | UT4 | FTP, FTPS, TFTP, SFTP/SCP, modos, autenticación, permisos y seguridad |

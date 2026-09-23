@@ -2,7 +2,7 @@
 
 ### RA4 · Transferencia de archivos.
 
-> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v5 · 2026**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
 > Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
@@ -69,11 +69,19 @@
                        ▼
                   🛡️ SEGURIDAD
 ┌──────────────────────────────────────────────────────────────────────┐
-│ 🧪 ITINERARIOS · I Packet Tracer · II WSL2 · III VirtualBox · IV Compose │
+│ 🧪 ENTORNOS · I Packet Tracer · II WSL2 · III VirtualBox · IV Compose │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
 ------------------------------------------------------------------------
+
+> 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
+>
+> **I · Cisco Packet Tracer** — simulación de red y protocolos.  
+> **II · WSL2 + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
+> **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
+> **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
+
 
 # 🎯 0. Objetivos
 
@@ -465,6 +473,7 @@ En versiones anteriores del material utilizaba navegadores como clientes FTP.
 | TFTP | UDP | ❌ | Muy limitada | Arranque, firmware, dispositivos |
 
 
+
 Conectar:
 
 ``` bash
@@ -515,6 +524,12 @@ o:
   `bye`       Cerrar sesión
 
 ------------------------------------------------------------------------
+
+> 🧭 **PREPARACIÓN DIDÁCTICA**
+>
+> 🧭 **ANTES DE EMPEZAR · PROTOCOLOS DE TRANSFERENCIA**
+> 
+> FTP, SFTP, SCP, FTPS y TFTP pueden parecer variantes de la misma herramienta porque todos permiten mover archivos. No lo son. Antes de configurarlos conviene distinguir transporte, cifrado, autenticación y canales de control/datos.
 
 # 📥 12. Descargar un fichero
 
@@ -593,6 +608,24 @@ RETR fichero.txt ──────────►
 ------------------------------------------------------------------------
 
 # 🧪 15. PRÁCTICA 4.1 --- Explorar FTP desde WSL2
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Objetivo
 
@@ -804,6 +837,12 @@ ftp> binary
 ```
 
 ------------------------------------------------------------------------
+
+> 🧭 **PREPARACIÓN DIDÁCTICA**
+>
+> 🧭 **ANTES DE EMPEZAR · FTP ACTIVO Y PASIVO**
+> 
+> FTP utiliza una arquitectura peculiar: el canal de control y el canal de datos no se comportan como una única conexión. Esta característica explica muchos problemas con NAT y firewalls.
 
 # 🛡️ 21. Seguridad de FTP
 
@@ -1019,6 +1058,24 @@ Puede utilizarse en determinados escenarios para:
 > TFTP es deliberadamente sencillo: utiliza UDP y carece de mecanismos propios de autenticación comparables a FTP o SSH. Se emplea principalmente en escenarios controlados, como transferencia de firmware o archivos de arranque.
 
 # 🧪 29. PRÁCTICA 4.2 --- TFTP en Cisco Packet Tracer
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Topología
 
@@ -1062,6 +1119,24 @@ y documenta qué comando utilizaste.
 ------------------------------------------------------------------------
 
 # 🧪 30. PRÁCTICA 4.3 --- FTP en Cisco Packet Tracer
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Packet Tracer permite simular un servidor FTP.
 
@@ -1108,6 +1183,24 @@ put prueba.txt
 ------------------------------------------------------------------------
 
 # 🧪 31. PRÁCTICA 4.4 --- Capturar FTP con Wireshark
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Utiliza un servidor FTP de laboratorio.
 
@@ -1178,6 +1271,24 @@ y utiliza `/etc/vsftpd.conf` como fichero principal de configuración.
 ------------------------------------------------------------------------
 
 # 🧪 33. PRÁCTICA 4.5 --- Instalar vsftpd
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Actualiza:
 
@@ -1521,6 +1632,24 @@ Internet/LAN
 ------------------------------------------------------------------------
 
 # 🧪 43. PRÁCTICA 4.6 --- FTP + firewall
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Configura:
 
@@ -1582,6 +1711,24 @@ transferencias en `/var/log/vsftpd.log`.
 ------------------------------------------------------------------------
 
 # 🧪 45. PRÁCTICA 4.7 --- Diagnóstico de FTP
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Introduce deliberadamente estos errores:
 
@@ -1630,6 +1777,12 @@ Prueba
 ```
 
 ------------------------------------------------------------------------
+
+> 🧭 **PREPARACIÓN DIDÁCTICA**
+>
+> 🧭 **ANTES DE EMPEZAR · SSH COMO TÚNEL SEGURO**
+> 
+> SFTP no significa «FTP con SSL». Es transferencia de ficheros sobre el subsistema SSH. Esta diferencia afecta a puertos, negociación, autenticación y herramientas de diagnóstico.
 
 # 🔐 46. OpenSSH: la alternativa segura
 
@@ -1800,6 +1953,24 @@ su documentación actual.
 ------------------------------------------------------------------------
 
 # 🧪 51. PRÁCTICA 4.8 --- SFTP frente a FTP
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Realiza la misma operación mediante:
 
@@ -1848,6 +2019,24 @@ Compara:
 ------------------------------------------------------------------------
 
 # 🧪 52. PRÁCTICA 4.9 --- SFTP restringido
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Configura un usuario destinado exclusivamente a transferencia.
 
@@ -1889,6 +2078,24 @@ y la documentación oficial de OpenSSH antes de aplicar la configuración.
 ------------------------------------------------------------------------
 
 # 🧪 53. PRÁCTICA 4.10 --- SFTP desde WSL2
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Desde WSL2:
 
@@ -1915,6 +2122,24 @@ find /home/alumno -maxdepth 2 -type f
 ------------------------------------------------------------------------
 
 # 🧪 54. PRÁCTICA 4.11 --- SCP automatizado
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Crea:
 
@@ -1945,6 +2170,24 @@ introducir la contraseña manualmente.
 ------------------------------------------------------------------------
 
 # 🧪 55. PRÁCTICA 4.12 --- Cliente gráfico
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Instala FileZilla en el sistema cliente:
 
@@ -1981,6 +2224,24 @@ Observa:
 ------------------------------------------------------------------------
 
 # 🧪 56. PRÁCTICA 4.13 --- FTP frente a SFTP con Wireshark
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Construye:
 
@@ -2069,6 +2330,24 @@ modo activo/pasivo
 ------------------------------------------------------------------------
 
 # 🧪 58. PRÁCTICA 4.14 --- Servidor FTP publicado mediante NAT
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Configura un router Linux de laboratorio.
 
@@ -2105,6 +2384,24 @@ Después prueba desde una red externa.
 ------------------------------------------------------------------------
 
 # 🧪 59. PRÁCTICA 4.15 --- Servidor SFTP
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Instala:
 
@@ -2342,87 +2639,6 @@ El alumno debe seleccionar una tecnología para cada caso y justificar:
 -   servidor.
 
 ------------------------------------------------------------------------
-
-
-
-
-## 🖥️ Ruta gráfica opcional · Webmin para SSH y FTP
-
-> 🧭 **Antes de continuar**
-> 
-> Webmin dispone de módulos para **SSH Server** y **ProFTPD Server**. Esto permite comparar la administración declarativa/manual de los servicios con una interfaz gráfica. SFTP, sin embargo, es una funcionalidad de SSH: no debe confundirse con FTP administrado mediante ProFTPD.
-
-### SSH / SFTP mediante Webmin
-
-1. Abre **Servers → SSH Server**.
-2. Localiza las opciones de autenticación, acceso, escucha y reenvío.
-3. Configura, como práctica, el puerto SSH y las restricciones de acceso del laboratorio.
-4. Aplica los cambios.
-5. Comprueba desde CLI con `sshd -t`, `ss -lntp` y `ssh`.
-6. Prueba la transferencia con `sftp`.
-
-### FTP mediante Webmin
-
-Si se desea practicar FTP gráfico, instala **ProFTPD** y abre **Servers → ProFTPD Server**. Configura el acceso y compara la configuración resultante con el fichero de ProFTPD.
-
-| Servicio | CLI | Interfaz gráfica | Cliente de prueba |
-|---|---|---|---|
-| SSH/SFTP | `sshd_config`, `systemctl`, `sshd -t` | Webmin → SSH Server | `ssh`, `sftp` |
-| FTP | `proftpd.conf`, `systemctl` | Webmin → ProFTPD Server | `ftp` |
-
-La práctica principal de la UT mantiene **SFTP/SSH** como opción preferente para transferencia segura.
-
-
-# 🐳 Itinerario IV · Docker Compose
-
-> **Cuadro de contexto · SFTP dentro de Compose**
-> 
-> SFTP **no es FTP sobre un puerto diferente**: es el subsistema de transferencia de OpenSSH y funciona sobre SSH. En Compose resulta especialmente útil para crear rápidamente un servidor de laboratorio y un cliente, pero nunca deben introducirse credenciales reales.
-
-### Arquitectura
-
-```text
-cliente ───── SSH/SFTP ─────► servidor
-             TCP/22
-```
-
-### Propuesta de laboratorio
-
-El despliegue debe utilizar una imagen de OpenSSH fijada a una versión concreta y una configuración de usuario exclusivamente docente. Los datos de práctica se montarán mediante un volumen.
-
-```text
-compose.yaml
-├── sftp-server
-├── cliente
-└── red-sftp
-```
-
-### Secuencia de trabajo
-
-```bash
-docker compose config
-docker compose up -d
-docker compose ps
-docker compose logs sftp-server
-docker compose exec cliente sh
-docker compose down
-```
-
-Desde el cliente se comprobarán las operaciones equivalentes a las estudiadas en VirtualBox:
-
-```text
-sftp usuario@servidor
-ls
-put fichero.txt
-get fichero.txt
-rm fichero.txt
-bye
-```
-
-> La comparación completa de FTP, FTPS, SFTP, SCP y TFTP, junto con la tabla de comandos FTP/SFTP, aparece en la introducción conceptual de esta UT. Aquí se reutilizan esos conceptos aplicándolos al laboratorio Compose.
-
-**Resultado esperado:** realizar una transferencia SFTP reproducible y explicar por qué la existencia de `put` y `get` no significa que FTP y SFTP sean el mismo protocolo.
-
 
 # 🏆 65. Reto integral
 

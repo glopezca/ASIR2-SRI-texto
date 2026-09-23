@@ -2,7 +2,7 @@
 
 ### RA1 · Resolución de nombres.
 
-> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v5 · 2026**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
 > Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
@@ -63,11 +63,19 @@
                              │
                    DNSSEC · TSIG · TKEY
 ┌──────────────────────────────────────────────────────────────────────┐
-│ 🧪 ITINERARIOS · I Packet Tracer · II WSL2 · III VirtualBox · IV Compose │
+│ 🧪 ENTORNOS · I Packet Tracer · II WSL2 · III VirtualBox · IV Compose │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
 ------------------------------------------------------------------------
+
+> 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
+>
+> **I · Cisco Packet Tracer** — simulación de red y protocolos.  
+> **II · WSL2 + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
+> **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
+> **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
+
 
 # 🎯 0. Objetivos
 
@@ -169,6 +177,12 @@ La raíz contiene información de referencia hacia los TLD; no contiene
 todos los registros de todos los dominios finales. 
 
 ------------------------------------------------------------------------
+
+> 🧭 **PREPARACIÓN DIDÁCTICA**
+>
+> 🧭 **ANTES DE EMPEZAR · NOMBRES FRENTE A DIRECCIONES**
+> 
+> DNS no es una agenda telefónica gigantesca que contiene todas las respuestas. Es un sistema jerárquico y distribuido. Primero distinguiremos nombre, dominio, zona, servidor autoritativo y resolvedor; después veremos cómo cooperan.
 
 # 🌳 3. Espacio de nombres de dominio
 
@@ -302,6 +316,12 @@ delegaciones.
 > cadena de caracteres del nombre.
 
 ------------------------------------------------------------------------
+
+> 🧭 **PREPARACIÓN DIDÁCTICA**
+>
+> 🧭 **ANTES DE EMPEZAR · RESOLUCIÓN RECURSIVA E ITERATIVA**
+> 
+> Cuando un cliente pregunta por un nombre, la respuesta puede proceder de una caché o requerir consultas sucesivas. La diferencia entre **recursión** e **iteración** es imprescindible para entender `dig`, los resolvedores y la propagación de errores.
 
 # 🏛️ 7. Delegación
 
@@ -546,7 +566,7 @@ primary y secondary dependiendo de las zonas que sirva.
 
 | Registro | Función | Ejemplo conceptual |
 |---|---|---|
-| `A` | Nombre → IPv4 | `www → 192.0.2.10` |
+| `A` | Nombre → IP | `www → 192.0.2.10` |
 | `AAAA` | Nombre → IPv6 | `www → 2001:db8::10` |
 | `CNAME` | Alias → nombre canónico | `web → servidor` |
 | `MX` | Servidor de correo del dominio | `dominio → mail.dominio` |
@@ -554,6 +574,7 @@ primary y secondary dependiendo de las zonas que sirva.
 | `PTR` | IP → nombre | `10.2.0.192 → host` |
 | `SOA` | Información administrativa de la zona | serial, refresh, retry... |
 | `TXT` | Texto asociado al nombre | SPF, verificaciones, etc. |
+
 
 
 La información DNS se almacena mediante **Resource Records (RR)**.
@@ -577,7 +598,7 @@ de una zona.
 
 # 🟦 16. Registro A
 
-Asocia un nombre con una dirección IPv4.
+Asocia un nombre con una dirección IP.
 
 ``` text
 www.example.es.   IN   A   192.0.2.10
@@ -613,6 +634,12 @@ dig www.example.es AAAA
 ```
 
 ------------------------------------------------------------------------
+
+> 🧭 **PREPARACIÓN DIDÁCTICA**
+>
+> 🧭 **ANTES DE EMPEZAR · BIND9**
+> 
+> BIND9 implementa funciones DNS concretas sobre los conceptos que acabamos de estudiar. Primero entenderemos qué papel desempeña cada fichero; después escribiremos configuraciones y finalmente validaremos sintaxis y resolución.
 
 # 🟨 18. Registro CNAME
 
@@ -798,7 +825,7 @@ La resolución inversa:
 IP ──────────► NOMBRE
 ```
 
-Para IPv4 se utiliza:
+Para IP se utiliza:
 
 ``` text
 in-addr.arpa
@@ -872,18 +899,6 @@ resolvectl query www.example.com
 ```
 
 ------------------------------------------------------------------------
-
-### 📊 Herramientas DNS: una por cada pregunta
-
-| Necesidad | Comando | Para qué sirve |
-|---|---|---|
-| Resolver un nombre rápidamente | `dig A host.ejemplo` | Obtener un registro concreto |
-| Consultar un tipo específico | `dig MX ejemplo` | Ver registros del dominio |
-| Preguntar a un servidor concreto | `dig @IP host.ejemplo` | Aislar el servidor DNS consultado |
-| Resolución inversa | `dig -x IP` | Consultar `PTR` |
-| Ver información básica | `host nombre` | Consulta sencilla |
-| Diagnóstico de servicio | `ss -lunp` | Comprobar escucha en UDP/TCP 53 |
-
 
 # 🔍 29. `dig`
 
@@ -968,6 +983,24 @@ Modo interactivo:
 ------------------------------------------------------------------------
 
 # 🧪 32. PRÁCTICA 1 --- Explorar DNS desde WSL2
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Objetivo
 
@@ -1021,6 +1054,24 @@ Una tabla:
 ------------------------------------------------------------------------
 
 # 🧪 33. PRÁCTICA 2 --- Instalar BIND9 en VirtualBox + Ubuntu 26.04 Server
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Topología
 
@@ -1063,100 +1114,25 @@ en los repositorios publicados para `resolute`.
 
 ------------------------------------------------------------------------
 
-
-
-
-## 🖥️ Ruta gráfica · BIND9 mediante Webmin
-
-> 🧭 **Antes de continuar**
-> 
-> Webmin dispone de un módulo específico para **BIND DNS Server**. El módulo modifica directamente los ficheros de configuración de BIND, por lo que no constituye un DNS diferente: es otra interfaz de administración.
-
-### Ruta CLI
-
-La ruta principal de la UT continúa siendo la edición y validación mediante CLI: `named.conf`, ficheros de zona, `named-checkconf`, `named-checkzone`, `rndc` y `dig`.
-
-### Ruta Webmin
-
-1. Instala y accede a Webmin según el Anexo VI.
-2. Abre **Servers → BIND DNS Server**.
-3. Identifica las opciones globales y las zonas existentes.
-4. Crea una zona de laboratorio y añade registros `A`, `AAAA`, `CNAME`, `MX` y `PTR`.
-5. Aplica los cambios desde Webmin.
-6. Comprueba después desde CLI que los ficheros generados contienen lo esperado.
-7. Valida con `named-checkconf`, `named-checkzone` y `dig`.
-
-> 💡 **Principio profesional:** una GUI no sustituye la comprensión del fichero de configuración. El administrador debe poder recuperar el servicio aunque Webmin no esté disponible.
-
-
-# 🐳 Itinerario IV · Docker Compose
-
-> **Cuadro de contexto · ¿Qué añade Compose a DNS?**
-> 
-> En Docker Compose cada servicio obtiene una identidad DNS dentro de la red del proyecto. Esto permite desplegar un servidor BIND9 y uno o varios clientes sin depender de direcciones IP efímeras. El **puerto publicado** es necesario para acceder desde el host; entre contenedores basta normalmente con la red interna.
-
-### Arquitectura
-
-```text
-              dnsnet
-        ┌────────┴────────┐
-        ▼                 ▼
-   ┌─────────┐       ┌─────────┐
-   │  BIND9  │◄─────►│ cliente │
-   │   dns   │       │  test   │
-   └────┬────┘       └─────────┘
-        │
-   host:5353 → 53
-```
-
-### `compose.yaml`
-
-```yaml
-services:
-  dns:
-    image: ubuntu/bind9:latest
-    ports:
-      - "5353:53/udp"
-      - "5353:53/tcp"
-    networks:
-      - dnsnet
-
-  cliente:
-    image: alpine:latest
-    command: ["sleep", "infinity"]
-    networks:
-      - dnsnet
-
-networks:
-  dnsnet:
-```
-
-### Práctica
-
-```bash
-docker compose config
-docker compose up -d
-docker compose ps
-docker compose exec cliente nslookup ejemplo.test dns
-docker compose logs -f dns
-```
-
-Desde el host puede comprobarse el puerto publicado con una herramienta DNS apropiada. Dentro de Compose, el nombre `dns` resuelve mediante el DNS interno de Docker.
-
-### Comparación con VirtualBox
-
-| VirtualBox | Docker Compose |
-|---|---|
-| IP de la VM | nombre del servicio |
-| adaptador de red | network Compose |
-| puerto del servidor | puerto del contenedor |
-| NAT/host-only/bridge | `ports` + red interna |
-| servidor completo | contenedor/imagen |
-
-**Resultado esperado:** consultar DNS desde otro contenedor y demostrar la diferencia entre resolución interna y publicación de puertos.
-
-
 # 🧪 34. PRÁCTICA 3 --- Servidor DNS caché/reenviador
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Objetivo
 
@@ -1209,6 +1185,24 @@ resolver consultas repetidas.
 ------------------------------------------------------------------------
 
 # 🧪 35. PRÁCTICA 4 --- Crear una zona autoritativa
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Dominio de laboratorio:
 
@@ -1299,6 +1293,24 @@ dig @192.168.10.10 www.asir.test
 ------------------------------------------------------------------------
 
 # 🧪 37. PRÁCTICA 5 --- Zona inversa
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Para:
 
@@ -1359,6 +1371,24 @@ dig @192.168.10.10 -x 192.168.10.20
 ------------------------------------------------------------------------
 
 # 🧪 38. PRÁCTICA 6 --- Registros DNS
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Amplía la zona `asir.test` con:
 
@@ -1413,6 +1443,24 @@ dig @192.168.10.10 asir.test ANY
 ------------------------------------------------------------------------
 
 # 🧪 39. PRÁCTICA 7 --- Servidor secundario y transferencia de zona
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Topología
 
@@ -1510,6 +1558,24 @@ No se debe incluir una clave TSIG real en un repositorio Git público.
 ------------------------------------------------------------------------
 
 # 🧪 42. PRÁCTICA 8 --- Transferencia autenticada
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Configura:
 
@@ -1555,6 +1621,24 @@ Puede utilizarse para integrar DHCP y DNS en determinados entornos.
 ------------------------------------------------------------------------
 
 # 🧪 44. PRÁCTICA 9 --- DHCP + DNS dinámico
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Utilizando la infraestructura de la UT2:
 
@@ -1677,6 +1761,24 @@ encuentran:
 ------------------------------------------------------------------------
 
 # 🧪 48. PRÁCTICA 10 --- Diagnóstico DNS con Wireshark
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Captura tráfico mientras ejecutas:
 
@@ -1715,6 +1817,24 @@ Compara UDP y TCP.
 ------------------------------------------------------------------------
 
 # 🧪 49. PRÁCTICA 11 --- Diagnóstico con `dig`
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Realiza:
 
@@ -1836,6 +1956,24 @@ Puede indicar un problema más profundo:
 ------------------------------------------------------------------------
 
 # 🧪 52. PRÁCTICA 12 --- Reto integral DNS
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Construye:
 
@@ -2138,7 +2276,7 @@ El TTL indica cuánto tiempo puede mantenerse una respuesta en caché.
 
 Es la obtención de un nombre a partir de una dirección IP.
 
-En IPv4 utiliza:
+En IP utiliza:
 
 ``` text
 in-addr.arpa

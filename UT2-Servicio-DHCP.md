@@ -2,7 +2,7 @@
 
 ### RA2 · Configuración automática de red.
 
-> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v5 · 2026**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
 > Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
@@ -55,11 +55,19 @@
          Packet Tracer   Ubuntu 26.04   Wireshark
                           + Kea
 ┌──────────────────────────────────────────────────────────────────────┐
-│ 🧪 ITINERARIOS · I Packet Tracer · II WSL2 · III VirtualBox · IV Compose │
+│ 🧪 ENTORNOS · I Packet Tracer · II WSL2 · III VirtualBox · IV Compose │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
 ------------------------------------------------------------------------
+
+> 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
+>
+> **I · Cisco Packet Tracer** — simulación de red y protocolos.  
+> **II · WSL2 + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
+> **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
+> **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
+
 
 # 🎯 0. Objetivos
 
@@ -92,7 +100,7 @@ comunicarse mediante IP.
 
 Un cliente DHCP puede recibir, entre otros:
 
--   Dirección IPv4.
+-   Dirección IP.
 -   Máscara de red.
 -   Puerta de enlace predeterminada.
 -   Servidores DNS.
@@ -256,7 +264,7 @@ En terminología tradicional se habla de:
 -   Reservas.
 -   Opciones.
 
-En Kea la configuración DHCPv4 utiliza principalmente el concepto
+En Kea la configuración DHCP utiliza principalmente el concepto
 `subnet4`, dentro del cual se pueden definir uno o varios `pools`.
 
 Ejemplo:
@@ -368,11 +376,11 @@ Ejemplos:
 
 > 🧭 **ANTES DE EMPEZAR · DORA y broadcast**
 >
-> Un cliente que todavía no conoce su configuración necesita localizar un servidor. Por eso el intercambio inicial utiliza mensajes DHCP y mecanismos de difusión. La secuencia **Discover → Offer → Request → ACK (DORA)** describe el proceso básico de obtención de una concesión IPv4.
+> Un cliente que todavía no conoce su configuración necesita localizar un servidor. Por eso el intercambio inicial utiliza mensajes DHCP y mecanismos de difusión. La secuencia **Discover → Offer → Request → ACK (DORA)** describe el proceso básico de obtención de una concesión IP.
 
 # 🔄 9. Funcionamiento DHCP: DORA
 
-La secuencia clásica para obtener una concesión IPv4 se resume mediante
+La secuencia clásica para obtener una concesión IP se resume mediante
 **DORA**:
 
 ``` text
@@ -394,7 +402,7 @@ La secuencia clásica para obtener una concesión IPv4 se resume mediante
 
 # 📡 10. DHCPDISCOVER
 
-El cliente todavía no dispone de una configuración IPv4 válida para esa
+El cliente todavía no dispone de una configuración IP válida para esa
 red.
 
 Emite un mensaje **DHCPDISCOVER** para localizar servidores DHCP.
@@ -485,7 +493,7 @@ protocolo.
 
 # 🔌 16. Puertos utilizados por DHCP
 
-DHCP para IPv4 utiliza **UDP**.
+DHCP para IP utiliza **UDP**.
 
   Función           Puerto
   --------------- --------
@@ -499,7 +507,7 @@ UDP 68  ◄──── DHCP ─────────── UDP 67
 ```
 
 > 🧠 **Para recordar:** DHCP no utiliza TCP para el intercambio normal
-> de mensajes DHCPv4.
+> de mensajes DHCP.
 
 ------------------------------------------------------------------------
 
@@ -517,6 +525,7 @@ UDP 68  ◄──── DHCP ─────────── UDP 67
 | DHCPREQUEST | Cliente → servidor/broadcast | Solicitar la concesión elegida |
 | DHCPACK | Servidor → cliente | Confirmar la concesión |
 | DHCPNAK | Servidor → cliente | Rechazar la solicitud |
+
 
 
 Un broadcast DHCP no atraviesa routers de forma normal.
@@ -736,7 +745,63 @@ Snooping** y políticas de puertos.
 
 ------------------------------------------------------------------------
 
+> 🧭 **PREPARACIÓN DIDÁCTICA**
+>
+> 🧭 **ANTES DE LA PRÁCTICA · QUÉ VAS A OBSERVAR**
+> 
+> Antes de teclear comandos, identifica el flujo esperado: cliente → descubrimiento → oferta → solicitud → confirmación. La práctica debe terminar con una concesión verificable, no simplemente con un servicio arrancado.
+
+# 🖥️ Administración web con Webmin
+
+La administración de servicios mediante terminal es una competencia fundamental en ASIR, pero una interfaz web puede resultar útil como **capa de observación y administración**, especialmente cuando queremos relacionar parámetros del servicio con su representación gráfica. Webmin no sustituye la comprensión de los ficheros de configuración ni de los comandos: es una interfaz sobre el sistema.
+
+> 🧭 **IDEA CLAVE · WEBMIN ES EL CUADRO DE MANDOS, NO EL MOTOR**
+>
+> Imagina un automóvil: el volante y el salpicadero facilitan la conducción, pero no sustituyen el conocimiento del motor. En ASIR debemos saber qué cambia Webmin, dónde se almacena esa configuración y cómo comprobarla desde la terminal.
+
+![Captura didáctica de Webmin](img/captura-webmin-didactica.png)
+
+**Captura didáctica.** La interfaz real puede variar según la versión y los módulos instalados.
+
+### Flujo recomendado
+
+1. Comprueba el estado del servicio desde la terminal.
+2. Abre Webmin y localiza el módulo correspondiente.
+3. Realiza un cambio pequeño.
+4. Comprueba qué configuración ha cambiado.
+5. Valida la configuración.
+6. Reinicia o recarga sólo si es necesario.
+7. Verifica el resultado desde un cliente.
+
+Comandos que conviene recordar:
+
+```bash
+systemctl status kea-dhcp4-server
+sudo journalctl -u kea-dhcp4-server -n 50
+sudo kea-dhcp4 -t /etc/kea/kea-dhcp4.conf
+```
+
+La práctica correcta es, por tanto, **GUI → configuración → validación → servicio → cliente**.
+
 # 🧪 25. PRÁCTICA 1 --- DHCP básico en Cisco Packet Tracer
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Objetivo
 
@@ -791,6 +856,24 @@ Maximum users:  50
 ------------------------------------------------------------------------
 
 # 🧪 26. PRÁCTICA 2 --- DHCP en varias redes con relay
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Objetivo
 
@@ -832,7 +915,25 @@ El alumno deberá demostrar:
 
 ------------------------------------------------------------------------
 
-# 🧪 27. PRÁCTICA 3 --- DHCPv4 con Kea en VirtualBox + Ubuntu 26.04 Server
+# 🧪 27. PRÁCTICA 3 --- DHCP con Kea en VirtualBox + Ubuntu 26.04 Server
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Objetivo
 
@@ -884,83 +985,9 @@ El paquete `kea-dhcp4-server` está disponible para Ubuntu 26.04 LTS.
 >
 > Kea es la plataforma DHCP moderna de ISC que utilizaremos en Ubuntu. Su configuración es estructurada y basada en JSON, y su arquitectura difiere de la antigua configuración de ISC DHCP. No conviene trasladar literalmente ejemplos de `dhcpd.conf`.
 
-
-
-
-## 🖥️ Ruta gráfica opcional · Webmin y DHCP
-
-> 🧭 **Antes de continuar**
-> 
-> Webmin dispone de un módulo **DHCP Server**, pero su documentación oficial está orientada al servidor DHCP de ISC, no a Kea. Por tanto, en esta UT la configuración de **Kea mediante CLI sigue siendo la ruta principal**. La interfaz de Webmin se utiliza como ampliación para comprender cómo una herramienta gráfica traduce opciones del servicio a ficheros de configuración y acciones de administración.
-
-### Objetivo
-
-Comparar una configuración de DHCP realizada mediante CLI con la administración gráfica de un servidor DHCP compatible con el módulo de Webmin.
-
-### Webmin
-
-1. Instala Webmin siguiendo el [Anexo VI · Webmin](ANEXO-VI-Webmin.md).
-2. Accede a **Servers → DHCP Server**.
-3. Identifica la configuración global, las subredes, los hosts y las concesiones.
-4. Compara cada elemento de la interfaz con el concepto equivalente estudiado en Kea.
-5. No utilices simultáneamente dos servidores DHCP en el mismo segmento de laboratorio.
-
-**Conclusión:** para este curso, Kea se administra mediante sus ficheros y herramientas CLI; Webmin sirve como comparación metodológica y como práctica adicional con ISC DHCP.
-
-
-# 🐳 Itinerario IV · Docker Compose
-
-> **Cuadro de contexto · ¿Por qué Docker Compose en DHCP?**
-> 
-> DHCP depende de **broadcasts, interfaces de red y acceso al segmento L2**. Por ello, un Compose convencional no reproduce por sí solo una LAN completa como lo hace VirtualBox o Packet Tracer. En esta UT utilizaremos Compose para practicar la configuración y validación del servicio en una red de laboratorio controlada, mientras que las pruebas que necesiten broadcast real o relay se mantienen en los itinerarios anteriores.
-
-### Objetivo
-
-Construir un laboratorio reproducible con **Kea DHCPv4** y un cliente de pruebas, aprendiendo qué parte de la práctica es apropiada para contenedores y qué parte requiere una red virtual completa.
-
-### Laboratorio
-
-```yaml
-services:
-  kea:
-    image: ubuntu:26.04
-    command: ["sleep", "infinity"]
-
-  cliente:
-    image: ubuntu:26.04
-    command: ["sleep", "infinity"]
-
-networks:
-  dhcp-lab:
-```
-
-Este es deliberadamente un **esqueleto de laboratorio**: la configuración real de Kea se montará como fichero y la red deberá adaptarse al modo de pruebas elegido. No se debe asumir que dos contenedores conectados a una red bridge proporcionan automáticamente las mismas condiciones que dos máquinas conectadas a una LAN Ethernet real.
-
-### Trabajo
-
-1. Crear el `compose.yaml`.
-2. Montar la configuración de Kea mediante un volumen de solo lectura.
-3. Validar la configuración con `kea-dhcp4 -t`.
-4. Consultar los logs del servicio.
-5. Documentar qué elementos de DHCP pueden probarse dentro de Compose y cuáles requieren VirtualBox/Packet Tracer.
-
-### Comandos
-
-```bash
-docker compose config
-docker compose up -d
-docker compose ps
-docker compose logs -f kea
-docker compose exec kea sh
-docker compose down
-```
-
-**Resultado esperado:** una infraestructura reproducible que permita estudiar configuración, logs y ciclo de vida de Kea sin confundir una red de contenedores con una LAN DHCP real.
-
-
 # 🛠️ 28. Configuración básica de Kea
 
-El fichero de configuración DHCPv4 contiene un objeto `Dhcp4`.
+El fichero de configuración DHCP contiene un objeto `Dhcp4`.
 
 Una configuración mínima puede seguir esta estructura:
 
@@ -1006,7 +1033,7 @@ Una configuración mínima puede seguir esta estructura:
 ```
 
 La estructura `interfaces-config`, `lease-database`, `valid-lifetime` y
-`subnet4/pools` corresponde a la configuración DHCPv4 documentada por
+`subnet4/pools` corresponde a la configuración DHCP documentada por
 Kea. 
 
 > 🔎 **Importante:** adapta el nombre de interfaz (`enp0s8`) a la
@@ -1080,6 +1107,24 @@ Seguir:
 ------------------------------------------------------------------------
 
 # 🧷 30. PRÁCTICA 4 --- Reservas DHCP con Kea
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Configura:
 
@@ -1117,6 +1162,24 @@ La documentación de Kea permite reservas mediante `hw-address`,
 ------------------------------------------------------------------------
 
 # 📡 31. PRÁCTICA 5 --- Analizar DHCP con Wireshark
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Objetivo
 
@@ -1170,6 +1233,24 @@ Identifica en una captura:
 ------------------------------------------------------------------------
 
 # 🌉 32. PRÁCTICA 6 --- DHCP Relay
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Construye:
 
@@ -1205,6 +1286,24 @@ a `192.168.10.0/24`.
 ------------------------------------------------------------------------
 
 # 🧪 33. PRÁCTICA 7 --- DHCP en WSL2
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 WSL2 se utilizará principalmente como **cliente y entorno de análisis**,
 no como sustituto de una LAN virtual completa.
@@ -1295,18 +1394,6 @@ Permite estudiar los registros del servicio.
 Permite analizar el intercambio DHCP paquete a paquete.
 
 ------------------------------------------------------------------------
-
-
-### 📊 Diagnóstico DHCP: qué herramienta usar
-
-| Pregunta | Herramienta | Qué buscar |
-|---|---|---|
-| ¿Tengo dirección IP? | `ip addr` | Dirección y estado de la interfaz |
-| ¿Qué ruta uso? | `ip route` | Ruta por defecto y red local |
-| ¿Escucha el servidor? | `ss -lunp` | UDP/67 en el servidor |
-| ¿Qué concesiones existen? | logs/base de datos de Kea | Lease y cliente |
-| ¿Qué mensajes circulan? | Wireshark / `tcpdump` | Discover, Offer, Request, ACK |
-| ¿Funciona el servicio? | `systemctl status` / `journalctl` | Estado y errores |
 
 # 🚨 35. Errores frecuentes
 
@@ -1449,7 +1536,7 @@ Las ideas fundamentales son:
 2.  El servidor administra direcciones y opciones.
 3.  Las concesiones tienen duración.
 4.  DORA resume la obtención inicial.
-5.  DHCP utiliza UDP 67/68 en IPv4.
+5.  DHCP utiliza UDP 67/68 en IP.
 6.  Los broadcasts no atraviesan routers normalmente.
 7.  Un relay permite atender clientes de otras redes.
 8.  Las reservas permiten asociar clientes con direcciones concretas.
@@ -1468,7 +1555,7 @@ Las ideas fundamentales son:
 5.  ¿Qué significa DORA?
 6.  ¿Qué función cumple DHCPDISCOVER?
 7.  ¿Qué función cumple DHCPREQUEST?
-8.  ¿Qué puertos UDP utiliza DHCPv4?
+8.  ¿Qué puertos UDP utiliza DHCP?
 9.  ¿Por qué es necesario un DHCP relay cuando cliente y servidor están
     en redes diferentes?
 10. ¿Qué función cumple `ip helper-address` en Cisco?
@@ -1482,7 +1569,7 @@ Las ideas fundamentales son:
 16. ¿Qué herramienta permite observar DHCP paquete a paquete?
 17. ¿Qué utilidad tiene `journalctl -u kea-dhcp4-server`?
 18. ¿Qué software sustituye actualmente a ISC DHCP en el laboratorio?
-19. ¿Qué estructura de configuración utiliza Kea DHCPv4 para definir
+19. ¿Qué estructura de configuración utiliza Kea DHCP para definir
     subredes?
 20. ¿Por qué WSL2 no se utilizará como plataforma principal para una
     topología DHCP de varias LAN?
@@ -1523,7 +1610,7 @@ R = DHCPREQUEST
 A = DHCPACK
 ```
 
-Es la secuencia clásica de obtención inicial de una concesión DHCPv4.
+Es la secuencia clásica de obtención inicial de una concesión DHCP.
 
 ### 6. ¿Qué función cumple DHCPDISCOVER?
 
@@ -1534,7 +1621,7 @@ Permite al cliente localizar servidores DHCP disponibles.
 Permite al cliente solicitar formalmente una configuración/oferta y
 comunicar la selección de servidor en el proceso correspondiente.
 
-### 8. ¿Qué puertos UDP utiliza DHCPv4?
+### 8. ¿Qué puertos UDP utiliza DHCP?
 
 **UDP 67** en el servidor y **UDP 68** en el cliente.
 
@@ -1583,7 +1670,7 @@ proporcionar parámetros de red incorrectos o maliciosos.
 
 ### 17. ¿Qué utilidad tiene `journalctl -u kea-dhcp4-server`?
 
-Permite consultar los registros del servicio Kea DHCPv4 gestionado por
+Permite consultar los registros del servicio Kea DHCP gestionado por
 systemd y utilizarlos para diagnosticar errores.
 
 ### 18. ¿Qué software sustituye actualmente a ISC DHCP?
@@ -1591,9 +1678,9 @@ systemd y utilizarlos para diagnosticar errores.
 **Kea DHCP**. ISC declaró ISC DHCP EOL en 2022 y recomienda migrar a
 Kea. 
 
-### 19. ¿Qué estructura utiliza Kea DHCPv4 para definir subredes?
+### 19. ¿Qué estructura utiliza Kea DHCP para definir subredes?
 
-La estructura `subnet4`, que contiene las subredes DHCPv4 y puede
+La estructura `subnet4`, que contiene las subredes DHCP y puede
 incluir `pools` y opciones asociadas. 
 
 ### 20. ¿Por qué WSL2 no es la plataforma principal para una topología DHCP de

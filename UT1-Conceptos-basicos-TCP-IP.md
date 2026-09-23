@@ -2,7 +2,7 @@
 
 ### Fundamentos de direccionamiento, transporte, encaminamiento, NAT/PAT y modelo cliente/servidor.
 
-> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Versión integral v5 · 2026**
+> **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
 > Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
 >
@@ -25,7 +25,7 @@
 >                               │
 >              ┌────────────────┼────────────────┐
 >              │                │                │
->          🏠 IPv4          🚦 Routing       🔌 TCP/UDP
+>          🏠 IP          🚦 Routing       🔌 TCP/UDP
 >              │                │                │
 >              └───────────────┬┴───────────────┘
 >                              │
@@ -44,6 +44,14 @@
 
 ------------------------------------------------------------------------
 
+> 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
+>
+> **I · Cisco Packet Tracer** — simulación de red y protocolos.  
+> **II · WSL2 + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
+> **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
+> **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
+
+
 ## 🎯 0. Objetivos
 
 Al finalizar esta unidad el alumnado deberá ser capaz de:
@@ -51,7 +59,7 @@ Al finalizar esta unidad el alumnado deberá ser capaz de:
 -   Explicar la arquitectura TCP/IP y relacionarla con el modelo OSI.
 -   Diferenciar aplicación, transporte, red y acceso a red.
 -   Explicar el modelo cliente/servidor.
--   Interpretar una dirección IPv4 y su máscara.
+-   Interpretar una dirección IP y su máscara.
 -   Trabajar con CIDR y calcular redes, hosts y broadcast.
 -   Distinguir direcciones públicas, privadas, loopback, enlace local y
     multicast.
@@ -124,7 +132,7 @@ funcionales:
   Transporte              Comunicación extremo a  TCP, UDP
                           extremo entre procesos  
 
-  Internet                Direccionamiento y      IPv4, IPv6, ICMP
+  Internet                Direccionamiento y      IP, IPv6, ICMP
                           encaminamiento de       
                           paquetes                
 
@@ -142,7 +150,7 @@ HTTP
  ↓
 TCP
  ↓
-IPv4
+IP
  ↓
 Ethernet
 ```
@@ -152,7 +160,7 @@ En el receptor se produce el proceso inverso:
 ``` text
 Ethernet
  ↓
-IPv4
+IP
  ↓
 TCP
  ↓
@@ -254,11 +262,11 @@ Servicio web
 
 ------------------------------------------------------------------------
 
-# 🌐 4. IPv4: direccionamiento en la capa de Internet
+# 🌐 4. IP: direccionamiento en la capa de Internet
 
-## 4.1. La dirección IPv4
+## 4.1. La dirección IP
 
-Una dirección IPv4 tiene 32 bits.
+Una dirección IP tiene 32 bits.
 
 Se representa habitualmente mediante cuatro octetos:
 
@@ -287,7 +295,7 @@ El valor de cada octeto está entre:
 
 ## 4.2. Dirección y prefijo
 
-Una dirección IPv4 no debe analizarse de forma aislada. Necesitamos
+Una dirección IP no debe analizarse de forma aislada. Necesitamos
 conocer el prefijo de red.
 
 Ejemplo:
@@ -369,7 +377,7 @@ Ejemplos:
      /29 255.255.255.248                 8
      /30 255.255.255.252                 4
 
-En una red IPv4 convencional, la cantidad de direcciones utilizables
+En una red IP convencional, la cantidad de direcciones utilizables
 para hosts suele ser:
 
 ``` text
@@ -384,7 +392,7 @@ broadcast.
 
 ------------------------------------------------------------------------
 
-# 📍 6. Direcciones IPv4 especiales
+# 📍 6. Direcciones IP especiales
 
 ## 6.1. Loopback
 
@@ -414,7 +422,7 @@ La comunicación no sale por la interfaz física.
 
 ## 6.2. Direcciones privadas
 
-Los principales rangos privados IPv4 son:
+Los principales rangos privados IP son:
 
 ``` text
 10.0.0.0/8
@@ -436,14 +444,14 @@ Ejemplo:
 
 ## 6.3. Link-local
 
-En IPv4:
+En IP:
 
 ``` text
 169.254.0.0/16
 ```
 
 se utiliza para direccionamiento local cuando un host no dispone de una
-configuración IPv4 válida mediante otros mecanismos.
+configuración IP válida mediante otros mecanismos.
 
 Una dirección `169.254.x.x` **no significa que Internet esté
 funcionando**.
@@ -452,7 +460,7 @@ funcionando**.
 
 ## 6.4. Broadcast
 
-En una red IPv4 se puede utilizar una dirección de broadcast para enviar
+En una red IP se puede utilizar una dirección de broadcast para enviar
 tráfico a todos los hosts de una red.
 
 Por ejemplo, en:
@@ -471,7 +479,7 @@ la dirección de broadcast es:
 
 ## 6.5. Multicast
 
-El rango IPv4 multicast es:
+El rango IP multicast es:
 
 ``` text
 224.0.0.0/4
@@ -678,7 +686,7 @@ En ASIR es importante distinguir el concepto de **routing** del de
 
 | Necesidad | Comando | Qué observar |
 |---|---|---|
-| Interfaces y direcciones | `ip addr` | Interfaces, estado e IPv4/IPv6 |
+| Interfaces y direcciones | `ip addr` | Interfaces, estado e IP/IPv6 |
 | Tabla de rutas | `ip route` | Red destino, gateway e interfaz |
 | Ruta hacia un destino | `ip route get IP` | Interfaz y siguiente salto elegidos |
 | Vecinos | `ip neigh` | ARP/NDP y estado de vecinos |
@@ -686,6 +694,7 @@ En ASIR es importante distinguir el concepto de **routing** del de
 | Conectividad | `ping IP` | Alcance IP y latencia |
 | Camino | `tracepath IP` | Saltos y MTU |
 | Captura | `sudo tcpdump -ni INTERFAZ` | Paquetes que realmente circulan |
+
 
 
 ## 🌐 Mostrar interfaces
@@ -1266,7 +1275,25 @@ autorización.
 
 ------------------------------------------------------------------------
 
-# 🧪 25. PRÁCTICA 1 --- IPv4 y encaminamiento con Cisco Packet Tracer
+# 🧪 25. PRÁCTICA 1 --- IP y encaminamiento con Cisco Packet Tracer
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Objetivo
 
@@ -1349,6 +1376,24 @@ ping 192.168.20.10
 ------------------------------------------------------------------------
 
 # 🧪 26. PRÁCTICA 2 --- Inspección de red con WSL2 + Ubuntu 26.04
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Objetivo
 
@@ -1363,7 +1408,7 @@ ip addr
 Localiza:
 
 -   interfaz Ethernet virtual;
--   dirección IPv4;
+-   dirección IP;
 -   prefijo;
 -   loopback.
 
@@ -1447,7 +1492,7 @@ ping
   ↓
 ICMP
   ↓
-IPv4
+IP
   ↓
 interfaz
   ↓
@@ -1457,6 +1502,24 @@ ruta
 ------------------------------------------------------------------------
 
 # 🧪 27. PRÁCTICA 3 --- Red en VirtualBox con Ubuntu Server 26.04
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Objetivo
 
@@ -1538,24 +1601,24 @@ ip addr
 ip route
 ```
 
-## Activar encaminamiento IPv4
+## Activar encaminamiento IP
 
 Comprobar:
 
 ``` bash
-sysctl net.ipv4.ip_forward
+sysctl net.ip.ip_forward
 ```
 
 Activar temporalmente:
 
 ``` bash
-sudo sysctl -w net.ipv4.ip_forward=1
+sudo sysctl -w net.ip.ip_forward=1
 ```
 
 Para hacerlo persistente:
 
 ``` bash
-echo 'net.ipv4.ip_forward=1' | sudo tee /etc/sysctl.d/99-sri-router.conf
+echo 'net.ip.ip_forward=1' | sudo tee /etc/sysctl.d/99-sri-router.conf
 sudo sysctl --system
 ```
 
@@ -1627,6 +1690,24 @@ Explicar por qué el tráfico pasa por:
 ------------------------------------------------------------------------
 
 # 🧪 28. PRÁCTICA 4 --- NAT en Ubuntu Server
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 Partimos de la práctica anterior.
 
@@ -1712,7 +1793,25 @@ Analizar qué dirección de origen observa la interfaz WAN.
 
 ------------------------------------------------------------------------
 
-# 🧪 29. PRÁCTICA 5 --- Comparación de los cuatro itinerarios
+# 🧪 29. PRÁCTICA 5 --- Comparación de los cuatro entornos
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+>
+> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+>
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+>
+> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+>
+> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+>
+> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+>
+> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+>
+> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+
+
+
 
 ## Objetivo
 
@@ -1961,7 +2060,7 @@ En esta unidad hemos estudiado:
 -   la arquitectura TCP/IP;
 -   el modelo cliente/servidor;
 -   las funciones de las capas;
--   IPv4;
+-   IP;
 -   máscaras y CIDR;
 -   direccionamiento especial;
 -   redes públicas y privadas;
@@ -1992,13 +2091,13 @@ La idea fundamental es:
 2.  ¿Qué diferencias fundamentales existen entre TCP/IP y OSI?
 3.  ¿Qué diferencia existe entre una aplicación y un protocolo?
 4.  ¿Qué función desempeña un puerto?
-5.  ¿Cuántos bits tiene una dirección IPv4?
+5.  ¿Cuántos bits tiene una dirección IP?
 6.  ¿Qué representa `/24`?
 7.  ¿Cuál es la máscara correspondiente a `/27`?
 8.  ¿Cuál es la dirección de red de `192.168.10.37/24`?
 9.  ¿Cuál es el broadcast de `192.168.10.37/24`?
 10. ¿Cuántas direcciones totales contiene una red `/26`?
-11. ¿Qué rangos IPv4 son privados?
+11. ¿Qué rangos IP son privados?
 12. ¿Para qué sirve `127.0.0.1`?
 13. ¿Qué significa una dirección `169.254.x.x`?
 14. ¿Qué diferencia existe entre unicast, broadcast y multicast?
@@ -2039,7 +2138,7 @@ La idea fundamental es:
 > concreta.
 
 1.  **Capa Internet:** proporciona direccionamiento lógico y
-    encaminamiento de paquetes entre redes. En IPv4 intervienen
+    encaminamiento de paquetes entre redes. En IP intervienen
     principalmente IP y, en el modelo TCP/IP, también protocolos
     asociados como ICMP.
 
@@ -2057,7 +2156,7 @@ La idea fundamental es:
     con la dirección IP y el protocolo de transporte. Permite distinguir
     diferentes comunicaciones dirigidas al mismo equipo.
 
-5.  **IPv4:** una dirección IPv4 tiene **32 bits**, normalmente escritos
+5.  **IP:** una dirección IP tiene **32 bits**, normalmente escritos
     como cuatro octetos en decimal, por ejemplo `192.168.10.25`.
 
 6.  **`/24`:** indica que los primeros **24 bits** corresponden al
@@ -2071,10 +2170,10 @@ La idea fundamental es:
 9.  **Broadcast de `192.168.10.37/24`:** **`192.168.10.255`**.
 
 10. **Red `/26`:** contiene **64 direcciones totales** (`2^6`). En una
-    red IPv4 convencional, 62 pueden utilizarse como direcciones de host
+    red IP convencional, 62 pueden utilizarse como direcciones de host
     porque la dirección de red y el broadcast tienen usos reservados.
 
-11. **Rangos privados IPv4:**
+11. **Rangos privados IP:**
 
     -   `10.0.0.0/8`
     -   `172.16.0.0/12`
@@ -2083,8 +2182,8 @@ La idea fundamental es:
 12. **`127.0.0.1`:** es una dirección de **loopback**. Hace referencia
     al propio host a través de la interfaz de bucle local.
 
-13. **`169.254.x.x`:** pertenece al rango IPv4 **link-local**
-    (`169.254.0.0/16`). En un contexto típico de cliente IPv4, puede
+13. **`169.254.x.x`:** pertenece al rango IP **link-local**
+    (`169.254.0.0/16`). En un contexto típico de cliente IP, puede
     aparecer cuando no se ha obtenido correctamente una configuración
     DHCP.
 
@@ -2233,7 +2332,7 @@ Construye la siguiente infraestructura:
 3.  El router debe tener salida a Internet.
 4.  El cliente debe utilizar el router como gateway.
 5.  El servidor debe utilizar el router como gateway.
-6.  Debe existir routing IPv4 en el router.
+6.  Debe existir routing IP en el router.
 7.  Debe existir NAT para la salida a Internet.
 8.  Debes poder demostrar el funcionamiento mediante:
     -   `ip addr`;

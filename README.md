@@ -1,10 +1,10 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-## Material docente integral · `ASIR2-SRI-texto` · v5
+## Material docente integral · `ASIR2-SRI-texto` · 
 
 Material autónomo de estudio, laboratorio y evaluación para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
-La versión v5 supone un cambio de alcance: el repositorio deja de ser una colección de apuntes complementarios y se plantea como **material docente integral**, con fundamentos, administración de servicios, prácticas, diagnóstico, autoevaluación, resultados de aprendizaje, Docker, GitHub, Codespaces, bibliografía y materiales para el profesor.
+La versión  supone un cambio de alcance: el repositorio deja de ser una colección de apuntes complementarios y se plantea como **material docente integral**, con fundamentos, administración de servicios, prácticas, diagnóstico, autoevaluación, resultados de aprendizaje, Docker, GitHub, Codespaces, bibliografía y materiales para el profesor.
 
 ---
 
@@ -72,7 +72,7 @@ El currículo de Castilla y León asigna actualmente **198 horas** al módulo 03
 Fundamentos de:
 
 - arquitectura TCP/IP;
-- IPv4 e IPv6;
+- IP e IPv6;
 - subredes y CIDR;
 - TCP y UDP;
 - puertos;
@@ -130,53 +130,73 @@ Incluye formatos, códecs, contenedores, bitrate, streaming, VOD, directo, FFmpe
 
 # 🧪 4. Laboratorio tecnológico
 
-La guía utiliza **cuatro itinerarios de prácticas complementarios**. Cada itinerario aborda el mismo servicio desde una perspectiva distinta: simulación, administración Linux, infraestructura virtualizada y contenerización reproducible.
+La guía utiliza **cuatro entornos de prácticas complementarios**. Los cuatro forman parte de un único laboratorio de SRI y aparecen relacionados desde el comienzo de la guía. Cada uno responde a una pregunta diferente y prepara el siguiente nivel de trabajo.
 
 ```text
                          🧪 LABORATORIO SRI
                                 │
-             ┌──────────────────┼──────────────────┐
-             │                  │                  │                  │
-             ▼                  ▼                  ▼                  ▼
-      🧪 ITINERARIO I    🐧 ITINERARIO II   🖥️ ITINERARIO III   🐳 ITINERARIO IV
-      Packet Tracer       WSL2 + Ubuntu     VirtualBox + Ubuntu    Docker Compose
-      simulación          26.04             26.04 Server           infraestructura
-      de red              herramientas      servidores             reproducible
-             │                  │                  │                  │
-             └──────────────────┴──────────────────┴──────────────────┘
+              ┌─────────────────┼─────────────────┐
+              │                 │                 │
+              ▼                 ▼                 ▼                 ▼
+       🧪 ENTORNO I      🐧 ENTORNO II     🖥️ ENTORNO III    🐳 ENTORNO IV
+       Packet Tracer      WSL2 + Ubuntu     VirtualBox +       Docker Compose
+       simulación         26.04             Ubuntu 26.04       infraestructura
+       de red             herramientas       Server              reproducible
+                          Linux             servidores
+              │                 │                 │                 │
+              └─────────────────┴─────────────────┴─────────────────┘
                                       │
                                       ▼
-                              servicios de red
+                              🌐 SERVICIOS SRI
 ```
 
-### Cisco Packet Tracer
+> 🧭 **Cómo leer el esquema**
+>
+> Los cuatro entornos no compiten entre sí. **Entorno I** permite visualizar el comportamiento de la red; **Entorno II** facilita la observación y el diagnóstico desde Linux; **Entorno III** reproduce la administración de servidores reales; **Entorno IV** convierte la infraestructura en código reproducible. Una misma actividad puede comenzar en I y terminar en IV, utilizando II y III cuando sean necesarios para comprender o validar el servicio.
 
-Para topologías, routing, VLAN, DHCP, relay y experimentación de red.
+### 🧪 Entorno I · Cisco Packet Tracer
 
-### WSL2 + Ubuntu 26.04
+Para topologías, routing, VLAN, DHCP, relay y experimentación de red. Es especialmente útil cuando queremos concentrarnos en el comportamiento de la red sin que la instalación de los servicios distraiga del concepto que estamos estudiando.
 
-Para herramientas Linux, clientes, scripts, análisis y Docker.
+### 🐧 Entorno II · WSL2 + Ubuntu 26.04
 
-### VirtualBox + Ubuntu 26.04 Server
+Para herramientas Linux, clientes, scripts, análisis de tráfico y pruebas rápidas. Es nuestro **banco de trabajo**: ligero, inmediato y adecuado para repetir comandos muchas veces.
 
-Para servidores completos y prácticas que requieren control de interfaces, servicios, systemd y comportamiento de red independiente.
+### 🖥️ Entorno III · VirtualBox + Ubuntu 26.04 Server
 
-### Docker Compose
+Para servidores completos y prácticas que requieren control de interfaces, servicios, `systemd`, firewall, DNS, DHCP, Web, correo y comportamiento de red independiente.
 
-Cuarto itinerario práctico para desplegar infraestructuras reproducibles mediante contenedores. Se utiliza especialmente para experimentar con arquitecturas multicontenedor, redes, puertos, volúmenes, DNS interno y composición de servicios.
+### 🐳 Entorno IV · Docker Compose
 
-### 📊 Los cuatro itinerarios, de un vistazo
+Para convertir una arquitectura de servicios en infraestructura reproducible. Permite trabajar con imágenes, contenedores, redes, puertos, volúmenes, DNS interno, dependencias y varios servicios coordinados mediante un único fichero `compose.yaml`.
 
-| Itinerario | Plataforma | Función principal | Tipo de aprendizaje |
+### 📊 Los cuatro entornos, de un vistazo
+
+| Entorno | Plataforma | Función principal | Pregunta didáctica |
 |---|---|---|---|
-| **I** | Cisco Packet Tracer | Simular topologías y protocolos | Comprender la red |
-| **II** | WSL2 + Ubuntu 26.04 | Ejecutar herramientas y clientes Linux | Observar y experimentar |
-| **III** | VirtualBox + Ubuntu 26.04 Server | Administrar servidores completos | Configurar y diagnosticar |
-| **IV** | Docker Compose | Desplegar la infraestructura de la UT de forma reproducible | Automatizar y desplegar |
+| **I** | Cisco Packet Tracer | Simular topologías y protocolos | **¿Cómo se comporta la red?** |
+| **II** | WSL2 + Ubuntu 26.04 | Ejecutar herramientas y clientes Linux | **¿Qué está ocurriendo realmente?** |
+| **III** | VirtualBox + Ubuntu 26.04 Server | Administrar servidores completos | **¿Cómo se configura y mantiene?** |
+| **IV** | Docker Compose | Reproducir infraestructura multicontenedor | **¿Cómo lo convierto en infraestructura reproducible?** |
 
 ---
 
-# 🧪 5. Itinerarios de prácticas
+# 🧪 5. Entornos de prácticas
+
+Los cuatro entornos aparecen a lo largo de las UT. No es necesario utilizarlos todos en todas las actividades: se selecciona el entorno que mejor responde al objetivo didáctico de cada ejercicio.
+
+| Entorno | Aplicación habitual |
+|---|---|
+| **I · Packet Tracer** | Redes, direccionamiento, routing, DHCP y servicios simulables |
+| **II · WSL2** | Clientes, diagnóstico, `curl`, `dig`, `ss`, `tcpdump`, scripts y análisis |
+| **III · VirtualBox** | Instalación y administración real de servidores |
+| **IV · Docker Compose** | Despliegues reproducibles y arquitecturas multicontenedor |
+
+## [🐳 Entorno IV · Docker Compose para UT1–UT8](ENTORNO-IV-Docker-Compose-UT1-UT8.md)
+
+El cuarto entorno permite desplegar, de forma reproducible, las infraestructuras de las UT mediante contenedores y Docker Compose. **Complementa los otros tres entornos; no los sustituye.**
+
+# 📚 6. Anexos
 
 ## [🧰 Anexo I · Visual Studio Code + WSL2](ANEXO-I-VSCode-WSL2.md)
 
@@ -245,7 +265,6 @@ Bibliografía temática y enlaces a documentación oficial de:
 - Wireshark.
 
 ## [🛡️ Anexo V · Seguridad, observabilidad y pruebas](ANEXO-V-Seguridad-Observabilidad-Pruebas.md)
-- [Anexo VI · Webmin: administración gráfica de servidores Linux](ANEXO-VI-Webmin.md)
 
 Método transversal para diseñar pruebas, observar servicios, introducir incidencias deliberadas y documentar la resolución.
 
@@ -332,7 +351,7 @@ El alumno debe entregar **evidencias**, no sólo afirmar que una práctica funci
 
 # ⚠️ 9. Estado de las pruebas técnicas
 
-La v5 incluye revisión estática y coherencia de los ejemplos. Cuando una práctica depende de un daemon, una VM, Docker Desktop, una red virtual específica o GitHub Codespaces, la ejecución final debe realizarse en el entorno indicado.
+La  incluye revisión estática y coherencia de los ejemplos. Cuando una práctica depende de un daemon, una VM, Docker Desktop, una red virtual específica o GitHub Codespaces, la ejecución final debe realizarse en el entorno indicado.
 
 En particular, el entorno de generación de este paquete **no dispone de Docker Engine ni de un Codespace ejecutable**, por lo que no se presenta como ejecutada una validación extremo a extremo que no haya sido posible realizar.
 
@@ -342,7 +361,7 @@ Esto es deliberado: en administración de sistemas, **una configuración que no 
 
 # 📜 10. Normativa y fuentes curriculares
 
-La versión v5 se ha actualizado tomando como referencia la normativa vigente y, para Castilla y León, la información oficial publicada para el título de ASIR.
+La versión  se ha actualizado tomando como referencia la normativa vigente y, para Castilla y León, la información oficial publicada para el título de ASIR.
 
 - Portal oficial de FP de Castilla y León: https://www.educa.jcyl.es/fp/
 - Ficha oficial de ASIR: https://www.educa.jcyl.es/fp/es/catalogo-titulos-fp-castilla-leon/catalogo-titulos-grado-superior/administracion-sistemas-informaticos-red

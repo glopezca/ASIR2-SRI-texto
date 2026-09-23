@@ -83,8 +83,8 @@ Mantén una única ubicación de trabajo principal. Para proyectos con mucha E/S
 - buscar: `Ctrl+F`;
 - reemplazar: `Ctrl+H`;
 - guardar: `Ctrl+S`;
-- terminal integrada: **Ctrl + tecla de acento grave**;
-- dividir editor: **Ctrl + \**;
+- terminal integrada: `Ctrl+\``;
+- dividir editor: `Ctrl+\`;
 - paleta: `Ctrl+Shift+P`.
 
 > Las combinaciones que contienen una comilla invertida deben escribirse en Markdown de forma que la combinación no aparezca como escape literal.

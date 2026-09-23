@@ -885,6 +885,29 @@ El paquete `kea-dhcp4-server` está disponible para Ubuntu 26.04 LTS.
 > Kea es la plataforma DHCP moderna de ISC que utilizaremos en Ubuntu. Su configuración es estructurada y basada en JSON, y su arquitectura difiere de la antigua configuración de ISC DHCP. No conviene trasladar literalmente ejemplos de `dhcpd.conf`.
 
 
+
+
+## 🖥️ Ruta gráfica opcional · Webmin y DHCP
+
+> 🧭 **Antes de continuar**
+> 
+> Webmin dispone de un módulo **DHCP Server**, pero su documentación oficial está orientada al servidor DHCP de ISC, no a Kea. Por tanto, en esta UT la configuración de **Kea mediante CLI sigue siendo la ruta principal**. La interfaz de Webmin se utiliza como ampliación para comprender cómo una herramienta gráfica traduce opciones del servicio a ficheros de configuración y acciones de administración.
+
+### Objetivo
+
+Comparar una configuración de DHCP realizada mediante CLI con la administración gráfica de un servidor DHCP compatible con el módulo de Webmin.
+
+### Webmin
+
+1. Instala Webmin siguiendo el [Anexo VI · Webmin](ANEXO-VI-Webmin.md).
+2. Accede a **Servers → DHCP Server**.
+3. Identifica la configuración global, las subredes, los hosts y las concesiones.
+4. Compara cada elemento de la interfaz con el concepto equivalente estudiado en Kea.
+5. No utilices simultáneamente dos servidores DHCP en el mismo segmento de laboratorio.
+
+**Conclusión:** para este curso, Kea se administra mediante sus ficheros y herramientas CLI; Webmin sirve como comparación metodológica y como práctica adicional con ISC DHCP.
+
+
 # 🐳 Itinerario IV · Docker Compose
 
 > **Cuadro de contexto · ¿Por qué Docker Compose en DHCP?**

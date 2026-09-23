@@ -2388,6 +2388,36 @@ Relaciona las UT anteriores:
 ------------------------------------------------------------------------
 
 
+
+
+## 🖥️ Ruta gráfica · Nginx mediante Webmin
+
+> 🧭 **Antes de continuar**
+> 
+> Webmin incorpora un módulo **Nginx Webserver** que permite administrar parámetros globales, *server blocks*, ubicaciones, SSL, proxying, logs y otras funciones. La configuración continúa siendo la de Nginx; Webmin proporciona una interfaz sobre ella.
+
+### Ruta CLI
+
+La ruta principal utiliza `/etc/nginx`, `nginx -t`, `systemctl`, `curl`, edición de `server` y `location`, y revisión de logs.
+
+### Ruta Webmin
+
+1. Instala Nginx y Webmin.
+2. Accede a **Servers → Nginx Webserver**.
+3. Crea un *server block* de laboratorio.
+4. Configura nombre, raíz documental, logs y, si procede, proxy inverso.
+5. Aplica la configuración.
+6. Comprueba mediante CLI con `nginx -t`.
+7. Verifica desde el cliente con `curl -I`.
+
+| Tarea | CLI | Webmin |
+|---|---|---|
+| Crear sitio | fichero `server` | Nginx Webserver → Create Server |
+| Proxy inverso | `location` + `proxy_pass` | Server Block → Proxying/Locations |
+| SSL/TLS | configuración Nginx | opciones SSL del módulo |
+| Validar | `nginx -t` | Apply Changes + validación posterior por CLI |
+
+
 # 🐳 Itinerario IV · Docker Compose
 
 > **Cuadro de contexto · Reverse proxy y red interna**

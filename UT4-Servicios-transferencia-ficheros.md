@@ -2344,6 +2344,35 @@ El alumno debe seleccionar una tecnología para cada caso y justificar:
 ------------------------------------------------------------------------
 
 
+
+
+## 🖥️ Ruta gráfica opcional · Webmin para SSH y FTP
+
+> 🧭 **Antes de continuar**
+> 
+> Webmin dispone de módulos para **SSH Server** y **ProFTPD Server**. Esto permite comparar la administración declarativa/manual de los servicios con una interfaz gráfica. SFTP, sin embargo, es una funcionalidad de SSH: no debe confundirse con FTP administrado mediante ProFTPD.
+
+### SSH / SFTP mediante Webmin
+
+1. Abre **Servers → SSH Server**.
+2. Localiza las opciones de autenticación, acceso, escucha y reenvío.
+3. Configura, como práctica, el puerto SSH y las restricciones de acceso del laboratorio.
+4. Aplica los cambios.
+5. Comprueba desde CLI con `sshd -t`, `ss -lntp` y `ssh`.
+6. Prueba la transferencia con `sftp`.
+
+### FTP mediante Webmin
+
+Si se desea practicar FTP gráfico, instala **ProFTPD** y abre **Servers → ProFTPD Server**. Configura el acceso y compara la configuración resultante con el fichero de ProFTPD.
+
+| Servicio | CLI | Interfaz gráfica | Cliente de prueba |
+|---|---|---|---|
+| SSH/SFTP | `sshd_config`, `systemctl`, `sshd -t` | Webmin → SSH Server | `ssh`, `sftp` |
+| FTP | `proftpd.conf`, `systemctl` | Webmin → ProFTPD Server | `ftp` |
+
+La práctica principal de la UT mantiene **SFTP/SSH** como opción preferente para transferencia segura.
+
+
 # 🐳 Itinerario IV · Docker Compose
 
 > **Cuadro de contexto · SFTP dentro de Compose**

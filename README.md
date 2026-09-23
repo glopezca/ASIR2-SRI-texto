@@ -4,7 +4,7 @@
 
 Material autónomo de estudio, laboratorio y evaluación para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
-La versión v4 supone un cambio de alcance: el repositorio deja de ser una colección de apuntes complementarios y se plantea como **material docente integral**, con fundamentos, administración de servicios, prácticas, diagnóstico, autoevaluación, resultados de aprendizaje, Docker, GitHub, Codespaces, bibliografía y materiales para el profesor.
+La versión v5 supone un cambio de alcance: el repositorio deja de ser una colección de apuntes complementarios y se plantea como **material docente integral**, con fundamentos, administración de servicios, prácticas, diagnóstico, autoevaluación, resultados de aprendizaje, Docker, GitHub, Codespaces, bibliografía y materiales para el profesor.
 
 ---
 
@@ -245,6 +245,7 @@ Bibliografía temática y enlaces a documentación oficial de:
 - Wireshark.
 
 ## [🛡️ Anexo V · Seguridad, observabilidad y pruebas](ANEXO-V-Seguridad-Observabilidad-Pruebas.md)
+- [Anexo VI · Webmin: administración gráfica de servidores Linux](ANEXO-VI-Webmin.md)
 
 Método transversal para diseñar pruebas, observar servicios, introducir incidencias deliberadas y documentar la resolución.
 
@@ -341,7 +342,7 @@ Esto es deliberado: en administración de sistemas, **una configuración que no 
 
 # 📜 10. Normativa y fuentes curriculares
 
-La versión v4 se ha actualizado tomando como referencia la normativa vigente y, para Castilla y León, la información oficial publicada para el título de ASIR.
+La versión v5 se ha actualizado tomando como referencia la normativa vigente y, para Castilla y León, la información oficial publicada para el título de ASIR.
 
 - Portal oficial de FP de Castilla y León: https://www.educa.jcyl.es/fp/
 - Ficha oficial de ASIR: https://www.educa.jcyl.es/fp/es/catalogo-titulos-fp-castilla-leon/catalogo-titulos-grado-superior/administracion-sistemas-informaticos-red

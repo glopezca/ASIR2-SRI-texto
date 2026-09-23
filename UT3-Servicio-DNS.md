@@ -1064,6 +1064,31 @@ en los repositorios publicados para `resolute`.
 ------------------------------------------------------------------------
 
 
+
+
+## 🖥️ Ruta gráfica · BIND9 mediante Webmin
+
+> 🧭 **Antes de continuar**
+> 
+> Webmin dispone de un módulo específico para **BIND DNS Server**. El módulo modifica directamente los ficheros de configuración de BIND, por lo que no constituye un DNS diferente: es otra interfaz de administración.
+
+### Ruta CLI
+
+La ruta principal de la UT continúa siendo la edición y validación mediante CLI: `named.conf`, ficheros de zona, `named-checkconf`, `named-checkzone`, `rndc` y `dig`.
+
+### Ruta Webmin
+
+1. Instala y accede a Webmin según el Anexo VI.
+2. Abre **Servers → BIND DNS Server**.
+3. Identifica las opciones globales y las zonas existentes.
+4. Crea una zona de laboratorio y añade registros `A`, `AAAA`, `CNAME`, `MX` y `PTR`.
+5. Aplica los cambios desde Webmin.
+6. Comprueba después desde CLI que los ficheros generados contienen lo esperado.
+7. Valida con `named-checkconf`, `named-checkzone` y `dig`.
+
+> 💡 **Principio profesional:** una GUI no sustituye la comprensión del fichero de configuración. El administrador debe poder recuperar el servicio aunque Webmin no esté disponible.
+
+
 # 🐳 Itinerario IV · Docker Compose
 
 > **Cuadro de contexto · ¿Qué añade Compose a DNS?**

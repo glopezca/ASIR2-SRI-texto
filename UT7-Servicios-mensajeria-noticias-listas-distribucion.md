@@ -740,6 +740,39 @@ NNTP  → 119/TCP
 
 > 🧠 El protocolo determina **cómo se intercambia la información**; el cliente es la herramienta que utiliza el usuario para interactuar con ese protocolo.
 
+
+
+## 🖥️ Ruta gráfica · Sympa para listas de distribución
+
+> 🧭 **Antes de continuar**
+> 
+> Sympa dispone de su propia interfaz web **WWSympa** para la gestión de listas. No es lo mismo que Webmin: Sympa es la aplicación de listas y su interfaz permite a propietarios, moderadores y listmasters gestionar las listas según sus privilegios.
+
+### Ruta CLI
+
+La administración avanzada puede realizarse mediante las herramientas de Sympa y sus ficheros de configuración. Esta ruta permite comprender `sympa.conf`, las plantillas, los escenarios de autorización y la estructura de una lista.
+
+### Ruta Web · WWSympa
+
+1. Instala Sympa y su servidor web según la documentación de la versión utilizada.
+2. Configura el dominio de correo y el acceso al servicio web.
+3. Accede a la página principal de Sympa.
+4. Como listmaster, localiza **Listmaster Admin**.
+5. Crea una lista de laboratorio desde **Create list** o solicita su creación si la política requiere aprobación.
+6. Añade propietarios y suscriptores.
+7. Configura moderación, visibilidad y archivo.
+8. Envía un mensaje de prueba y comprueba la distribución.
+
+| Tarea | CLI | WWSympa |
+|---|---|---|
+| Crear lista | `sympa create` / herramientas administrativas | **Create list** |
+| Gestionar miembros | herramientas/configuración | interfaz de administración de la lista |
+| Moderación | configuración y escenarios | opciones de moderación |
+| Administrar como listmaster | consola | **Listmaster Admin** |
+
+Webmin no dispone de un módulo estándar específico para Sympa en la documentación oficial consultada; por ello **no se presenta Webmin como sustituto de WWSympa**.
+
+
 # 🐳 Itinerario IV · Docker Compose
 
 > **Cuadro de contexto · Mensajería multicontenedor**

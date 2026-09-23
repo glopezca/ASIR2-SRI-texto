@@ -876,15 +876,16 @@ Esto constituye un puente directo con los contenidos de DNS de SRI.
 > Para eso utilizamos un `Dockerfile`: un fichero de instrucciones que permite construir una imagen de forma reproducible. **Dockerfile no es un contenedor, ni es una alternativa a Compose.** Cumplen funciones diferentes y complementarias:
 >
 > ```text
-> Docker CLI
->    │  administra recursos y ejecuta contenedores
->    ▼
-> Dockerfile ──► imagen personalizada ──► contenedor
->                                      \
->                                       │
->                                       ▼
->                                  Docker Compose
->                              organiza varios servicios
+> Docker CLI ───────────────► opera sobre recursos
+>      │
+>      ├── docker build ──► Dockerfile ──► imagen
+>      │                                      │
+>      │                                      ▼
+>      └── docker run ───────────────────► contenedor
+>                                             ▲
+>                                             │
+>                                   Docker Compose
+>                              coordina varios servicios
 > ```
 >
 > En términos prácticos:

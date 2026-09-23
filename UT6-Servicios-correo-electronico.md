@@ -52,34 +52,22 @@
 # 🧭 Mapa de la unidad
 
 ```text
-                         ✉️ CORREO
-                            │
-              ┌─────────────┼─────────────┐
-              │             │             │
-            CREAR         ENVIAR        LEER
-              │             │             │
-             MUA           SMTP       POP3 / IMAP
-              │             │             │
-              └─────────────┼─────────────┘
-                            │
-                         INTERNET
-                            │
-                            ▼
-                    ┌──────────────┐
-                    │ SERVIDOR MX  │
-                    └──────┬───────┘
-                           │
-                         BUZÓN
-                           │
-                  ┌────────┴────────┐
-                  │                 │
-                POP3              IMAP
-                  │                 │
-                  └────────┬────────┘
-                           ▼
-                         MUA
+                    ✉️ SISTEMA DE CORREO
+                             │
+                 ┌───────────┴───────────┐
+                 │                       │
+              ENVÍO                   RECEPCIÓN
+                 │                       │
+          SMTP / Submission          IMAP / POP3
+                 │                       │
+                 ▼                       ▼
+                MTA ──► MDA ──► BUZÓN ◄──┘
+                 │
+                 │ DNS / MX
+                 ▼
+          MTA del destinatario
 
-                 🧪 I Packet Tracer · II WSL2 · III VirtualBox · IV Docker Compose
+🧪 I Packet Tracer · II WSL2 · III VirtualBox · IV Docker Compose
 ```
 
 ---
@@ -2873,15 +2861,14 @@ d) `hostnamectl`
 # 🧪 75. Entornos de laboratorio
 
 ```text
-┌─────────────────────────────────────────────────────────────┐
-│                    LABORATORIO ASIR                         │
-├─────────────────┬─────────────────┬─────────────────────────┤
-│ Packet Tracer   │ WSL2            │ VirtualBox              │
-│                 │                 │                         │
-│ SMTP/POP3       │ Cliente CLI     │ Ubuntu 26.04 Server    │
-│ DNS             │ OpenSSL         │ DNS + servicios         │
-│ Simulation Mode │ dig / nc        │ infraestructura         │
-└─────────────────┴─────────────────┴─────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────┐
+│                         LABORATORIO ASIR                                  │
+├────────────────┬────────────────┬────────────────┬────────────────────────┤
+│ Packet Tracer  │ WSL2           │ VirtualBox     │ Docker Compose         │
+│ SMTP/POP3      │ Cliente CLI    │ Ubuntu Server  │ Infraestructura        │
+│ DNS            │ OpenSSL        │ DNS + correo   │ reproducible           │
+│ simulación     │ dig / nc       │ servidor real  │ servicios aislados     │
+└────────────────┴────────────────┴────────────────┴────────────────────────┘
 ```
 
 ### Packet Tracer
@@ -2924,6 +2911,78 @@ firewall
 ```
 
 ---
+
+
+
+
+## 🖥️ Ruta gráfica del servidor · Webmin + Postfix + Dovecot
+
+> 🧭 **Antes de continuar**
+> 
+> El servidor de correo se compone de varios servicios. Webmin dispone de módulos específicos para **Postfix Mail Server** y **Dovecot IMAP/POP3 Server**. La administración gráfica no elimina la necesidad de comprender `main.cf`, `master.cf` y la configuración de Dovecot: sirve para visualizar y modificar de forma guiada parte de esos parámetros.
+
+### Postfix mediante Webmin
+
+1. Accede a **Servers → Postfix Mail Server**.
+2. Revisa **General Options**, dominios locales, relay y opciones del servidor SMTP.
+3. Configura el dominio de laboratorio.
+4. Aplica los cambios.
+5. Contrasta el resultado con `postconf -n` y `postfix check`.
+
+### Dovecot mediante Webmin
+
+1. Accede a **Servers → Dovecot IMAP/POP3 Server**.
+2. Identifica las opciones relacionadas con IMAP/POP3 y autenticación.
+3. Aplica los cambios.
+4. Contrasta desde CLI con `doveconf -n` y `ss -lntp`.
+
+> 💡 **Regla:** si Webmin y la CLI muestran configuraciones distintas, no se debe continuar modificando al azar. Hay que identificar primero qué fichero y qué directiva gobiernan el comportamiento real.
+
+### Cliente gráfico 1 · Roundcube Webmail
+
+Roundcube es un **cliente web**, no un MTA ni un servidor IMAP. Se conecta al servicio de correo existente mediante IMAP y SMTP. La documentación actual de Roundcube recomienda utilizar `public_html` como raíz documental en las versiones recientes y configurar una base de datos y un servidor HTTP/PHP.
+
+#### Instalación orientativa
+
+En una máquina de laboratorio Ubuntu con Nginx, PHP-FPM y MariaDB: instala los prerrequisitos, descarga una versión estable de Roundcube, crea su base de datos y configura `config/config.inc.php`. El instalador web permite comprobar requisitos y generar la configuración. Después de completar la instalación hay que retirar/deshabilitar el instalador y proteger `config`, `temp` y `logs`.
+
+```bash
+# Comprobar requisitos básicos
+php -v
+nginx -v
+mariadb --version
+
+# La instalación de Roundcube se realiza siguiendo la versión estable
+# indicada por la documentación oficial del proyecto.
+```
+
+> ⚠️ **No fijamos aquí una versión concreta ni una lista rígida de paquetes PHP**: Roundcube modifica sus requisitos entre versiones. Antes de instalar, consulta los requisitos de la versión estable elegida.
+
+#### Configuración
+
+En `config/config.inc.php` se definen, entre otros, el servidor IMAP y el servidor SMTP. Una vez configurado, accede desde el navegador a la URL de Roundcube e inicia sesión con una cuenta del servidor.
+
+### Cliente gráfico 2 · Mozilla Thunderbird
+
+Thunderbird permite comprobar el mismo servicio desde un cliente de escritorio. En la configuración manual hay que distinguir claramente **servidor entrante** y **servidor saliente**.
+
+| Función | Protocolo | Puerto habitual | Seguridad |
+|---|---|---:|---|
+| Recepción | IMAP | 143 | STARTTLS |
+| Recepción segura | IMAPS | 993 | TLS |
+| Envío autenticado | Submission | 587 | STARTTLS |
+| Envío con TLS implícito | SMTPS | 465 | TLS |
+
+En Thunderbird: **Añadir cuenta → correo electrónico → configuración manual**. Introduce el servidor IMAP, el puerto, el método de seguridad y autenticación; después configura el servidor SMTP de salida. Comprueba recepción y envío.
+
+### Comparativa de las tres interfaces
+
+| Capa | Herramienta | Qué administra |
+|---|---|---|
+| Servidor SMTP | CLI / Webmin | Postfix |
+| Servidor IMAP/POP3 | CLI / Webmin | Dovecot |
+| Cliente web | Roundcube | Acceso al buzón desde navegador |
+| Cliente escritorio | Thunderbird | Acceso al buzón desde el equipo del usuario |
 
 
 # 🐳 Itinerario IV · Docker Compose

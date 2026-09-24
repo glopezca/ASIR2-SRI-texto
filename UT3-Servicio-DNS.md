@@ -1,121 +1,5 @@
 # 🌐⚡ Unidad de Trabajo 3 · SERVICIO DE NOMBRES DE DOMINIO (DNS) ⚡🌐
 
-> 🧭 **ANTES DE EMPEZAR · VOCABULARIO TÉCNICO**
->
-> Las siglas, abreviaturas y conceptos técnicos que van a aparecer en esta unidad se presentan aquí antes de su desarrollo. La explicación local de cada tema podrá ampliar estas definiciones cuando sea necesario.
->
-> **UT** — Unidad de Trabajo: unidad didáctica del módulo profesional.
-> **RA** — Resultado de Aprendizaje: capacidad que el alumnado debe demostrar al finalizar un bloque curricular.
-> **CFGS** — Ciclo Formativo de Grado Superior.
-> **ASIR** — Administración de Sistemas Informáticos en Red.
-> **SRI** — Servicios de Red e Internet.
-> **DNS** — Sistema de nombres de dominio: servicio distribuido que relaciona nombres con direcciones IP y otros datos.
-> **NS** — Registro DNS que identifica servidores autoritativos de una zona.
-> **WSL2** — Windows Subsystem for Linux 2: tecnología de Windows que ejecuta un entorno Linux mediante una máquina virtual ligera.
-> **ID** — Identificador utilizado para distinguir un objeto de otros.
-> **CLI** — Interfaz de línea de comandos, es decir, administración mediante órdenes escritas.
-> **BIND** — Berkeley Internet Name Domain, implementación de servidor DNS.
-> **BIND9** — Rama 9 de BIND, implementación de servidor DNS usada habitualmente en Linux.
-> **RR** — Resource Record o registro de recursos DNS: unidad básica de información de una zona.
-> **HOST** — Equipo o sistema anfitrión en el que se ejecuta un servicio, contenedor o máquina virtual.
-> **IP** — Protocolo de Internet, responsable del direccionamiento y encaminamiento de paquetes.
-> **AAAA** — Registro DNS que asocia un nombre con una dirección IPv6.
-> **MX** — Registro DNS que identifica los servidores que reciben correo.
-> **DNSSEC** — Extensiones de seguridad de DNS que permiten validar criptográficamente respuestas y datos DNS.
-> **TSIG** — Mecanismo de autenticación mediante una clave compartida para proteger operaciones DNS concretas.
-> **Docker** — Plataforma de contenerización para construir, distribuir y ejecutar aplicaciones aisladas en contenedores.
-> **Docker Compose** — Herramienta de Docker para definir y ejecutar aplicaciones multicontenedor mediante un archivo declarativo.
-> **FQDN** — Nombre de dominio completamente cualificado, que identifica un nombre dentro de toda la jerarquía DNS.
-> **TLD** — Dominio de nivel superior, como .es, .org o .com.
-> **TTL** — Tiempo de vida de un dato o registro almacenado en caché.
-> **SOA** — Registro DNS de autoridad de una zona que incluye información de temporización y control.
-> **CNAME** — Registro DNS que define un alias de un nombre canónico.
-> **SRV** — Registro DNS que publica la ubicación de un servicio mediante prioridad, peso, puerto y destino.
-> **PTR** — Registro usado en resolución DNS inversa, de dirección IP a nombre.
-> **ROOT** — Servidores raíz de DNS, punto superior de la jerarquía de nombres.
-> **IPv6** — Versión 6 del Protocolo de Internet, con direcciones de 128 bits.
-> **TXT** — Registro DNS que contiene información textual estructurada, como determinadas políticas de correo.
-> **SPF** — Sender Policy Framework, mecanismo que publica mediante DNS qué servidores están autorizados a enviar correo para un dominio.
-> **DS** — Registro DNSSEC que enlaza una clave de una zona hija con la cadena de confianza de la zona padre.
-> **NXDOMAIN** — Respuesta DNS que indica que el nombre consultado no existe.
-> **TCP** — Protocolo de transporte orientado a conexión que proporciona entrega fiable y ordenada.
-> **DHCP** — Protocolo de configuración dinámica de host: entrega automáticamente parámetros de red a los clientes.
-> **LAN** — Red de área local.
-> **ANY** — Tipo de consulta DNS que históricamente solicitaba información amplia sobre un nombre; su uso operativo está desaconsejado en muchos escenarios.
-> **AXFR** — Transferencia completa de una zona DNS entre servidores.
-> **IXFR** — Transferencia incremental de una zona DNS, limitada a los cambios.
-> **Git** — Sistema distribuido de control de versiones.
-> **KEA** — Servidor DHCP desarrollado por Internet Systems Consortium como alternativa moderna al servidor DHCP clásico de ISC.
-> **DNSKEY** — Registro DNSSEC que publica una clave criptográfica.
-> **RRSIG** — Registro DNSSEC que contiene una firma digital asociada a otros registros.
-> **NSEC/NSEC3** — Mecanismos DNSSEC que permiten demostrar de forma autenticada que determinados nombres o tipos de registros no existen.
-> **UDP** — Protocolo de transporte sin conexión, ligero y sin garantía de entrega.
-> **ACL** — Lista de control de acceso que determina quién puede realizar una operación.
-> **SERVFAIL** — Respuesta DNS que indica que el servidor no pudo completar correctamente la resolución.
-> **FTP** — Protocolo de transferencia de archivos que separa un canal de control de los canales de datos.
-> **IPv4** — Versión 4 del Protocolo de Internet, con direcciones de 32 bits.
-> **PAT** — Traducción de direcciones mediante puertos: permite multiplexar conexiones privadas sobre una dirección pública.
->
-> **Criterio didáctico:** no se presupone que conocer una sigla equivalga a comprender el concepto. Primero se identifica qué significa y qué función desempeña; después se emplea en comandos, configuraciones y prácticas.
-
-> 🧩 **ANTES DE EMPEZAR · CONCEPTOS BASE**
->
-> **Protocolo** — conjunto de reglas que define cómo se comunican dos o más sistemas.
-> **Cliente** — programa o equipo que inicia una petición de un servicio.
-> **Servidor** — programa o equipo que ofrece un servicio y atiende peticiones.
-> **Servicio de red** — aplicación o proceso que ofrece una función accesible mediante la red, normalmente a través de uno o varios puertos.
-> **Proceso** — instancia en ejecución de un programa dentro de un sistema operativo.
-> **Demonio (daemon)** — proceso que permanece ejecutándose en segundo plano para prestar un servicio; en Linux es habitual que esté gestionado por `systemd`.
-> **Puerto** — número lógico asociado a un servicio de transporte; permite distinguir varias comunicaciones que utilizan la misma dirección IP.
-> **Socket** — extremo de comunicación que combina, según el contexto, una dirección IP, un puerto y un protocolo de transporte.
-> **Interfaz de red** — componente físico o virtual mediante el que un sistema se conecta a una red.
-> **Dirección IP** — identificador lógico de una interfaz dentro de una red IP.
-> **Subred** — porción de un espacio de direccionamiento IP que comparte un prefijo común.
-> **Puerta de enlace predeterminada** — equipo al que un host entrega el tráfico destinado a redes que no conoce directamente.
-> **Encaminamiento (routing)** — proceso de decidir por qué camino debe avanzar un paquete para alcanzar su destino.
-> **Tabla de encaminamiento** — conjunto de rutas que utiliza un sistema para decidir dónde enviar los paquetes.
-> **Broadcast o difusión** — envío dirigido a todos los equipos de un dominio de difusión.
-> **Unicast** — comunicación dirigida de un emisor a un receptor concreto.
-> **Multicast** — comunicación dirigida a un grupo de receptores que se han suscrito al grupo.
-> **Resolución de nombres** — proceso mediante el cual un sistema obtiene información asociada a un nombre, por ejemplo una dirección IP mediante DNS.
-> **Caché** — almacenamiento temporal de resultados para poder reutilizarlos sin repetir inmediatamente una consulta o cálculo.
-> **Archivo de configuración** — fichero que contiene parámetros con los que un programa determina cómo debe funcionar.
-> **Validación** — comprobación de que una configuración tiene una sintaxis y una estructura aceptables antes de aplicarla.
-> **Estado** — situación actual de un proceso, servicio, interfaz o recurso; conocerlo es esencial para diagnosticar una incidencia.
-> **Registro (log)** — anotación generada por un programa o sistema para dejar constancia de eventos, errores y operaciones.
->
-> Estos conceptos son el vocabulario común sobre el que se construyen las prácticas. Cuando una unidad introduzca un concepto especializado —por ejemplo, una zona DNS, una concesión DHCP, un virtual host, un contenedor o un Pod— se explicará de nuevo antes de utilizarlo operativamente.
-
-> 🧠 **CONCEPTOS QUE NO DEBEMOS DAR POR SUPUESTOS**
->
-> **`systemd`** — sistema de inicio y gestor de servicios habitual en Linux; `systemctl` permite consultar y administrar esos servicios.
-> **Archivo de configuración** — fichero que contiene los parámetros con los que un servicio determina su comportamiento.
-> **Registro DNS** — entrada de una zona DNS que asocia un nombre con un dato, como una dirección IP, un servidor de correo o un alias.
-> **Zona DNS** — parte de la jerarquía DNS administrada por un servidor autoritativo concreto.
-> **Servidor autoritativo** — servidor que posee la información oficial de una zona DNS y puede responder con autoridad sobre ella.
-> **Resolver o resolvedor** — componente que realiza consultas DNS en nombre de una aplicación o de un usuario y obtiene la respuesta siguiendo el proceso de resolución.
-> **Consulta recursiva** — consulta en la que el servidor consultado asume la tarea de obtener una respuesta completa para el cliente, si tiene habilitada la recursión.
-> **Consulta iterativa** — consulta en la que el servidor responde con la mejor información que conoce, pudiendo remitir al consultante hacia otro servidor.
-> **Concesión DHCP** — asignación temporal de una dirección IP y otros parámetros de red a un cliente.
-> **Imagen de contenedor** — plantilla inmutable a partir de la cual se crean contenedores.
-> **Volumen** — almacenamiento gestionado que permite conservar datos independientemente del ciclo de vida de un contenedor.
-> **Red Docker** — red virtual administrada por Docker que permite conectar contenedores y, según su configuración, publicar servicios hacia el host.
-> **Orquestación** — automatización de la ejecución, escalado, recuperación y coordinación de múltiples cargas de trabajo o contenedores.
-> **Pod** — unidad mínima desplegable de Kubernetes; contiene uno o varios contenedores que comparten determinados recursos.
-> **Virtual host** — configuración que permite que un mismo servidor web atienda distintos sitios o nombres mediante configuraciones diferenciadas.
-> **Certificado digital** — credencial criptográfica que vincula una identidad con una clave pública y que puede estar firmada por una autoridad de certificación.
-> **Códec** — algoritmo que codifica y decodifica audio, vídeo u otro tipo de datos; un códec no es lo mismo que un contenedor multimedia.
-> **Contenedor multimedia** — formato de archivo que agrupa una o varias pistas de audio, vídeo, subtítulos o metadatos.
-> **Streaming** — distribución de contenido de forma que el receptor puede comenzar a consumirlo mientras continúa recibiendo datos.
-> **Commit** — instantánea registrada por Git que conserva un conjunto concreto de cambios.
-> **Staging area** — área intermedia de Git donde se seleccionan los cambios que formarán el próximo commit.
-> **Rama (branch)** — línea de desarrollo independiente dentro de un repositorio Git.
-> **Remoto (remote)** — referencia a un repositorio Git externo con el que se intercambian commits mediante `fetch`, `pull` o `push`.
-> **Codespace** — entorno de desarrollo remoto proporcionado por GitHub para trabajar con un repositorio.
-> **Webmin** — interfaz web de administración de sistemas que permite gestionar determinados servicios y parámetros de un sistema Linux.
-> **Roundcube** — cliente de correo web que accede al buzón mediante IMAP y puede enviar mensajes mediante SMTP.
-> **Sympa** — gestor de listas de distribución que proporciona funciones de suscripción, moderación, administración y distribución de mensajes.
-
 ### RA1 · Resolución de nombres.
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
@@ -127,6 +11,11 @@
 > **RA1.** Administra servicios de resolución de nombres, analizándolos y garantizando la seguridad del servicio.
 
 ---
+
+
+> 🧭 **ANTES DE UTILIZAR DNS**
+>
+> **DNS (Domain Name System)** es el sistema distribuido que relaciona nombres de dominio con direcciones y otros datos. Un **FQDN (Fully Qualified Domain Name)** es un nombre completamente cualificado. Un **TLD (Top-Level Domain)** es el nivel superior de la jerarquía, como `.es`. Un **servidor autoritativo** contiene información oficial de una zona y un **resolver** consulta DNS en nombre de clientes. **BIND9** es la implementación de servidor DNS utilizada en estas prácticas.
 
 > 🎯 **MISIÓN DE LA UT**
 >
@@ -146,7 +35,7 @@
 
 # 🧭 Mapa de la unidad
 
-``` text
+```text
                               🌐 DNS
                                │
               ┌────────────────┼─────────────────┐
@@ -227,7 +116,7 @@ utilizamos nombres.
 
 Recordar:
 
-``` text
+```text
 142.250.x.x
 151.101.x.x
 ...
@@ -235,7 +124,7 @@ Recordar:
 
 es mucho menos práctico que utilizar:
 
-``` text
+```text
 www.google.com
 www.ubuntu.com
 www.ejemplo.es
@@ -244,7 +133,7 @@ www.ejemplo.es
 DNS proporciona un espacio de nombres que permite asociar nombres con
 información de red.
 
-``` text
+```text
               👤 Usuario
                   │
                   │ www.ejemplo.es
@@ -277,7 +166,7 @@ ICANN describe el DNS como una jerarquía que comienza en la raíz y se
 estructura mediante delegaciones hacia los dominios de nivel superior.
 
 
-``` text
+```text
                          .
                          │
              ┌───────────┼───────────┐
@@ -306,7 +195,7 @@ El DNS utiliza una estructura jerárquica.
 
 Ejemplo:
 
-``` text
+```text
 www.sri.iesburgos.es.
 │   │   │       │
 │   │   │       └── TLD
@@ -319,13 +208,13 @@ Cada nivel está separado mediante un punto.
 
 El árbol completo tiene como raíz:
 
-``` text
+```text
 .
 ```
 
 Por eso un FQDN completo puede terminar conceptualmente en punto:
 
-``` text
+```text
 www.sri.iesburgos.es.
                     ↑
                   raíz
@@ -339,7 +228,7 @@ Los TLD (*Top-Level Domains*) aparecen inmediatamente bajo la raíz.
 
 ### Genéricos
 
-``` text
+```text
 .com
 .org
 .net
@@ -348,7 +237,7 @@ Los TLD (*Top-Level Domains*) aparecen inmediatamente bajo la raíz.
 
 ### Geográficos
 
-``` text
+```text
 .es
 .fr
 .pt
@@ -368,7 +257,7 @@ Existen además otras categorías y dominios especializados.
 
 Supongamos:
 
-``` text
+```text
 www.asir.example.
 ```
 
@@ -377,7 +266,7 @@ Un nombre **absoluto** especifica completamente su posición en el árbol.
 Un **FQDN** (*Fully Qualified Domain Name*) identifica un nombre
 completo dentro del espacio DNS.
 
-``` text
+```text
 www.asir.example.
 └───────┬────────┘
        FQDN
@@ -387,7 +276,7 @@ El punto final representa la raíz.
 
 ### Ejemplo
 
-``` text
+```text
 www
  └── asir
       └── example
@@ -412,7 +301,7 @@ Es una parte del espacio de nombres.
 
 Es un dominio situado por debajo de otro.
 
-``` text
+```text
 juandecolonia.jc
 └── asir.juandecolonia.jc
     └── aula.asir.juandecolonia.jc
@@ -446,7 +335,7 @@ parte del espacio de nombres a otros servidores.
 
 Ejemplo:
 
-``` text
+```text
               juandecolonia.jc
                   │
                   │ delegación
@@ -475,7 +364,7 @@ Actualmente existen **13 identidades de servidores raíz**, operadas por
 distintos operadores, que se sirven mediante una infraestructura global
 de más de 1500 instancias. 
 
-``` text
+```text
 CLIENTE
    │
    ▼
@@ -510,7 +399,7 @@ Resolver un nombre significa obtener la información DNS asociada.
 
 Ejemplo:
 
-``` text
+```text
 www.juandecolonia.jc
        │
        ▼
@@ -537,7 +426,7 @@ Y las consultas pueden realizarse:
 En una consulta recursiva, el servidor al que pregunta el cliente asume
 la responsabilidad de obtener una respuesta completa o un error.
 
-``` text
+```text
 CLIENTE
    │
    │ www.juandecolonia.jc ?
@@ -565,7 +454,7 @@ El cliente no necesita realizar cada consulta intermedia.
 En una consulta iterativa el servidor responde con la mejor información
 que tiene, pudiendo proporcionar una referencia a otro servidor.
 
-``` text
+```text
 Resolver ──► Root
               │
               └──► servidores .es
@@ -619,13 +508,13 @@ Un servidor autoritativo almacena información de una o más zonas.
 
 En BIND9, Ubuntu organiza habitualmente la configuración bajo:
 
-``` text
+```text
 /etc/bind/
 ```
 
 Incluyendo:
 
-``` text
+```text
 named.conf
 named.conf.options
 named.conf.local
@@ -661,7 +550,7 @@ Almacena temporalmente respuestas para evitar repetir consultas.
 
 Envía consultas a otros servidores DNS.
 
-``` text
+```text
              BIND9
                │
        ┌───────┼────────┐
@@ -697,13 +586,13 @@ La información DNS se almacena mediante **Resource Records (RR)**.
 
 Formato conceptual:
 
-``` text
+```text
 NOMBRE   TTL   CLASE   TIPO   DATOS
 ```
 
 Ejemplo:
 
-``` text
+```text
 www.juandecolonia.jc.   3600   IN   A   192.0.2.10
 ```
 
@@ -716,11 +605,11 @@ de una zona.
 
 Asocia un nombre con una dirección IP.
 
-``` text
+```text
 www.juandecolonia.jc.   IN   A   192.0.2.10
 ```
 
-``` text
+```text
 www.juandecolonia.jc
        │
        ▼
@@ -739,7 +628,7 @@ dig www.juandecolonia.jc A
 
 Asocia un nombre con una dirección IPv6.
 
-``` text
+```text
 www.juandecolonia.jc.   IN   AAAA   2001:db8::10
 ```
 
@@ -761,11 +650,11 @@ dig www.juandecolonia.jc AAAA
 
 Crea un alias para otro nombre.
 
-``` text
+```text
 web.juandecolonia.jc.   IN   CNAME   www.juandecolonia.jc.
 ```
 
-``` text
+```text
 web
  │
  └──── CNAME ───► www
@@ -782,7 +671,7 @@ web
 
 Indica qué servidores reciben correo para un dominio.
 
-``` text
+```text
 juandecolonia.jc.   IN   MX   10   mail.juandecolonia.jc.
 ```
 
@@ -791,7 +680,7 @@ uno mayor.
 
 Ejemplo:
 
-``` text
+```text
 MX 10 mail1.juandecolonia.jc.
 MX 20 mail2.juandecolonia.jc.
 ```
@@ -802,7 +691,7 @@ MX 20 mail2.juandecolonia.jc.
 
 Indica los servidores de nombres autoritativos de una zona.
 
-``` text
+```text
 juandecolonia.jc.   IN   NS   ns1.juandecolonia.jc.
 juandecolonia.jc.   IN   NS   ns2.juandecolonia.jc.
 ```
@@ -816,7 +705,7 @@ configurados.
 
 Se utiliza en la resolución inversa.
 
-``` text
+```text
 10.2.0.192.in-addr.arpa.
              │
              ▼
@@ -838,7 +727,7 @@ fundamental sobre una zona.
 
 Ejemplo conceptual:
 
-``` text
+```text
 juandecolonia.jc. IN SOA ns1.juandecolonia.jc. hostmaster.juandecolonia.jc. (
     2026091701
     3600
@@ -866,13 +755,13 @@ El `serial` permite detectar cambios en la zona.
 
 Ejemplo:
 
-``` text
+```text
 2026091701
 ```
 
 Al modificar la zona:
 
-``` text
+```text
 2026091702
 ```
 
@@ -891,7 +780,7 @@ deben actualizar su copia.
 **TTL --- Time To Live** determina durante cuánto tiempo una respuesta
 puede permanecer en caché.
 
-``` text
+```text
 Consulta
    │
    ▼
@@ -917,7 +806,7 @@ No solo se almacenan respuestas positivas.
 
 También puede almacenarse información sobre nombres que no existen.
 
-``` text
+```text
 www.juandecolonia.jc  ──► existe ──► A
 noexiste.es      ──► NXDOMAIN
 ```
@@ -931,25 +820,25 @@ determinada información negativa.
 
 La resolución directa:
 
-``` text
+```text
 NOMBRE ─────► IP
 ```
 
 La resolución inversa:
 
-``` text
+```text
 IP ──────────► NOMBRE
 ```
 
 Para IP se utiliza:
 
-``` text
+```text
 in-addr.arpa
 ```
 
 Ejemplo:
 
-``` text
+```text
 192.0.2.10
 
 10.2.0.192.in-addr.arpa
@@ -967,7 +856,7 @@ dig -x 192.0.2.10
 
 Una configuración completa puede tener:
 
-``` text
+```text
 Zona directa
 juandecolonia.jc
      │
@@ -994,7 +883,7 @@ una biblioteca.
 
 En Linux moderno pueden intervenir:
 
-``` text
+```text
 Aplicación
     │
     ▼
@@ -1090,7 +979,7 @@ nslookup www.juandecolonia.jc
 
 Modo interactivo:
 
-``` text
+```text
 > server 192.168.10.10
 > set type=MX
 > juandecolonia.jc
@@ -1139,7 +1028,7 @@ En Webmin, el módulo **Servers → BIND DNS Server** permite inspeccionar y edi
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1244,7 +1133,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1261,7 +1150,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 ## Topología
 
-``` text
+```text
                VirtualBox
                     │
           ┌─────────┴─────────┐
@@ -1339,7 +1228,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1361,13 +1250,13 @@ Configurar BIND9 para proporcionar resolución a una LAN y utilizar
 
 Archivo:
 
-``` text
+```text
 /etc/bind/named.conf.options
 ```
 
 Estructura conceptual:
 
-``` text
+```text
 options {
     directory "/var/cache/bind";
 
@@ -1395,7 +1284,7 @@ dig @127.0.0.1 www.juandecolonia.jc
 
 Repite la consulta y compara:
 
-``` text
+```text
 ;; Query time:
 ```
 
@@ -1443,7 +1332,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1460,13 +1349,13 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Dominio de laboratorio:
 
-``` text
+```text
 asir.test
 ```
 
 Servidor:
 
-``` text
+```text
 dns01.asir.test
 192.168.10.10
 ```
@@ -1479,7 +1368,7 @@ sudo nano /etc/bind/named.conf.local
 
 Añade:
 
-``` text
+```text
 zone "asir.test" {
     type primary;
     file "/etc/bind/db.asir.test";
@@ -1494,7 +1383,7 @@ sudo nano /etc/bind/db.asir.test
 
 Ejemplo:
 
-``` text
+```text
 $TTL 3600
 @   IN SOA dns01.asir.test. admin.asir.test. (
         2026091701
@@ -1585,7 +1474,7 @@ dig @192.168.10.10 www.asir.test
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1602,23 +1491,23 @@ dig @192.168.10.10 www.asir.test
 
 Para:
 
-``` text
+```text
 192.168.10.0/24
 ```
 
 crea:
 
-``` text
+```text
 10.168.192.in-addr.arpa
 ```
 
 En:
 
-``` text
+```text
 /etc/bind/named.conf.local
 ```
 
-``` text
+```text
 zone "10.168.192.in-addr.arpa" {
     type primary;
     file "/etc/bind/db.192.168.10";
@@ -1627,7 +1516,7 @@ zone "10.168.192.in-addr.arpa" {
 
 Zona:
 
-``` text
+```text
 $TTL 3600
 @ IN SOA dns01.asir.test. admin.asir.test. (
     2026091701
@@ -1697,7 +1586,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1716,31 +1605,31 @@ Amplía la zona `asir.test` con:
 
 ### A
 
-``` text
+```text
 web IN A 192.168.10.20
 ```
 
 ### AAAA
 
-``` text
+```text
 web IN AAAA 2001:db8:10::20
 ```
 
 ### CNAME
 
-``` text
+```text
 portal IN CNAME web.asir.test.
 ```
 
 ### MX
 
-``` text
+```text
 @ IN MX 10 mail.asir.test.
 ```
 
 ### TXT
 
-``` text
+```text
 @ IN TXT "Laboratorio SRI"
 ```
 
@@ -1748,7 +1637,7 @@ portal IN CNAME web.asir.test.
 
 Como actividad de investigación:
 
-``` text
+```text
 _servicio._tcp.asir.test.
 ```
 
@@ -1803,7 +1692,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1820,7 +1709,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 ## Topología
 
-``` text
+```text
              PRIMARY
           192.168.10.10
                 │
@@ -1901,7 +1790,7 @@ infraestructura DNS.
 
 Por ello no debe permitirse indiscriminadamente.
 
-``` text
+```text
 ❌ CUALQUIER HOST ──► AXFR ──► DNS
 
 ✅ PRIMARY ──► SECONDARY autorizado
@@ -1922,7 +1811,7 @@ Para autenticación puede utilizarse **TSIG**.
 TSIG permite autenticar comunicaciones entre servidores DNS mediante una
 clave compartida.
 
-``` text
+```text
 PRIMARY                         SECONDARY
    │                                │
    │──── consulta firmada ─────────►│
@@ -1935,7 +1824,7 @@ comunicaciones y operaciones.
 
 ### Idea fundamental
 
-``` text
+```text
 MISMA CLAVE
     │
     ├── Primary
@@ -1952,7 +1841,7 @@ No se debe incluir una clave TSIG real en un repositorio Git público.
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1969,7 +1858,7 @@ No se debe incluir una clave TSIG real en un repositorio Git público.
 
 Configura:
 
-``` text
+```text
 DNS01 → primary
 DNS02 → secondary
 ```
@@ -2025,7 +1914,7 @@ DNS dinámico permite modificar registros automáticamente.
 
 Caso típico:
 
-``` text
+```text
 DHCP
  │
  │ asigna IP
@@ -2049,7 +1938,7 @@ Puede utilizarse para integrar DHCP y DNS en determinados entornos.
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2066,7 +1955,7 @@ Puede utilizarse para integrar DHCP y DNS en determinados entornos.
 
 Utilizando la infraestructura de la UT2:
 
-``` text
+```text
           DHCP / KEA
               │
               │ IP
@@ -2132,7 +2021,7 @@ de los datos DNS.
 
 Añade registros como:
 
-``` text
+```text
 DNSKEY
 RRSIG
 NSEC / NSEC3
@@ -2142,7 +2031,7 @@ DS
 BIND9 proporciona herramientas y políticas específicas para firmar zonas
 y mantener sus claves. 
 
-``` text
+```text
 Zona DNS
    │
    ├── A
@@ -2177,7 +2066,7 @@ encuentran:
 -   Ataques contra servidores DNS.
 -   Actualizaciones dinámicas no protegidas.
 
-``` text
+```text
                  🚨 ATAQUE
                     │
        ┌────────────┼────────────┐
@@ -2205,7 +2094,7 @@ encuentran:
 
 ### Principio
 
-``` text
+```text
            DNS
             │
       ┌─────┴─────┐
@@ -2223,7 +2112,7 @@ encuentran:
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2246,7 +2135,7 @@ dig www.juandecolonia.jc
 
 Filtro:
 
-``` text
+```text
 dns
 ```
 
@@ -2313,7 +2202,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2396,7 +2285,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Cuando DNS falla, no empieces cambiando configuraciones al azar.
 
-``` text
+```text
                  ❌ NO RESUELVE
                        │
                        ▼
@@ -2486,7 +2375,7 @@ Puede indicar un problema más profundo:
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2503,7 +2392,7 @@ Puede indicar un problema más profundo:
 
 Construye:
 
-``` text
+```text
                          🌐 INTERNET
                               │
                          ┌────┴────┐
@@ -2525,13 +2414,13 @@ Construye:
 
 ### Zona directa
 
-``` text
+```text
 asir.test
 ```
 
 ### Zona inversa
 
-``` text
+```text
 10.168.192.in-addr.arpa
 ```
 
@@ -2609,7 +2498,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 # 🧠 53. Resumen
 
-``` text
+```text
                            DNS
                             │
                 ┌───────────┼───────────┐
@@ -2710,7 +2599,7 @@ El sistema DNS está formado, entre otros, por:
 
 Ejemplo:
 
-``` text
+```text
                     .
                     │
               ┌─────┴─────┐
@@ -2723,7 +2612,7 @@ Ejemplo:
 
 Para resolución inversa:
 
-``` text
+```text
                 in-addr.arpa
                      │
                   192
@@ -2739,7 +2628,7 @@ Para resolución inversa:
 
 Genéricos:
 
-``` text
+```text
 .com
 .org
 .net
@@ -2747,7 +2636,7 @@ Genéricos:
 
 Geográficos:
 
-``` text
+```text
 .es
 .pt
 .fr
@@ -2770,7 +2659,7 @@ Un FQDN identifica completamente un nombre dentro de la jerarquía.
 
 Ejemplo:
 
-``` text
+```text
 www.asir.example.
 ```
 
@@ -2785,7 +2674,7 @@ autoritativos para una zona hija.
 
 Ejemplo:
 
-``` text
+```text
 juandecolonia.jc
      │
      └──► asir.juandecolonia.jc
@@ -2799,13 +2688,13 @@ Permite distribuir la administración del espacio DNS.
 
 El cliente pregunta a un resolver:
 
-``` text
+```text
 www.juandecolonia.jc ?
 ```
 
 El resolver puede consultar:
 
-``` text
+```text
 ROOT
   ↓
 .COM
@@ -2838,13 +2727,13 @@ Es la obtención de un nombre a partir de una dirección IP.
 
 En IP utiliza:
 
-``` text
+```text
 in-addr.arpa
 ```
 
 Ejemplo:
 
-``` text
+```text
 192.168.10.20
       ↓
 20.10.168.192.in-addr.arpa
@@ -2892,7 +2781,7 @@ integridad de la información DNS.
 
 Utiliza registros como:
 
-``` text
+```text
 DNSKEY
 RRSIG
 DS
@@ -3018,7 +2907,7 @@ Incluye, cuando aporte información, una captura de la topología, del fichero o
 
 El profesor proporciona:
 
-``` text
+```text
 Cliente
 192.168.10.50
 
@@ -3037,13 +2926,13 @@ dig @192.168.10.10 www.asir.test
 
 y obtiene:
 
-``` text
+```text
 SERVFAIL
 ```
 
 ### El alumno deberá comprobar, en orden:
 
-``` text
+```text
 1️⃣ conectividad IP
        ↓
 2️⃣ puerto 53

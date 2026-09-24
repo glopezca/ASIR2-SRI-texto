@@ -1,109 +1,5 @@
 # 🌐⚡ Unidad de Trabajo 1 · CONCEPTOS BÁSICOS DE LA FAMILIA DE PROTOCOLOS DE INTERNET (TCP/IP) ⚡🌐
 
-> 🧭 **ANTES DE EMPEZAR · VOCABULARIO TÉCNICO**
->
-> Las siglas, abreviaturas y conceptos técnicos que van a aparecer en esta unidad se presentan aquí antes de su desarrollo. La explicación local de cada tema podrá ampliar estas definiciones cuando sea necesario.
->
-> **UT** — Unidad de Trabajo: unidad didáctica del módulo profesional.
-> **RA** — Resultado de Aprendizaje: capacidad que el alumnado debe demostrar al finalizar un bloque curricular.
-> **CFGS** — Ciclo Formativo de Grado Superior.
-> **ASIR** — Administración de Sistemas Informáticos en Red.
-> **SRI** — Servicios de Red e Internet.
-> **TCP** — Protocolo de transporte orientado a conexión que proporciona entrega fiable y ordenada.
-> **TCP/IP** — Familia de protocolos de Internet en la que IP proporciona direccionamiento y TCP es uno de los protocolos de transporte.
-> **IP** — Protocolo de Internet, responsable del direccionamiento y encaminamiento de paquetes.
-> **NAT** — Traducción de direcciones de red: modificación de direcciones IP al atravesar un dispositivo intermedio.
-> **NAT/PAT** — Combinación de NAT y PAT, habitual cuando varias direcciones privadas comparten una dirección pública.
-> **PAT** — Traducción de direcciones mediante puertos: permite multiplexar conexiones privadas sobre una dirección pública.
-> **CLI** — Interfaz de línea de comandos, es decir, administración mediante órdenes escritas.
-> **WSL** — Windows Subsystem for Linux, plataforma de Windows para ejecutar entornos Linux.
-> **WSL2** — Windows Subsystem for Linux 2: tecnología de Windows que ejecuta un entorno Linux mediante una máquina virtual ligera.
-> **UDP** — Protocolo de transporte sin conexión, ligero y sin garantía de entrega.
-> **Docker** — Plataforma de contenerización para construir, distribuir y ejecutar aplicaciones aisladas en contenedores.
-> **Docker Compose** — Herramienta de Docker para definir y ejecutar aplicaciones multicontenedor mediante un archivo declarativo.
-> **OSI** — Modelo de referencia que organiza las funciones de comunicación de red en siete capas.
-> **CIDR** — Enrutamiento entre dominios sin clases: notación que expresa una red mediante dirección y longitud de prefijo, por ejemplo /24.
-> **GUI** — Interfaz gráfica de usuario, es decir, administración mediante ventanas, menús y controles visuales.
-> **DNS** — Sistema de nombres de dominio: servicio distribuido que relaciona nombres con direcciones IP y otros datos.
-> **SSH** — Protocolo seguro de administración remota y transporte de otros servicios.
-> **HTTP** — Protocolo de transferencia de hipertexto utilizado principalmente por la Web.
-> **SMTP** — Simple Mail Transfer Protocol, protocolo principal para transportar correo entre agentes de correo.
-> **DHCP** — Protocolo de configuración dinámica de host: entrega automáticamente parámetros de red a los clientes.
-> **IPv6** — Versión 6 del Protocolo de Internet, con direcciones de 128 bits.
-> **ICMP** — Protocolo de control y diagnóstico de Internet; ping utiliza mensajes ICMP en IPv4.
-> **HTTP/HTTPS** — HTTP es el protocolo web; HTTPS es HTTP protegido mediante TLS.
-> **HTTPS** — HTTP protegido mediante TLS.
-> **MAC** — Dirección de control de acceso al medio asociada a una interfaz de red.
-> **ARP** — Protocolo que relaciona una dirección IPv4 con una dirección de enlace en una red local.
-> **ARP/NDP** — ARP resuelve direcciones IPv4 en una red local; NDP realiza funciones equivalentes de descubrimiento y resolución en IPv6.
-> **MTU** — Unidad máxima de transmisión: tamaño máximo de una trama o paquete que puede transportarse sin fragmentación en un enlace concreto.
-> **LAN** — Red de área local.
-> **IANA** — Internet Assigned Numbers Authority, organismo que coordina parámetros, espacios de nombres y números de Internet.
-> **RFC** — Request for Comments: documento técnico que especifica o describe protocolos, estándares o prácticas de Internet.
-> **VM** — Máquina virtual: ordenador software aislado que ejecuta un sistema operativo invitado.
-> **WAN** — Red de área extensa que conecta redes separadas geográficamente.
-> **IPv4** — Versión 4 del Protocolo de Internet, con direcciones de 32 bits.
->
-> **Criterio didáctico:** no se presupone que conocer una sigla equivalga a comprender el concepto. Primero se identifica qué significa y qué función desempeña; después se emplea en comandos, configuraciones y prácticas.
-
-> 🧩 **ANTES DE EMPEZAR · CONCEPTOS BASE**
->
-> **Protocolo** — conjunto de reglas que define cómo se comunican dos o más sistemas.
-> **Cliente** — programa o equipo que inicia una petición de un servicio.
-> **Servidor** — programa o equipo que ofrece un servicio y atiende peticiones.
-> **Servicio de red** — aplicación o proceso que ofrece una función accesible mediante la red, normalmente a través de uno o varios puertos.
-> **Proceso** — instancia en ejecución de un programa dentro de un sistema operativo.
-> **Demonio (daemon)** — proceso que permanece ejecutándose en segundo plano para prestar un servicio; en Linux es habitual que esté gestionado por `systemd`.
-> **Puerto** — número lógico asociado a un servicio de transporte; permite distinguir varias comunicaciones que utilizan la misma dirección IP.
-> **Socket** — extremo de comunicación que combina, según el contexto, una dirección IP, un puerto y un protocolo de transporte.
-> **Interfaz de red** — componente físico o virtual mediante el que un sistema se conecta a una red.
-> **Dirección IP** — identificador lógico de una interfaz dentro de una red IP.
-> **Subred** — porción de un espacio de direccionamiento IP que comparte un prefijo común.
-> **Puerta de enlace predeterminada** — equipo al que un host entrega el tráfico destinado a redes que no conoce directamente.
-> **Encaminamiento (routing)** — proceso de decidir por qué camino debe avanzar un paquete para alcanzar su destino.
-> **Tabla de encaminamiento** — conjunto de rutas que utiliza un sistema para decidir dónde enviar los paquetes.
-> **Broadcast o difusión** — envío dirigido a todos los equipos de un dominio de difusión.
-> **Unicast** — comunicación dirigida de un emisor a un receptor concreto.
-> **Multicast** — comunicación dirigida a un grupo de receptores que se han suscrito al grupo.
-> **Resolución de nombres** — proceso mediante el cual un sistema obtiene información asociada a un nombre, por ejemplo una dirección IP mediante DNS.
-> **Caché** — almacenamiento temporal de resultados para poder reutilizarlos sin repetir inmediatamente una consulta o cálculo.
-> **Archivo de configuración** — fichero que contiene parámetros con los que un programa determina cómo debe funcionar.
-> **Validación** — comprobación de que una configuración tiene una sintaxis y una estructura aceptables antes de aplicarla.
-> **Estado** — situación actual de un proceso, servicio, interfaz o recurso; conocerlo es esencial para diagnosticar una incidencia.
-> **Registro (log)** — anotación generada por un programa o sistema para dejar constancia de eventos, errores y operaciones.
->
-> Estos conceptos son el vocabulario común sobre el que se construyen las prácticas. Cuando una unidad introduzca un concepto especializado —por ejemplo, una zona DNS, una concesión DHCP, un virtual host, un contenedor o un Pod— se explicará de nuevo antes de utilizarlo operativamente.
-
-> 🧠 **CONCEPTOS QUE NO DEBEMOS DAR POR SUPUESTOS**
->
-> **`systemd`** — sistema de inicio y gestor de servicios habitual en Linux; `systemctl` permite consultar y administrar esos servicios.
-> **Archivo de configuración** — fichero que contiene los parámetros con los que un servicio determina su comportamiento.
-> **Registro DNS** — entrada de una zona DNS que asocia un nombre con un dato, como una dirección IP, un servidor de correo o un alias.
-> **Zona DNS** — parte de la jerarquía DNS administrada por un servidor autoritativo concreto.
-> **Servidor autoritativo** — servidor que posee la información oficial de una zona DNS y puede responder con autoridad sobre ella.
-> **Resolver o resolvedor** — componente que realiza consultas DNS en nombre de una aplicación o de un usuario y obtiene la respuesta siguiendo el proceso de resolución.
-> **Consulta recursiva** — consulta en la que el servidor consultado asume la tarea de obtener una respuesta completa para el cliente, si tiene habilitada la recursión.
-> **Consulta iterativa** — consulta en la que el servidor responde con la mejor información que conoce, pudiendo remitir al consultante hacia otro servidor.
-> **Concesión DHCP** — asignación temporal de una dirección IP y otros parámetros de red a un cliente.
-> **Imagen de contenedor** — plantilla inmutable a partir de la cual se crean contenedores.
-> **Volumen** — almacenamiento gestionado que permite conservar datos independientemente del ciclo de vida de un contenedor.
-> **Red Docker** — red virtual administrada por Docker que permite conectar contenedores y, según su configuración, publicar servicios hacia el host.
-> **Orquestación** — automatización de la ejecución, escalado, recuperación y coordinación de múltiples cargas de trabajo o contenedores.
-> **Pod** — unidad mínima desplegable de Kubernetes; contiene uno o varios contenedores que comparten determinados recursos.
-> **Virtual host** — configuración que permite que un mismo servidor web atienda distintos sitios o nombres mediante configuraciones diferenciadas.
-> **Certificado digital** — credencial criptográfica que vincula una identidad con una clave pública y que puede estar firmada por una autoridad de certificación.
-> **Códec** — algoritmo que codifica y decodifica audio, vídeo u otro tipo de datos; un códec no es lo mismo que un contenedor multimedia.
-> **Contenedor multimedia** — formato de archivo que agrupa una o varias pistas de audio, vídeo, subtítulos o metadatos.
-> **Streaming** — distribución de contenido de forma que el receptor puede comenzar a consumirlo mientras continúa recibiendo datos.
-> **Commit** — instantánea registrada por Git que conserva un conjunto concreto de cambios.
-> **Staging area** — área intermedia de Git donde se seleccionan los cambios que formarán el próximo commit.
-> **Rama (branch)** — línea de desarrollo independiente dentro de un repositorio Git.
-> **Remoto (remote)** — referencia a un repositorio Git externo con el que se intercambian commits mediante `fetch`, `pull` o `push`.
-> **Codespace** — entorno de desarrollo remoto proporcionado por GitHub para trabajar con un repositorio.
-> **Webmin** — interfaz web de administración de sistemas que permite gestionar determinados servicios y parámetros de un sistema Linux.
-> **Roundcube** — cliente de correo web que accede al buzón mediante IMAP y puede enviar mensajes mediante SMTP.
-> **Sympa** — gestor de listas de distribución que proporciona funciones de suscripción, moderación, administración y distribución de mensajes.
-
 ### Fundamentos de direccionamiento, transporte, encaminamiento, NAT/PAT y modelo cliente/servidor.
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
@@ -116,6 +12,11 @@
 
 ---
 
+
+> 🧭 **ANTES DE UTILIZAR TCP/IP, IP, TCP, UDP, CIDR Y NAT/PAT**
+>
+> **TCP/IP** es la familia de protocolos que utilizaremos para explicar la comunicación en redes. **IP (Internet Protocol)** se ocupa del direccionamiento y encaminamiento; **TCP (Transmission Control Protocol)** proporciona transporte fiable y orientado a conexión; **UDP (User Datagram Protocol)** proporciona un transporte más simple y sin conexión. **CIDR (Classless Inter-Domain Routing)** permite expresar una red mediante dirección y longitud de prefijo, por ejemplo `/24`. **NAT (Network Address Translation)** modifica direcciones al atravesar un dispositivo intermedio y **PAT (Port Address Translation)** permite diferenciar conexiones mediante puertos.
+
 > 🎯 **MISIÓN DE LA UT**
 >
 > Comprender cómo se direccionan, encaminan y transportan los datos en
@@ -124,67 +25,31 @@
 
 > 🧭 **MAPA DE LA UNIDAD**
 >
-> ``` text
+> ```text
 >                         🌐 REDES TCP/IP
->                               │
->          ┌────────────────────┼────────────────────┐
->          │                    │                    │
->       🏠 IP              🚦 Routing           🔌 TCP/UDP
->          │                    │                    │
->          └────────────────────┼────────────────────┘
->                               │
->                          🔄 NAT / PAT
->                               │
->       ┌───────────────────────┼──────────────────────────────┐
->       │                       │                              │
->  🧪 Entorno I           🐧 Entorno II                🖥️ Entorno III
->  Packet Tracer           WSL2 + Ubuntu                VirtualBox +
->                                                        Ubuntu 26.04 Server
->       │                       │                              │
->       └───────────────────────┴──────────────────────────────┴── 🐳 Entorno IV
->                                                                   Docker Compose
-> ``` text
->                         🌐 REDES TCP/IP
->                               │
->          ┌────────────────────┼────────────────────┐
->          │                    │                    │
->       🏠 IP              🚦 Routing           🔌 TCP/UDP
->          │                    │                    │
->          └────────────────────┼────────────────────┘
->                               │
->                          🔄 NAT / PAT
->                               │
->       ┌───────────────────────┼────────────────────────┐
->       │                       │                        │
->  🧪 Entorno I            🐧 Entorno II          🖥️ Entorno III
->  Packet Tracer            WSL2 + Ubuntu         VirtualBox + Ubuntu
->                                                    26.04 Server
->                               │
->                               └───────────────┐
->                                               ▼
->                                         🐳 Entorno IV
->                                         Docker Compose
-> ``` text
->                         🌐 REDES TCP/IP
->                               │
->              ┌────────────────┼────────────────┐
->              │                │                │
->          🏠 IP          🚦 Routing       🔌 TCP/UDP
->              │                │                │
->              └───────────────┬┴───────────────┘
->                              │
->                         🔄 NAT / PAT
->                              │
->                 ┌────────────┬────────────┬────────────┬────────────┐
->                 │            │            │            │
->              🧪 Packet     🐧 WSL2     🖥️ VirtualBox  🐳 Compose
->              Tracer       + Ubuntu     + Ubuntu Server  + Docker
+>                                │
+>              ┌─────────────────┼─────────────────┐
+>              │                 │                 │
+>           🏠 IP          🚦 Encaminamiento   🔌 TCP / UDP
+>              │                 │                 │
+>              └─────────────────┼─────────────────┘
+>                                │
+>                           🔄 NAT / PAT
+>                                │
+>          ┌───────────────┬─────┴─────┬────────────────┐
+>          │               │           │                │
+>       Entorno I       Entorno II  Entorno III     Entorno IV
+>    Packet Tracer       WSL2 +     VirtualBox +    Docker Compose
+>                        Ubuntu     Ubuntu Server
+>          │               │           │                │
+>          └───────────────┴───────────┴────────────────┘
+>                                │
+>                                ▼
+>                         🌐 SERVICIOS SRI
 > ```
 >
-> 💡 **Idea guía:** no estudiaremos la red solo para memorizar
-> conceptos. Aprenderemos a **observar qué está haciendo realmente el
-> sistema** y a demostrarlo mediante comandos, tablas de rutas,
-> simulaciones y capturas de tráfico.
+> 💡 **Idea guía:** no estudiaremos la red solo para memorizar conceptos. Aprenderemos a observar qué está haciendo realmente el sistema y a demostrarlo mediante comandos, simulaciones y capturas de tráfico.
+
 
 ------------------------------------------------------------------------
 
@@ -289,7 +154,7 @@ de la capa inferior.
 
 Por ejemplo, una petición HTTP puede utilizar:
 
-``` text
+```text
 HTTP
  ↓
 TCP
@@ -301,7 +166,7 @@ Ethernet
 
 En el receptor se produce el proceso inverso:
 
-``` text
+```text
 Ethernet
  ↓
 IP
@@ -331,7 +196,7 @@ El modelo OSI utiliza siete capas:
 
 TCP/IP agrupa varias de ellas:
 
-``` text
+```text
 OSI                         TCP/IP
 
 Aplicación       ┐
@@ -363,7 +228,7 @@ El modelo cliente/servidor describe una relación entre procesos.
 
 Ejemplo:
 
-``` text
+```text
 Cliente                          Servidor web
 
  navegador                       nginx
@@ -396,7 +261,7 @@ extremos.
 
 Ejemplo:
 
-``` text
+```text
 Servicio web
     │
     ├── servidor: nginx / Apache
@@ -414,26 +279,26 @@ Una dirección IP tiene 32 bits.
 
 Se representa habitualmente mediante cuatro octetos:
 
-``` text
+```text
 192.168.10.25
 ```
 
 Cada octeto tiene 8 bits:
 
-``` text
+```text
 192       168       10        25
 11000000  10101000  00001010  00011001
 ```
 
 Por tanto:
 
-``` text
+```text
 4 × 8 = 32 bits
 ```
 
 El valor de cada octeto está entre:
 
-``` text
+```text
 0 y 255
 ```
 
@@ -444,19 +309,19 @@ conocer el prefijo de red.
 
 Ejemplo:
 
-``` text
+```text
 192.168.10.25/24
 ```
 
 El `/24` indica que los primeros 24 bits identifican la red.
 
-``` text
+```text
 11111111.11111111.11111111.00000000
 ```
 
 equivalente a:
 
-``` text
+```text
 255.255.255.0
 ```
 
@@ -475,21 +340,21 @@ La máscara permite separar:
 
 Ejemplo:
 
-``` text
+```text
 IP:       192.168.10.25
 Máscara:  255.255.255.0
 ```
 
 En binario:
 
-``` text
+```text
 IP:       11000000.10101000.00001010.00011001
 Máscara:  11111111.11111111.11111111.00000000
 ```
 
 La operación AND permite obtener la dirección de red:
 
-``` text
+```text
 11000000.10101000.00001010.00011001
 AND
 11111111.11111111.11111111.00000000
@@ -499,7 +364,7 @@ AND
 
 Resultado:
 
-``` text
+```text
 192.168.10.0
 ```
 
@@ -524,7 +389,7 @@ Ejemplos:
 En una red IP convencional, la cantidad de direcciones utilizables
 para hosts suele ser:
 
-``` text
+```text
 2^(32-prefijo) - 2
 ```
 
@@ -542,7 +407,7 @@ broadcast.
 
 La red:
 
-``` text
+```text
 127.0.0.0/8
 ```
 
@@ -550,7 +415,7 @@ se utiliza para comunicaciones internas del propio host.
 
 La dirección más habitual es:
 
-``` text
+```text
 127.0.0.1
 ```
 
@@ -568,7 +433,7 @@ La comunicación no sale por la interfaz física.
 
 Los principales rangos privados IP son:
 
-``` text
+```text
 10.0.0.0/8
 172.16.0.0/12
 192.168.0.0/16
@@ -580,7 +445,7 @@ Son habituales en redes locales.
 
 Ejemplo:
 
-``` text
+```text
 192.168.1.0/24
 ```
 
@@ -590,7 +455,7 @@ Ejemplo:
 
 En IP:
 
-``` text
+```text
 169.254.0.0/16
 ```
 
@@ -609,13 +474,13 @@ tráfico a todos los hosts de una red.
 
 Por ejemplo, en:
 
-``` text
+```text
 192.168.10.0/24
 ```
 
 la dirección de broadcast es:
 
-``` text
+```text
 192.168.10.255
 ```
 
@@ -625,7 +490,7 @@ la dirección de broadcast es:
 
 El rango IP multicast es:
 
-``` text
+```text
 224.0.0.0/4
 ```
 
@@ -633,7 +498,7 @@ Permite enviar tráfico a un grupo de receptores.
 
 No debe confundirse:
 
-``` text
+```text
 unicast   → un receptor
 broadcast → todos los receptores de una red
 multicast → miembros de un grupo
@@ -645,7 +510,7 @@ multicast → miembros de un grupo
 
 Supongamos:
 
-``` text
+```text
 Host A
 IP: 192.168.10.20/24
 Gateway: 192.168.10.1
@@ -653,13 +518,13 @@ Gateway: 192.168.10.1
 
 y queremos acceder a:
 
-``` text
+```text
 192.168.10.50
 ```
 
 Ambas direcciones pertenecen a:
 
-``` text
+```text
 192.168.10.0/24
 ```
 
@@ -667,7 +532,7 @@ Por tanto, el destino es local.
 
 Si queremos acceder a:
 
-``` text
+```text
 8.8.8.8
 ```
 
@@ -675,7 +540,7 @@ el destino no pertenece a la red local.
 
 El host debe utilizar su **puerta de enlace predeterminada**.
 
-``` text
+```text
                  Internet
                     │
                     │
@@ -711,14 +576,14 @@ ip route
 
 Ejemplo:
 
-``` text
+```text
 default via 192.168.10.1 dev enp0s3
 192.168.10.0/24 dev enp0s3 proto kernel scope link src 192.168.10.20
 ```
 
 Interpretación:
 
-``` text
+```text
 default
     cualquier destino que no coincida con una ruta más específica
 
@@ -739,7 +604,7 @@ src 192.168.10.20
 
 La ruta:
 
-``` text
+```text
 default via 192.168.10.1
 ```
 
@@ -764,7 +629,7 @@ flowchart LR
 
 R1 puede necesitar una ruta hacia:
 
-``` text
+```text
 192.168.30.0/24
 ```
 
@@ -772,7 +637,7 @@ por R2.
 
 Una ruta estática podría ser:
 
-``` text
+```text
 192.168.30.0/24 via 192.168.20.2
 ```
 
@@ -783,13 +648,13 @@ red.
 
 Por ejemplo:
 
-``` text
+```text
 IP: 192.168.10.1/24
 ```
 
 genera una red directamente conectada:
 
-``` text
+```text
 192.168.10.0/24
 ```
 
@@ -867,7 +732,7 @@ ip route get 8.8.8.8
 
 Ejemplo:
 
-``` text
+```text
 8.8.8.8 via 192.168.10.1 dev enp0s3 src 192.168.10.20
 ```
 
@@ -914,7 +779,7 @@ simultáneamente muchos procesos comunicándose.
 
 Por ejemplo:
 
-``` text
+```text
 192.168.10.20
  ├── navegador
  ├── SSH
@@ -926,13 +791,13 @@ Los **puertos** permiten identificar servicios y procesos de red.
 
 Un extremo de una comunicación puede representarse mediante:
 
-``` text
+```text
 IP + puerto + protocolo
 ```
 
 Ejemplo:
 
-``` text
+```text
 192.168.10.20:22/TCP
 ```
 
@@ -942,7 +807,7 @@ Ejemplo:
 
 Un puerto es un valor de 16 bits:
 
-``` text
+```text
 0 - 65535
 ```
 
@@ -1014,7 +879,7 @@ Una conexión TCP se identifica mediante los extremos de la comunicación.
 
 Por ejemplo:
 
-``` text
+```text
 Cliente
 192.168.10.20:49152
         │
@@ -1030,7 +895,7 @@ Servidor
 
 El establecimiento clásico utiliza el **three-way handshake**:
 
-``` text
+```text
 Cliente                         Servidor
 
    SYN ──────────────────────────>
@@ -1061,7 +926,7 @@ Las redes privadas utilizan habitualmente direcciones RFC 1918.
 
 Ejemplo:
 
-``` text
+```text
 192.168.1.0/24
 ```
 
@@ -1083,7 +948,7 @@ compartan una misma dirección pública, hablamos habitualmente de:
 
 Supongamos:
 
-``` text
+```text
 Cliente:
 192.168.1.10:51500
 
@@ -1093,25 +958,25 @@ IP pública 203.0.113.20
 
 El cliente quiere acceder a:
 
-``` text
+```text
 198.51.100.50:443
 ```
 
 El router puede transformar:
 
-``` text
+```text
 192.168.1.10:51500
 ```
 
 en:
 
-``` text
+```text
 203.0.113.20:40001
 ```
 
 y mantener una asociación en su tabla NAT:
 
-``` text
+```text
 192.168.1.10:51500
         ↕
 203.0.113.20:40001
@@ -1119,13 +984,13 @@ y mantener una asociación en su tabla NAT:
 
 La respuesta recibida en:
 
-``` text
+```text
 203.0.113.20:40001
 ```
 
 puede asociarse con:
 
-``` text
+```text
 192.168.1.10:51500
 ```
 
@@ -1138,7 +1003,7 @@ resolverse únicamente con NAT de salida.
 
 Puede configurarse una regla de redirección:
 
-``` text
+```text
 203.0.113.20:443
         ↓
 192.168.1.20:443
@@ -1152,7 +1017,7 @@ Esto se denomina:
 
 Debe distinguirse entre:
 
-``` text
+```text
 SNAT/PAT
     cambia principalmente el origen
 
@@ -1201,7 +1066,7 @@ laboratorios completos sin disponer de varios equipos físicos.
 
 Una arquitectura típica es:
 
-``` text
+```text
 Hardware físico
       │
       ▼
@@ -1239,7 +1104,7 @@ incluyendo NAT, bridge, red interna y host-only.
 
 Para construir una topología de routing:
 
-``` text
+```text
              NAT
               │
               │
@@ -1324,7 +1189,7 @@ wsl --list --verbose
 
 Debe comprobarse que la distribución utiliza:
 
-``` text
+```text
 CONFIGURACIÓN DE REFERENCIA
 ```
 
@@ -1479,7 +1344,7 @@ Webmin puede presentar parte de la configuración de red mediante sus módulos d
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1500,7 +1365,7 @@ Construir una red con dos subredes y un router.
 
 ## Topología
 
-``` text
+```text
 PC-A
 192.168.10.10/24
 GW 192.168.10.1
@@ -1520,7 +1385,7 @@ GW 192.168.20.1
 
 ## Configuración de R1
 
-``` text
+```text
 enable
 configure terminal
 
@@ -1540,7 +1405,7 @@ write memory
 
 ## Configuración de PC-A
 
-``` text
+```text
 IP:       192.168.10.10
 Mask:     255.255.255.0
 Gateway:  192.168.10.1
@@ -1548,7 +1413,7 @@ Gateway:  192.168.10.1
 
 ## Configuración de PC-B
 
-``` text
+```text
 IP:       192.168.20.10
 Mask:     255.255.255.0
 Gateway:  192.168.20.1
@@ -1558,7 +1423,7 @@ Gateway:  192.168.20.1
 
 Desde PC-A:
 
-``` text
+```text
 ping 192.168.10.1
 ping 192.168.20.1
 ping 192.168.20.10
@@ -1613,7 +1478,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1720,7 +1585,7 @@ Analiza los paquetes capturados.
 
 El alumnado debe ser capaz de relacionar:
 
-``` text
+```text
 ping
   ↓
 ICMP
@@ -1773,7 +1638,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1792,7 +1657,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Crear una topología de tres máquinas:
 
-``` text
+```text
                          Internet
                             │
                            NAT
@@ -1814,7 +1679,7 @@ Crear una topología de tres máquinas:
 
 ### LAN-A
 
-``` text
+```text
 192.168.10.0/24
 Router:  192.168.10.1
 Cliente: 192.168.10.10
@@ -1822,7 +1687,7 @@ Cliente: 192.168.10.10
 
 ### LAN-B
 
-``` text
+```text
 192.168.20.0/24
 Router:  192.168.20.1
 Servidor:192.168.20.10
@@ -1950,7 +1815,7 @@ ip route get 192.168.20.10
 
 Explicar por qué el tráfico pasa por:
 
-``` text
+```text
 192.168.10.1
 ```
 
@@ -1995,7 +1860,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2014,7 +1879,7 @@ Partimos de la práctica anterior.
 
 El router dispone de:
 
-``` text
+```text
 WAN:     DHCP
 LAN-A:   192.168.10.1/24
 LAN-B:   192.168.20.1/24
@@ -2133,7 +1998,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2156,7 +2021,7 @@ Resolver la misma cuestión de red en tres plataformas.
 
 Tenemos:
 
-``` text
+```text
 192.168.10.0/24
 ```
 
@@ -2234,7 +2099,7 @@ curl -I https://juandecolonia.jc
 
 Abrir posteriormente:
 
-``` text
+```text
 ut1.pcap
 ```
 
@@ -2274,7 +2139,7 @@ Identificar:
 
 Ante el siguiente problema:
 
-``` text
+```text
 PC
  │
  ├── IP: 192.168.10.20/24
@@ -2286,7 +2151,7 @@ el equipo no tiene conectividad.
 
 Establecer un procedimiento de diagnóstico:
 
-``` text
+```text
 1. ¿La interfaz está activa?
         ↓
 2. ¿Tiene IP correcta?
@@ -2327,7 +2192,7 @@ La puerta de enlace no es la dirección IP del host.
 
 Incorrecto:
 
-``` text
+```text
 Host: 192.168.10.20
 Gateway: 192.168.10.20
 ```
@@ -2341,7 +2206,7 @@ segmento.
 
 `/24` indica:
 
-``` text
+```text
 24 bits de red
 8 bits restantes
 ```
@@ -2360,7 +2225,7 @@ comprueba ICMP.
 
 No demuestra que:
 
-``` text
+```text
 SSH
 HTTP
 DNS
@@ -2660,7 +2525,7 @@ La idea fundamental es:
 
 > 🧠 **Regla de oro para diagnosticar una red**
 >
-> ``` text
+> ```text
 > 1️⃣ ¿Tengo interfaz?
 >        ↓
 > 2️⃣ ¿Tengo dirección IP?
@@ -2758,7 +2623,7 @@ D. Cisco Packet Tracer
 
 Construye la siguiente infraestructura:
 
-``` text
+```text
                          Internet
                             │
                            NAT
@@ -2791,7 +2656,7 @@ Construye la siguiente infraestructura:
 
 ## Entregables
 
-``` text
+```text
 01-topologia.png
 02-configuracion-router.md
 03-configuracion-cliente.md

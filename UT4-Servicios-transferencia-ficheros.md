@@ -1,113 +1,5 @@
 # 📂⚡ Unidad de Trabajo 4 · SERVICIOS DE TRANSFERENCIA DE FICHEROS ⚡📂
 
-> 🧭 **ANTES DE EMPEZAR · VOCABULARIO TÉCNICO**
->
-> Las siglas, abreviaturas y conceptos técnicos que van a aparecer en esta unidad se presentan aquí antes de su desarrollo. La explicación local de cada tema podrá ampliar estas definiciones cuando sea necesario.
->
-> **UT** — Unidad de Trabajo: unidad didáctica del módulo profesional.
-> **RA** — Resultado de Aprendizaje: capacidad que el alumnado debe demostrar al finalizar un bloque curricular.
-> **CFGS** — Ciclo Formativo de Grado Superior.
-> **ASIR** — Administración de Sistemas Informáticos en Red.
-> **SRI** — Servicios de Red e Internet.
-> **WSL2** — Windows Subsystem for Linux 2: tecnología de Windows que ejecuta un entorno Linux mediante una máquina virtual ligera.
-> **FTP** — Protocolo de transferencia de archivos que separa un canal de control de los canales de datos.
-> **FTPS** — FTP protegido mediante TLS.
-> **TFTP** — Protocolo muy sencillo de transferencia de archivos basado en UDP.
-> **SFTP** — Protocolo de transferencia de archivos que funciona como subsistema de SSH; no es FTP cifrado.
-> **SCP** — Secure Copy: copia de archivos sobre SSH.
-> **QUIT** — Comando de salida de sesiones de protocolos como FTP o IRC.
-> **SFTP/SCP** — SFTP proporciona operaciones de transferencia sobre SSH; SCP realiza copias de archivos sobre SSH.
-> **SSH** — Protocolo seguro de administración remota y transporte de otros servicios.
-> **SSH/SFTP** — SSH es el protocolo seguro de transporte; SFTP es un subsistema de transferencia de archivos que funciona sobre SSH.
-> **UDP** — Protocolo de transporte sin conexión, ligero y sin garantía de entrega.
-> **NAT** — Traducción de direcciones de red: modificación de direcciones IP al atravesar un dispositivo intermedio.
-> **FW** — Firewall o cortafuegos: sistema que filtra tráfico según reglas.
-> **TLS** — Protocolo criptográfico que proporciona confidencialidad, integridad y autenticación mediante certificados.
-> **SSL** — Familia histórica de protocolos de seguridad antecesora de TLS; hoy se considera obsoleta.
-> **Docker** — Plataforma de contenerización para construir, distribuir y ejecutar aplicaciones aisladas en contenedores.
-> **Docker Compose** — Herramienta de Docker para definir y ejecutar aplicaciones multicontenedor mediante un archivo declarativo.
-> **IP** — Protocolo de Internet, responsable del direccionamiento y encaminamiento de paquetes.
-> **ASCII** — American Standard Code for Information Interchange, codificación histórica de caracteres.
-> **FXP** — Mecanismo de transferencia directa entre dos servidores FTP coordinada por un cliente.
-> **FTP/TFTP** — FTP es un protocolo completo de transferencia de archivos; TFTP es una versión mínima basada en UDP.
-> **LAN** — Red de área local.
-> **TCP** — Protocolo de transporte orientado a conexión que proporciona entrega fiable y ordenada.
-> **TCP/IP** — Familia de protocolos de Internet en la que IP proporciona direccionamiento y TCP es uno de los protocolos de transporte.
-> **LIST** — Comando FTP que solicita un listado de archivos.
-> **PWD** — Comando FTP que muestra el directorio de trabajo actual.
-> **RETR** — Comando FTP que solicita la descarga de un archivo.
-> **STOR** — Comando FTP que solicita la subida de un archivo.
-> **SRV** — Registro DNS que publica la ubicación de un servicio mediante prioridad, peso, puerto y destino.
-> **GET** — Método HTTP usado normalmente para solicitar una representación de un recurso.
-> **ALG** — Application Layer Gateway: función que adapta o inspecciona protocolos de aplicación al atravesar un intermediario.
-> **PASV** — Modo pasivo de FTP, en el que el servidor anuncia un puerto para el canal de datos.
-> **AUTH** — Mecanismo de autenticación utilizado por protocolos como SMTP para identificar al usuario.
-> **VM** — Máquina virtual: ordenador software aislado que ejecuta un sistema operativo invitado.
-> **WAN** — Red de área extensa que conecta redes separadas geográficamente.
-> **ACL** — Lista de control de acceso que determina quién puede realizar una operación.
-> **ICMP** — Protocolo de control y diagnóstico de Internet; ping utiliza mensajes ICMP en IPv4.
-> **ARP** — Protocolo que relaciona una dirección IPv4 con una dirección de enlace en una red local.
->
-> **Criterio didáctico:** no se presupone que conocer una sigla equivalga a comprender el concepto. Primero se identifica qué significa y qué función desempeña; después se emplea en comandos, configuraciones y prácticas.
-
-> 🧩 **ANTES DE EMPEZAR · CONCEPTOS BASE**
->
-> **Protocolo** — conjunto de reglas que define cómo se comunican dos o más sistemas.
-> **Cliente** — programa o equipo que inicia una petición de un servicio.
-> **Servidor** — programa o equipo que ofrece un servicio y atiende peticiones.
-> **Servicio de red** — aplicación o proceso que ofrece una función accesible mediante la red, normalmente a través de uno o varios puertos.
-> **Proceso** — instancia en ejecución de un programa dentro de un sistema operativo.
-> **Demonio (daemon)** — proceso que permanece ejecutándose en segundo plano para prestar un servicio; en Linux es habitual que esté gestionado por `systemd`.
-> **Puerto** — número lógico asociado a un servicio de transporte; permite distinguir varias comunicaciones que utilizan la misma dirección IP.
-> **Socket** — extremo de comunicación que combina, según el contexto, una dirección IP, un puerto y un protocolo de transporte.
-> **Interfaz de red** — componente físico o virtual mediante el que un sistema se conecta a una red.
-> **Dirección IP** — identificador lógico de una interfaz dentro de una red IP.
-> **Subred** — porción de un espacio de direccionamiento IP que comparte un prefijo común.
-> **Puerta de enlace predeterminada** — equipo al que un host entrega el tráfico destinado a redes que no conoce directamente.
-> **Encaminamiento (routing)** — proceso de decidir por qué camino debe avanzar un paquete para alcanzar su destino.
-> **Tabla de encaminamiento** — conjunto de rutas que utiliza un sistema para decidir dónde enviar los paquetes.
-> **Broadcast o difusión** — envío dirigido a todos los equipos de un dominio de difusión.
-> **Unicast** — comunicación dirigida de un emisor a un receptor concreto.
-> **Multicast** — comunicación dirigida a un grupo de receptores que se han suscrito al grupo.
-> **Resolución de nombres** — proceso mediante el cual un sistema obtiene información asociada a un nombre, por ejemplo una dirección IP mediante DNS.
-> **Caché** — almacenamiento temporal de resultados para poder reutilizarlos sin repetir inmediatamente una consulta o cálculo.
-> **Archivo de configuración** — fichero que contiene parámetros con los que un programa determina cómo debe funcionar.
-> **Validación** — comprobación de que una configuración tiene una sintaxis y una estructura aceptables antes de aplicarla.
-> **Estado** — situación actual de un proceso, servicio, interfaz o recurso; conocerlo es esencial para diagnosticar una incidencia.
-> **Registro (log)** — anotación generada por un programa o sistema para dejar constancia de eventos, errores y operaciones.
->
-> Estos conceptos son el vocabulario común sobre el que se construyen las prácticas. Cuando una unidad introduzca un concepto especializado —por ejemplo, una zona DNS, una concesión DHCP, un virtual host, un contenedor o un Pod— se explicará de nuevo antes de utilizarlo operativamente.
-
-> 🧠 **CONCEPTOS QUE NO DEBEMOS DAR POR SUPUESTOS**
->
-> **`systemd`** — sistema de inicio y gestor de servicios habitual en Linux; `systemctl` permite consultar y administrar esos servicios.
-> **Archivo de configuración** — fichero que contiene los parámetros con los que un servicio determina su comportamiento.
-> **Registro DNS** — entrada de una zona DNS que asocia un nombre con un dato, como una dirección IP, un servidor de correo o un alias.
-> **Zona DNS** — parte de la jerarquía DNS administrada por un servidor autoritativo concreto.
-> **Servidor autoritativo** — servidor que posee la información oficial de una zona DNS y puede responder con autoridad sobre ella.
-> **Resolver o resolvedor** — componente que realiza consultas DNS en nombre de una aplicación o de un usuario y obtiene la respuesta siguiendo el proceso de resolución.
-> **Consulta recursiva** — consulta en la que el servidor consultado asume la tarea de obtener una respuesta completa para el cliente, si tiene habilitada la recursión.
-> **Consulta iterativa** — consulta en la que el servidor responde con la mejor información que conoce, pudiendo remitir al consultante hacia otro servidor.
-> **Concesión DHCP** — asignación temporal de una dirección IP y otros parámetros de red a un cliente.
-> **Imagen de contenedor** — plantilla inmutable a partir de la cual se crean contenedores.
-> **Volumen** — almacenamiento gestionado que permite conservar datos independientemente del ciclo de vida de un contenedor.
-> **Red Docker** — red virtual administrada por Docker que permite conectar contenedores y, según su configuración, publicar servicios hacia el host.
-> **Orquestación** — automatización de la ejecución, escalado, recuperación y coordinación de múltiples cargas de trabajo o contenedores.
-> **Pod** — unidad mínima desplegable de Kubernetes; contiene uno o varios contenedores que comparten determinados recursos.
-> **Virtual host** — configuración que permite que un mismo servidor web atienda distintos sitios o nombres mediante configuraciones diferenciadas.
-> **Certificado digital** — credencial criptográfica que vincula una identidad con una clave pública y que puede estar firmada por una autoridad de certificación.
-> **Códec** — algoritmo que codifica y decodifica audio, vídeo u otro tipo de datos; un códec no es lo mismo que un contenedor multimedia.
-> **Contenedor multimedia** — formato de archivo que agrupa una o varias pistas de audio, vídeo, subtítulos o metadatos.
-> **Streaming** — distribución de contenido de forma que el receptor puede comenzar a consumirlo mientras continúa recibiendo datos.
-> **Commit** — instantánea registrada por Git que conserva un conjunto concreto de cambios.
-> **Staging area** — área intermedia de Git donde se seleccionan los cambios que formarán el próximo commit.
-> **Rama (branch)** — línea de desarrollo independiente dentro de un repositorio Git.
-> **Remoto (remote)** — referencia a un repositorio Git externo con el que se intercambian commits mediante `fetch`, `pull` o `push`.
-> **Codespace** — entorno de desarrollo remoto proporcionado por GitHub para trabajar con un repositorio.
-> **Webmin** — interfaz web de administración de sistemas que permite gestionar determinados servicios y parámetros de un sistema Linux.
-> **Roundcube** — cliente de correo web que accede al buzón mediante IMAP y puede enviar mensajes mediante SMTP.
-> **Sympa** — gestor de listas de distribución que proporciona funciones de suscripción, moderación, administración y distribución de mensajes.
-
 ### RA4 · Transferencia de archivos.
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
@@ -119,6 +11,11 @@
 > **RA4.** Administra servicios de transferencia de archivos asegurando y limitando el acceso a la información.
 
 ---
+
+
+> 🧭 **ANTES DE UTILIZAR LOS PROTOCOLOS DE TRANSFERENCIA**
+>
+> **FTP (File Transfer Protocol)** separa canal de control y conexiones de datos. **FTPS** es FTP protegido mediante TLS. **SFTP (SSH File Transfer Protocol)** es un subsistema de SSH, mientras que **SCP (Secure Copy)** realiza copias sobre SSH. **TFTP (Trivial File Transfer Protocol)** es un protocolo sencillo basado en UDP. Los modos **activo y pasivo de FTP** determinan cómo se establece la conexión de datos y son especialmente relevantes con NAT y cortafuegos.
 
 > 🎯 **MISIÓN DE LA UT**
 >
@@ -147,7 +44,7 @@
 
 # 🧭 Mapa de la unidad
 
-``` text
+```text
                          📂 TRANSFERENCIA
                                 │
              ┌──────────────────┼──────────────────┐
@@ -221,7 +118,7 @@ Las redes permiten transferir información entre sistemas.
 Pero no todos los mecanismos de transferencia tienen los mismos
 objetivos:
 
-``` text
+```text
 Necesidad
    │
    ├── 📂 Transferir ficheros en una LAN
@@ -259,7 +156,7 @@ Existen diferentes soluciones.
 
 En el modelo clásico:
 
-``` text
+```text
              CLIENTE
                 │
                 │ solicitud
@@ -279,7 +176,7 @@ Inicia las conexiones y solicita operaciones.
 
 Ejemplos:
 
-``` text
+```text
 ftp
 sftp
 scp
@@ -293,7 +190,7 @@ Acepta conexiones, autentica usuarios y aplica permisos.
 
 Ejemplos:
 
-``` text
+```text
 vsftpd
 OpenSSH / sshd
 ```
@@ -313,7 +210,7 @@ TCP/IP.
 El servicio se aborda como un servicio cliente/servidor con
 operaciones de listado, descarga, subida y administración de ficheros.
 
-``` text
+```text
 CLIENTE FTP                         SERVIDOR FTP
      │                                    │
      │──── conexión de control ──────────►│
@@ -337,7 +234,7 @@ FTP utiliza una arquitectura peculiar porque emplea:
 
 Tradicionalmente:
 
-``` text
+```text
 TCP/21 → conexión de control
 TCP/20 → puerto tradicional asociado a datos en modo activo
 ```
@@ -353,7 +250,7 @@ La conexión de control permanece activa durante la sesión FTP.
 
 Por ella viajan comandos como:
 
-``` text
+```text
 USER
 PASS
 PWD
@@ -366,7 +263,7 @@ QUIT
 
 Ejemplo conceptual:
 
-``` text
+```text
 CLIENTE                           SERVIDOR
 
 USER alumno ─────────────────────►
@@ -397,7 +294,7 @@ La conexión de datos transporta:
 
 Ejemplo:
 
-``` text
+```text
              CONTROL
 CLIENTE ───────────────────────► SERVIDOR
        TCP/21
@@ -420,19 +317,19 @@ El manual distingue dos grandes modelos.
 
 El usuario utiliza normalmente:
 
-``` text
+```text
 anonymous
 ```
 
 o:
 
-``` text
+```text
 ftp
 ```
 
 Es apropiado para servidores de distribución pública.
 
-``` text
+```text
 anonymous
     │
     ▼
@@ -460,7 +357,7 @@ Puede tratarse de:
 
 Los permisos deben limitar:
 
-``` text
+```text
 📥 descarga
 📤 subida
 🗑️ borrado
@@ -477,7 +374,7 @@ usuario.
 
 Conceptualmente:
 
-``` text
+```text
 Sistema completo
 │
 ├── /etc
@@ -492,7 +389,7 @@ Sistema completo
 
 Para un usuario confinado:
 
-``` text
+```text
             🚪
             │
         /srv/ftp
@@ -524,7 +421,7 @@ ftp servidor
 
 Ejemplos históricos y actuales:
 
-``` text
+```text
 FileZilla
 WinSCP
 gFTP
@@ -584,19 +481,19 @@ ftp 192.168.10.10
 
 Una vez conectado:
 
-``` text
+```text
 ftp>
 ```
 
 Ayuda:
 
-``` text
+```text
 help
 ```
 
 o:
 
-``` text
+```text
 ?
 ```
 
@@ -635,13 +532,13 @@ o:
 
 # 📥 12. Descargar un fichero
 
-``` text
+```text
 ftp> get informe.pdf
 ```
 
 Conceptualmente:
 
-``` text
+```text
 SERVIDOR
    │
    │ informe.pdf
@@ -653,11 +550,11 @@ CLIENTE
 
 # 📤 13. Subir un fichero
 
-``` text
+```text
 ftp> put informe.pdf
 ```
 
-``` text
+```text
 CLIENTE
    │
    │ informe.pdf
@@ -679,7 +576,7 @@ El servidor responde mediante códigos numéricos.
 
 Ejemplos habituales:
 
-``` text
+```text
 220 → servicio preparado
 331 → usuario correcto, solicita contraseña
 230 → autenticación correcta
@@ -692,7 +589,7 @@ Ejemplos habituales:
 
 Ejemplo:
 
-``` text
+```text
 CLIENTE                     SERVIDOR
 
 USER alumno ───────────────►
@@ -760,7 +657,7 @@ Webmin puede administrar **SSH** y otros servicios mediante módulos de servidor
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -794,7 +691,7 @@ ftp 192.168.10.10
 
 Prueba:
 
-``` text
+```text
 help
 pwd
 ls
@@ -855,7 +752,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 En modo activo:
 
-``` text
+```text
                  CONTROL
 CLIENTE:puerto alto ─────────► SERVIDOR:21
 
@@ -878,7 +775,7 @@ Esto puede causar problemas cuando el cliente está detrás de:
 
 En modo pasivo:
 
-``` text
+```text
                  CONTROL
 CLIENTE ──────────────────────► SERVIDOR:21
 
@@ -888,7 +785,7 @@ CLIENTE ──────────────────────► SE
 
 El cliente solicita:
 
-``` text
+```text
 PASV
 ```
 
@@ -896,7 +793,7 @@ o mecanismos equivalentes de FTP extendido.
 
 El servidor comunica un puerto de datos y el cliente inicia la conexión.
 
-``` text
+```text
 CLIENTE
    │
    │ PASV
@@ -914,7 +811,7 @@ CLIENTE ─────────► SERVIDOR:40000
 
 Este es uno de los conceptos más importantes de la unidad.
 
-``` text
+```text
 CLIENTE
 192.168.1.50
     │
@@ -935,7 +832,7 @@ SERVIDOR FTP
 
 El servidor intenta iniciar una conexión hacia el cliente.
 
-``` text
+```text
 SERVIDOR ───────► NAT ───────► CLIENTE
 ```
 
@@ -943,7 +840,7 @@ El firewall puede bloquearla.
 
 ### Modo pasivo
 
-``` text
+```text
 CLIENTE ───────► NAT ───────► SERVIDOR
 ```
 
@@ -961,7 +858,7 @@ El dispositivo inspecciona la comunicación FTP y puede modificar
 información relativa a las conexiones de datos para hacer compatible FTP
 con NAT.
 
-``` text
+```text
 FTP
  │
  ▼
@@ -990,7 +887,7 @@ Pensado para datos textuales.
 
 Ejemplos:
 
-``` text
+```text
 .txt
 .csv
 ```
@@ -1001,7 +898,7 @@ Para datos que deben conservar exactamente sus bytes.
 
 Ejemplos:
 
-``` text
+```text
 .png
 .jpg
 .iso
@@ -1014,7 +911,7 @@ Ejemplos:
 En la práctica moderna es habitual utilizar modo binario cuando se
 quiere evitar conversiones de contenido.
 
-``` text
+```text
 ftp> binary
 ```
 
@@ -1030,7 +927,7 @@ ftp> binary
 
 FTP tradicional **no proporciona confidencialidad**.
 
-``` text
+```text
 USER alumno
      ↓
      texto claro
@@ -1044,7 +941,7 @@ También los datos pueden viajar sin cifrar.
 
 Por tanto:
 
-``` text
+```text
 FTP tradicional
       │
       ├── ❌ confidencialidad
@@ -1061,7 +958,7 @@ requieran protección de credenciales o datos.
 
 **FTPS** es FTP protegido mediante TLS.
 
-``` text
+```text
 FTP
  │
  └── TLS
@@ -1087,7 +984,7 @@ solicita explícitamente protección TLS.
 
 Conceptualmente:
 
-``` text
+```text
 CLIENTE
    │
    │ conexión FTP
@@ -1108,7 +1005,7 @@ Una ventaja es que permite una negociación explícita de la protección.
 En el modelo implícito, TLS se establece desde el comienzo de la
 conexión.
 
-``` text
+```text
 CLIENTE
    │
    │ TLS desde el inicio
@@ -1155,7 +1052,7 @@ SSH cifrado.
 
 La idea es:
 
-``` text
+```text
              CLIENTE
                 │
        ┌────────┴────────┐
@@ -1185,7 +1082,7 @@ sencillo.
 
 Utiliza:
 
-``` text
+```text
 UDP/69
 ```
 
@@ -1197,7 +1094,7 @@ Características:
 -   sin cifrado;
 -   orientado a operaciones simples.
 
-``` text
+```text
 CLIENTE
    │
    │ UDP
@@ -1211,7 +1108,7 @@ TFTP SERVER
 
 Un caso clásico es la infraestructura de red:
 
-``` text
+```text
              ROUTER
                 │
                 │ TFTP
@@ -1244,7 +1141,7 @@ Puede utilizarse en determinados escenarios para:
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1261,7 +1158,7 @@ Puede utilizarse en determinados escenarios para:
 
 ## Topología
 
-``` text
+```text
 PC ───── SWITCH ───── ROUTER
                          │
                          │
@@ -1272,13 +1169,13 @@ Configura un servidor TFTP en Packet Tracer.
 
 Desde un dispositivo Cisco:
 
-``` text
+```text
 Router# copy running-config tftp:
 ```
 
 Indica:
 
-``` text
+```text
 Address or name of remote host []? 192.168.10.20
 Destination filename [router-confg]?
 ```
@@ -1289,7 +1186,7 @@ Después comprueba que el fichero aparece en el servidor.
 
 Realiza el proceso inverso:
 
-``` text
+```text
 TFTP SERVER
      │
      ▼
@@ -1339,7 +1236,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1358,7 +1255,7 @@ Packet Tracer permite simular un servidor FTP.
 
 ## Topología
 
-``` text
+```text
 PC1 ───── SWITCH ───── SERVER-PT
                            │
                           FTP
@@ -1374,7 +1271,7 @@ En el servidor:
 
 Desde el PC:
 
-``` text
+```text
 PC > Command Prompt
 
 ftp 192.168.10.20
@@ -1382,7 +1279,7 @@ ftp 192.168.10.20
 
 Prueba:
 
-``` text
+```text
 dir
 get fichero.txt
 put prueba.txt
@@ -1437,7 +1334,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1456,19 +1353,19 @@ Utiliza un servidor FTP de laboratorio.
 
 Captura:
 
-``` text
+```text
 ftp
 ```
 
 o:
 
-``` text
+```text
 tcp.port == 21
 ```
 
 Observa:
 
-``` text
+```text
 USER
 PASS
 PWD
@@ -1481,14 +1378,14 @@ QUIT
 
 Si puedes leer:
 
-``` text
+```text
 USER alumno
 PASS secreto
 ```
 
 directamente en una captura...
 
-``` text
+```text
         🚨 ¿QUÉ CONCLUSIÓN OBTIENES?
 ```
 
@@ -1534,7 +1431,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Para el laboratorio utilizaremos:
 
-``` text
+```text
 VirtualBox
    │
    └── Ubuntu 26.04 Server
@@ -1559,7 +1456,7 @@ y utiliza `/etc/vsftpd.conf` como fichero principal de configuración.
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1737,14 +1634,14 @@ ftp 192.168.10.10
 
 Autenticación:
 
-``` text
+```text
 Name: alumnoftp
 Password: ********
 ```
 
 Después:
 
-``` text
+```text
 pwd
 ls
 get prueba.txt
@@ -1769,7 +1666,7 @@ La documentación de `vsftpd` identifica, entre otros, `STOR`, `DELE`,
 
 Prueba:
 
-``` text
+```text
 put prueba-subida.txt
 ```
 
@@ -1811,7 +1708,7 @@ sudo systemctl restart vsftpd
 
 Prueba:
 
-``` text
+```text
 pwd
 cd /
 ls
@@ -1833,7 +1730,7 @@ anonymous_enable=YES
 
 El directorio predeterminado de `ftp` en Ubuntu es:
 
-``` text
+```text
 /srv/ftp
 ```
 
@@ -1863,13 +1760,13 @@ Configura acceso anónimo **solo de lectura**.
 
 Nunca debe asumirse:
 
-``` text
+```text
 anonymous = peligroso siempre
 ```
 
 ni:
 
-``` text
+```text
 anonymous = seguro
 ```
 
@@ -1885,7 +1782,7 @@ La seguridad depende de:
 
 Para un laboratorio:
 
-``` text
+```text
 ANÓNIMO
   │
   ├── 📥 descargar
@@ -1925,7 +1822,7 @@ y captura la negociación con Wireshark.
 
 Si utilizas:
 
-``` text
+```text
 TCP/21
 TCP/40000-40100
 ```
@@ -1934,7 +1831,7 @@ el firewall debe permitir el tráfico necesario.
 
 Conceptualmente:
 
-``` text
+```text
 Internet/LAN
      │
      ├── TCP/21 ───────────► FTP
@@ -1954,7 +1851,7 @@ Internet/LAN
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1971,20 +1868,20 @@ Internet/LAN
 
 Configura:
 
-``` text
+```text
 TCP/21
 TCP/40000-40100
 ```
 
 Bloquea temporalmente:
 
-``` text
+```text
 TCP/40000-40100
 ```
 
 Prueba:
 
-``` text
+```text
 login → funciona
 LIST   → falla
 GET    → falla
@@ -1996,7 +1893,7 @@ Después vuelve a permitir el rango.
 
 Demostrar experimentalmente que:
 
-``` text
+```text
 CONTROL ≠ DATOS
 ```
 
@@ -2067,7 +1964,7 @@ transferencias en `/var/log/vsftpd.log`.
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2086,37 +1983,37 @@ Introduce deliberadamente estos errores:
 
 ### Error A
 
-``` text
+```text
 TCP/21 bloqueado
 ```
 
 ### Error B
 
-``` text
+```text
 rango PASV bloqueado
 ```
 
 ### Error C
 
-``` text
+```text
 usuario sin permisos
 ```
 
 ### Error D
 
-``` text
+```text
 write_enable=NO
 ```
 
 ### Error E
 
-``` text
+```text
 directorio incorrecto
 ```
 
 Para cada caso:
 
-``` text
+```text
 Síntoma
    ↓
 Hipótesis
@@ -2208,7 +2105,7 @@ sudo ss -ltnp | grep ':22'
 **SFTP --- SSH File Transfer Protocol** permite transferir ficheros
 mediante un canal SSH cifrado.
 
-``` text
+```text
 CLIENTE
    │
    │ TCP/22
@@ -2222,7 +2119,7 @@ CLIENTE
 
 A diferencia de FTP:
 
-``` text
+```text
 FTP
  ├── control
  └── datos
@@ -2246,7 +2143,7 @@ sftp alumno@192.168.10.10
 
 Comandos habituales:
 
-``` text
+```text
 pwd
 lpwd
 ls
@@ -2263,7 +2160,7 @@ bye
 
 Ejemplo:
 
-``` text
+```text
 sftp> get documento.pdf
 sftp> put informe.txt
 sftp> ls
@@ -2343,7 +2240,7 @@ su documentación actual.
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2360,14 +2257,14 @@ su documentación actual.
 
 Realiza la misma operación mediante:
 
-``` text
+```text
 FTP
 SFTP
 ```
 
 Transfiere:
 
-``` text
+```text
 informe.txt
 imagen.png
 archivo.zip
@@ -2379,7 +2276,7 @@ Captura ambos tráficos con Wireshark.
 
 Filtro:
 
-``` text
+```text
 tcp.port == 21
 ```
 
@@ -2387,7 +2284,7 @@ tcp.port == 21
 
 Filtro:
 
-``` text
+```text
 tcp.port == 22
 ```
 
@@ -2443,7 +2340,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2462,7 +2359,7 @@ Configura un usuario destinado exclusivamente a transferencia.
 
 Investiga cómo restringirlo para que:
 
-``` text
+```text
 ❌ no tenga shell interactiva
 ✅ pueda utilizar SFTP
 ❌ no pueda acceder al resto del sistema
@@ -2470,7 +2367,7 @@ Investiga cómo restringirlo para que:
 
 Utiliza:
 
-``` text
+```text
 Match User
 ```
 
@@ -2536,7 +2433,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2559,7 +2456,7 @@ sftp alumno@192.168.10.10
 
 Realiza:
 
-``` text
+```text
 put fichero1.txt
 get fichero2.txt
 mkdir pruebas
@@ -2614,7 +2511,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2696,7 +2593,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2719,14 +2616,14 @@ sudo apt install filezilla
 
 Configura dos conexiones:
 
-``` text
+```text
 FTP
 SFTP
 ```
 
 Compara:
 
-``` text
+```text
 FTP  → puerto 21
 SFTP → puerto 22
 ```
@@ -2784,7 +2681,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2801,7 +2698,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Construye:
 
-``` text
+```text
                  ┌──────────────┐
                  │ Ubuntu Server│
                  │              │
@@ -2817,7 +2714,7 @@ Construye:
 
 Realiza:
 
-``` text
+```text
 1️⃣ login FTP
 2️⃣ transferir fichero
 3️⃣ login SFTP
@@ -2869,7 +2766,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Construye en VirtualBox:
 
-``` text
+```text
                   NAT
                    │
                    ▼
@@ -2888,14 +2785,14 @@ Construye en VirtualBox:
 
 Configura:
 
-``` text
+```text
 TCP/21
 TCP/40000-40100
 ```
 
 Comprueba:
 
-``` text
+```text
 FTP activo  → comportamiento
 FTP pasivo  → comportamiento
 SFTP        → comportamiento
@@ -2905,7 +2802,7 @@ SFTP        → comportamiento
 
 Relacionar:
 
-``` text
+```text
 FTP
  +
 NAT
@@ -2924,7 +2821,7 @@ modo activo/pasivo
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2943,7 +2840,7 @@ Configura un router Linux de laboratorio.
 
 Publica:
 
-``` text
+```text
 WAN:21
    ↓
 SERVER:21
@@ -2951,7 +2848,7 @@ SERVER:21
 
 y:
 
-``` text
+```text
 WAN:40000-40100
    ↓
 SERVER:40000-40100
@@ -3012,7 +2909,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -3053,7 +2950,7 @@ scp fichero.txt alumno@192.168.10.10:/home/alumno/
 
 Desde un cliente gráfico:
 
-``` text
+```text
 Protocolo: SFTP
 Host: 192.168.10.10
 Puerto: 22
@@ -3104,7 +3001,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Cuando una transferencia falla:
 
-``` text
+```text
                   ❌ NO TRANSFIERE
                          │
                          ▼
@@ -3233,7 +3130,7 @@ sudo tcpdump -ni any port 22
 
 Utiliza este árbol:
 
-``` text
+```text
                    ¿Necesitas transferir?
                            │
                            ▼
@@ -3251,7 +3148,7 @@ Utiliza este árbol:
 
 Pero añade siempre:
 
-``` text
+```text
 🔐 autenticación
 🧱 permisos
 🔥 firewall
@@ -3335,7 +3232,7 @@ El alumno debe seleccionar una tecnología para cada caso y justificar:
 
 Construye en VirtualBox:
 
-``` text
+```text
                        🌐
                        │
                     Router
@@ -3388,7 +3285,7 @@ Construye en VirtualBox:
 
 El alumno recibe:
 
-``` text
+```text
 Cliente:
 192.168.10.50
 
@@ -3404,7 +3301,7 @@ PASV:
 
 El usuario consigue:
 
-``` text
+```text
 LOGIN → OK
 PWD   → OK
 LIST  → ERROR
@@ -3412,7 +3309,7 @@ LIST  → ERROR
 
 Debe demostrar si el problema está en:
 
-``` text
+```text
 1. FTP
 2. firewall
 3. NAT
@@ -3436,7 +3333,7 @@ y una captura Wireshark.
 
 # 🧠 67. Resumen
 
-``` text
+```text
                      📂 FICHEROS
                          │
           ┌──────────────┼──────────────┐
@@ -3531,7 +3428,7 @@ La conexión de **datos** transporta los ficheros y listados.
 
 Tradicionalmente:
 
-``` text
+```text
 TCP/21
 ```
 
@@ -3541,7 +3438,7 @@ TCP/21
 
 **Activo:**
 
-``` text
+```text
 CLIENTE ──► SERVIDOR:21
 SERVIDOR ──► CLIENTE:puerto_alto
 ```
@@ -3550,7 +3447,7 @@ El servidor inicia la conexión de datos.
 
 **Pasivo:**
 
-``` text
+```text
 CLIENTE ──► SERVIDOR:21
 CLIENTE ──► SERVIDOR:puerto_pasivo
 ```
@@ -3631,7 +3528,7 @@ explícitamente activar TLS.
 
 ### 13. FTPS/SFTP
 
-``` text
+```text
 FTPS = FTP + TLS
 SFTP = protocolo de transferencia sobre SSH
 ```
@@ -3645,7 +3542,7 @@ No son variantes del mismo protocolo.
 TFTP es un protocolo de transferencia muy sencillo basado en UDP,
 normalmente asociado al puerto:
 
-``` text
+```text
 UDP/69
 ```
 
@@ -3685,7 +3582,7 @@ En OpenSSH moderno, `scp` utiliza SFTP como protocolo de transferencia.
 
 Se necesita:
 
-``` text
+```text
 TCP/21
 ```
 
@@ -3694,7 +3591,7 @@ conexiones pasivas.
 
 Ejemplo de laboratorio:
 
-``` text
+```text
 40000-40100/TCP
 ```
 
@@ -3704,7 +3601,7 @@ Ejemplo de laboratorio:
 
 Un procedimiento razonable sería:
 
-``` text
+```text
 1. ping
 2. ss / nc
 3. systemctl
@@ -3824,7 +3721,7 @@ d)  `data_min` / `data_max`
 
 # 🔄 73. Evolución tecnológica
 
-``` text
+```text
                  MODELO ORIGINAL
                        │
        ┌───────────────┼────────────────┐
@@ -3885,7 +3782,7 @@ confidencialidad y remite a SFTP/OpenSSH para ese propósito.
 
 Al terminar la UT4, el alumno debe poder enfrentarse a este escenario:
 
-``` text
+```text
 «Tengo un servidor Ubuntu.
 
 Necesito:
@@ -3909,7 +3806,7 @@ La respuesta no consiste en instalar simplemente `vsftpd`.
 
 Debe comenzar por:
 
-``` text
+```text
 REQUISITOS
     ↓
 PROTOCOLO

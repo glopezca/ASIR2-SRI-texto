@@ -1,134 +1,10 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-> 🧭 **ANTES DE EMPEZAR · VOCABULARIO TÉCNICO**
->
-> Las siglas, abreviaturas y conceptos técnicos que van a aparecer en esta unidad se presentan aquí antes de su desarrollo. La explicación local de cada tema podrá ampliar estas definiciones cuando sea necesario.
->
-> **UT** — Unidad de Trabajo: unidad didáctica del módulo profesional.
-> **RA** — Resultado de Aprendizaje: capacidad que el alumnado debe demostrar al finalizar un bloque curricular.
-> **CFGS** — Ciclo Formativo de Grado Superior.
-> **ASIR** — Administración de Sistemas Informáticos en Red.
-> **SRI** — Servicios de Red e Internet.
-> **Docker** — Plataforma de contenerización para construir, distribuir y ejecutar aplicaciones aisladas en contenedores.
-> **Git** — Sistema distribuido de control de versiones.
-> **GitHub** — Servicio de alojamiento y colaboración basado en repositorios Git.
-> **Codespaces** — Entornos de desarrollo alojados en GitHub que proporcionan un espacio de trabajo remoto.
-> **URI** — Identificador uniforme de recursos: sintaxis general para identificar un recurso.
-> **IP** — Protocolo de Internet, responsable del direccionamiento y encaminamiento de paquetes.
-> **TCP** — Protocolo de transporte orientado a conexión que proporciona entrega fiable y ordenada.
-> **TCP/IP** — Familia de protocolos de Internet en la que IP proporciona direccionamiento y TCP es uno de los protocolos de transporte.
-> **IPv6** — Versión 6 del Protocolo de Internet, con direcciones de 128 bits.
-> **CIDR** — Enrutamiento entre dominios sin clases: notación que expresa una red mediante dirección y longitud de prefijo, por ejemplo /24.
-> **UDP** — Protocolo de transporte sin conexión, ligero y sin garantía de entrega.
-> **NAT** — Traducción de direcciones de red: modificación de direcciones IP al atravesar un dispositivo intermedio.
-> **NAT/PAT** — Combinación de NAT y PAT, habitual cuando varias direcciones privadas comparten una dirección pública.
-> **PAT** — Traducción de direcciones mediante puertos: permite multiplexar conexiones privadas sobre una dirección pública.
-> **DHCP** — Protocolo de configuración dinámica de host: entrega automáticamente parámetros de red a los clientes.
-> **DORA** — Secuencia Discover, Offer, Request y Acknowledgement usada habitualmente para obtener una concesión IPv4 mediante DHCP.
-> **DNS** — Sistema de nombres de dominio: servicio distribuido que relaciona nombres con direcciones IP y otros datos.
-> **BIND** — Berkeley Internet Name Domain, implementación de servidor DNS.
-> **BIND9** — Rama 9 de BIND, implementación de servidor DNS usada habitualmente en Linux.
-> **FTP** — Protocolo de transferencia de archivos que separa un canal de control de los canales de datos.
-> **FTPS** — FTP protegido mediante TLS.
-> **TFTP** — Protocolo muy sencillo de transferencia de archivos basado en UDP.
-> **SFTP** — Protocolo de transferencia de archivos que funciona como subsistema de SSH; no es FTP cifrado.
-> **SCP** — Secure Copy: copia de archivos sobre SSH.
-> **HTTP** — Protocolo de transferencia de hipertexto utilizado principalmente por la Web.
-> **WWW** — World Wide Web, sistema de recursos enlazados accesibles principalmente mediante HTTP.
-> **URI/URL** — URI identifica un recurso; URL es un URI que además proporciona una forma de localizarlo.
-> **URL** — Localizador uniforme de recursos: URI que además proporciona su ubicación mediante un esquema.
-> **MIME** — Multipurpose Internet Mail Extensions, mecanismo para describir tipos de contenido y adjuntos en mensajes.
-> **HTTPS** — HTTP protegido mediante TLS.
-> **TLS** — Protocolo criptográfico que proporciona confidencialidad, integridad y autenticación mediante certificados.
-> **MUA** — Mail User Agent, programa con el que el usuario compone, envía y lee correo.
-> **MTA** — Mail Transfer Agent, componente que transporta correo entre servidores.
-> **SMTP** — Simple Mail Transfer Protocol, protocolo principal para transportar correo entre agentes de correo.
-> **ESMTP** — Extended SMTP, conjunto de extensiones que amplían SMTP.
-> **IMAP** — Internet Message Access Protocol, protocolo para acceder y gestionar mensajes que permanecen en el servidor.
-> **POP3** — Post Office Protocol version 3, protocolo para recuperar mensajes del buzón.
-> **XMPP** — Extensible Messaging and Presence Protocol, protocolo abierto para mensajería y presencia.
-> **IRC** — Internet Relay Chat, protocolo de conversación textual en tiempo real mediante canales.
-> **NNTP** — Network News Transfer Protocol, protocolo para intercambio y consulta de artículos de grupos de noticias.
-> **VOD** — Video on Demand, vídeo reproducido bajo demanda.
-> **FFmpeg** — Conjunto de herramientas para procesar, convertir, capturar y transmitir audio y vídeo.
-> **RTMP** — Real-Time Messaging Protocol, protocolo usado en determinados flujos de ingestión de audio y vídeo en directo.
-> **HLS** — HTTP Live Streaming, sistema de distribución de audio y vídeo segmentado mediante HTTP.
-> **WSL2** — Windows Subsystem for Linux 2: tecnología de Windows que ejecuta un entorno Linux mediante una máquina virtual ligera.
-> **Docker Compose** — Herramienta de Docker para definir y ejecutar aplicaciones multicontenedor mediante un archivo declarativo.
-> **VLAN** — Red de área local virtual que permite separar lógicamente redes sobre infraestructura compartida.
-> **YAML** — Formato de representación de datos estructurados, muy usado en configuración.
-> **YAML/JSON** — YAML y JSON son formatos de representación de datos estructurados usados frecuentemente en configuración.
-> **JSON** — Formato textual para representar datos estructurados mediante objetos y listas.
-> **Kubernetes** — Plataforma de orquestación de contenedores que automatiza despliegue, escalado y operación.
-> **VS Code** — Visual Studio Code, editor de código extensible con terminal y herramientas de desarrollo.
-> **RFC** — Request for Comments: documento técnico que especifica o describe protocolos, estándares o prácticas de Internet.
-> **VM** — Máquina virtual: ordenador software aislado que ejecuta un sistema operativo invitado.
->
-> **Criterio didáctico:** no se presupone que conocer una sigla equivalga a comprender el concepto. Primero se identifica qué significa y qué función desempeña; después se emplea en comandos, configuraciones y prácticas.
-
-> 🧩 **ANTES DE EMPEZAR · CONCEPTOS BASE**
->
-> **Protocolo** — conjunto de reglas que define cómo se comunican dos o más sistemas.
-> **Cliente** — programa o equipo que inicia una petición de un servicio.
-> **Servidor** — programa o equipo que ofrece un servicio y atiende peticiones.
-> **Servicio de red** — aplicación o proceso que ofrece una función accesible mediante la red, normalmente a través de uno o varios puertos.
-> **Proceso** — instancia en ejecución de un programa dentro de un sistema operativo.
-> **Demonio (daemon)** — proceso que permanece ejecutándose en segundo plano para prestar un servicio; en Linux es habitual que esté gestionado por `systemd`.
-> **Puerto** — número lógico asociado a un servicio de transporte; permite distinguir varias comunicaciones que utilizan la misma dirección IP.
-> **Socket** — extremo de comunicación que combina, según el contexto, una dirección IP, un puerto y un protocolo de transporte.
-> **Interfaz de red** — componente físico o virtual mediante el que un sistema se conecta a una red.
-> **Dirección IP** — identificador lógico de una interfaz dentro de una red IP.
-> **Subred** — porción de un espacio de direccionamiento IP que comparte un prefijo común.
-> **Puerta de enlace predeterminada** — equipo al que un host entrega el tráfico destinado a redes que no conoce directamente.
-> **Encaminamiento (routing)** — proceso de decidir por qué camino debe avanzar un paquete para alcanzar su destino.
-> **Tabla de encaminamiento** — conjunto de rutas que utiliza un sistema para decidir dónde enviar los paquetes.
-> **Broadcast o difusión** — envío dirigido a todos los equipos de un dominio de difusión.
-> **Unicast** — comunicación dirigida de un emisor a un receptor concreto.
-> **Multicast** — comunicación dirigida a un grupo de receptores que se han suscrito al grupo.
-> **Resolución de nombres** — proceso mediante el cual un sistema obtiene información asociada a un nombre, por ejemplo una dirección IP mediante DNS.
-> **Caché** — almacenamiento temporal de resultados para poder reutilizarlos sin repetir inmediatamente una consulta o cálculo.
-> **Archivo de configuración** — fichero que contiene parámetros con los que un programa determina cómo debe funcionar.
-> **Validación** — comprobación de que una configuración tiene una sintaxis y una estructura aceptables antes de aplicarla.
-> **Estado** — situación actual de un proceso, servicio, interfaz o recurso; conocerlo es esencial para diagnosticar una incidencia.
-> **Registro (log)** — anotación generada por un programa o sistema para dejar constancia de eventos, errores y operaciones.
->
-> Estos conceptos son el vocabulario común sobre el que se construyen las prácticas. Cuando una unidad introduzca un concepto especializado —por ejemplo, una zona DNS, una concesión DHCP, un virtual host, un contenedor o un Pod— se explicará de nuevo antes de utilizarlo operativamente.
-
-> 🧠 **CONCEPTOS QUE NO DEBEMOS DAR POR SUPUESTOS**
->
-> **`systemd`** — sistema de inicio y gestor de servicios habitual en Linux; `systemctl` permite consultar y administrar esos servicios.
-> **Archivo de configuración** — fichero que contiene los parámetros con los que un servicio determina su comportamiento.
-> **Registro DNS** — entrada de una zona DNS que asocia un nombre con un dato, como una dirección IP, un servidor de correo o un alias.
-> **Zona DNS** — parte de la jerarquía DNS administrada por un servidor autoritativo concreto.
-> **Servidor autoritativo** — servidor que posee la información oficial de una zona DNS y puede responder con autoridad sobre ella.
-> **Resolver o resolvedor** — componente que realiza consultas DNS en nombre de una aplicación o de un usuario y obtiene la respuesta siguiendo el proceso de resolución.
-> **Consulta recursiva** — consulta en la que el servidor consultado asume la tarea de obtener una respuesta completa para el cliente, si tiene habilitada la recursión.
-> **Consulta iterativa** — consulta en la que el servidor responde con la mejor información que conoce, pudiendo remitir al consultante hacia otro servidor.
-> **Concesión DHCP** — asignación temporal de una dirección IP y otros parámetros de red a un cliente.
-> **Imagen de contenedor** — plantilla inmutable a partir de la cual se crean contenedores.
-> **Volumen** — almacenamiento gestionado que permite conservar datos independientemente del ciclo de vida de un contenedor.
-> **Red Docker** — red virtual administrada por Docker que permite conectar contenedores y, según su configuración, publicar servicios hacia el host.
-> **Orquestación** — automatización de la ejecución, escalado, recuperación y coordinación de múltiples cargas de trabajo o contenedores.
-> **Pod** — unidad mínima desplegable de Kubernetes; contiene uno o varios contenedores que comparten determinados recursos.
-> **Virtual host** — configuración que permite que un mismo servidor web atienda distintos sitios o nombres mediante configuraciones diferenciadas.
-> **Certificado digital** — credencial criptográfica que vincula una identidad con una clave pública y que puede estar firmada por una autoridad de certificación.
-> **Códec** — algoritmo que codifica y decodifica audio, vídeo u otro tipo de datos; un códec no es lo mismo que un contenedor multimedia.
-> **Contenedor multimedia** — formato de archivo que agrupa una o varias pistas de audio, vídeo, subtítulos o metadatos.
-> **Streaming** — distribución de contenido de forma que el receptor puede comenzar a consumirlo mientras continúa recibiendo datos.
-> **Commit** — instantánea registrada por Git que conserva un conjunto concreto de cambios.
-> **Staging area** — área intermedia de Git donde se seleccionan los cambios que formarán el próximo commit.
-> **Rama (branch)** — línea de desarrollo independiente dentro de un repositorio Git.
-> **Remoto (remote)** — referencia a un repositorio Git externo con el que se intercambian commits mediante `fetch`, `pull` o `push`.
-> **Codespace** — entorno de desarrollo remoto proporcionado por GitHub para trabajar con un repositorio.
-> **Webmin** — interfaz web de administración de sistemas que permite gestionar determinados servicios y parámetros de un sistema Linux.
-> **Roundcube** — cliente de correo web que accede al buzón mediante IMAP y puede enviar mensajes mediante SMTP.
-> **Sympa** — gestor de listas de distribución que proporciona funciones de suscripción, moderación, administración y distribución de mensajes.
-
 ## Material docente integral · `ASIR2-SRI-texto` · 
 
 Material autónomo de estudio, laboratorio y evaluación para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
-La versión  supone un cambio de alcance: el repositorio deja de ser una colección de apuntes complementarios y se plantea como **material docente integral**, con fundamentos, administración de servicios, prácticas, diagnóstico, autoevaluación, resultados de aprendizaje, Docker, GitHub, Codespaces, bibliografía y materiales para el profesor.
+Esta edición supone un cambio de alcance: el repositorio deja de ser una colección de apuntes complementarios y se plantea como **material docente integral**, con fundamentos, administración de servicios, prácticas, diagnóstico, autoevaluación, resultados de aprendizaje, Docker, GitHub, Codespaces, bibliografía y materiales para el profesor.
 
 ---
 
@@ -254,164 +130,99 @@ Incluye formatos, códecs, contenedores, bitrate, streaming, VOD, directo, FFmpe
 
 # 🧪 4. Laboratorio tecnológico
 
-La guía utiliza **cuatro entornos de prácticas complementarios**. Los cuatro forman parte de un único laboratorio de SRI y aparecen relacionados desde el comienzo de la guía. Cada uno responde a una pregunta diferente y prepara el siguiente nivel de trabajo.
+Las ocho unidades se pueden trabajar mediante **cuatro entornos complementarios**. Los cuatro forman parte del mismo laboratorio de Servicios de Red e Internet: no son itinerarios alternativos ni niveles excluyentes. Cada entorno responde a una necesidad didáctica distinta.
 
 ```text
                          🧪 LABORATORIO SRI
                                 │
-        ┌───────────────────────┼──────────────────────────────┐
-        │                       │                              │
-        ├── 🧪 ENTORNO I       ├── 🐧 ENTORNO II              ├── 🖥️ ENTORNO III
-        │   Cisco Packet       │   WSL2 + Ubuntu              │   VirtualBox +
-        │   Tracer             │   26.04                      │   Ubuntu 26.04 Server
-        │                      │                              │
-        └──────────────────────┴──────────────────────────────┴── 🐳 ENTORNO IV
-                                                                   Docker Compose
-                                                                   │
-                                                                   ▼
-                                                            🌐 SERVICIOS SRI
+              ┌─────────────────┼─────────────────┐
+              │                 │                 │
+              ▼                 ▼                 ▼
+      🧪 ENTORNO I       🐧 ENTORNO II      🖥️ ENTORNO III
+      Cisco Packet       WSL2 + Ubuntu      VirtualBox +
+      Tracer             26.04              Ubuntu 26.04 Server
+              │                 │                 │
+              └─────────────────┼─────────────────┘
+                                │
+                                ▼
+                         🐳 ENTORNO IV
+                         Docker Compose
+                                │
+                                ▼
+                         🌐 SERVICIOS SRI
 ```
 
-> 🧭 **Cómo leer el esquema**
+> 🧭 **Cómo interpretar la arquitectura**
 >
-> Los cuatro entornos no compiten entre sí. **Entorno I** permite visualizar el comportamiento de la red; **Entorno II** facilita la observación y el diagnóstico desde Linux; **Entorno III** reproduce la administración de servidores reales; **Entorno IV** convierte la infraestructura en código reproducible. Una misma actividad puede comenzar en I y terminar en IV, utilizando II y III cuando sean necesarios para comprender o validar el servicio.
-
-### 🧪 Entorno I · Cisco Packet Tracer
-
-Para topologías, routing, VLAN, DHCP, relay y experimentación de red. Es especialmente útil cuando queremos concentrarnos en el comportamiento de la red sin que la instalación de los servicios distraiga del concepto que estamos estudiando.
-
-### 🐧 Entorno II · WSL2 + Ubuntu 26.04
-
-Para herramientas Linux, clientes, scripts, análisis de tráfico y pruebas rápidas. Es nuestro **banco de trabajo**: ligero, inmediato y adecuado para repetir comandos muchas veces.
-
-### 🖥️ Entorno III · VirtualBox + Ubuntu 26.04 Server
-
-Para servidores completos y prácticas que requieren control de interfaces, servicios, `systemd`, firewall, DNS, DHCP, Web, correo y comportamiento de red independiente.
-
-### 🐳 Entorno IV · Docker Compose
-
-Para convertir una arquitectura de servicios en infraestructura reproducible. Permite trabajar con imágenes, contenedores, redes, puertos, volúmenes, DNS interno, dependencias y varios servicios coordinados mediante un único fichero `compose.yaml`.
-
-### 📊 Los cuatro entornos, de un vistazo
+> Los cuatro entornos están conectados pedagógicamente. **Entorno I** permite observar la red y sus protocolos mediante simulación. **Entorno II** proporciona un Linux ligero para utilizar clientes, herramientas de diagnóstico y scripts. **Entorno III** permite administrar servidores completos con sus interfaces, servicios, procesos, firewall y sistema de archivos. **Entorno IV** convierte una arquitectura multicontenedor en una infraestructura reproducible y versionable.
+>
+> Una misma práctica puede pasar por varios entornos: primero se observa el fenómeno en Packet Tracer, después se diagnostica con Linux, se implementa como servicio real en VirtualBox y, cuando el servicio lo permite, se reproduce mediante Docker Compose.
 
 | Entorno | Plataforma | Función principal | Pregunta didáctica |
 |---|---|---|---|
-| **I** | Cisco Packet Tracer | Simular topologías y protocolos | **¿Cómo se comporta la red?** |
-| **II** | WSL2 + Ubuntu 26.04 | Ejecutar herramientas y clientes Linux | **¿Qué está ocurriendo realmente?** |
-| **III** | VirtualBox + Ubuntu 26.04 Server | Administrar servidores completos | **¿Cómo se configura y mantiene?** |
-| **IV** | Docker Compose | Reproducir infraestructura multicontenedor | **¿Cómo lo convierto en infraestructura reproducible?** |
-
----
+| **I** | Cisco Packet Tracer | Simulación de topologías y protocolos | **¿Cómo se comporta la red?** |
+| **II** | WSL2 + Ubuntu 26.04 | Herramientas, clientes, scripts y diagnóstico | **¿Qué está ocurriendo realmente?** |
+| **III** | VirtualBox + Ubuntu 26.04 Server | Administración de servidores completos | **¿Cómo se instala, configura y mantiene?** |
+| **IV** | Docker Compose | Infraestructura reproducible y multicontenedor | **¿Cómo convierto la arquitectura en infraestructura como código?** |
 
 # 🧪 5. Entornos de prácticas
 
-Los cuatro entornos aparecen a lo largo de las UT. No es necesario utilizarlos todos en todas las actividades: se selecciona el entorno que mejor responde al objetivo didáctico de cada ejercicio.
+Los entornos se distribuyen por función. No es obligatorio utilizar los cuatro en cada actividad: se selecciona el que mejor permite alcanzar el objetivo de aprendizaje.
 
-| Entorno | Aplicación habitual |
-|---|---|
-| **I · Packet Tracer** | Redes, direccionamiento, routing, DHCP y servicios simulables |
-| **II · WSL2** | Clientes, diagnóstico, `curl`, `dig`, `ss`, `tcpdump`, scripts y análisis |
-| **III · VirtualBox** | Instalación y administración real de servidores |
-| **IV · Docker Compose** | Despliegues reproducibles y arquitecturas multicontenedor |
+- **Entorno I · Cisco Packet Tracer:** redes, direccionamiento, routing, VLAN, DHCP y experimentación de protocolos.
+- **Entorno II · WSL2 + Ubuntu 26.04:** clientes, `curl`, `dig`, `ss`, `tcpdump`, scripts, análisis y diagnóstico.
+- **Entorno III · VirtualBox + Ubuntu 26.04 Server:** instalación y administración de servicios reales.
+- **Entorno IV · Docker Compose:** despliegues reproducibles, redes internas, puertos, volúmenes y arquitecturas multicontenedor.
 
-## [🐳 Entorno IV · Docker Compose para UT1–UT8](ENTORNO-IV-Docker-Compose-UT1-UT8.md)
-
-El cuarto entorno permite desplegar, de forma reproducible, las infraestructuras de las UT mediante contenedores y Docker Compose. **Complementa los otros tres entornos; no los sustituye.**
+La documentación completa del cuarto entorno se encuentra en el **[Anexo VI · Entorno IV · Docker Compose para UT1–UT8](ANEXO-VI-Docker-Compose-UT1-UT8.md)**.
 
 # 📚 6. Anexos
 
+Los anexos amplían las UT sin romper su secuencia didáctica. El alumnado puede consultarlos cuando la unidad lo indique.
+
 ## [🧰 Anexo I · Visual Studio Code + WSL2](ANEXO-I-VSCode-WSL2.md)
 
-Herramienta común de edición y administración:
+Herramienta transversal de edición, terminal, exploración de archivos, YAML/JSON/Markdown, validación y trabajo con Git.
 
-- Explorador;
-- editor;
-- terminal WSL2;
-- YAML/JSON/Markdown;
-- validación de configuraciones;
-- Git;
-- diagnóstico.
+## [🐳 Anexo II · Docker, Docker Compose y fundamentos de Kubernetes](ANEXO-II-Docker-WSL2.md)
 
-## [🐳 Anexo II · Docker, Docker Compose y Kubernetes](ANEXO-II-Docker-WSL2.md)
-
-Guía completa de:
-
-- Docker Desktop;
-- WSL2;
-- imágenes y contenedores;
-- shell;
-- logs;
-- redes;
-- DNS;
-- puertos;
-- volúmenes;
-- Dockerfile;
-- Compose;
-- Swarm;
-- Kubernetes;
-- Pods;
-- Deployments;
-- Services;
-- `kubectl exec`;
-- `port-forward`;
-- troubleshooting.
+Introduce Docker desde cero y presenta, sin presuponer conocimientos previos, los conceptos esenciales de Kubernetes: clúster, plano de control, nodo, Pod, contenedor, Deployment, Service, red, almacenamiento, `kubectl`, acceso a shells y diagnóstico.
 
 ## [🐙 Anexo III · Git, GitHub, Codespaces y VS Code](ANEXO-III-Git-GitHub-Codespaces.md)
 
-Flujo completo desde Git local hasta GitHub y Codespaces.
+Desde el repositorio local hasta GitHub y Codespaces, incluyendo edición y ejecución desde VS Code.
 
 ## [📚 Anexo IV · Bibliografía y documentación abierta](ANEXO-IV-Bibliografia.md)
 
-Bibliografía temática y enlaces a documentación oficial de:
-
-- normativa;
-- RFC;
-- Ubuntu;
-- BIND;
-- Kea;
-- OpenSSH;
-- Apache;
-- Nginx;
-- Postfix;
-- Dovecot;
-- XMPP;
-- Icecast;
-- FFmpeg;
-- Docker;
-- Kubernetes;
-- Git/GitHub;
-- VS Code;
-- WSL2;
-- VirtualBox;
-- Packet Tracer;
-- Wireshark.
+Bibliografía organizada por áreas y enlaces a documentación oficial de las herramientas y protocolos utilizados.
 
 ## [🛡️ Anexo V · Seguridad, observabilidad y pruebas](ANEXO-V-Seguridad-Observabilidad-Pruebas.md)
 
-Método transversal para diseñar pruebas, observar servicios, introducir incidencias deliberadas y documentar la resolución.
+Método transversal para validar servicios, observar procesos, analizar logs, introducir fallos deliberados, diagnosticar incidencias y documentar resultados.
 
----
+## [🐳 Anexo VI · Entorno IV · Docker Compose para UT1–UT8](ANEXO-VI-Docker-Compose-UT1-UT8.md)
 
-# 👨‍🏫 6. Material para el profesor
+Laboratorio reproducible de las ocho UT mediante Docker Compose. Incluye introducción conceptual, preparación, estructura de proyectos, redes, puertos, volúmenes, comandos, soluciones de referencia, troubleshooting y criterios de validación.
+
+## [☸️ Anexo VII · Migración guiada de Docker Compose a Kubernetes](ANEXO-VII-Compose-a-Kubernetes.md)
+
+Recorrido paso a paso para transformar una aplicación descrita mediante Compose en recursos Kubernetes. Explica primero Kubernetes desde cero y después traduce progresivamente servicios, redes, puertos, volúmenes, configuración, secretos, dependencias y comprobaciones. Incluye un procedimiento de conversión manual y el uso de Kompose como herramienta auxiliar, dejando claro qué partes requieren revisión humana.
+
+## [📖 Anexo VIII · Glosario técnico completo](ANEXO-VIII-Glosario.md)
+
+Glosario acumulativo y ordenado alfabéticamente con las siglas, abreviaturas, protocolos, tecnologías, objetos de infraestructura y conceptos técnicos empleados en el material.
+
+> 📌 **Criterio de lectura del glosario**
+>
+> El glosario es una referencia general, no un sustituto de las explicaciones locales. Cuando una UT introduce un concepto que puede resultar nuevo, se presenta **inmediatamente antes de utilizarlo** mediante un cuadro breve y contextualizado. El Anexo VIII permite consultar después la definición completa y localizar rápidamente otros términos relacionados.
+
+# 👨‍🏫 7. Material para el profesor
 
 ## [Apéndice · Evaluación y prácticas](APENDICE-PROFESOR.md)
 
-Incluye:
+Incluye bancos de preguntas tipo test, solucionarios, prácticas evaluables de hasta 1 h 45 min, propuestas de resolución y rúbricas.
 
-- 3 preguntas tipo test por UT;
-- una sola respuesta correcta;
-- distribución variable de las posiciones correctas;
-- solucionario al final;
-- prácticas evaluables de hasta 1 h 45 min;
-- proyecto integrador;
-- rúbrica común;
-- lista de comprobación docente.
-
-Las preguntas del apéndice son **reformulaciones y ampliaciones docentes**, no una reproducción literal de los bancos de preguntas del material de referencia.
-
----
-
-# 🧭 7. Secuencia didáctica
+# 🧭 8. Secuencia didáctica
 
 ```text
 UT1 · TCP/IP
@@ -448,7 +259,7 @@ Anexos tecnológicos
 
 ---
 
-# 🔬 8. Método común de todas las prácticas
+# 🔬 9. Método común de todas las prácticas
 
 Todas las prácticas deben seguir, en la medida de lo posible:
 
@@ -471,9 +282,9 @@ El alumno debe entregar **evidencias**, no sólo afirmar que una práctica funci
 
 ---
 
-# ⚠️ 9. Estado de las pruebas técnicas
+# ⚠️ 10. Estado de las pruebas técnicas
 
-La  incluye revisión estática y coherencia de los ejemplos. Cuando una práctica depende de un daemon, una VM, Docker Desktop, una red virtual específica o GitHub Codespaces, la ejecución final debe realizarse en el entorno indicado.
+El paquete incluye revisión estática y coherencia de los ejemplos. Cuando una práctica depende de un daemon, una VM, Docker Desktop, una red virtual específica o GitHub Codespaces, la ejecución final debe realizarse en el entorno indicado.
 
 En particular, el entorno de generación de este paquete **no dispone de Docker Engine ni de un Codespace ejecutable**, por lo que no se presenta como ejecutada una validación extremo a extremo que no haya sido posible realizar.
 
@@ -481,9 +292,9 @@ Esto es deliberado: en administración de sistemas, **una configuración que no 
 
 ---
 
-# 📜 10. Normativa y fuentes curriculares
+# 📜 11. Normativa y fuentes curriculares
 
-La versión  se ha actualizado tomando como referencia la normativa vigente y, para Castilla y León, la información oficial publicada para el título de ASIR.
+El material se ha actualizado tomando como referencia la normativa vigente y, para Castilla y León, la información oficial publicada para el título de ASIR.
 
 - Portal oficial de FP de Castilla y León: https://www.educa.jcyl.es/fp/
 - Ficha oficial de ASIR: https://www.educa.jcyl.es/fp/es/catalogo-titulos-fp-castilla-leon/catalogo-titulos-grado-superior/administracion-sistemas-informaticos-red
@@ -494,7 +305,7 @@ La versión  se ha actualizado tomando como referencia la normativa vigente y, p
 
 ---
 
-# 🧑‍🎓 11. Cómo utilizar este material
+# 🧑‍🎓 12. Cómo utilizar este material
 
 ### Primera pasada
 
@@ -530,7 +341,7 @@ A:
 
 ---
 
-# 🏁 12. Principio rector
+# 🏁 13. Principio rector
 
 ```text
         ┌───────────────────────────────┐

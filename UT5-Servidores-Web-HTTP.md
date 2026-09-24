@@ -1,120 +1,5 @@
 # 🌍⚡ Unidad de Trabajo 5 · SERVIDORES WEB Y PROTOCOLO DE TRANSFERENCIA DE HIPERTEXTO (HTTP) ⚡🌍
 
-> 🧭 **ANTES DE EMPEZAR · VOCABULARIO TÉCNICO**
->
-> Las siglas, abreviaturas y conceptos técnicos que van a aparecer en esta unidad se presentan aquí antes de su desarrollo. La explicación local de cada tema podrá ampliar estas definiciones cuando sea necesario.
->
-> **UT** — Unidad de Trabajo: unidad didáctica del módulo profesional.
-> **RA** — Resultado de Aprendizaje: capacidad que el alumnado debe demostrar al finalizar un bloque curricular.
-> **CFGS** — Ciclo Formativo de Grado Superior.
-> **ASIR** — Administración de Sistemas Informáticos en Red.
-> **SRI** — Servicios de Red e Internet.
-> **HTTP** — Protocolo de transferencia de hipertexto utilizado principalmente por la Web.
-> **WSL2** — Windows Subsystem for Linux 2: tecnología de Windows que ejecuta un entorno Linux mediante una máquina virtual ligera.
-> **CA** — Autoridad de certificación que emite y firma certificados digitales.
-> **IIS** — Internet Information Services, servidor web de Microsoft para Windows.
-> **CLI** — Interfaz de línea de comandos, es decir, administración mediante órdenes escritas.
-> **IP** — Protocolo de Internet, responsable del direccionamiento y encaminamiento de paquetes.
-> **HTTPS** — HTTP protegido mediante TLS.
-> **PROXY** — Servidor intermediario que recibe peticiones de un cliente y las reenvía a otro servicio.
-> **TCP** — Protocolo de transporte orientado a conexión que proporciona entrega fiable y ordenada.
-> **TLS** — Protocolo criptográfico que proporciona confidencialidad, integridad y autenticación mediante certificados.
-> **URI** — Identificador uniforme de recursos: sintaxis general para identificar un recurso.
-> **Docker** — Plataforma de contenerización para construir, distribuir y ejecutar aplicaciones aisladas en contenedores.
-> **Docker Compose** — Herramienta de Docker para definir y ejecutar aplicaciones multicontenedor mediante un archivo declarativo.
-> **URL** — Localizador uniforme de recursos: URI que además proporciona su ubicación mediante un esquema.
-> **MIME** — Multipurpose Internet Mail Extensions, mecanismo para describir tipos de contenido y adjuntos en mensajes.
-> **DNS** — Sistema de nombres de dominio: servicio distribuido que relaciona nombres con direcciones IP y otros datos.
-> **URI/URL** — URI identifica un recurso; URL es un URI que además proporciona una forma de localizarlo.
-> **WWW** — World Wide Web, sistema de recursos enlazados accesibles principalmente mediante HTTP.
-> **HTTP/HTTPS** — HTTP es el protocolo web; HTTPS es HTTP protegido mediante TLS.
-> **HTML** — HyperText Markup Language, lenguaje de marcado para estructurar documentos web.
-> **CSS** — Cascading Style Sheets, lenguaje de hojas de estilo para definir la presentación de documentos web.
-> **JS** — JavaScript, lenguaje de programación usado ampliamente en aplicaciones web.
-> **BD** — Base de datos.
-> **PHP** — Lenguaje de programación de propósito general utilizado con frecuencia en aplicaciones web del lado del servidor.
-> **REVERSE** — Proxy inverso: intermediario situado delante de servidores de origen y que recibe peticiones de los clientes.
-> **GET** — Método HTTP usado normalmente para solicitar una representación de un recurso.
-> **OPTIONS** — Método HTTP utilizado para consultar capacidades o métodos permitidos.
-> **UDP** — Protocolo de transporte sin conexión, ligero y sin garantía de entrega.
-> **POST** — Método HTTP usado normalmente para enviar datos al servidor para crear o procesar un recurso.
-> **HEAD** — Referencia de Git que identifica el commit actual de la línea de trabajo seleccionada.
-> **PUT** — Método HTTP usado normalmente para crear o reemplazar la representación de un recurso en una URI determinada.
-> **PATCH** — Método HTTP usado normalmente para aplicar modificaciones parciales a un recurso.
-> **DELETE** — Método HTTP usado normalmente para solicitar la eliminación de un recurso.
-> **JSON** — Formato textual para representar datos estructurados mediante objetos y listas.
-> **XSS** — Cross-Site Scripting, vulnerabilidad que permite inyectar contenido ejecutable en páginas web servidas a otros usuarios.
-> **CSRF** — Cross-Site Request Forgery, ataque que induce al navegador de una víctima a realizar una acción no deseada.
-> **QUIC** — Protocolo de transporte moderno sobre UDP con seguridad y multiplexación.
-> **SSL** — Familia histórica de protocolos de seguridad antecesora de TLS; hoy se considera obsoleta.
-> **VM** — Máquina virtual: ordenador software aislado que ejecuta un sistema operativo invitado.
-> **ACL** — Lista de control de acceso que determina quién puede realizar una operación.
-> **SNI** — Server Name Indication, extensión de TLS que indica el nombre del servicio solicitado durante el establecimiento seguro.
-> **ACME** — Automated Certificate Management Environment, protocolo para automatizar la obtención y renovación de certificados.
-> **FTP** — Protocolo de transferencia de archivos que separa un canal de control de los canales de datos.
-> **DHCP** — Protocolo de configuración dinámica de host: entrega automáticamente parámetros de red a los clientes.
-> **TFTP** — Protocolo muy sencillo de transferencia de archivos basado en UDP.
->
-> **Criterio didáctico:** no se presupone que conocer una sigla equivalga a comprender el concepto. Primero se identifica qué significa y qué función desempeña; después se emplea en comandos, configuraciones y prácticas.
-
-> 🧩 **ANTES DE EMPEZAR · CONCEPTOS BASE**
->
-> **Protocolo** — conjunto de reglas que define cómo se comunican dos o más sistemas.
-> **Cliente** — programa o equipo que inicia una petición de un servicio.
-> **Servidor** — programa o equipo que ofrece un servicio y atiende peticiones.
-> **Servicio de red** — aplicación o proceso que ofrece una función accesible mediante la red, normalmente a través de uno o varios puertos.
-> **Proceso** — instancia en ejecución de un programa dentro de un sistema operativo.
-> **Demonio (daemon)** — proceso que permanece ejecutándose en segundo plano para prestar un servicio; en Linux es habitual que esté gestionado por `systemd`.
-> **Puerto** — número lógico asociado a un servicio de transporte; permite distinguir varias comunicaciones que utilizan la misma dirección IP.
-> **Socket** — extremo de comunicación que combina, según el contexto, una dirección IP, un puerto y un protocolo de transporte.
-> **Interfaz de red** — componente físico o virtual mediante el que un sistema se conecta a una red.
-> **Dirección IP** — identificador lógico de una interfaz dentro de una red IP.
-> **Subred** — porción de un espacio de direccionamiento IP que comparte un prefijo común.
-> **Puerta de enlace predeterminada** — equipo al que un host entrega el tráfico destinado a redes que no conoce directamente.
-> **Encaminamiento (routing)** — proceso de decidir por qué camino debe avanzar un paquete para alcanzar su destino.
-> **Tabla de encaminamiento** — conjunto de rutas que utiliza un sistema para decidir dónde enviar los paquetes.
-> **Broadcast o difusión** — envío dirigido a todos los equipos de un dominio de difusión.
-> **Unicast** — comunicación dirigida de un emisor a un receptor concreto.
-> **Multicast** — comunicación dirigida a un grupo de receptores que se han suscrito al grupo.
-> **Resolución de nombres** — proceso mediante el cual un sistema obtiene información asociada a un nombre, por ejemplo una dirección IP mediante DNS.
-> **Caché** — almacenamiento temporal de resultados para poder reutilizarlos sin repetir inmediatamente una consulta o cálculo.
-> **Archivo de configuración** — fichero que contiene parámetros con los que un programa determina cómo debe funcionar.
-> **Validación** — comprobación de que una configuración tiene una sintaxis y una estructura aceptables antes de aplicarla.
-> **Estado** — situación actual de un proceso, servicio, interfaz o recurso; conocerlo es esencial para diagnosticar una incidencia.
-> **Registro (log)** — anotación generada por un programa o sistema para dejar constancia de eventos, errores y operaciones.
->
-> Estos conceptos son el vocabulario común sobre el que se construyen las prácticas. Cuando una unidad introduzca un concepto especializado —por ejemplo, una zona DNS, una concesión DHCP, un virtual host, un contenedor o un Pod— se explicará de nuevo antes de utilizarlo operativamente.
-
-> 🧠 **CONCEPTOS QUE NO DEBEMOS DAR POR SUPUESTOS**
->
-> **`systemd`** — sistema de inicio y gestor de servicios habitual en Linux; `systemctl` permite consultar y administrar esos servicios.
-> **Archivo de configuración** — fichero que contiene los parámetros con los que un servicio determina su comportamiento.
-> **Registro DNS** — entrada de una zona DNS que asocia un nombre con un dato, como una dirección IP, un servidor de correo o un alias.
-> **Zona DNS** — parte de la jerarquía DNS administrada por un servidor autoritativo concreto.
-> **Servidor autoritativo** — servidor que posee la información oficial de una zona DNS y puede responder con autoridad sobre ella.
-> **Resolver o resolvedor** — componente que realiza consultas DNS en nombre de una aplicación o de un usuario y obtiene la respuesta siguiendo el proceso de resolución.
-> **Consulta recursiva** — consulta en la que el servidor consultado asume la tarea de obtener una respuesta completa para el cliente, si tiene habilitada la recursión.
-> **Consulta iterativa** — consulta en la que el servidor responde con la mejor información que conoce, pudiendo remitir al consultante hacia otro servidor.
-> **Concesión DHCP** — asignación temporal de una dirección IP y otros parámetros de red a un cliente.
-> **Imagen de contenedor** — plantilla inmutable a partir de la cual se crean contenedores.
-> **Volumen** — almacenamiento gestionado que permite conservar datos independientemente del ciclo de vida de un contenedor.
-> **Red Docker** — red virtual administrada por Docker que permite conectar contenedores y, según su configuración, publicar servicios hacia el host.
-> **Orquestación** — automatización de la ejecución, escalado, recuperación y coordinación de múltiples cargas de trabajo o contenedores.
-> **Pod** — unidad mínima desplegable de Kubernetes; contiene uno o varios contenedores que comparten determinados recursos.
-> **Virtual host** — configuración que permite que un mismo servidor web atienda distintos sitios o nombres mediante configuraciones diferenciadas.
-> **Certificado digital** — credencial criptográfica que vincula una identidad con una clave pública y que puede estar firmada por una autoridad de certificación.
-> **Códec** — algoritmo que codifica y decodifica audio, vídeo u otro tipo de datos; un códec no es lo mismo que un contenedor multimedia.
-> **Contenedor multimedia** — formato de archivo que agrupa una o varias pistas de audio, vídeo, subtítulos o metadatos.
-> **Streaming** — distribución de contenido de forma que el receptor puede comenzar a consumirlo mientras continúa recibiendo datos.
-> **Commit** — instantánea registrada por Git que conserva un conjunto concreto de cambios.
-> **Staging area** — área intermedia de Git donde se seleccionan los cambios que formarán el próximo commit.
-> **Rama (branch)** — línea de desarrollo independiente dentro de un repositorio Git.
-> **Remoto (remote)** — referencia a un repositorio Git externo con el que se intercambian commits mediante `fetch`, `pull` o `push`.
-> **Codespace** — entorno de desarrollo remoto proporcionado por GitHub para trabajar con un repositorio.
-> **Webmin** — interfaz web de administración de sistemas que permite gestionar determinados servicios y parámetros de un sistema Linux.
-> **Roundcube** — cliente de correo web que accede al buzón mediante IMAP y puede enviar mensajes mediante SMTP.
-> **Sympa** — gestor de listas de distribución que proporciona funciones de suscripción, moderación, administración y distribución de mensajes.
-
 ### RA3 · Administración de servidores Web.
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
@@ -126,6 +11,11 @@
 > **RA3.** Administra servidores Web aplicando criterios de configuración y asegurando el funcionamiento del servicio.
 
 ---
+
+
+> 🧭 **ANTES DE UTILIZAR HTTP Y LA WEB**
+>
+> **HTTP (HyperText Transfer Protocol)** es el protocolo de aplicación de gran parte de la Web. **WWW (World Wide Web)** es el sistema de recursos enlazados que utilizan navegadores y otros clientes. Una **URI (Uniform Resource Identifier)** identifica un recurso y una **URL (Uniform Resource Locator)** proporciona además una forma de localizarlo. **TLS (Transport Layer Security)** aporta protección criptográfica; HTTP sobre TLS se denomina **HTTPS**. Un **virtual host** permite atender distintos sitios desde un mismo servidor y un **proxy inverso** recibe peticiones y las reenvía a servidores internos.
 
 > 🎯 **MISIÓN DE LA UT**
 >
@@ -153,7 +43,7 @@
 
 # 🧭 Mapa de la unidad
 
-``` text
+```text
                          🌐 WEB
                            │
              ┌─────────────┼─────────────┐
@@ -238,7 +128,7 @@ La Web es uno de los servicios de red más utilizados.
 
 Conceptualmente:
 
-``` text
+```text
         🌐 INTERNET
              │
              │ HTTP / HTTPS
@@ -254,7 +144,7 @@ Conceptualmente:
 
 Pero una página web aparentemente sencilla puede implicar:
 
-``` text
+```text
 DNS
  ↓
 TCP
@@ -286,7 +176,7 @@ construido sobre Internet.
 
 Sus elementos fundamentales incluyen:
 
-``` text
+```text
 🌐 recursos
 🔗 enlaces
 🧭 identificadores
@@ -297,7 +187,7 @@ Sus elementos fundamentales incluyen:
 
 No debe confundirse:
 
-``` text
+```text
 Internet ≠ Web
 ```
 
@@ -316,7 +206,7 @@ un papel central en la estandarización de tecnologías Web.
 
 Entre las tecnologías relacionadas encontramos:
 
-``` text
+```text
 HTML
 CSS
 DOM
@@ -340,7 +230,7 @@ interpretarse que «todo estándar Web» procede exclusivamente del W3C.
 
 Una arquitectura web básica:
 
-``` text
+```text
 ┌──────────────┐
 │   NAVEGADOR  │
 └──────┬───────┘
@@ -360,7 +250,7 @@ Una arquitectura web básica:
 
 En una aplicación dinámica:
 
-``` text
+```text
 NAVEGADOR
     │
     ▼
@@ -384,7 +274,7 @@ para localizarlo mediante un mecanismo de acceso.
 
 Ejemplo:
 
-``` text
+```text
 https://www.ejemplo.test:443/alumnos/ut5/index.html?grupo=asir#inicio
 │      │                    │            │             │        │
 │      │                    │            │             │        └─ fragmento
@@ -409,7 +299,7 @@ La estructura conceptual ayuda a interpretar cualquier URL.
 
 Un recurso concreto:
 
-``` text
+```text
 /index.html
 ```
 
@@ -417,7 +307,7 @@ Un recurso concreto:
 
 Conjunto organizado de recursos:
 
-``` text
+```text
 www.ejemplo.test
 ├── index.html
 ├── css/
@@ -430,7 +320,7 @@ www.ejemplo.test
 
 Incluye lógica de aplicación:
 
-``` text
+```text
 Navegador
     │
     ▼
@@ -448,7 +338,7 @@ BD
 
 Ejemplos de tecnologías de aplicación:
 
-``` text
+```text
 PHP
 Python
 Node.js
@@ -478,7 +368,7 @@ Un servidor web:
 
 Ejemplos:
 
-``` text
+```text
 Apache HTTP Server
 Nginx
 Caddy
@@ -487,13 +377,13 @@ Microsoft IIS
 
 En esta UT utilizaremos principalmente:
 
-``` text
+```text
 🪶 Apache 2.4
 ```
 
 y compararemos conceptos con:
 
-``` text
+```text
 🚀 Nginx
 ```
 
@@ -503,7 +393,7 @@ y compararemos conceptos con:
 
 El cliente habitual es el navegador:
 
-``` text
+```text
 Firefox
 Chrome
 Edge
@@ -556,7 +446,7 @@ curl -vk https://192.168.10.10/
 
 Un proxy se sitúa entre cliente y servidor.
 
-``` text
+```text
 CLIENTE
    │
    ▼
@@ -590,7 +480,7 @@ Puede utilizarse para:
 
 El cliente conoce el proxy:
 
-``` text
+```text
 CLIENTE
    │
    ▼
@@ -601,7 +491,7 @@ PROXY ───────► INTERNET
 
 El cliente cree comunicarse con el servicio final:
 
-``` text
+```text
 CLIENTE
    │
    ▼
@@ -638,7 +528,7 @@ Nginx y Apache pueden utilizarse en arquitecturas de reverse proxy.
 **HTTP --- Hypertext Transfer Protocol** es un protocolo de aplicación
 basado en un modelo petición/respuesta.
 
-``` text
+```text
 CLIENTE                         SERVIDOR
 
      ──────── HTTP REQUEST ─────────►
@@ -673,7 +563,7 @@ Content-Length: 1234
 
 Proceso simplificado:
 
-``` text
+```text
 1. Resolver nombre
        ↓
 2. Conectar TCP
@@ -698,7 +588,7 @@ persistentes y otras optimizaciones.
 
 Una petición HTTP contiene conceptualmente:
 
-``` text
+```text
 Línea inicial
 Cabeceras
 Línea vacía
@@ -769,7 +659,7 @@ Las cabeceras aportan metadatos.
 
 Ejemplos:
 
-``` text
+```text
 Host
 User-Agent
 Accept
@@ -798,7 +688,7 @@ Accept-Encoding: gzip
 
 Los códigos HTTP se agrupan:
 
-``` text
+```text
 1xx → información
 2xx → éxito
 3xx → redirección
@@ -847,7 +737,7 @@ Location: https://www.asir.test/
 
 Es habitual utilizarla para:
 
-``` text
+```text
 HTTP → HTTPS
 www → dominio canónico
 URL antigua → URL nueva
@@ -867,7 +757,7 @@ HTTP necesita indicar qué tipo de contenido se está entregando.
 
 Ejemplos:
 
-``` text
+```text
 text/html
 text/css
 text/javascript
@@ -911,7 +801,7 @@ Cookie: sesion=abc123
 
 ### Atributos importantes
 
-``` text
+```text
 Secure
 HttpOnly
 SameSite
@@ -930,7 +820,7 @@ Max-Age / Expires
 
 La caché reduce transferencias y latencia.
 
-``` text
+```text
 CLIENTE
    │
    │ petición
@@ -944,7 +834,7 @@ CACHE
 
 Cabeceras relacionadas:
 
-``` text
+```text
 Cache-Control
 ETag
 Last-Modified
@@ -982,7 +872,7 @@ Content-Encoding: gzip
 
 La compresión puede reducir el tamaño de recursos textuales:
 
-``` text
+```text
 HTML
 CSS
 JavaScript
@@ -1005,7 +895,7 @@ Abrir una conexión TCP tiene un coste.
 Las conexiones persistentes permiten reutilizar una conexión para varias
 peticiones.
 
-``` text
+```text
 TCP
  │
  ├── GET /
@@ -1025,7 +915,7 @@ de multiplexación y transporte.
 El estudio comienza con HTTP/1.x como base histórica y después relaciona sus conceptos con las versiones modernas de HTTP. En una infraestructura
 actual conviene conocer la evolución.
 
-``` text
+```text
 HTTP/1.1
    │
    ▼
@@ -1048,7 +938,7 @@ Introduce, entre otras características:
 
 Utiliza:
 
-``` text
+```text
 QUIC
  ↓
 UDP
@@ -1066,7 +956,7 @@ HTTP/3
 
 Un servidor web debe proteger:
 
-``` text
+```text
 🔐 comunicación
 👤 identidad
 📂 recursos
@@ -1095,7 +985,7 @@ Amenazas habituales:
 
 HTTPS es HTTP transportado sobre TLS.
 
-``` text
+```text
 HTTP
   │
   ▼
@@ -1107,14 +997,14 @@ TCP
 
 Tradicionalmente:
 
-``` text
+```text
 HTTP  → TCP/80
 HTTPS → TCP/443
 ```
 
 Con HTTP/3:
 
-``` text
+```text
 HTTP/3 → QUIC/UDP/443
 ```
 
@@ -1127,7 +1017,7 @@ y el servidor presenta un certificado.
 
 Conceptualmente:
 
-``` text
+```text
 CLIENTE
    │
    │ ClientHello
@@ -1161,7 +1051,7 @@ Un certificado X.509 puede contener:
 
 Un certificado de laboratorio puede ser autofirmado:
 
-``` text
+```text
 Servidor
    │
    └── firma su propio certificado
@@ -1215,7 +1105,7 @@ Incluye, cuando aporte información, una captura de la topología, del fichero o
 
 Para el laboratorio podemos utilizar certificados autofirmados.
 
-``` text
+```text
 /etc/ssl/
 ├── certs/
 └── private/
@@ -1273,7 +1163,7 @@ mediante APT.
 
 La estructura principal:
 
-``` text
+```text
 /etc/apache2/
 ├── apache2.conf
 ├── ports.conf
@@ -1287,7 +1177,7 @@ La estructura principal:
 
 La configuración está modularizada mediante enlaces simbólicos.
 
-``` text
+```text
 mods-available
       │
       │ a2enmod
@@ -1297,7 +1187,7 @@ mods-enabled
 
 y:
 
-``` text
+```text
 sites-available
       │
       │ a2ensite
@@ -1324,7 +1214,7 @@ En un VirtualHost:
 
 Las directivas principales:
 
-``` text
+```text
 Listen
 ServerName
 ServerAlias
@@ -1343,7 +1233,7 @@ El `DocumentRoot` indica dónde se encuentran los recursos publicados.
 
 Ejemplo:
 
-``` text
+```text
 /srv/www/asir/
 ├── index.html
 ├── css/
@@ -1424,7 +1314,7 @@ En Webmin, los módulos de **Servers → Apache Webserver** o **Servers → Ngin
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1453,7 +1343,7 @@ curl -v https://juandecolonia.jc
 
 Identifica:
 
-``` text
+```text
 versión HTTP
 código de estado
 Server
@@ -1508,7 +1398,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1531,13 +1421,13 @@ curl http://192.168.10.10/
 
 Captura:
 
-``` text
+```text
 tcp.port == 80
 ```
 
 Identifica:
 
-``` text
+```text
 GET
 Host
 User-Agent
@@ -1591,7 +1481,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1621,7 +1511,7 @@ systemctl status apache2
 
 Abre:
 
-``` text
+```text
 http://IP_DEL_SERVIDOR/
 ```
 
@@ -1639,7 +1529,7 @@ ls -la /var/www/html/
 
 ### Evidencias
 
-``` text
+```text
 ✔ servicio activo
 ✔ puerto 80
 ✔ página inicial
@@ -1687,7 +1577,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1815,7 +1705,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1834,25 +1724,25 @@ Utiliza la UT3.
 
 Crea:
 
-``` text
+```text
 www.asir.test
 ```
 
 y:
 
-``` text
+```text
 www.daw.test
 ```
 
 Ambos deben resolver a:
 
-``` text
+```text
 192.168.10.10
 ```
 
 Apache:
 
-``` text
+```text
 www.asir.test → /srv/www/asir
 www.daw.test  → /srv/www/daw
 ```
@@ -1868,7 +1758,7 @@ curl http://www.daw.test/
 
 Demostrar que:
 
-``` text
+```text
 DNS
  +
 Host:
@@ -1923,7 +1813,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1952,7 +1842,7 @@ curl -H 'Host: www.daw.test' http://192.168.10.10/
 
 Observa cómo el mismo:
 
-``` text
+```text
 IP = 192.168.10.10
 ```
 
@@ -2008,7 +1898,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2103,7 +1993,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2120,7 +2010,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Configura:
 
-``` text
+```text
 http://www.asir.test
        │
        │ 301
@@ -2145,7 +2035,7 @@ curl -I http://www.asir.test/
 
 Debe aparecer un código de redirección y una cabecera:
 
-``` text
+```text
 Location:
 ```
 
@@ -2190,7 +2080,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2279,7 +2169,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2376,7 +2266,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2471,7 +2361,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2506,7 +2396,7 @@ Require ip 192.168.10.0/24
 
 Construye:
 
-``` text
+```text
 PUBLICO
   │
   └── acceso general
@@ -2563,7 +2453,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2580,7 +2470,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Apache registra por defecto:
 
-``` text
+```text
 /var/log/apache2/access.log
 /var/log/apache2/error.log
 ```
@@ -2657,7 +2547,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2674,7 +2564,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Provoca:
 
-``` text
+```text
 404
 403
 401
@@ -2683,7 +2573,7 @@ Provoca:
 
 Para cada uno documenta:
 
-``` text
+```text
 Petición
    ↓
 Código HTTP
@@ -2747,7 +2637,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2782,7 +2672,7 @@ curl http://localhost/
 
 Observa:
 
-``` text
+```text
 TCP handshake
 HTTP request
 HTTP response
@@ -2830,7 +2720,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2847,13 +2737,13 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Captura:
 
-``` text
+```text
 tcp.port == 80
 ```
 
 Busca:
 
-``` text
+```text
 GET
 HTTP/1.1
 Host
@@ -2864,7 +2754,7 @@ Content-Type
 
 Utiliza:
 
-``` text
+```text
 Follow → TCP Stream
 ```
 
@@ -2872,13 +2762,13 @@ Follow → TCP Stream
 
 Filtro:
 
-``` text
+```text
 tcp.port == 443
 ```
 
 Compara:
 
-``` text
+```text
 HTTP
    → contenido visible
 
@@ -2927,7 +2817,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -2944,7 +2834,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Construye:
 
-``` text
+```text
 WSL2
   │
   ▼
@@ -3014,7 +2904,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -3037,7 +2927,7 @@ sudo apt install nginx
 
 Arquitectura:
 
-``` text
+```text
 CLIENTE
    │
    ▼
@@ -3049,7 +2939,7 @@ APACHE :8080
 
 Configura Apache para escuchar en:
 
-``` text
+```text
 8080
 ```
 
@@ -3076,7 +2966,7 @@ curl -I http://app.asir.test/
 
 Distinguir:
 
-``` text
+```text
 servidor web
      ≠
 reverse proxy
@@ -3123,7 +3013,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -3140,7 +3030,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Monta:
 
-``` text
+```text
 Navegador
     │
     ▼
@@ -3163,7 +3053,7 @@ Apache/Nginx actuará como reverse proxy.
 
 Comprueba:
 
-``` text
+```text
 Cliente → proxy → aplicación
 ```
 
@@ -3171,7 +3061,7 @@ Cliente → proxy → aplicación
 
 Añade una segunda aplicación:
 
-``` text
+```text
 /app1 → 127.0.0.1:9000
 /app2 → 127.0.0.1:9001
 ```
@@ -3217,7 +3107,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -3234,7 +3124,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Construye:
 
-``` text
+```text
                  DNS
                   │
         ┌─────────┴─────────┐
@@ -3253,7 +3143,7 @@ Construye:
 
 Cada sitio debe tener:
 
-``` text
+```text
 index.html
 CSS
 favicon
@@ -3311,7 +3201,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -3328,20 +3218,20 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Configura:
 
-``` text
+```text
 www.asir.test → HTTPS
 www.daw.test  → HTTPS
 ```
 
 Con:
 
-``` text
+```text
 SNI
 ```
 
 Cada sitio tendrá un certificado apropiado.
 
-``` text
+```text
 CLIENTE
    │
    │ TLS ClientHello + SNI
@@ -3398,7 +3288,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -3415,13 +3305,13 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Compara:
 
-``` text
+```text
 certificado autofirmado
 ```
 
 con:
 
-``` text
+```text
 certificado emitido por una CA
 ```
 
@@ -3455,7 +3345,7 @@ sudo certbot --apache -d www.ejemplo.es
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -3474,7 +3364,7 @@ Instala ambos, pero evita conflictos de puerto.
 
 Escenario:
 
-``` text
+```text
 Apache → 8080
 Nginx  → 80
 ```
@@ -3495,7 +3385,7 @@ Compara:
 
 Explica qué servidor utilizarías en:
 
-``` text
+```text
 A. sitio estático
 B. reverse proxy
 C. aplicación PHP
@@ -3546,7 +3436,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -3563,7 +3453,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Realiza una auditoría:
 
-``` text
+```text
 ☐ ¿Está activo HTTP?
 ☐ ¿Está activo HTTPS?
 ☐ ¿Hay redirección?
@@ -3618,7 +3508,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Cuando una web no funciona:
 
-``` text
+```text
                    ❌ WEB NO FUNCIONA
                            │
                            ▼
@@ -3763,7 +3653,7 @@ dig www.asir.test
 
 devuelve:
 
-``` text
+```text
 192.168.10.10
 ```
 
@@ -3775,13 +3665,13 @@ curl http://www.asir.test/
 
 devuelve:
 
-``` text
+```text
 503 Service Unavailable
 ```
 
 Debes investigar:
 
-``` text
+```text
 1. DNS
 2. TCP
 3. Apache
@@ -3809,7 +3699,7 @@ tail /var/log/apache2/error.log
 
 Relaciona las UT anteriores:
 
-``` text
+```text
                     🌐 CLIENTE
                          │
                          ▼
@@ -3851,7 +3741,7 @@ Relaciona las UT anteriores:
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -3868,19 +3758,19 @@ Relaciona las UT anteriores:
 
 Construye en:
 
-``` text
+```text
 VirtualBox + Ubuntu 26.04 Server
 ```
 
 con un cliente:
 
-``` text
+```text
 WSL2 + Ubuntu 26.04
 ```
 
 ## Infraestructura
 
-``` text
+```text
 WSL2
  │
  │ DNS / HTTP / HTTPS
@@ -3898,14 +3788,14 @@ Ubuntu Server
 
 ### DNS
 
-``` text
+```text
 www.asir.test → 192.168.10.10
 www.sri.test  → 192.168.10.10
 ```
 
 ### Web
 
-``` text
+```text
 www.asir.test → /srv/www/asir
 www.sri.test  → /srv/www/sri
 ```
@@ -3914,7 +3804,7 @@ www.sri.test  → /srv/www/sri
 
 Ambos sitios:
 
-``` text
+```text
 TCP/443
 TLS
 SNI
@@ -3932,7 +3822,7 @@ SNI
 
 Debes demostrar:
 
-``` text
+```text
 dig
 curl
 openssl s_client
@@ -3982,7 +3872,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 Una empresa solicita:
 
-``` text
+```text
                  INTERNET
                      │
                   FIREWALL
@@ -4011,7 +3901,7 @@ Requisitos:
 
 ### Entrega
 
-``` text
+```text
 01-arquitectura.md
 02-dns.md
 03-apache.md
@@ -4042,7 +3932,7 @@ Requisitos:
 
 # 📚 64. Apache: estructura mental
 
-``` text
+```text
 /etc/apache2/
 │
 ├── apache2.conf       ← configuración global
@@ -4060,7 +3950,7 @@ Requisitos:
 
 Herramientas:
 
-``` text
+```text
 a2enmod    → activar módulo
 a2dismod   → desactivar módulo
 
@@ -4081,13 +3971,13 @@ Ubuntu documenta estas utilidades y la organización modular de Apache.
 
 Para un laboratorio:
 
-``` text
+```text
 certificado autofirmado
 ```
 
 Para una infraestructura pública:
 
-``` text
+```text
 DNS
  ↓
 dominio real
@@ -4105,7 +3995,7 @@ mecanismos para obtener y configurar certificados ACME.
 
 ### No confundir
 
-``` text
+```text
 HTTPS
   ≠
 aplicación segura
@@ -4115,7 +4005,7 @@ HTTPS protege el canal.
 
 La aplicación sigue necesitando:
 
-``` text
+```text
 validación
 autorización
 gestión de sesiones
@@ -4129,7 +4019,7 @@ actualizaciones
 
 # 🧠 66. Resumen
 
-``` text
+```text
                        🌐 WEB
                          │
              ┌───────────┼───────────┐
@@ -4270,7 +4160,7 @@ reducirse a «GET seguro y POST inseguro».
 
 ### 11. Familias de códigos
 
-``` text
+```text
 2xx → éxito
 3xx → redirección
 4xx → problema asociado a la petición/cliente
@@ -4297,7 +4187,7 @@ preferencias.
 
 Participan mecanismos como:
 
-``` text
+```text
 Cache-Control
 ETag
 Last-Modified
@@ -4363,7 +4253,7 @@ Muestra cómo Apache ha interpretado la configuración de Virtual Hosts.
 
 Habitualmente:
 
-``` text
+```text
 /var/log/apache2/access.log
 /var/log/apache2/error.log
 ```
@@ -4374,7 +4264,7 @@ aunque cada Virtual Host puede definir sus propios logs.
 
 Una combinación razonable:
 
-``` text
+```text
 dig
 ping
 nc
@@ -4543,7 +4433,7 @@ d)  El puerto de HTTP.
 
 # 🧱 72. Evolución tecnológica
 
-``` text
+```text
                  CAPÍTULO ORIGINAL
                         │
        ┌────────────────┼─────────────────┐
@@ -4585,13 +4475,13 @@ Al finalizar la UT5, el alumno debería poder enfrentarse a:
 
 La solución no debe comenzar por:
 
-``` text
+```text
 sudo apt install apache2
 ```
 
 sino por:
 
-``` text
+```text
 REQUISITOS
     ↓
 DNS

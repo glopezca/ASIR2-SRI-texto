@@ -1,111 +1,5 @@
 # 📡⚡ Unidad de Trabajo 2 · SERVICIO DE CONFIGURACIÓN DINÁMICA DE HOST (DHCP) ⚡📡
 
-> 🧭 **ANTES DE EMPEZAR · VOCABULARIO TÉCNICO**
->
-> Las siglas, abreviaturas y conceptos técnicos que van a aparecer en esta unidad se presentan aquí antes de su desarrollo. La explicación local de cada tema podrá ampliar estas definiciones cuando sea necesario.
->
-> **UT** — Unidad de Trabajo: unidad didáctica del módulo profesional.
-> **RA** — Resultado de Aprendizaje: capacidad que el alumnado debe demostrar al finalizar un bloque curricular.
-> **CFGS** — Ciclo Formativo de Grado Superior.
-> **ASIR** — Administración de Sistemas Informáticos en Red.
-> **SRI** — Servicios de Red e Internet.
-> **DHCP** — Protocolo de configuración dinámica de host: entrega automáticamente parámetros de red a los clientes.
-> **IOS** — Cisco Internetwork Operating System, sistema operativo de muchos equipos de red Cisco.
-> **ISC** — Internet Systems Consortium, organización que desarrolla software de infraestructura de Internet como BIND y Kea.
-> **WSL2** — Windows Subsystem for Linux 2: tecnología de Windows que ejecuta un entorno Linux mediante una máquina virtual ligera.
-> **CLI** — Interfaz de línea de comandos, es decir, administración mediante órdenes escritas.
-> **IP** — Protocolo de Internet, responsable del direccionamiento y encaminamiento de paquetes.
-> **NS** — Registro DNS que identifica servidores autoritativos de una zona.
-> **KEA** — Servidor DHCP desarrollado por Internet Systems Consortium como alternativa moderna al servidor DHCP clásico de ISC.
-> **RELAY** — Agente que reenvía mensajes DHCP entre redes distintas.
-> **DORA** — Secuencia Discover, Offer, Request y Acknowledgement usada habitualmente para obtener una concesión IPv4 mediante DHCP.
-> **LEASE** — Concesión temporal de parámetros de red entregada por DHCP.
-> **Docker** — Plataforma de contenerización para construir, distribuir y ejecutar aplicaciones aisladas en contenedores.
-> **Docker Compose** — Herramienta de Docker para definir y ejecutar aplicaciones multicontenedor mediante un archivo declarativo.
-> **DNS** — Sistema de nombres de dominio: servicio distribuido que relaciona nombres con direcciones IP y otros datos.
-> **DHCPDISCOVER** — Mensaje DHCP con el que un cliente busca servidores disponibles.
-> **DHCPOFFER** — Mensaje DHCP con el que un servidor ofrece parámetros de configuración.
-> **DHCPREQUEST** — Mensaje DHCP con el que un cliente solicita una oferta o confirma una concesión.
-> **DHCPACK** — Mensaje DHCP que confirma una concesión y sus parámetros.
-> **MAC** — Dirección de control de acceso al medio asociada a una interfaz de red.
-> **POOL** — Conjunto de direcciones disponibles para asignación dinámica.
-> **GUI** — Interfaz gráfica de usuario, es decir, administración mediante ventanas, menús y controles visuales.
-> **JSON** — Formato textual para representar datos estructurados mediante objetos y listas.
-> **DHCPNAK** — Mensaje DHCP que rechaza una solicitud o indica que la concesión solicitada no es válida.
-> **UDP** — Protocolo de transporte sin conexión, ligero y sin garantía de entrega.
-> **TCP** — Protocolo de transporte orientado a conexión que proporciona entrega fiable y ordenada.
-> **LAN** — Red de área local.
-> **POST** — Método HTTP usado normalmente para enviar datos al servidor para crear o procesar un recurso.
-> **WEBMIN** — Interfaz web de administración de sistemas Linux y Unix.
-> **GET** — Método HTTP usado normalmente para solicitar una representación de un recurso.
-> **VLAN** — Red de área local virtual que permite separar lógicamente redes sobre infraestructura compartida.
-> **EOL** — End of Life: momento a partir del cual un producto deja de recibir soporte normal del fabricante.
-> **PUT** — Método HTTP usado normalmente para crear o reemplazar la representación de un recurso en una URI determinada.
-> **MX** — Registro DNS que identifica los servidores que reciben correo.
-> **SOA** — Registro DNS de autoridad de una zona que incluye información de temporización y control.
-> **TLS** — Protocolo criptográfico que proporciona confidencialidad, integridad y autenticación mediante certificados.
-> **BIND9** — Rama 9 de BIND, implementación de servidor DNS usada habitualmente en Linux.
->
-> **Criterio didáctico:** no se presupone que conocer una sigla equivalga a comprender el concepto. Primero se identifica qué significa y qué función desempeña; después se emplea en comandos, configuraciones y prácticas.
-
-> 🧩 **ANTES DE EMPEZAR · CONCEPTOS BASE**
->
-> **Protocolo** — conjunto de reglas que define cómo se comunican dos o más sistemas.
-> **Cliente** — programa o equipo que inicia una petición de un servicio.
-> **Servidor** — programa o equipo que ofrece un servicio y atiende peticiones.
-> **Servicio de red** — aplicación o proceso que ofrece una función accesible mediante la red, normalmente a través de uno o varios puertos.
-> **Proceso** — instancia en ejecución de un programa dentro de un sistema operativo.
-> **Demonio (daemon)** — proceso que permanece ejecutándose en segundo plano para prestar un servicio; en Linux es habitual que esté gestionado por `systemd`.
-> **Puerto** — número lógico asociado a un servicio de transporte; permite distinguir varias comunicaciones que utilizan la misma dirección IP.
-> **Socket** — extremo de comunicación que combina, según el contexto, una dirección IP, un puerto y un protocolo de transporte.
-> **Interfaz de red** — componente físico o virtual mediante el que un sistema se conecta a una red.
-> **Dirección IP** — identificador lógico de una interfaz dentro de una red IP.
-> **Subred** — porción de un espacio de direccionamiento IP que comparte un prefijo común.
-> **Puerta de enlace predeterminada** — equipo al que un host entrega el tráfico destinado a redes que no conoce directamente.
-> **Encaminamiento (routing)** — proceso de decidir por qué camino debe avanzar un paquete para alcanzar su destino.
-> **Tabla de encaminamiento** — conjunto de rutas que utiliza un sistema para decidir dónde enviar los paquetes.
-> **Broadcast o difusión** — envío dirigido a todos los equipos de un dominio de difusión.
-> **Unicast** — comunicación dirigida de un emisor a un receptor concreto.
-> **Multicast** — comunicación dirigida a un grupo de receptores que se han suscrito al grupo.
-> **Resolución de nombres** — proceso mediante el cual un sistema obtiene información asociada a un nombre, por ejemplo una dirección IP mediante DNS.
-> **Caché** — almacenamiento temporal de resultados para poder reutilizarlos sin repetir inmediatamente una consulta o cálculo.
-> **Archivo de configuración** — fichero que contiene parámetros con los que un programa determina cómo debe funcionar.
-> **Validación** — comprobación de que una configuración tiene una sintaxis y una estructura aceptables antes de aplicarla.
-> **Estado** — situación actual de un proceso, servicio, interfaz o recurso; conocerlo es esencial para diagnosticar una incidencia.
-> **Registro (log)** — anotación generada por un programa o sistema para dejar constancia de eventos, errores y operaciones.
->
-> Estos conceptos son el vocabulario común sobre el que se construyen las prácticas. Cuando una unidad introduzca un concepto especializado —por ejemplo, una zona DNS, una concesión DHCP, un virtual host, un contenedor o un Pod— se explicará de nuevo antes de utilizarlo operativamente.
-
-> 🧠 **CONCEPTOS QUE NO DEBEMOS DAR POR SUPUESTOS**
->
-> **`systemd`** — sistema de inicio y gestor de servicios habitual en Linux; `systemctl` permite consultar y administrar esos servicios.
-> **Archivo de configuración** — fichero que contiene los parámetros con los que un servicio determina su comportamiento.
-> **Registro DNS** — entrada de una zona DNS que asocia un nombre con un dato, como una dirección IP, un servidor de correo o un alias.
-> **Zona DNS** — parte de la jerarquía DNS administrada por un servidor autoritativo concreto.
-> **Servidor autoritativo** — servidor que posee la información oficial de una zona DNS y puede responder con autoridad sobre ella.
-> **Resolver o resolvedor** — componente que realiza consultas DNS en nombre de una aplicación o de un usuario y obtiene la respuesta siguiendo el proceso de resolución.
-> **Consulta recursiva** — consulta en la que el servidor consultado asume la tarea de obtener una respuesta completa para el cliente, si tiene habilitada la recursión.
-> **Consulta iterativa** — consulta en la que el servidor responde con la mejor información que conoce, pudiendo remitir al consultante hacia otro servidor.
-> **Concesión DHCP** — asignación temporal de una dirección IP y otros parámetros de red a un cliente.
-> **Imagen de contenedor** — plantilla inmutable a partir de la cual se crean contenedores.
-> **Volumen** — almacenamiento gestionado que permite conservar datos independientemente del ciclo de vida de un contenedor.
-> **Red Docker** — red virtual administrada por Docker que permite conectar contenedores y, según su configuración, publicar servicios hacia el host.
-> **Orquestación** — automatización de la ejecución, escalado, recuperación y coordinación de múltiples cargas de trabajo o contenedores.
-> **Pod** — unidad mínima desplegable de Kubernetes; contiene uno o varios contenedores que comparten determinados recursos.
-> **Virtual host** — configuración que permite que un mismo servidor web atienda distintos sitios o nombres mediante configuraciones diferenciadas.
-> **Certificado digital** — credencial criptográfica que vincula una identidad con una clave pública y que puede estar firmada por una autoridad de certificación.
-> **Códec** — algoritmo que codifica y decodifica audio, vídeo u otro tipo de datos; un códec no es lo mismo que un contenedor multimedia.
-> **Contenedor multimedia** — formato de archivo que agrupa una o varias pistas de audio, vídeo, subtítulos o metadatos.
-> **Streaming** — distribución de contenido de forma que el receptor puede comenzar a consumirlo mientras continúa recibiendo datos.
-> **Commit** — instantánea registrada por Git que conserva un conjunto concreto de cambios.
-> **Staging area** — área intermedia de Git donde se seleccionan los cambios que formarán el próximo commit.
-> **Rama (branch)** — línea de desarrollo independiente dentro de un repositorio Git.
-> **Remoto (remote)** — referencia a un repositorio Git externo con el que se intercambian commits mediante `fetch`, `pull` o `push`.
-> **Codespace** — entorno de desarrollo remoto proporcionado por GitHub para trabajar con un repositorio.
-> **Webmin** — interfaz web de administración de sistemas que permite gestionar determinados servicios y parámetros de un sistema Linux.
-> **Roundcube** — cliente de correo web que accede al buzón mediante IMAP y puede enviar mensajes mediante SMTP.
-> **Sympa** — gestor de listas de distribución que proporciona funciones de suscripción, moderación, administración y distribución de mensajes.
-
 ### RA2 · Configuración automática de red.
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
@@ -117,6 +11,11 @@
 > **RA2.** Administra servicios de configuración automática, identificándolos y verificando la correcta asignación de los parámetros.
 
 ---
+
+
+> 🧭 **ANTES DE UTILIZAR DHCP**
+>
+> **DHCP (Dynamic Host Configuration Protocol)** entrega automáticamente parámetros de red a los clientes. Una **concesión o lease** es una asignación temporal de esos parámetros. **DORA** resume las fases habituales de obtención inicial: *Discover, Offer, Request, Acknowledgement*. Un **agente relay** reenvía mensajes DHCP entre redes cuando cliente y servidor no comparten directamente el mismo dominio de difusión.
 
 > 🎯 **MISIÓN DE LA UT**
 >
@@ -139,7 +38,7 @@
 
 # 🧭 Mapa de la unidad
 
-``` text
+```text
                          📡 DHCP
                            │
              ┌─────────────┼─────────────┐
@@ -216,7 +115,7 @@ Un cliente DHCP puede recibir, entre otros:
 
 Sin DHCP, cada equipo tendría que recibir manualmente esta información.
 
-``` text
+```text
               CONFIGURACIÓN MANUAL
               ─────────────────────
                  👨‍💻 Administrador
@@ -285,7 +184,7 @@ principales:
   📜 Protocolo DHCP   Define mensajes y reglas
   🌉 Relay DHCP       Transporta peticiones entre redes
 
-``` text
+```text
        CLIENTE
           │
           │ DHCP
@@ -318,7 +217,7 @@ dirección determinada.
 
 Ejemplo conceptual:
 
-``` text
+```text
 MAC  00:11:22:33:44:55
           │
           ▼
@@ -336,7 +235,7 @@ En Kea puede realizarse mediante **host reservations**.
 El servidor selecciona una dirección disponible de un conjunto o *pool*
 y la entrega durante un tiempo determinado.
 
-``` text
+```text
 POOL DHCP
 
 192.168.10.100 ─────────────── 192.168.10.200
@@ -375,7 +274,7 @@ En Kea la configuración DHCP utiliza principalmente el concepto
 
 Ejemplo:
 
-``` text
+```text
 SUBRED
 192.168.10.0/24
        │
@@ -394,7 +293,7 @@ No todas las direcciones de una subred deben entregarse dinámicamente.
 
 Por ejemplo:
 
-``` text
+```text
 192.168.10.0/24
 
 .1       Router
@@ -448,7 +347,7 @@ Ejemplo:
 
 Una dirección dinámica se entrega durante un periodo limitado.
 
-``` text
+```text
      OBTENCIÓN
         │
         ▼
@@ -489,7 +388,7 @@ Ejemplos:
 La secuencia clásica para obtener una concesión IP se resume mediante
 **DORA**:
 
-``` text
+```text
         CLIENTE                         SERVIDOR
            │                                │
            │──── DHCPDISCOVER ─────────────>│
@@ -548,7 +447,7 @@ El servidor confirma la concesión mediante **DHCPACK**.
 
 El cliente puede configurar entonces:
 
-``` text
+```text
 IP       → 192.168.10.101
 Máscara  → 255.255.255.0
 Gateway  → 192.168.10.1
@@ -574,7 +473,7 @@ Una concesión no permanece indefinidamente.
 
 El cliente intenta renovarla antes de que expire.
 
-``` text
+```text
           LEASE
             │
             │
@@ -606,7 +505,7 @@ DHCP para IP utiliza **UDP**.
   Servidor DHCP     UDP 67
   Cliente DHCP      UDP 68
 
-``` text
+```text
 CLIENTE                         SERVIDOR
 UDP 68  ───── DHCP ──────────► UDP 67
 UDP 68  ◄──── DHCP ─────────── UDP 67
@@ -638,7 +537,7 @@ Un broadcast DHCP no atraviesa routers de forma normal.
 
 Por tanto:
 
-``` text
+```text
 ❌ NO
 
 LAN A ── DHCP Broadcast ──X── Router ──X── DHCP Server
@@ -661,7 +560,7 @@ el servidor DHCP.
 
 En Cisco IOS se utiliza habitualmente:
 
-``` text
+```text
 interface GigabitEthernet0/0
  ip helper-address 192.168.20.10
 ```
@@ -679,7 +578,7 @@ permite al servidor determinar la red desde la que procede la petición.
 En Cisco aparece especialmente el campo **giaddr** (*gateway IP
 address*).
 
-``` text
+```text
 CLIENTE
 192.168.10.0/24
       │
@@ -703,7 +602,7 @@ correspondiente.
 Un único servidor DHCP puede proporcionar configuración a varias
 subredes cuando existe conectividad y un mecanismo de relay.
 
-``` text
+```text
                  DHCP SERVER
                  192.168.30.10
                        │
@@ -762,7 +661,7 @@ El servidor necesita conservar información sobre las concesiones.
 Kea puede utilizar distintos backends. Para un laboratorio sencillo es
 especialmente útil `memfile`.
 
-``` text
+```text
        KEA DHCP
           │
           ▼
@@ -828,7 +727,7 @@ Amenazas posibles:
 
 Un equipo no autorizado actúa como servidor DHCP.
 
-``` text
+```text
 CLIENTE
    │
    ├──── DHCPDISCOVER ────► Servidor legítimo
@@ -931,7 +830,7 @@ Si la instalación dispone de un módulo DHCP compatible, localízalo en **Serve
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -953,7 +852,7 @@ configuración.
 
 ### Topología
 
-``` text
+```text
       🖥️ PC-A
           │
           │
@@ -968,14 +867,14 @@ configuración.
 
 Servidor:
 
-``` text
+```text
 IP:       192.168.10.2/24
 Gateway:  192.168.10.1
 ```
 
 Pool:
 
-``` text
+```text
 Network:        192.168.10.0/24
 Default Gateway:192.168.10.1
 DNS:            192.168.10.2
@@ -1037,7 +936,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1057,7 +956,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 Comprobar que un servidor DHCP puede atender clientes de varias redes
 mediante un router configurado como relay.
 
-``` text
+```text
        LAN 10                         LAN 20
 192.168.10.0/24                 192.168.20.0/24
       │                                │
@@ -1073,7 +972,7 @@ mediante un router configurado como relay.
 
 En cada interfaz del router que reciba peticiones DHCP se configurará:
 
-``` text
+```text
 ip helper-address 192.168.30.10
 ```
 
@@ -1131,7 +1030,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1156,7 +1055,7 @@ paquetes de Ubuntu muestra la rama 3.0.x para 26.04 LTS.
 
 ### Topología
 
-``` text
+```text
               VirtualBox
                   │
         ┌─────────┴─────────┐
@@ -1169,14 +1068,14 @@ paquetes de Ubuntu muestra la rama 3.0.x para 26.04 LTS.
 
 ### Servidor
 
-``` text
+```text
 IP:       192.168.10.2/24
 Gateway:  192.168.10.1
 ```
 
 ### Cliente
 
-``` text
+```text
 DHCP automático
 ```
 
@@ -1384,7 +1283,7 @@ azar.
 
 Seguir:
 
-``` text
+```text
 1️⃣ ¿La interfaz del servidor existe?
         ↓
 2️⃣ ¿Tiene IP en la LAN?
@@ -1409,7 +1308,7 @@ Seguir:
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1426,7 +1325,7 @@ Seguir:
 
 Configura:
 
-``` text
+```text
 Cliente A
 MAC: 00:11:22:33:44:55
 IP reservada: 192.168.10.50
@@ -1464,7 +1363,7 @@ La documentación de Kea permite reservas mediante `hw-address`,
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1487,19 +1386,19 @@ Captura tráfico en la interfaz correspondiente.
 
 Filtro Wireshark:
 
-``` text
+```text
 dhcp
 ```
 
 o:
 
-``` text
+```text
 bootp
 ```
 
 Busca:
 
-``` text
+```text
 DHCPDISCOVER
 DHCPOFFER
 DHCPREQUEST
@@ -1535,7 +1434,7 @@ Identifica en una captura:
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1552,7 +1451,7 @@ Identifica en una captura:
 
 Construye:
 
-``` text
+```text
 LAN A                         LAN B
 192.168.10.0/24               192.168.20.0/24
      │                              │
@@ -1565,7 +1464,7 @@ LAN A                         LAN B
 
 En la interfaz del router conectada a la LAN A:
 
-``` text
+```text
 ip helper-address 192.168.20.10
 ```
 
@@ -1588,7 +1487,7 @@ a `192.168.10.0/24`.
 >
 > **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
 >
 > **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
 >
@@ -1744,7 +1643,7 @@ Posibles causas:
 
 Comprobar:
 
-``` text
+```text
 IP       ✓
 Máscara  ✓
 Gateway  ?
@@ -1783,7 +1682,7 @@ Comprobar qué servidores están respondiendo.
 
 Utiliza siempre este árbol:
 
-``` text
+```text
                  CLIENTE SIN IP
                        │
                        ▼
@@ -1816,7 +1715,7 @@ Utiliza siempre este árbol:
 
 DHCP suele trabajar conjuntamente con:
 
-``` text
+```text
         DHCP
          │
     ┌────┼────┐
@@ -1840,7 +1739,7 @@ No deben confundirse las funciones.
 
 # 🧠 38. Resumen
 
-``` text
+```text
                     DHCP
                      │
        ┌─────────────┼─────────────┐
@@ -1935,7 +1834,7 @@ configuración asignada por DHCP.
 
 ### 5. ¿Qué significa DORA?
 
-``` text
+```text
 D = DHCPDISCOVER
 O = DHCPOFFER
 R = DHCPREQUEST
@@ -2108,7 +2007,7 @@ D. Dovecot
 
 Construye una infraestructura con:
 
-``` text
+```text
                   INTERNET
                      │
                 ┌────┴────┐

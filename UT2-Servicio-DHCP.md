@@ -1,4 +1,110 @@
-# 📡⚡ UT2 · SERVICIO DHCP ⚡📡
+# 📡⚡ Unidad de Trabajo 2 · SERVICIO DE CONFIGURACIÓN DINÁMICA DE HOST (DHCP) ⚡📡
+
+> 🧭 **ANTES DE EMPEZAR · VOCABULARIO TÉCNICO**
+>
+> Las siglas, abreviaturas y conceptos técnicos que van a aparecer en esta unidad se presentan aquí antes de su desarrollo. La explicación local de cada tema podrá ampliar estas definiciones cuando sea necesario.
+>
+> **UT** — Unidad de Trabajo: unidad didáctica del módulo profesional.
+> **RA** — Resultado de Aprendizaje: capacidad que el alumnado debe demostrar al finalizar un bloque curricular.
+> **CFGS** — Ciclo Formativo de Grado Superior.
+> **ASIR** — Administración de Sistemas Informáticos en Red.
+> **SRI** — Servicios de Red e Internet.
+> **DHCP** — Protocolo de configuración dinámica de host: entrega automáticamente parámetros de red a los clientes.
+> **IOS** — Cisco Internetwork Operating System, sistema operativo de muchos equipos de red Cisco.
+> **ISC** — Internet Systems Consortium, organización que desarrolla software de infraestructura de Internet como BIND y Kea.
+> **WSL2** — Windows Subsystem for Linux 2: tecnología de Windows que ejecuta un entorno Linux mediante una máquina virtual ligera.
+> **CLI** — Interfaz de línea de comandos, es decir, administración mediante órdenes escritas.
+> **IP** — Protocolo de Internet, responsable del direccionamiento y encaminamiento de paquetes.
+> **NS** — Registro DNS que identifica servidores autoritativos de una zona.
+> **KEA** — Servidor DHCP desarrollado por Internet Systems Consortium como alternativa moderna al servidor DHCP clásico de ISC.
+> **RELAY** — Agente que reenvía mensajes DHCP entre redes distintas.
+> **DORA** — Secuencia Discover, Offer, Request y Acknowledgement usada habitualmente para obtener una concesión IPv4 mediante DHCP.
+> **LEASE** — Concesión temporal de parámetros de red entregada por DHCP.
+> **Docker** — Plataforma de contenerización para construir, distribuir y ejecutar aplicaciones aisladas en contenedores.
+> **Docker Compose** — Herramienta de Docker para definir y ejecutar aplicaciones multicontenedor mediante un archivo declarativo.
+> **DNS** — Sistema de nombres de dominio: servicio distribuido que relaciona nombres con direcciones IP y otros datos.
+> **DHCPDISCOVER** — Mensaje DHCP con el que un cliente busca servidores disponibles.
+> **DHCPOFFER** — Mensaje DHCP con el que un servidor ofrece parámetros de configuración.
+> **DHCPREQUEST** — Mensaje DHCP con el que un cliente solicita una oferta o confirma una concesión.
+> **DHCPACK** — Mensaje DHCP que confirma una concesión y sus parámetros.
+> **MAC** — Dirección de control de acceso al medio asociada a una interfaz de red.
+> **POOL** — Conjunto de direcciones disponibles para asignación dinámica.
+> **GUI** — Interfaz gráfica de usuario, es decir, administración mediante ventanas, menús y controles visuales.
+> **JSON** — Formato textual para representar datos estructurados mediante objetos y listas.
+> **DHCPNAK** — Mensaje DHCP que rechaza una solicitud o indica que la concesión solicitada no es válida.
+> **UDP** — Protocolo de transporte sin conexión, ligero y sin garantía de entrega.
+> **TCP** — Protocolo de transporte orientado a conexión que proporciona entrega fiable y ordenada.
+> **LAN** — Red de área local.
+> **POST** — Método HTTP usado normalmente para enviar datos al servidor para crear o procesar un recurso.
+> **WEBMIN** — Interfaz web de administración de sistemas Linux y Unix.
+> **GET** — Método HTTP usado normalmente para solicitar una representación de un recurso.
+> **VLAN** — Red de área local virtual que permite separar lógicamente redes sobre infraestructura compartida.
+> **EOL** — End of Life: momento a partir del cual un producto deja de recibir soporte normal del fabricante.
+> **PUT** — Método HTTP usado normalmente para crear o reemplazar la representación de un recurso en una URI determinada.
+> **MX** — Registro DNS que identifica los servidores que reciben correo.
+> **SOA** — Registro DNS de autoridad de una zona que incluye información de temporización y control.
+> **TLS** — Protocolo criptográfico que proporciona confidencialidad, integridad y autenticación mediante certificados.
+> **BIND9** — Rama 9 de BIND, implementación de servidor DNS usada habitualmente en Linux.
+>
+> **Criterio didáctico:** no se presupone que conocer una sigla equivalga a comprender el concepto. Primero se identifica qué significa y qué función desempeña; después se emplea en comandos, configuraciones y prácticas.
+
+> 🧩 **ANTES DE EMPEZAR · CONCEPTOS BASE**
+>
+> **Protocolo** — conjunto de reglas que define cómo se comunican dos o más sistemas.
+> **Cliente** — programa o equipo que inicia una petición de un servicio.
+> **Servidor** — programa o equipo que ofrece un servicio y atiende peticiones.
+> **Servicio de red** — aplicación o proceso que ofrece una función accesible mediante la red, normalmente a través de uno o varios puertos.
+> **Proceso** — instancia en ejecución de un programa dentro de un sistema operativo.
+> **Demonio (daemon)** — proceso que permanece ejecutándose en segundo plano para prestar un servicio; en Linux es habitual que esté gestionado por `systemd`.
+> **Puerto** — número lógico asociado a un servicio de transporte; permite distinguir varias comunicaciones que utilizan la misma dirección IP.
+> **Socket** — extremo de comunicación que combina, según el contexto, una dirección IP, un puerto y un protocolo de transporte.
+> **Interfaz de red** — componente físico o virtual mediante el que un sistema se conecta a una red.
+> **Dirección IP** — identificador lógico de una interfaz dentro de una red IP.
+> **Subred** — porción de un espacio de direccionamiento IP que comparte un prefijo común.
+> **Puerta de enlace predeterminada** — equipo al que un host entrega el tráfico destinado a redes que no conoce directamente.
+> **Encaminamiento (routing)** — proceso de decidir por qué camino debe avanzar un paquete para alcanzar su destino.
+> **Tabla de encaminamiento** — conjunto de rutas que utiliza un sistema para decidir dónde enviar los paquetes.
+> **Broadcast o difusión** — envío dirigido a todos los equipos de un dominio de difusión.
+> **Unicast** — comunicación dirigida de un emisor a un receptor concreto.
+> **Multicast** — comunicación dirigida a un grupo de receptores que se han suscrito al grupo.
+> **Resolución de nombres** — proceso mediante el cual un sistema obtiene información asociada a un nombre, por ejemplo una dirección IP mediante DNS.
+> **Caché** — almacenamiento temporal de resultados para poder reutilizarlos sin repetir inmediatamente una consulta o cálculo.
+> **Archivo de configuración** — fichero que contiene parámetros con los que un programa determina cómo debe funcionar.
+> **Validación** — comprobación de que una configuración tiene una sintaxis y una estructura aceptables antes de aplicarla.
+> **Estado** — situación actual de un proceso, servicio, interfaz o recurso; conocerlo es esencial para diagnosticar una incidencia.
+> **Registro (log)** — anotación generada por un programa o sistema para dejar constancia de eventos, errores y operaciones.
+>
+> Estos conceptos son el vocabulario común sobre el que se construyen las prácticas. Cuando una unidad introduzca un concepto especializado —por ejemplo, una zona DNS, una concesión DHCP, un virtual host, un contenedor o un Pod— se explicará de nuevo antes de utilizarlo operativamente.
+
+> 🧠 **CONCEPTOS QUE NO DEBEMOS DAR POR SUPUESTOS**
+>
+> **`systemd`** — sistema de inicio y gestor de servicios habitual en Linux; `systemctl` permite consultar y administrar esos servicios.
+> **Archivo de configuración** — fichero que contiene los parámetros con los que un servicio determina su comportamiento.
+> **Registro DNS** — entrada de una zona DNS que asocia un nombre con un dato, como una dirección IP, un servidor de correo o un alias.
+> **Zona DNS** — parte de la jerarquía DNS administrada por un servidor autoritativo concreto.
+> **Servidor autoritativo** — servidor que posee la información oficial de una zona DNS y puede responder con autoridad sobre ella.
+> **Resolver o resolvedor** — componente que realiza consultas DNS en nombre de una aplicación o de un usuario y obtiene la respuesta siguiendo el proceso de resolución.
+> **Consulta recursiva** — consulta en la que el servidor consultado asume la tarea de obtener una respuesta completa para el cliente, si tiene habilitada la recursión.
+> **Consulta iterativa** — consulta en la que el servidor responde con la mejor información que conoce, pudiendo remitir al consultante hacia otro servidor.
+> **Concesión DHCP** — asignación temporal de una dirección IP y otros parámetros de red a un cliente.
+> **Imagen de contenedor** — plantilla inmutable a partir de la cual se crean contenedores.
+> **Volumen** — almacenamiento gestionado que permite conservar datos independientemente del ciclo de vida de un contenedor.
+> **Red Docker** — red virtual administrada por Docker que permite conectar contenedores y, según su configuración, publicar servicios hacia el host.
+> **Orquestación** — automatización de la ejecución, escalado, recuperación y coordinación de múltiples cargas de trabajo o contenedores.
+> **Pod** — unidad mínima desplegable de Kubernetes; contiene uno o varios contenedores que comparten determinados recursos.
+> **Virtual host** — configuración que permite que un mismo servidor web atienda distintos sitios o nombres mediante configuraciones diferenciadas.
+> **Certificado digital** — credencial criptográfica que vincula una identidad con una clave pública y que puede estar firmada por una autoridad de certificación.
+> **Códec** — algoritmo que codifica y decodifica audio, vídeo u otro tipo de datos; un códec no es lo mismo que un contenedor multimedia.
+> **Contenedor multimedia** — formato de archivo que agrupa una o varias pistas de audio, vídeo, subtítulos o metadatos.
+> **Streaming** — distribución de contenido de forma que el receptor puede comenzar a consumirlo mientras continúa recibiendo datos.
+> **Commit** — instantánea registrada por Git que conserva un conjunto concreto de cambios.
+> **Staging area** — área intermedia de Git donde se seleccionan los cambios que formarán el próximo commit.
+> **Rama (branch)** — línea de desarrollo independiente dentro de un repositorio Git.
+> **Remoto (remote)** — referencia a un repositorio Git externo con el que se intercambian commits mediante `fetch`, `pull` o `push`.
+> **Codespace** — entorno de desarrollo remoto proporcionado por GitHub para trabajar con un repositorio.
+> **Webmin** — interfaz web de administración de sistemas que permite gestionar determinados servicios y parámetros de un sistema Linux.
+> **Roundcube** — cliente de correo web que accede al buzón mediante IMAP y puede enviar mensajes mediante SMTP.
+> **Sympa** — gestor de listas de distribución que proporciona funciones de suscripción, moderación, administración y distribución de mensajes.
 
 ### RA2 · Configuración automática de red.
 
@@ -695,7 +801,6 @@ conflictivas.
 
 # 🔄 23. Alta disponibilidad y DHCP Failover
 
-En versiones anteriores del material introduce **DHCP Failover Protocol**.
 
 La tecnología ha evolucionado. En el laboratorio actual se distinguirán:
 
@@ -783,6 +888,44 @@ sudo kea-dhcp4 -t /etc/kea/kea-dhcp4.conf
 
 La práctica correcta es, por tanto, **GUI → configuración → validación → servicio → cliente**.
 
+
+---
+
+# 🗂️ Antes de las prácticas · localizar la configuración de DHCP
+
+DHCP parece sencillo porque el cliente solo recibe una IP, pero detrás existe un servidor que mantiene **subredes, pools, reservas, opciones y concesiones**. Antes de configurarlo, aprende a encontrar cada pieza.
+
+### 🐧 / 🖥️ Kea DHCP
+
+```text
+/etc/kea/
+├── kea-dhcp4.conf           → configuración principal de DHCPv4
+├── kea-dhcp6.conf           → configuración de DHCPv6, si se utiliza
+└── kea-ctrl-agent.conf      → API de control, cuando está habilitada
+
+/var/lib/kea/                → ficheros de estado/concesiones según backend
+/var/log/                    → registros, según configuración del sistema
+```
+
+Comandos fundamentales:
+sudo ls -la /etc/kea
+sudo sed -n '1,260p' /etc/kea/kea-dhcp4.conf
+sudo systemctl status kea-dhcp4-server
+sudo journalctl -u kea-dhcp4-server --no-pager
+
+Antes de reiniciar un servicio, valida la sintaxis con la herramienta de comprobación disponible en tu instalación. Una configuración DHCP incorrecta puede dejar sin dirección a toda una LAN.
+
+### 🖥️ Webmin
+
+Si la instalación dispone de un módulo DHCP compatible, localízalo en **Servers**. No des por hecho que Webmin dispone de un módulo actualizado para cada versión de Kea: si el módulo no representa una directiva, edítala y valídala desde CLI.
+
+> 🧠 **Analogía:** el fichero de configuración es el plano de la oficina; Webmin es la recepción que te ayuda a llegar a algunas salas, pero el técnico debe conocer el plano completo.
+
+
+
+> 👨‍🏫 **Criterio de corrección de las prácticas**
+>
+> La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
 # 🧪 25. PRÁCTICA 1 --- DHCP básico en Cisco Packet Tracer
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -855,6 +998,40 @@ Maximum users:  50
 
 ------------------------------------------------------------------------
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `show ip interface brief`
+- `show ip route`
+- `show running-config`
+- `ping <destino>`
+- `traceroute <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 26. PRÁCTICA 2 --- DHCP en varias redes con relay
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -914,6 +1091,40 @@ El alumno deberá demostrar:
 -   Diferencias entre los pools.
 
 ------------------------------------------------------------------------
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `sudo systemctl status kea-dhcp4-server`
+- `sudo journalctl -u kea-dhcp4-server --no-pager`
+- `ip neigh`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 27. PRÁCTICA 3 --- DHCP con Kea en VirtualBox + Ubuntu 26.04 Server
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -985,6 +1196,40 @@ El paquete `kea-dhcp4-server` está disponible para Ubuntu 26.04 LTS.
 >
 > Kea es la plataforma DHCP moderna de ISC que utilizaremos en Ubuntu. Su configuración es estructurada y basada en JSON, y su arquitectura difiere de la antigua configuración de ISC DHCP. No conviene trasladar literalmente ejemplos de `dhcpd.conf`.
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `sudo systemctl status kea-dhcp4-server`
+- `sudo journalctl -u kea-dhcp4-server --no-pager`
+- `ip neigh`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🛠️ 28. Configuración básica de Kea
 
 El fichero de configuración DHCP contiene un objeto `Dhcp4`.
@@ -1048,6 +1293,59 @@ ip addr
 ------------------------------------------------------------------------
 
 # 🧪 29. Validar la configuración de Kea
+### 🧭 Guía de resolución y comprobación
+
+**Puntos a conseguir:** dejar el sistema en el estado solicitado, poder explicar qué protocolo interviene, comprobarlo desde un cliente y aportar evidencias reproducibles.
+
+1. **Preparar** el entorno y registrar el estado inicial.
+2. **Construir** solo el siguiente elemento necesario.
+3. **Validar** sintaxis y servicio.
+4. **Probar** desde el cliente.
+5. **Observar** puertos, logs y tráfico cuando proceda.
+6. **Documentar** configuración, comandos y capturas.
+
+
+#### Solución de referencia
+
+La configuración mínima de Kea debe contener una subred y un pool coherentes con la red de la práctica. Como patrón didáctico:
+
+```json
+{
+  "Dhcp4": {
+    "interfaces-config": {"interfaces": ["<interfaz>"]},
+    "subnet4": [
+      {
+        "subnet": "192.168.10.0/24",
+        "pools": [{"pool": "192.168.10.100-192.168.10.199"}],
+        "option-data": [
+          {"name": "routers", "data": "192.168.10.1"},
+          {"name": "domain-name-servers", "data": "192.168.10.10"}
+        ]
+      }
+    ]
+  }
+}
+```
+
+Adapta interfaz, red, pool, gateway y DNS a la topología real. Después valida la configuración, reinicia o recarga el servicio y demuestra la concesión desde un cliente.
+
+
+### 📸 Evidencias y capturas
+
+Incluye, cuando aporte información, una captura de la topología, del fichero o interfaz configurada, del estado del servicio y de la prueba final. Cada captura debe llevar una frase que explique **qué demuestra**; una imagen sin interpretación no constituye una evidencia técnica suficiente.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos |
+|---|---:|
+| Comprensión del servicio/protocolo | 2 |
+| Configuración y proceso | 2 |
+| Funcionamiento demostrado | 2 |
+| Diagnóstico y razonamiento | 2 |
+| Documentación y evidencias | 1 |
+| Seguridad y buenas prácticas | 1 |
+| **Total** | **10** |
+
 
 Antes de iniciar el servicio conviene comprobar que el JSON es válido y
 que la configuración puede ser aceptada por Kea.
@@ -1346,6 +1644,40 @@ Ubuntu Server.
 > Packet Tracer.
 
 ------------------------------------------------------------------------
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `sudo systemctl status kea-dhcp4-server`
+- `sudo journalctl -u kea-dhcp4-server --no-pager`
+- `ip neigh`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧰 34. Herramientas fundamentales
 
@@ -1693,6 +2025,84 @@ virtuales independientes resulta más controlable utilizar Packet Tracer
 o máquinas virtuales con VirtualBox.
 
 ------------------------------------------------------------------------
+
+
+# 📝 Test de repaso
+
+## 1. ¿Qué problema resuelve principalmente DHCP?
+A. Cifrar las conexiones
+B. Automatizar parámetros de configuración de red
+C. Resolver nombres DNS
+D. Transferir ficheros
+
+## 2. ¿Qué secuencia resume la obtención inicial de una concesión DHCP?
+A. SYN/ACK/FIN
+B. GET/POST/PUT
+C. DORA
+D. MX/SOA/NS
+
+## 3. ¿Qué puertos utiliza tradicionalmente DHCPv4?
+A. UDP 67 servidor y UDP 68 cliente
+B. TCP 67 servidor y TCP 68 cliente
+C. UDP 53 servidor y cliente
+D. TCP 80 y 443
+
+## 4. ¿Por qué se necesita un relay cuando cliente y servidor están en redes IP distintas?
+A. Porque DHCP utiliza únicamente TCP
+B. Porque los broadcasts DHCP iniciales no atraviesan routers normalmente
+C. Porque el servidor no puede tener IP
+D. Porque DNS debe retransmitir DHCP
+
+## 5. ¿Qué elemento permite reservar una dirección para un cliente concreto?
+A. Una reserva DHCP
+B. Un registro MX
+C. Un Virtual Host
+D. Un certificado TLS
+
+## 6. ¿Qué comando permite observar el estado del servicio Kea?
+A. `dig`
+B. `systemctl status kea-dhcp4-server`
+C. `curl -I`
+D. `sshd -t`
+
+## 7. ¿Qué herramienta resulta especialmente útil para comprobar el proceso DORA paquete a paquete?
+A. Wireshark/tcpdump
+B. `passwd`
+C. `tar`
+D. `nano`
+
+## 8. ¿Qué describe mejor un pool DHCP?
+A. Conjunto de direcciones que el servidor puede conceder
+B. Lista de servidores DNS raíz
+C. Grupo de puertos TCP
+D. Fichero de logs
+
+## 9. ¿Qué ocurre normalmente si un cliente DHCP se encuentra en otra subred y no existe relay?
+A. El router convierte automáticamente cualquier broadcast en DHCP
+B. El servidor recibe siempre el broadcast directamente
+C. El proceso inicial no llega normalmente al servidor DHCP de otra red
+D. DNS asume la función de DHCP
+
+## 10. ¿Qué software se utiliza en este material como servidor DHCP actualizado?
+A. ISC DHCP 4.x
+B. Kea DHCP
+C. BIND9
+D. Dovecot
+
+### ✅ Respuestas
+
+| Pregunta | Respuesta |
+|---:|:---:|
+| 1 | **B** |
+| 2 | **C** |
+| 3 | **A** |
+| 4 | **B** |
+| 5 | **A** |
+| 6 | **B** |
+| 7 | **A** |
+| 8 | **A** |
+| 9 | **C** |
+| 10 | **B** |
 
 # 🏆 40. Reto final --- Diseña una infraestructura DHCP
 

@@ -1,4 +1,120 @@
-# 🌐⚡ UT3 · SERVICIO DNS ⚡🌐
+# 🌐⚡ Unidad de Trabajo 3 · SERVICIO DE NOMBRES DE DOMINIO (DNS) ⚡🌐
+
+> 🧭 **ANTES DE EMPEZAR · VOCABULARIO TÉCNICO**
+>
+> Las siglas, abreviaturas y conceptos técnicos que van a aparecer en esta unidad se presentan aquí antes de su desarrollo. La explicación local de cada tema podrá ampliar estas definiciones cuando sea necesario.
+>
+> **UT** — Unidad de Trabajo: unidad didáctica del módulo profesional.
+> **RA** — Resultado de Aprendizaje: capacidad que el alumnado debe demostrar al finalizar un bloque curricular.
+> **CFGS** — Ciclo Formativo de Grado Superior.
+> **ASIR** — Administración de Sistemas Informáticos en Red.
+> **SRI** — Servicios de Red e Internet.
+> **DNS** — Sistema de nombres de dominio: servicio distribuido que relaciona nombres con direcciones IP y otros datos.
+> **NS** — Registro DNS que identifica servidores autoritativos de una zona.
+> **WSL2** — Windows Subsystem for Linux 2: tecnología de Windows que ejecuta un entorno Linux mediante una máquina virtual ligera.
+> **ID** — Identificador utilizado para distinguir un objeto de otros.
+> **CLI** — Interfaz de línea de comandos, es decir, administración mediante órdenes escritas.
+> **BIND** — Berkeley Internet Name Domain, implementación de servidor DNS.
+> **BIND9** — Rama 9 de BIND, implementación de servidor DNS usada habitualmente en Linux.
+> **RR** — Resource Record o registro de recursos DNS: unidad básica de información de una zona.
+> **HOST** — Equipo o sistema anfitrión en el que se ejecuta un servicio, contenedor o máquina virtual.
+> **IP** — Protocolo de Internet, responsable del direccionamiento y encaminamiento de paquetes.
+> **AAAA** — Registro DNS que asocia un nombre con una dirección IPv6.
+> **MX** — Registro DNS que identifica los servidores que reciben correo.
+> **DNSSEC** — Extensiones de seguridad de DNS que permiten validar criptográficamente respuestas y datos DNS.
+> **TSIG** — Mecanismo de autenticación mediante una clave compartida para proteger operaciones DNS concretas.
+> **Docker** — Plataforma de contenerización para construir, distribuir y ejecutar aplicaciones aisladas en contenedores.
+> **Docker Compose** — Herramienta de Docker para definir y ejecutar aplicaciones multicontenedor mediante un archivo declarativo.
+> **FQDN** — Nombre de dominio completamente cualificado, que identifica un nombre dentro de toda la jerarquía DNS.
+> **TLD** — Dominio de nivel superior, como .es, .org o .com.
+> **TTL** — Tiempo de vida de un dato o registro almacenado en caché.
+> **SOA** — Registro DNS de autoridad de una zona que incluye información de temporización y control.
+> **CNAME** — Registro DNS que define un alias de un nombre canónico.
+> **SRV** — Registro DNS que publica la ubicación de un servicio mediante prioridad, peso, puerto y destino.
+> **PTR** — Registro usado en resolución DNS inversa, de dirección IP a nombre.
+> **ROOT** — Servidores raíz de DNS, punto superior de la jerarquía de nombres.
+> **IPv6** — Versión 6 del Protocolo de Internet, con direcciones de 128 bits.
+> **TXT** — Registro DNS que contiene información textual estructurada, como determinadas políticas de correo.
+> **SPF** — Sender Policy Framework, mecanismo que publica mediante DNS qué servidores están autorizados a enviar correo para un dominio.
+> **DS** — Registro DNSSEC que enlaza una clave de una zona hija con la cadena de confianza de la zona padre.
+> **NXDOMAIN** — Respuesta DNS que indica que el nombre consultado no existe.
+> **TCP** — Protocolo de transporte orientado a conexión que proporciona entrega fiable y ordenada.
+> **DHCP** — Protocolo de configuración dinámica de host: entrega automáticamente parámetros de red a los clientes.
+> **LAN** — Red de área local.
+> **ANY** — Tipo de consulta DNS que históricamente solicitaba información amplia sobre un nombre; su uso operativo está desaconsejado en muchos escenarios.
+> **AXFR** — Transferencia completa de una zona DNS entre servidores.
+> **IXFR** — Transferencia incremental de una zona DNS, limitada a los cambios.
+> **Git** — Sistema distribuido de control de versiones.
+> **KEA** — Servidor DHCP desarrollado por Internet Systems Consortium como alternativa moderna al servidor DHCP clásico de ISC.
+> **DNSKEY** — Registro DNSSEC que publica una clave criptográfica.
+> **RRSIG** — Registro DNSSEC que contiene una firma digital asociada a otros registros.
+> **NSEC/NSEC3** — Mecanismos DNSSEC que permiten demostrar de forma autenticada que determinados nombres o tipos de registros no existen.
+> **UDP** — Protocolo de transporte sin conexión, ligero y sin garantía de entrega.
+> **ACL** — Lista de control de acceso que determina quién puede realizar una operación.
+> **SERVFAIL** — Respuesta DNS que indica que el servidor no pudo completar correctamente la resolución.
+> **FTP** — Protocolo de transferencia de archivos que separa un canal de control de los canales de datos.
+> **IPv4** — Versión 4 del Protocolo de Internet, con direcciones de 32 bits.
+> **PAT** — Traducción de direcciones mediante puertos: permite multiplexar conexiones privadas sobre una dirección pública.
+>
+> **Criterio didáctico:** no se presupone que conocer una sigla equivalga a comprender el concepto. Primero se identifica qué significa y qué función desempeña; después se emplea en comandos, configuraciones y prácticas.
+
+> 🧩 **ANTES DE EMPEZAR · CONCEPTOS BASE**
+>
+> **Protocolo** — conjunto de reglas que define cómo se comunican dos o más sistemas.
+> **Cliente** — programa o equipo que inicia una petición de un servicio.
+> **Servidor** — programa o equipo que ofrece un servicio y atiende peticiones.
+> **Servicio de red** — aplicación o proceso que ofrece una función accesible mediante la red, normalmente a través de uno o varios puertos.
+> **Proceso** — instancia en ejecución de un programa dentro de un sistema operativo.
+> **Demonio (daemon)** — proceso que permanece ejecutándose en segundo plano para prestar un servicio; en Linux es habitual que esté gestionado por `systemd`.
+> **Puerto** — número lógico asociado a un servicio de transporte; permite distinguir varias comunicaciones que utilizan la misma dirección IP.
+> **Socket** — extremo de comunicación que combina, según el contexto, una dirección IP, un puerto y un protocolo de transporte.
+> **Interfaz de red** — componente físico o virtual mediante el que un sistema se conecta a una red.
+> **Dirección IP** — identificador lógico de una interfaz dentro de una red IP.
+> **Subred** — porción de un espacio de direccionamiento IP que comparte un prefijo común.
+> **Puerta de enlace predeterminada** — equipo al que un host entrega el tráfico destinado a redes que no conoce directamente.
+> **Encaminamiento (routing)** — proceso de decidir por qué camino debe avanzar un paquete para alcanzar su destino.
+> **Tabla de encaminamiento** — conjunto de rutas que utiliza un sistema para decidir dónde enviar los paquetes.
+> **Broadcast o difusión** — envío dirigido a todos los equipos de un dominio de difusión.
+> **Unicast** — comunicación dirigida de un emisor a un receptor concreto.
+> **Multicast** — comunicación dirigida a un grupo de receptores que se han suscrito al grupo.
+> **Resolución de nombres** — proceso mediante el cual un sistema obtiene información asociada a un nombre, por ejemplo una dirección IP mediante DNS.
+> **Caché** — almacenamiento temporal de resultados para poder reutilizarlos sin repetir inmediatamente una consulta o cálculo.
+> **Archivo de configuración** — fichero que contiene parámetros con los que un programa determina cómo debe funcionar.
+> **Validación** — comprobación de que una configuración tiene una sintaxis y una estructura aceptables antes de aplicarla.
+> **Estado** — situación actual de un proceso, servicio, interfaz o recurso; conocerlo es esencial para diagnosticar una incidencia.
+> **Registro (log)** — anotación generada por un programa o sistema para dejar constancia de eventos, errores y operaciones.
+>
+> Estos conceptos son el vocabulario común sobre el que se construyen las prácticas. Cuando una unidad introduzca un concepto especializado —por ejemplo, una zona DNS, una concesión DHCP, un virtual host, un contenedor o un Pod— se explicará de nuevo antes de utilizarlo operativamente.
+
+> 🧠 **CONCEPTOS QUE NO DEBEMOS DAR POR SUPUESTOS**
+>
+> **`systemd`** — sistema de inicio y gestor de servicios habitual en Linux; `systemctl` permite consultar y administrar esos servicios.
+> **Archivo de configuración** — fichero que contiene los parámetros con los que un servicio determina su comportamiento.
+> **Registro DNS** — entrada de una zona DNS que asocia un nombre con un dato, como una dirección IP, un servidor de correo o un alias.
+> **Zona DNS** — parte de la jerarquía DNS administrada por un servidor autoritativo concreto.
+> **Servidor autoritativo** — servidor que posee la información oficial de una zona DNS y puede responder con autoridad sobre ella.
+> **Resolver o resolvedor** — componente que realiza consultas DNS en nombre de una aplicación o de un usuario y obtiene la respuesta siguiendo el proceso de resolución.
+> **Consulta recursiva** — consulta en la que el servidor consultado asume la tarea de obtener una respuesta completa para el cliente, si tiene habilitada la recursión.
+> **Consulta iterativa** — consulta en la que el servidor responde con la mejor información que conoce, pudiendo remitir al consultante hacia otro servidor.
+> **Concesión DHCP** — asignación temporal de una dirección IP y otros parámetros de red a un cliente.
+> **Imagen de contenedor** — plantilla inmutable a partir de la cual se crean contenedores.
+> **Volumen** — almacenamiento gestionado que permite conservar datos independientemente del ciclo de vida de un contenedor.
+> **Red Docker** — red virtual administrada por Docker que permite conectar contenedores y, según su configuración, publicar servicios hacia el host.
+> **Orquestación** — automatización de la ejecución, escalado, recuperación y coordinación de múltiples cargas de trabajo o contenedores.
+> **Pod** — unidad mínima desplegable de Kubernetes; contiene uno o varios contenedores que comparten determinados recursos.
+> **Virtual host** — configuración que permite que un mismo servidor web atienda distintos sitios o nombres mediante configuraciones diferenciadas.
+> **Certificado digital** — credencial criptográfica que vincula una identidad con una clave pública y que puede estar firmada por una autoridad de certificación.
+> **Códec** — algoritmo que codifica y decodifica audio, vídeo u otro tipo de datos; un códec no es lo mismo que un contenedor multimedia.
+> **Contenedor multimedia** — formato de archivo que agrupa una o varias pistas de audio, vídeo, subtítulos o metadatos.
+> **Streaming** — distribución de contenido de forma que el receptor puede comenzar a consumirlo mientras continúa recibiendo datos.
+> **Commit** — instantánea registrada por Git que conserva un conjunto concreto de cambios.
+> **Staging area** — área intermedia de Git donde se seleccionan los cambios que formarán el próximo commit.
+> **Rama (branch)** — línea de desarrollo independiente dentro de un repositorio Git.
+> **Remoto (remote)** — referencia a un repositorio Git externo con el que se intercambian commits mediante `fetch`, `pull` o `push`.
+> **Codespace** — entorno de desarrollo remoto proporcionado por GitHub para trabajar con un repositorio.
+> **Webmin** — interfaz web de administración de sistemas que permite gestionar determinados servicios y parámetros de un sistema Linux.
+> **Roundcube** — cliente de correo web que accede al buzón mediante IMAP y puede enviar mensajes mediante SMTP.
+> **Sympa** — gestor de listas de distribución que proporciona funciones de suscripción, moderación, administración y distribución de mensajes.
 
 ### RA1 · Resolución de nombres.
 
@@ -297,9 +413,9 @@ Es una parte del espacio de nombres.
 Es un dominio situado por debajo de otro.
 
 ``` text
-example.es
-└── asir.example.es
-    └── aula.asir.example.es
+juandecolonia.jc
+└── asir.juandecolonia.jc
+    └── aula.asir.juandecolonia.jc
 ```
 
 ### Zona
@@ -331,12 +447,12 @@ parte del espacio de nombres a otros servidores.
 Ejemplo:
 
 ``` text
-              example.es
+              juandecolonia.jc
                   │
                   │ delegación
                   ▼
           ┌─────────────────┐
-          │ asir.example.es│
+          │ asir.juandecolonia.jc│
           └─────────────────┘
                   │
             DNS propio
@@ -372,10 +488,10 @@ ROOT ─────────► .es
                 .es DNS
                   │
                   ▼
-             example.es
+             juandecolonia.jc
                   │
                   ▼
-             www.example.es
+             www.juandecolonia.jc
 ```
 
 > 💡 No hay que imaginar los root servers como «el servidor DNS de
@@ -395,7 +511,7 @@ Resolver un nombre significa obtener la información DNS asociada.
 Ejemplo:
 
 ``` text
-www.example.es
+www.juandecolonia.jc
        │
        ▼
     ¿qué IP?
@@ -424,7 +540,7 @@ la responsabilidad de obtener una respuesta completa o un error.
 ``` text
 CLIENTE
    │
-   │ www.example.es ?
+   │ www.juandecolonia.jc ?
    ▼
 DNS RECURSOR
    │
@@ -432,7 +548,7 @@ DNS RECURSOR
    │
    ├──► .es
    │
-   ├──► example.es
+   ├──► juandecolonia.jc
    │
    └──► respuesta
             │
@@ -456,9 +572,9 @@ Resolver ──► Root
 
 Resolver ──► .es
               │
-              └──► NS de example.es
+              └──► NS de juandecolonia.jc
 
-Resolver ──► example.es
+Resolver ──► juandecolonia.jc
               │
               └──► respuesta
 ```
@@ -470,17 +586,17 @@ varias consultas iterativas.
 
 # 🧠 12. Recursividad vs. iteración
 
-  Característica                           Recursiva            Iterativa
-  ---------------------------------------- -------------------- ------------------------------
-  El servidor debe resolver por nosotros   Sí                   No necesariamente
-  Puede devolver una referencia            Sí, internamente     Sí
-  Carga del servidor                       Mayor                Menor
-  Uso típico                               Cliente → resolver   Resolver → DNS autoritativos
+| Característica | Consulta recursiva | Consulta iterativa |
+|---|---|---|
+| ¿El servidor consultado debe resolver por el cliente? | Sí, si acepta la recursión | No necesariamente |
+| ¿Puede devolver una referencia a otro servidor? | Puede hacerlo internamente | Sí, es habitual |
+| Carga de trabajo | Mayor para el resolvedor | Menor por consulta |
+| Uso típico | Cliente → resolvedor | Resolvedor → servidores autoritativos |
 
 ### Analiza con `dig`
 
 ``` bash
-dig www.example.com
+dig www.juandecolonia.jc
 ```
 
 Consulta un resolver.
@@ -488,7 +604,7 @@ Consulta un resolver.
 Para observar el proceso:
 
 ``` bash
-dig +trace www.example.com
+dig +trace www.juandecolonia.jc
 ```
 
 `dig` es una herramienta específica para interrogar servidores DNS y es
@@ -588,7 +704,7 @@ NOMBRE   TTL   CLASE   TIPO   DATOS
 Ejemplo:
 
 ``` text
-www.example.es.   3600   IN   A   192.0.2.10
+www.juandecolonia.jc.   3600   IN   A   192.0.2.10
 ```
 
 BIND9 utiliza registros de recursos para describir las características
@@ -601,11 +717,11 @@ de una zona.
 Asocia un nombre con una dirección IP.
 
 ``` text
-www.example.es.   IN   A   192.0.2.10
+www.juandecolonia.jc.   IN   A   192.0.2.10
 ```
 
 ``` text
-www.example.es
+www.juandecolonia.jc
        │
        ▼
   192.0.2.10
@@ -614,7 +730,7 @@ www.example.es
 Consulta:
 
 ``` bash
-dig www.example.es A
+dig www.juandecolonia.jc A
 ```
 
 ------------------------------------------------------------------------
@@ -624,13 +740,13 @@ dig www.example.es A
 Asocia un nombre con una dirección IPv6.
 
 ``` text
-www.example.es.   IN   AAAA   2001:db8::10
+www.juandecolonia.jc.   IN   AAAA   2001:db8::10
 ```
 
 Consulta:
 
 ``` bash
-dig www.example.es AAAA
+dig www.juandecolonia.jc AAAA
 ```
 
 ------------------------------------------------------------------------
@@ -646,7 +762,7 @@ dig www.example.es AAAA
 Crea un alias para otro nombre.
 
 ``` text
-web.example.es.   IN   CNAME   www.example.es.
+web.juandecolonia.jc.   IN   CNAME   www.juandecolonia.jc.
 ```
 
 ``` text
@@ -667,7 +783,7 @@ web
 Indica qué servidores reciben correo para un dominio.
 
 ``` text
-example.es.   IN   MX   10   mail.example.es.
+juandecolonia.jc.   IN   MX   10   mail.juandecolonia.jc.
 ```
 
 El número es la **preferencia**: un valor menor tiene prioridad sobre
@@ -676,8 +792,8 @@ uno mayor.
 Ejemplo:
 
 ``` text
-MX 10 mail1.example.es.
-MX 20 mail2.example.es.
+MX 10 mail1.juandecolonia.jc.
+MX 20 mail2.juandecolonia.jc.
 ```
 
 ------------------------------------------------------------------------
@@ -687,8 +803,8 @@ MX 20 mail2.example.es.
 Indica los servidores de nombres autoritativos de una zona.
 
 ``` text
-example.es.   IN   NS   ns1.example.es.
-example.es.   IN   NS   ns2.example.es.
+juandecolonia.jc.   IN   NS   ns1.juandecolonia.jc.
+juandecolonia.jc.   IN   NS   ns2.juandecolonia.jc.
 ```
 
 Una zona debería contar con servidores autoritativos adecuadamente
@@ -704,7 +820,7 @@ Se utiliza en la resolución inversa.
 10.2.0.192.in-addr.arpa.
              │
              ▼
-        www.example.es.
+        www.juandecolonia.jc.
 ```
 
 Consulta:
@@ -723,7 +839,7 @@ fundamental sobre una zona.
 Ejemplo conceptual:
 
 ``` text
-example.es. IN SOA ns1.example.es. hostmaster.example.es. (
+juandecolonia.jc. IN SOA ns1.juandecolonia.jc. hostmaster.juandecolonia.jc. (
     2026091701
     3600
     600
@@ -802,7 +918,7 @@ No solo se almacenan respuestas positivas.
 También puede almacenarse información sobre nombres que no existen.
 
 ``` text
-www.example.es  ──► existe ──► A
+www.juandecolonia.jc  ──► existe ──► A
 noexiste.es      ──► NXDOMAIN
 ```
 
@@ -853,7 +969,7 @@ Una configuración completa puede tener:
 
 ``` text
 Zona directa
-example.es
+juandecolonia.jc
      │
      └── www → 192.0.2.10
 
@@ -861,7 +977,7 @@ example.es
 Zona inversa
 2.0.192.in-addr.arpa
      │
-     └── 10 → www.example.es
+     └── 10 → www.juandecolonia.jc
 ```
 
 Ambas zonas son independientes y deben configurarse correctamente.
@@ -895,7 +1011,7 @@ Herramientas útiles:
 
 ``` bash
 resolvectl status
-resolvectl query www.example.com
+resolvectl query www.juandecolonia.jc
 ```
 
 ------------------------------------------------------------------------
@@ -905,25 +1021,25 @@ resolvectl query www.example.com
 `dig` proporciona información detallada sobre las consultas.
 
 ``` bash
-dig www.example.com
+dig www.juandecolonia.jc
 ```
 
 Especificar servidor:
 
 ``` bash
-dig @192.168.10.10 www.example.com
+dig @192.168.10.10 www.juandecolonia.jc
 ```
 
 Tipo concreto:
 
 ``` bash
-dig @192.168.10.10 www.example.com MX
+dig @192.168.10.10 www.juandecolonia.jc MX
 ```
 
 Respuesta corta:
 
 ``` bash
-dig +short www.example.com
+dig +short www.juandecolonia.jc
 ```
 
 Resolución inversa:
@@ -935,7 +1051,7 @@ dig -x 192.168.10.10
 Traza:
 
 ``` bash
-dig +trace www.example.com
+dig +trace www.juandecolonia.jc
 ```
 
 ------------------------------------------------------------------------
@@ -945,7 +1061,7 @@ dig +trace www.example.com
 Herramienta sencilla para consultas rápidas.
 
 ``` bash
-host www.example.com
+host www.juandecolonia.jc
 ```
 
 Consulta inversa:
@@ -957,7 +1073,7 @@ host 192.168.10.10
 Consultar un servidor concreto:
 
 ``` bash
-host www.example.com 192.168.10.10
+host www.juandecolonia.jc 192.168.10.10
 ```
 
 ------------------------------------------------------------------------
@@ -969,7 +1085,7 @@ continúa siendo útil para consultas rápidas y para comparar el
 comportamiento entre plataformas.
 
 ``` bash
-nslookup www.example.com
+nslookup www.juandecolonia.jc
 ```
 
 Modo interactivo:
@@ -977,11 +1093,47 @@ Modo interactivo:
 ``` text
 > server 192.168.10.10
 > set type=MX
-> example.com
+> juandecolonia.jc
 ```
 
 ------------------------------------------------------------------------
 
+
+---
+
+# 🗂️ Antes de las prácticas · árbol de configuración de BIND9
+
+En DNS no basta con saber escribir `dig`. Debes poder localizar **qué fichero define la zona, cuál declara la zona y qué fichero controla el comportamiento global del servidor**.
+
+```text
+/etc/bind/
+├── named.conf                 → punto de entrada principal
+├── named.conf.options        → opciones globales, recursión, forwarders…
+├── named.conf.local          → zonas locales declaradas por el administrador
+├── named.conf.default-zones  → zonas estándar de instalación
+└── db.juandecolonia.jc       → fichero de datos de la zona autoritativa
+
+/var/log/                      → logs, si se han configurado por archivo/syslog/journald
+```
+
+Inspección inicial:
+sudo find /etc/bind -maxdepth 1 -type f -print
+sudo sed -n '1,220p' /etc/bind/named.conf.options
+sudo sed -n '1,220p' /etc/bind/named.conf.local
+sudo named-checkconf
+sudo named-checkzone juandecolonia.jc /etc/bind/db.juandecolonia.jc
+
+### 🖥️ Webmin
+
+En Webmin, el módulo **Servers → BIND DNS Server** permite inspeccionar y editar zonas y determinadas opciones. Después de cualquier cambio importante, vuelve a la CLI y ejecuta `named-checkconf` y `named-checkzone`.
+
+> 💡 **Secuencia profesional:** localizar → leer → modificar → validar → recargar → consultar con `dig` → revisar logs.
+
+
+
+> 👨‍🏫 **Criterio de corrección de las prácticas**
+>
+> La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
 # 🧪 32. PRÁCTICA 1 --- Explorar DNS desde WSL2
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1015,19 +1167,19 @@ resolvectl status
 Después:
 
 ``` bash
-dig www.example.com
+dig www.juandecolonia.jc
 ```
 
 ``` bash
-dig +short www.example.com
+dig +short www.juandecolonia.jc
 ```
 
 ``` bash
-dig www.example.com NS
+dig www.juandecolonia.jc NS
 ```
 
 ``` bash
-dig www.example.com MX
+dig www.juandecolonia.jc MX
 ```
 
 ``` bash
@@ -1037,7 +1189,7 @@ dig -x 8.8.8.8
 Y finalmente:
 
 ``` bash
-dig +trace www.example.com
+dig +trace www.juandecolonia.jc
 ```
 
 ### Entrega
@@ -1046,12 +1198,46 @@ Una tabla:
 
   Consulta            Servidor utilizado   Tipo     Resultado
   ------------------- -------------------- -------- -----------
-  `www.example.com`                        A/AAAA   
-  `example.com NS`                         NS       
-  `example.com MX`                         MX       
+  `www.juandecolonia.jc`                        A/AAAA   
+  `juandecolonia.jc NS`                         NS       
+  `juandecolonia.jc MX`                         MX       
   `8.8.8.8`                                PTR      
 
 ------------------------------------------------------------------------
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `resolvectl status`
+- `dig @<DNS> <nombre>`
+- `sudo named-checkconf`
+- `sudo named-checkzone <zona> <fichero>`
+- `sudo journalctl -u bind9 --no-pager`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 33. PRÁCTICA 2 --- Instalar BIND9 en VirtualBox + Ubuntu 26.04 Server
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1114,6 +1300,40 @@ en los repositorios publicados para `resolute`.
 
 ------------------------------------------------------------------------
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `resolvectl status`
+- `dig @<DNS> <nombre>`
+- `sudo named-checkconf`
+- `sudo named-checkzone <zona> <fichero>`
+- `sudo journalctl -u bind9 --no-pager`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 34. PRÁCTICA 3 --- Servidor DNS caché/reenviador
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1170,7 +1390,7 @@ Ubuntu documenta el uso de `forwarders` en BIND9 para un servidor caché.
 ### Verificación
 
 ``` bash
-dig @127.0.0.1 www.example.com
+dig @127.0.0.1 www.juandecolonia.jc
 ```
 
 Repite la consulta y compara:
@@ -1183,6 +1403,40 @@ El almacenamiento en caché puede reducir el tiempo necesario para
 resolver consultas repetidas.
 
 ------------------------------------------------------------------------
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `resolvectl status`
+- `dig @<DNS> <nombre>`
+- `sudo named-checkconf`
+- `sudo named-checkzone <zona> <fichero>`
+- `sudo journalctl -u bind9 --no-pager`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 35. PRÁCTICA 4 --- Crear una zona autoritativa
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1258,6 +1512,40 @@ mail    IN A 192.168.10.30
 ```
 
 ------------------------------------------------------------------------
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🔎 36. Validar una zona
 
@@ -1370,6 +1658,40 @@ dig @192.168.10.10 -x 192.168.10.20
 
 ------------------------------------------------------------------------
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 38. PRÁCTICA 6 --- Registros DNS
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1442,6 +1764,40 @@ dig @192.168.10.10 asir.test ANY
 
 ------------------------------------------------------------------------
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `resolvectl status`
+- `dig @<DNS> <nombre>`
+- `sudo named-checkconf`
+- `sudo named-checkzone <zona> <fichero>`
+- `sudo journalctl -u bind9 --no-pager`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 39. PRÁCTICA 7 --- Servidor secundario y transferencia de zona
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1503,6 +1859,40 @@ dig @192.168.10.11 asir.test SOA
 Compara el `serial` de ambos servidores.
 
 ------------------------------------------------------------------------
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🔐 40. Transferencias de zona y seguridad
 
@@ -1595,6 +1985,40 @@ Objetivo:
 
 ------------------------------------------------------------------------
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🔄 43. DNS dinámico --- DDNS
 
 DNS dinámico permite modificar registros automáticamente.
@@ -1666,6 +2090,40 @@ Investiga y documenta:
 > 🧭 **ANTES DE EMPEZAR · DNSSEC**
 >
 > DNSSEC añade autenticación criptográfica de los datos DNS mediante firmas digitales y una cadena de confianza. **No cifra las consultas DNS**: su finalidad principal es permitir validar la autenticidad e integridad de los datos.
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `sudo systemctl status kea-dhcp4-server`
+- `sudo journalctl -u kea-dhcp4-server --no-pager`
+- `ip neigh`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🛡️ 45. DNSSEC
 
@@ -1783,7 +2241,7 @@ encuentran:
 Captura tráfico mientras ejecutas:
 
 ``` bash
-dig www.example.com
+dig www.juandecolonia.jc
 ```
 
 Filtro:
@@ -1809,12 +2267,46 @@ Analiza:
 Después repite:
 
 ``` bash
-dig +tcp www.example.com
+dig +tcp www.juandecolonia.jc
 ```
 
 Compara UDP y TCP.
 
 ------------------------------------------------------------------------
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `resolvectl status`
+- `dig @<DNS> <nombre>`
+- `sudo named-checkconf`
+- `sudo named-checkzone <zona> <fichero>`
+- `sudo journalctl -u bind9 --no-pager`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 49. PRÁCTICA 11 --- Diagnóstico con `dig`
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1850,7 +2342,7 @@ dig @192.168.10.10 -x 192.168.10.20
 Después:
 
 ``` bash
-dig +trace www.example.com
+dig +trace www.juandecolonia.jc
 ```
 
 ### Informe
@@ -1865,6 +2357,40 @@ Para cada consulta indica:
 -   tiempo de respuesta.
 
 ------------------------------------------------------------------------
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `resolvectl status`
+- `dig @<DNS> <nombre>`
+- `sudo named-checkconf`
+- `sudo named-checkzone <zona> <fichero>`
+- `sudo journalctl -u bind9 --no-pager`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🩺 50. Diagnóstico sistemático
 
@@ -2047,6 +2573,40 @@ asir.test
 
 ------------------------------------------------------------------------
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `resolvectl status`
+- `dig @<DNS> <nombre>`
+- `sudo named-checkconf`
+- `sudo named-checkzone <zona> <fichero>`
+- `sudo journalctl -u bind9 --no-pager`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧠 53. Resumen
 
 ``` text
@@ -2226,9 +2786,9 @@ autoritativos para una zona hija.
 Ejemplo:
 
 ``` text
-example.es
+juandecolonia.jc
      │
-     └──► asir.example.es
+     └──► asir.juandecolonia.jc
               │
               └── DNS propio
 ```
@@ -2240,7 +2800,7 @@ Permite distribuir la administración del espacio DNS.
 El cliente pregunta a un resolver:
 
 ``` text
-www.example.com ?
+www.juandecolonia.jc ?
 ```
 
 El resolver puede consultar:
@@ -2250,7 +2810,7 @@ ROOT
   ↓
 .COM
   ↓
-example.com
+juandecolonia.jc
   ↓
 respuesta
 ```
@@ -2344,38 +2904,117 @@ la cadena de confianza.
 
 ------------------------------------------------------------------------
 
-# 📝 55. Test de repaso --- respuestas
+# 📝 55. Test de repaso
 
-En versiones anteriores del material incluye además un test de 10 preguntas.
+## 1. ¿Qué componente suele realizar consultas recursivas para un cliente?
+A. El cliente FTP
+B. El resolvedor DNS
+C. El servidor web
+D. El servidor DHCP
 
+## 2. ¿Qué registro contiene información de autoridad de una zona?
+A. SOA
+B. A
+C. MX
+D. PTR
 
-### Respuestas
+## 3. ¿Qué registro asocia normalmente un nombre con una dirección IPv4?
+A. AAAA
+B. CNAME
+C. A
+D. NS
 
-    Nº    Respuesta
-  ---- ----------------
-     1      **c**
-     2      **b**
-     3      **b**
-     4      **d**
-     5      **a**
-     6  ⚠️ **Revisar**
-     7      **b**
-     8      **b**
-     9      **a**
-    10      **a**
+## 4. ¿Qué registro se utiliza para localizar servidores de correo?
+A. TXT
+B. MX
+C. PTR
+D. SOA
 
-> ⚠️ **Nota sobre la pregunta 6 del material previo**
->
-> La redacción presenta un problema: las opciones mostradas pueden ser
-> compatibles con el funcionamiento normal de servidores DNS que
-> desempeñan funciones distintas para diferentes zonas. Por tanto, no se
-> identifica una única opción falsa de forma inequívoca. Se recomienda
-> **corregir esta pregunta antes de incorporarla a un examen o
-> cuestionario Moodle**.
+## 5. ¿Qué herramienta permite realizar consultas DNS detalladas desde Linux?
+A. `dig`
+B. `ss`
+C. `scp`
+D. `ip route`
 
-------------------------------------------------------------------------
+## 6. ¿Qué comando valida la sintaxis global de BIND?
+A. `named-checkzone`
+B. `named-checkconf`
+C. `bind-check`
+D. `dns-test`
+
+## 7. ¿Qué comando valida los registros de una zona concreta?
+A. `named-checkzone`
+B. `named-checkconf`
+C. `dig +trace`
+D. `resolvectl flush-caches`
+
+## 8. ¿Qué registro se utiliza habitualmente para resolución inversa IPv4?
+A. MX
+B. PTR
+C. CNAME
+D. TXT
+
+## 9. ¿Qué mecanismo protege la autenticidad de los datos DNS mediante una cadena de confianza?
+A. FTP
+B. DNSSEC
+C. DHCP relay
+D. PAT
+
+## 10. ¿Qué herramienta permite seguir la delegación DNS desde la raíz?
+A. `dig +trace`
+B. `dig +short`
+C. `host -v` únicamente
+D. `ss -lnt`
+
+### ✅ Respuestas
+
+| Pregunta | Respuesta |
+|---:|:---:|
+| 1 | **B** |
+| 2 | **A** |
+| 3 | **C** |
+| 4 | **B** |
+| 5 | **A** |
+| 6 | **B** |
+| 7 | **A** |
+| 8 | **B** |
+| 9 | **B** |
+| 10 | **A** |
 
 # 🧪 56. Actividad final --- «¿Dónde está el problema?»
+### 🧭 Guía de resolución y comprobación
+
+**Puntos a conseguir:** dejar el sistema en el estado solicitado, poder explicar qué protocolo interviene, comprobarlo desde un cliente y aportar evidencias reproducibles.
+
+1. **Preparar** el entorno y registrar el estado inicial.
+2. **Construir** solo el siguiente elemento necesario.
+3. **Validar** sintaxis y servicio.
+4. **Probar** desde el cliente.
+5. **Observar** puertos, logs y tráfico cuando proceda.
+6. **Documentar** configuración, comandos y capturas.
+
+
+#### Solución de referencia
+
+La solución debe dejar un estado reproducible: topología o configuración documentada, comandos ejecutados, resultado esperado y resultado observado. Si el ejercicio pide una incidencia, documenta además **causa → evidencia → corrección → prueba de recuperación**.
+
+
+### 📸 Evidencias y capturas
+
+Incluye, cuando aporte información, una captura de la topología, del fichero o interfaz configurada, del estado del servicio y de la prueba final. Cada captura debe llevar una frase que explique **qué demuestra**; una imagen sin interpretación no constituye una evidencia técnica suficiente.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos |
+|---|---:|
+| Comprensión del servicio/protocolo | 2 |
+| Configuración y proceso | 2 |
+| Funcionamiento demostrado | 2 |
+| Diagnóstico y razonamiento | 2 |
+| Documentación y evidencias | 1 |
+| Seguridad y buenas prácticas | 1 |
+| **Total** | **10** |
+
 
 El profesor proporciona:
 

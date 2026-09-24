@@ -1,5 +1,98 @@
 # 🧱 ENTORNO IV · Infraestructura de las UT1–UT8 con Docker Compose
 
+> 🧭 **ANTES DE EMPEZAR · VOCABULARIO TÉCNICO**
+>
+> Las siglas, abreviaturas y conceptos técnicos que van a aparecer en esta unidad se presentan aquí antes de su desarrollo. La explicación local de cada tema podrá ampliar estas definiciones cuando sea necesario.
+>
+> **UT** — Unidad de Trabajo: unidad didáctica del módulo profesional.
+> **CFGS** — Ciclo Formativo de Grado Superior.
+> **ASIR** — Administración de Sistemas Informáticos en Red.
+> **Docker** — Plataforma de contenerización para construir, distribuir y ejecutar aplicaciones aisladas en contenedores.
+> **Docker Compose** — Herramienta de Docker para definir y ejecutar aplicaciones multicontenedor mediante un archivo declarativo.
+> **DNS** — Sistema de nombres de dominio: servicio distribuido que relaciona nombres con direcciones IP y otros datos.
+> **TCP** — Protocolo de transporte orientado a conexión que proporciona entrega fiable y ordenada.
+> **TCP/IP** — Familia de protocolos de Internet en la que IP proporciona direccionamiento y TCP es uno de los protocolos de transporte.
+> **IP** — Protocolo de Internet, responsable del direccionamiento y encaminamiento de paquetes.
+> **CONTENEDOR** — Instancia aislada de una imagen que comparte el núcleo del sistema anfitrión.
+> **DHCP** — Protocolo de configuración dinámica de host: entrega automáticamente parámetros de red a los clientes.
+> **LAN** — Red de área local.
+> **SFTP** — Protocolo de transferencia de archivos que funciona como subsistema de SSH; no es FTP cifrado.
+> **SSH** — Protocolo seguro de administración remota y transporte de otros servicios.
+> **SSH/SFTP** — SSH es el protocolo seguro de transporte; SFTP es un subsistema de transferencia de archivos que funciona sobre SSH.
+> **HOST** — Equipo o sistema anfitrión en el que se ejecuta un servicio, contenedor o máquina virtual.
+> **HTTP** — Protocolo de transferencia de hipertexto utilizado principalmente por la Web.
+> **MUA** — Mail User Agent, programa con el que el usuario compone, envía y lee correo.
+> **MTA** — Mail Transfer Agent, componente que transporta correo entre servidores.
+> **SMTP** — Simple Mail Transfer Protocol, protocolo principal para transportar correo entre agentes de correo.
+> **IMAP** — Internet Message Access Protocol, protocolo para acceder y gestionar mensajes que permanecen en el servidor.
+> **XMPP** — Extensible Messaging and Presence Protocol, protocolo abierto para mensajería y presencia.
+> **IRC** — Internet Relay Chat, protocolo de conversación textual en tiempo real mediante canales.
+> **FFmpeg** — Conjunto de herramientas para procesar, convertir, capturar y transmitir audio y vídeo.
+> **RTMP** — Real-Time Messaging Protocol, protocolo usado en determinados flujos de ingestión de audio y vídeo en directo.
+> **HLS** — HTTP Live Streaming, sistema de distribución de audio y vídeo segmentado mediante HTTP.
+> **CMD** — Instrucción de Dockerfile que define el comando predeterminado del contenedor.
+> **WSL2** — Windows Subsystem for Linux 2: tecnología de Windows que ejecuta un entorno Linux mediante una máquina virtual ligera.
+>
+> **Criterio didáctico:** no se presupone que conocer una sigla equivalga a comprender el concepto. Primero se identifica qué significa y qué función desempeña; después se emplea en comandos, configuraciones y prácticas.
+
+> 🧩 **ANTES DE EMPEZAR · CONCEPTOS BASE**
+>
+> **Protocolo** — conjunto de reglas que define cómo se comunican dos o más sistemas.
+> **Cliente** — programa o equipo que inicia una petición de un servicio.
+> **Servidor** — programa o equipo que ofrece un servicio y atiende peticiones.
+> **Servicio de red** — aplicación o proceso que ofrece una función accesible mediante la red, normalmente a través de uno o varios puertos.
+> **Proceso** — instancia en ejecución de un programa dentro de un sistema operativo.
+> **Demonio (daemon)** — proceso que permanece ejecutándose en segundo plano para prestar un servicio; en Linux es habitual que esté gestionado por `systemd`.
+> **Puerto** — número lógico asociado a un servicio de transporte; permite distinguir varias comunicaciones que utilizan la misma dirección IP.
+> **Socket** — extremo de comunicación que combina, según el contexto, una dirección IP, un puerto y un protocolo de transporte.
+> **Interfaz de red** — componente físico o virtual mediante el que un sistema se conecta a una red.
+> **Dirección IP** — identificador lógico de una interfaz dentro de una red IP.
+> **Subred** — porción de un espacio de direccionamiento IP que comparte un prefijo común.
+> **Puerta de enlace predeterminada** — equipo al que un host entrega el tráfico destinado a redes que no conoce directamente.
+> **Encaminamiento (routing)** — proceso de decidir por qué camino debe avanzar un paquete para alcanzar su destino.
+> **Tabla de encaminamiento** — conjunto de rutas que utiliza un sistema para decidir dónde enviar los paquetes.
+> **Broadcast o difusión** — envío dirigido a todos los equipos de un dominio de difusión.
+> **Unicast** — comunicación dirigida de un emisor a un receptor concreto.
+> **Multicast** — comunicación dirigida a un grupo de receptores que se han suscrito al grupo.
+> **Resolución de nombres** — proceso mediante el cual un sistema obtiene información asociada a un nombre, por ejemplo una dirección IP mediante DNS.
+> **Caché** — almacenamiento temporal de resultados para poder reutilizarlos sin repetir inmediatamente una consulta o cálculo.
+> **Archivo de configuración** — fichero que contiene parámetros con los que un programa determina cómo debe funcionar.
+> **Validación** — comprobación de que una configuración tiene una sintaxis y una estructura aceptables antes de aplicarla.
+> **Estado** — situación actual de un proceso, servicio, interfaz o recurso; conocerlo es esencial para diagnosticar una incidencia.
+> **Registro (log)** — anotación generada por un programa o sistema para dejar constancia de eventos, errores y operaciones.
+>
+> Estos conceptos son el vocabulario común sobre el que se construyen las prácticas. Cuando una unidad introduzca un concepto especializado —por ejemplo, una zona DNS, una concesión DHCP, un virtual host, un contenedor o un Pod— se explicará de nuevo antes de utilizarlo operativamente.
+
+> 🧠 **CONCEPTOS QUE NO DEBEMOS DAR POR SUPUESTOS**
+>
+> **`systemd`** — sistema de inicio y gestor de servicios habitual en Linux; `systemctl` permite consultar y administrar esos servicios.
+> **Archivo de configuración** — fichero que contiene los parámetros con los que un servicio determina su comportamiento.
+> **Registro DNS** — entrada de una zona DNS que asocia un nombre con un dato, como una dirección IP, un servidor de correo o un alias.
+> **Zona DNS** — parte de la jerarquía DNS administrada por un servidor autoritativo concreto.
+> **Servidor autoritativo** — servidor que posee la información oficial de una zona DNS y puede responder con autoridad sobre ella.
+> **Resolver o resolvedor** — componente que realiza consultas DNS en nombre de una aplicación o de un usuario y obtiene la respuesta siguiendo el proceso de resolución.
+> **Consulta recursiva** — consulta en la que el servidor consultado asume la tarea de obtener una respuesta completa para el cliente, si tiene habilitada la recursión.
+> **Consulta iterativa** — consulta en la que el servidor responde con la mejor información que conoce, pudiendo remitir al consultante hacia otro servidor.
+> **Concesión DHCP** — asignación temporal de una dirección IP y otros parámetros de red a un cliente.
+> **Imagen de contenedor** — plantilla inmutable a partir de la cual se crean contenedores.
+> **Volumen** — almacenamiento gestionado que permite conservar datos independientemente del ciclo de vida de un contenedor.
+> **Red Docker** — red virtual administrada por Docker que permite conectar contenedores y, según su configuración, publicar servicios hacia el host.
+> **Orquestación** — automatización de la ejecución, escalado, recuperación y coordinación de múltiples cargas de trabajo o contenedores.
+> **Pod** — unidad mínima desplegable de Kubernetes; contiene uno o varios contenedores que comparten determinados recursos.
+> **Virtual host** — configuración que permite que un mismo servidor web atienda distintos sitios o nombres mediante configuraciones diferenciadas.
+> **Certificado digital** — credencial criptográfica que vincula una identidad con una clave pública y que puede estar firmada por una autoridad de certificación.
+> **Códec** — algoritmo que codifica y decodifica audio, vídeo u otro tipo de datos; un códec no es lo mismo que un contenedor multimedia.
+> **Contenedor multimedia** — formato de archivo que agrupa una o varias pistas de audio, vídeo, subtítulos o metadatos.
+> **Streaming** — distribución de contenido de forma que el receptor puede comenzar a consumirlo mientras continúa recibiendo datos.
+> **Commit** — instantánea registrada por Git que conserva un conjunto concreto de cambios.
+> **Staging area** — área intermedia de Git donde se seleccionan los cambios que formarán el próximo commit.
+> **Rama (branch)** — línea de desarrollo independiente dentro de un repositorio Git.
+> **Remoto (remote)** — referencia a un repositorio Git externo con el que se intercambian commits mediante `fetch`, `pull` o `push`.
+> **Codespace** — entorno de desarrollo remoto proporcionado por GitHub para trabajar con un repositorio.
+> **Webmin** — interfaz web de administración de sistemas que permite gestionar determinados servicios y parámetros de un sistema Linux.
+> **Roundcube** — cliente de correo web que accede al buzón mediante IMAP y puede enviar mensajes mediante SMTP.
+> **Sympa** — gestor de listas de distribución que proporciona funciones de suscripción, moderación, administración y distribución de mensajes.
+
 > **Material docente integral · CFGS ASIR**
 
 ## 1. 🎯 Objetivos

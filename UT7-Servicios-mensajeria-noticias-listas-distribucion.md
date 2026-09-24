@@ -1,4 +1,112 @@
-# 💬⚡ UT7 · MENSAJERÍA, NOTICIAS Y LISTAS DE DISTRIBUCIÓN ⚡💬
+# 💬⚡ Unidad de Trabajo 7 · MENSAJERÍA, NOTICIAS Y LISTAS DE DISTRIBUCIÓN ⚡💬
+
+> 🧭 **ANTES DE EMPEZAR · VOCABULARIO TÉCNICO**
+>
+> Las siglas, abreviaturas y conceptos técnicos que van a aparecer en esta unidad se presentan aquí antes de su desarrollo. La explicación local de cada tema podrá ampliar estas definiciones cuando sea necesario.
+>
+> **UT** — Unidad de Trabajo: unidad didáctica del módulo profesional.
+> **RA** — Resultado de Aprendizaje: capacidad que el alumnado debe demostrar al finalizar un bloque curricular.
+> **CFGS** — Ciclo Formativo de Grado Superior.
+> **ASIR** — Administración de Sistemas Informáticos en Red.
+> **SRI** — Servicios de Red e Internet.
+> **LIST** — Comando FTP que solicita un listado de archivos.
+> **WSL** — Windows Subsystem for Linux, plataforma de Windows para ejecutar entornos Linux.
+> **WSL2** — Windows Subsystem for Linux 2: tecnología de Windows que ejecuta un entorno Linux mediante una máquina virtual ligera.
+> **XMPP** — Extensible Messaging and Presence Protocol, protocolo abierto para mensajería y presencia.
+> **CLI** — Interfaz de línea de comandos, es decir, administración mediante órdenes escritas.
+> **ID** — Identificador utilizado para distinguir un objeto de otros.
+> **IRC** — Internet Relay Chat, protocolo de conversación textual en tiempo real mediante canales.
+> **IP** — Protocolo de Internet, responsable del direccionamiento y encaminamiento de paquetes.
+> **NNTP** — Network News Transfer Protocol, protocolo para intercambio y consulta de artículos de grupos de noticias.
+> **QUIT** — Comando de salida de sesiones de protocolos como FTP o IRC.
+> **GUI** — Interfaz gráfica de usuario, es decir, administración mediante ventanas, menús y controles visuales.
+> **RR** — Resource Record o registro de recursos DNS: unidad básica de información de una zona.
+> **IM** — Instant Messaging o mensajería instantánea.
+> **ICQ** — Servicio histórico de mensajería instantánea.
+> **MSN/MSNP** — MSN Messenger fue un servicio histórico de mensajería; MSNP fue su protocolo de comunicación.
+> **XML** — Extensible Markup Language, lenguaje de marcado para datos estructurados.
+> **JID** — Jabber ID, identificador de usuario XMPP, normalmente usuario@dominio/recurso.
+> **XEP** — XMPP Extension Protocol, especificación que define una extensión de XMPP.
+> **TLS** — Protocolo criptográfico que proporciona confidencialidad, integridad y autenticación mediante certificados.
+> **VM** — Máquina virtual: ordenador software aislado que ejecuta un sistema operativo invitado.
+> **SMTP** — Simple Mail Transfer Protocol, protocolo principal para transportar correo entre agentes de correo.
+> **LISTSERV** — Sistema de gestión de listas de distribución de correo.
+> **TCP** — Protocolo de transporte orientado a conexión que proporciona entrega fiable y ordenada.
+> **NNTPS** — NNTP protegido mediante TLS.
+> **INN** — InterNetNews, implementación de servidor de noticias NNTP.
+> **MTA** — Mail Transfer Agent, componente que transporta correo entre servidores.
+> **Docker** — Plataforma de contenerización para construir, distribuir y ejecutar aplicaciones aisladas en contenedores.
+> **Docker Compose** — Herramienta de Docker para definir y ejecutar aplicaciones multicontenedor mediante un archivo declarativo.
+> **DNS** — Sistema de nombres de dominio: servicio distribuido que relaciona nombres con direcciones IP y otros datos.
+> **WAN** — Red de área extensa que conecta redes separadas geográficamente.
+> **TCP/IP** — Familia de protocolos de Internet en la que IP proporciona direccionamiento y TCP es uno de los protocolos de transporte.
+> **MX** — Registro DNS que identifica los servidores que reciben correo.
+> **ICMP** — Protocolo de control y diagnóstico de Internet; ping utiliza mensajes ICMP en IPv4.
+> **UDP** — Protocolo de transporte sin conexión, ligero y sin garantía de entrega.
+> **FTP** — Protocolo de transferencia de archivos que separa un canal de control de los canales de datos.
+> **DHCP** — Protocolo de configuración dinámica de host: entrega automáticamente parámetros de red a los clientes.
+> **POP3** — Post Office Protocol version 3, protocolo para recuperar mensajes del buzón.
+> **DNSSEC** — Extensiones de seguridad de DNS que permiten validar criptográficamente respuestas y datos DNS.
+>
+> **Criterio didáctico:** no se presupone que conocer una sigla equivalga a comprender el concepto. Primero se identifica qué significa y qué función desempeña; después se emplea en comandos, configuraciones y prácticas.
+
+> 🧩 **ANTES DE EMPEZAR · CONCEPTOS BASE**
+>
+> **Protocolo** — conjunto de reglas que define cómo se comunican dos o más sistemas.
+> **Cliente** — programa o equipo que inicia una petición de un servicio.
+> **Servidor** — programa o equipo que ofrece un servicio y atiende peticiones.
+> **Servicio de red** — aplicación o proceso que ofrece una función accesible mediante la red, normalmente a través de uno o varios puertos.
+> **Proceso** — instancia en ejecución de un programa dentro de un sistema operativo.
+> **Demonio (daemon)** — proceso que permanece ejecutándose en segundo plano para prestar un servicio; en Linux es habitual que esté gestionado por `systemd`.
+> **Puerto** — número lógico asociado a un servicio de transporte; permite distinguir varias comunicaciones que utilizan la misma dirección IP.
+> **Socket** — extremo de comunicación que combina, según el contexto, una dirección IP, un puerto y un protocolo de transporte.
+> **Interfaz de red** — componente físico o virtual mediante el que un sistema se conecta a una red.
+> **Dirección IP** — identificador lógico de una interfaz dentro de una red IP.
+> **Subred** — porción de un espacio de direccionamiento IP que comparte un prefijo común.
+> **Puerta de enlace predeterminada** — equipo al que un host entrega el tráfico destinado a redes que no conoce directamente.
+> **Encaminamiento (routing)** — proceso de decidir por qué camino debe avanzar un paquete para alcanzar su destino.
+> **Tabla de encaminamiento** — conjunto de rutas que utiliza un sistema para decidir dónde enviar los paquetes.
+> **Broadcast o difusión** — envío dirigido a todos los equipos de un dominio de difusión.
+> **Unicast** — comunicación dirigida de un emisor a un receptor concreto.
+> **Multicast** — comunicación dirigida a un grupo de receptores que se han suscrito al grupo.
+> **Resolución de nombres** — proceso mediante el cual un sistema obtiene información asociada a un nombre, por ejemplo una dirección IP mediante DNS.
+> **Caché** — almacenamiento temporal de resultados para poder reutilizarlos sin repetir inmediatamente una consulta o cálculo.
+> **Archivo de configuración** — fichero que contiene parámetros con los que un programa determina cómo debe funcionar.
+> **Validación** — comprobación de que una configuración tiene una sintaxis y una estructura aceptables antes de aplicarla.
+> **Estado** — situación actual de un proceso, servicio, interfaz o recurso; conocerlo es esencial para diagnosticar una incidencia.
+> **Registro (log)** — anotación generada por un programa o sistema para dejar constancia de eventos, errores y operaciones.
+>
+> Estos conceptos son el vocabulario común sobre el que se construyen las prácticas. Cuando una unidad introduzca un concepto especializado —por ejemplo, una zona DNS, una concesión DHCP, un virtual host, un contenedor o un Pod— se explicará de nuevo antes de utilizarlo operativamente.
+
+> 🧠 **CONCEPTOS QUE NO DEBEMOS DAR POR SUPUESTOS**
+>
+> **`systemd`** — sistema de inicio y gestor de servicios habitual en Linux; `systemctl` permite consultar y administrar esos servicios.
+> **Archivo de configuración** — fichero que contiene los parámetros con los que un servicio determina su comportamiento.
+> **Registro DNS** — entrada de una zona DNS que asocia un nombre con un dato, como una dirección IP, un servidor de correo o un alias.
+> **Zona DNS** — parte de la jerarquía DNS administrada por un servidor autoritativo concreto.
+> **Servidor autoritativo** — servidor que posee la información oficial de una zona DNS y puede responder con autoridad sobre ella.
+> **Resolver o resolvedor** — componente que realiza consultas DNS en nombre de una aplicación o de un usuario y obtiene la respuesta siguiendo el proceso de resolución.
+> **Consulta recursiva** — consulta en la que el servidor consultado asume la tarea de obtener una respuesta completa para el cliente, si tiene habilitada la recursión.
+> **Consulta iterativa** — consulta en la que el servidor responde con la mejor información que conoce, pudiendo remitir al consultante hacia otro servidor.
+> **Concesión DHCP** — asignación temporal de una dirección IP y otros parámetros de red a un cliente.
+> **Imagen de contenedor** — plantilla inmutable a partir de la cual se crean contenedores.
+> **Volumen** — almacenamiento gestionado que permite conservar datos independientemente del ciclo de vida de un contenedor.
+> **Red Docker** — red virtual administrada por Docker que permite conectar contenedores y, según su configuración, publicar servicios hacia el host.
+> **Orquestación** — automatización de la ejecución, escalado, recuperación y coordinación de múltiples cargas de trabajo o contenedores.
+> **Pod** — unidad mínima desplegable de Kubernetes; contiene uno o varios contenedores que comparten determinados recursos.
+> **Virtual host** — configuración que permite que un mismo servidor web atienda distintos sitios o nombres mediante configuraciones diferenciadas.
+> **Certificado digital** — credencial criptográfica que vincula una identidad con una clave pública y que puede estar firmada por una autoridad de certificación.
+> **Códec** — algoritmo que codifica y decodifica audio, vídeo u otro tipo de datos; un códec no es lo mismo que un contenedor multimedia.
+> **Contenedor multimedia** — formato de archivo que agrupa una o varias pistas de audio, vídeo, subtítulos o metadatos.
+> **Streaming** — distribución de contenido de forma que el receptor puede comenzar a consumirlo mientras continúa recibiendo datos.
+> **Commit** — instantánea registrada por Git que conserva un conjunto concreto de cambios.
+> **Staging area** — área intermedia de Git donde se seleccionan los cambios que formarán el próximo commit.
+> **Rama (branch)** — línea de desarrollo independiente dentro de un repositorio Git.
+> **Remoto (remote)** — referencia a un repositorio Git externo con el que se intercambian commits mediante `fetch`, `pull` o `push`.
+> **Codespace** — entorno de desarrollo remoto proporcionado por GitHub para trabajar con un repositorio.
+> **Webmin** — interfaz web de administración de sistemas que permite gestionar determinados servicios y parámetros de un sistema Linux.
+> **Roundcube** — cliente de correo web que accede al buzón mediante IMAP y puede enviar mensajes mediante SMTP.
+> **Sympa** — gestor de listas de distribución que proporciona funciones de suscripción, moderación, administración y distribución de mensajes.
 
 ### RA6 · Mensajería instantánea, noticias y listas de distribución.
 
@@ -76,7 +184,7 @@ Podemos distinguir, de forma general:
                                       LISTAS       NNTP
 ```
 
-En versiones anteriores del material agrupa tres familias:
+La unidad agrupa tres familias de servicios:
 
 - 💬 mensajería instantánea;
 - 📋 listas de distribución;
@@ -402,7 +510,7 @@ Para laboratorio resulta especialmente útil un cliente CLI porque permite obser
 
 # 3.3 🖥️ Servidor IRC
 
-En versiones anteriores del material propone **InspIRCd**.
+El laboratorio puede utilizar **InspIRCd** como implementación de servidor IRC cuando se desee practicar este protocolo.
 
 Actualmente sigue existiendo como servidor IRC modular y Ubuntu dispone de paquetes de InspIRCd en sus repositorios. 
 
@@ -698,6 +806,53 @@ Sympa ── comprueba reglas ──► moderación (si procede)
    └──► miembro C
 ```
 
+
+---
+
+# 🗂️ Antes de las prácticas · localizar la configuración de mensajería, listas y noticias
+
+Aquí convivirán varios servicios. No los mezcles: cada uno tiene su propio modelo y sus propios ficheros.
+
+```text
+Prosody / XMPP
+/etc/prosody/                 → prosody.cfg.lua y configuración de módulos
+
+IRC (servidor elegido)
+/etc/                         → ubicación variable según software/paquete
+
+Sympa
+/etc/sympa/                   → configuración del servicio
+/var/lib/sympa/               → datos, listas y estado según instalación
+
+Mailman
+/etc/mailman3/                → configuración de Mailman 3
+
+NNTP
+/etc/news/ o configuración específica del servidor → depende del software
+```
+
+Comandos de reconocimiento:
+```bash
+sudo find /etc -maxdepth 2 -type f \( -name '*prosody*' -o -name '*sympa*' -o -name '*mailman*' \) 2>/dev/null
+sudo systemctl list-units --type=service | grep -Ei 'prosody|sympa|mailman|news|irc'
+sudo ss -lntup
+```
+
+### 🌐 Sympa
+
+Sympa dispone de una interfaz web para administrar listas, suscriptores y moderación.
+
+![Interfaz didáctica de Sympa](img/captura-sympa-didactica.png)
+
+### 🖥️ Webmin
+
+Webmin no debe considerarse un panel universal para estos servicios. Si existe un módulo específico, úsalo como apoyo; si no existe, trabaja con CLI y con la interfaz propia de cada aplicación.
+
+
+
+> 👨‍🏫 **Criterio de corrección de las prácticas**
+>
+> La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
 ## 🧪 Práctica 7.X — Crear y administrar una lista con Sympa
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -750,6 +905,40 @@ journalctl -u postfix -n 50
 - recepción por al menos dos miembros;
 - logs relevantes;
 - diagrama del flujo.
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ss -lntup`
+- `sudo systemctl status <servicio>`
+- `sudo journalctl -u <servicio> --no-pager`
+- `tcpdump -ni any port <puerto>`
+- `curl -I http://<interfaz-web>/`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 6. 🧪 Arquitectura de laboratorio
 
@@ -890,6 +1079,40 @@ Diseñar la infraestructura necesaria para desplegar los servicios de la unidad.
 
 ---
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 ## 🧪 Práctica 7.2 · Diagnóstico TCP
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -933,6 +1156,40 @@ timed out     → filtrado, ruta incorrecta o host inaccesible
 ```
 
 ---
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 Práctica 7.3 · Desplegar XMPP con Prosody
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1026,6 +1283,40 @@ Los dos usuarios deben poder:
 
 ---
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ss -lntup`
+- `sudo systemctl status <servicio>`
+- `sudo journalctl -u <servicio> --no-pager`
+- `tcpdump -ni any port <puerto>`
+- `curl -I http://<interfaz-web>/`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 Práctica 7.4 · Analizar XMPP con tcpdump
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1070,6 +1361,40 @@ Analizar:
 **Respuesta:** porque la sesión puede utilizar TLS y el contenido de aplicación puede ir cifrado.
 
 ---
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ss -lntup`
+- `sudo systemctl status <servicio>`
+- `sudo journalctl -u <servicio> --no-pager`
+- `tcpdump -ni any port <puerto>`
+- `curl -I http://<interfaz-web>/`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 Práctica 7.5 · Crear un servidor IRC
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1155,6 +1480,40 @@ Observar la respuesta del servidor.
 
 ---
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ss -lntup`
+- `sudo systemctl status <servicio>`
+- `sudo journalctl -u <servicio> --no-pager`
+- `tcpdump -ni any port <puerto>`
+- `curl -I http://<interfaz-web>/`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 Práctica 7.7 · Crear canales IRC
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1193,6 +1552,40 @@ Investigar los comandos necesarios para:
 - enviar mensajes privados.
 
 ---
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ss -lntup`
+- `sudo systemctl status <servicio>`
+- `sudo journalctl -u <servicio> --no-pager`
+- `tcpdump -ni any port <puerto>`
+- `curl -I http://<interfaz-web>/`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 Práctica 7.8 · Modelo de lista de distribución
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1236,6 +1629,40 @@ Responder:
 
 ---
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ss -lntup`
+- `sudo systemctl status <servicio>`
+- `sudo journalctl -u <servicio> --no-pager`
+- `tcpdump -ni any port <puerto>`
+- `curl -I http://<interfaz-web>/`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 Práctica 7.9 · Mailman
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1272,6 +1699,40 @@ En una instalación moderna se debe trabajar con **Mailman 3** cuando el entorno
 > ⚠️ La instalación exacta de Mailman 3 depende de la versión empaquetada y del método de despliegue elegido. No se debe copiar una receta de Mailman 2 como si fuera equivalente.
 
 ---
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `dig MX juandecolonia.jc`
+- `ss -lntup`
+- `sudo postfix check`
+- `sudo doveconf -n`
+- `curl -I https://<roundcube-host>/`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 Práctica 7.10 · Crear un servidor NNTP
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1323,6 +1784,40 @@ Determinar:
 
 ---
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ss -lntup`
+- `sudo systemctl status <servicio>`
+- `sudo journalctl -u <servicio> --no-pager`
+- `tcpdump -ni any port <puerto>`
+- `curl -I http://<interfaz-web>/`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 Práctica 7.11 · Comprobar NNTP
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1365,6 +1860,40 @@ QUIT
 
 ---
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ss -lntup`
+- `sudo systemctl status <servicio>`
+- `sudo journalctl -u <servicio> --no-pager`
+- `tcpdump -ni any port <puerto>`
+- `curl -I http://<interfaz-web>/`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 Práctica 7.12 · Comparar los tres modelos
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1399,6 +1928,40 @@ Completar:
 | Cifrado posible | | | | |
 
 ---
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 Práctica 7.13 · Captura de tráfico
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1438,6 +2001,40 @@ Comparar:
 
 ---
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 Práctica 7.14 · Inventario de servicios
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1473,6 +2070,40 @@ Elaborar una tabla:
 | NNTP | 119 | | | |
 
 ---
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 Práctica 7.15 · Firewall
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1521,6 +2152,40 @@ sudo ufw status numbered
 Porque cada servicio expuesto aumenta la superficie de ataque y debe justificarse.
 
 ---
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 Práctica 7.16 · DNS para XMPP
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1576,6 +2241,40 @@ TCP/5222
 
 ---
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `resolvectl status`
+- `dig @<DNS> <nombre>`
+- `sudo named-checkconf`
+- `sudo named-checkzone <zona> <fichero>`
+- `sudo journalctl -u bind9 --no-pager`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 Práctica 7.17 · Simular una incidencia
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1616,6 +2315,40 @@ El alumno deberá:
 5. documentar.
 
 ---
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 Práctica 7.18 · Logs
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1660,6 +2393,40 @@ journalctl -u prosody | grep -i error
 
 ---
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 Práctica 7.19 · Cliente frente a servidor
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1702,6 +2469,40 @@ SERVIDOR
 
 ---
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 Práctica 7.20 · Comparación histórica
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1737,6 +2538,40 @@ Distinguir:
 > **protocolo ≠ aplicación ≠ servicio ≠ empresa**
 
 ---
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 8. 🔎 Diagnóstico y troubleshooting
 

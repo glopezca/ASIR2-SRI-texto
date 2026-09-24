@@ -1,4 +1,108 @@
-# 🌐⚡ UT1 · CONCEPTOS BÁSICOS DE TCP/IP ⚡🌐
+# 🌐⚡ Unidad de Trabajo 1 · CONCEPTOS BÁSICOS DE LA FAMILIA DE PROTOCOLOS DE INTERNET (TCP/IP) ⚡🌐
+
+> 🧭 **ANTES DE EMPEZAR · VOCABULARIO TÉCNICO**
+>
+> Las siglas, abreviaturas y conceptos técnicos que van a aparecer en esta unidad se presentan aquí antes de su desarrollo. La explicación local de cada tema podrá ampliar estas definiciones cuando sea necesario.
+>
+> **UT** — Unidad de Trabajo: unidad didáctica del módulo profesional.
+> **RA** — Resultado de Aprendizaje: capacidad que el alumnado debe demostrar al finalizar un bloque curricular.
+> **CFGS** — Ciclo Formativo de Grado Superior.
+> **ASIR** — Administración de Sistemas Informáticos en Red.
+> **SRI** — Servicios de Red e Internet.
+> **TCP** — Protocolo de transporte orientado a conexión que proporciona entrega fiable y ordenada.
+> **TCP/IP** — Familia de protocolos de Internet en la que IP proporciona direccionamiento y TCP es uno de los protocolos de transporte.
+> **IP** — Protocolo de Internet, responsable del direccionamiento y encaminamiento de paquetes.
+> **NAT** — Traducción de direcciones de red: modificación de direcciones IP al atravesar un dispositivo intermedio.
+> **NAT/PAT** — Combinación de NAT y PAT, habitual cuando varias direcciones privadas comparten una dirección pública.
+> **PAT** — Traducción de direcciones mediante puertos: permite multiplexar conexiones privadas sobre una dirección pública.
+> **CLI** — Interfaz de línea de comandos, es decir, administración mediante órdenes escritas.
+> **WSL** — Windows Subsystem for Linux, plataforma de Windows para ejecutar entornos Linux.
+> **WSL2** — Windows Subsystem for Linux 2: tecnología de Windows que ejecuta un entorno Linux mediante una máquina virtual ligera.
+> **UDP** — Protocolo de transporte sin conexión, ligero y sin garantía de entrega.
+> **Docker** — Plataforma de contenerización para construir, distribuir y ejecutar aplicaciones aisladas en contenedores.
+> **Docker Compose** — Herramienta de Docker para definir y ejecutar aplicaciones multicontenedor mediante un archivo declarativo.
+> **OSI** — Modelo de referencia que organiza las funciones de comunicación de red en siete capas.
+> **CIDR** — Enrutamiento entre dominios sin clases: notación que expresa una red mediante dirección y longitud de prefijo, por ejemplo /24.
+> **GUI** — Interfaz gráfica de usuario, es decir, administración mediante ventanas, menús y controles visuales.
+> **DNS** — Sistema de nombres de dominio: servicio distribuido que relaciona nombres con direcciones IP y otros datos.
+> **SSH** — Protocolo seguro de administración remota y transporte de otros servicios.
+> **HTTP** — Protocolo de transferencia de hipertexto utilizado principalmente por la Web.
+> **SMTP** — Simple Mail Transfer Protocol, protocolo principal para transportar correo entre agentes de correo.
+> **DHCP** — Protocolo de configuración dinámica de host: entrega automáticamente parámetros de red a los clientes.
+> **IPv6** — Versión 6 del Protocolo de Internet, con direcciones de 128 bits.
+> **ICMP** — Protocolo de control y diagnóstico de Internet; ping utiliza mensajes ICMP en IPv4.
+> **HTTP/HTTPS** — HTTP es el protocolo web; HTTPS es HTTP protegido mediante TLS.
+> **HTTPS** — HTTP protegido mediante TLS.
+> **MAC** — Dirección de control de acceso al medio asociada a una interfaz de red.
+> **ARP** — Protocolo que relaciona una dirección IPv4 con una dirección de enlace en una red local.
+> **ARP/NDP** — ARP resuelve direcciones IPv4 en una red local; NDP realiza funciones equivalentes de descubrimiento y resolución en IPv6.
+> **MTU** — Unidad máxima de transmisión: tamaño máximo de una trama o paquete que puede transportarse sin fragmentación en un enlace concreto.
+> **LAN** — Red de área local.
+> **IANA** — Internet Assigned Numbers Authority, organismo que coordina parámetros, espacios de nombres y números de Internet.
+> **RFC** — Request for Comments: documento técnico que especifica o describe protocolos, estándares o prácticas de Internet.
+> **VM** — Máquina virtual: ordenador software aislado que ejecuta un sistema operativo invitado.
+> **WAN** — Red de área extensa que conecta redes separadas geográficamente.
+> **IPv4** — Versión 4 del Protocolo de Internet, con direcciones de 32 bits.
+>
+> **Criterio didáctico:** no se presupone que conocer una sigla equivalga a comprender el concepto. Primero se identifica qué significa y qué función desempeña; después se emplea en comandos, configuraciones y prácticas.
+
+> 🧩 **ANTES DE EMPEZAR · CONCEPTOS BASE**
+>
+> **Protocolo** — conjunto de reglas que define cómo se comunican dos o más sistemas.
+> **Cliente** — programa o equipo que inicia una petición de un servicio.
+> **Servidor** — programa o equipo que ofrece un servicio y atiende peticiones.
+> **Servicio de red** — aplicación o proceso que ofrece una función accesible mediante la red, normalmente a través de uno o varios puertos.
+> **Proceso** — instancia en ejecución de un programa dentro de un sistema operativo.
+> **Demonio (daemon)** — proceso que permanece ejecutándose en segundo plano para prestar un servicio; en Linux es habitual que esté gestionado por `systemd`.
+> **Puerto** — número lógico asociado a un servicio de transporte; permite distinguir varias comunicaciones que utilizan la misma dirección IP.
+> **Socket** — extremo de comunicación que combina, según el contexto, una dirección IP, un puerto y un protocolo de transporte.
+> **Interfaz de red** — componente físico o virtual mediante el que un sistema se conecta a una red.
+> **Dirección IP** — identificador lógico de una interfaz dentro de una red IP.
+> **Subred** — porción de un espacio de direccionamiento IP que comparte un prefijo común.
+> **Puerta de enlace predeterminada** — equipo al que un host entrega el tráfico destinado a redes que no conoce directamente.
+> **Encaminamiento (routing)** — proceso de decidir por qué camino debe avanzar un paquete para alcanzar su destino.
+> **Tabla de encaminamiento** — conjunto de rutas que utiliza un sistema para decidir dónde enviar los paquetes.
+> **Broadcast o difusión** — envío dirigido a todos los equipos de un dominio de difusión.
+> **Unicast** — comunicación dirigida de un emisor a un receptor concreto.
+> **Multicast** — comunicación dirigida a un grupo de receptores que se han suscrito al grupo.
+> **Resolución de nombres** — proceso mediante el cual un sistema obtiene información asociada a un nombre, por ejemplo una dirección IP mediante DNS.
+> **Caché** — almacenamiento temporal de resultados para poder reutilizarlos sin repetir inmediatamente una consulta o cálculo.
+> **Archivo de configuración** — fichero que contiene parámetros con los que un programa determina cómo debe funcionar.
+> **Validación** — comprobación de que una configuración tiene una sintaxis y una estructura aceptables antes de aplicarla.
+> **Estado** — situación actual de un proceso, servicio, interfaz o recurso; conocerlo es esencial para diagnosticar una incidencia.
+> **Registro (log)** — anotación generada por un programa o sistema para dejar constancia de eventos, errores y operaciones.
+>
+> Estos conceptos son el vocabulario común sobre el que se construyen las prácticas. Cuando una unidad introduzca un concepto especializado —por ejemplo, una zona DNS, una concesión DHCP, un virtual host, un contenedor o un Pod— se explicará de nuevo antes de utilizarlo operativamente.
+
+> 🧠 **CONCEPTOS QUE NO DEBEMOS DAR POR SUPUESTOS**
+>
+> **`systemd`** — sistema de inicio y gestor de servicios habitual en Linux; `systemctl` permite consultar y administrar esos servicios.
+> **Archivo de configuración** — fichero que contiene los parámetros con los que un servicio determina su comportamiento.
+> **Registro DNS** — entrada de una zona DNS que asocia un nombre con un dato, como una dirección IP, un servidor de correo o un alias.
+> **Zona DNS** — parte de la jerarquía DNS administrada por un servidor autoritativo concreto.
+> **Servidor autoritativo** — servidor que posee la información oficial de una zona DNS y puede responder con autoridad sobre ella.
+> **Resolver o resolvedor** — componente que realiza consultas DNS en nombre de una aplicación o de un usuario y obtiene la respuesta siguiendo el proceso de resolución.
+> **Consulta recursiva** — consulta en la que el servidor consultado asume la tarea de obtener una respuesta completa para el cliente, si tiene habilitada la recursión.
+> **Consulta iterativa** — consulta en la que el servidor responde con la mejor información que conoce, pudiendo remitir al consultante hacia otro servidor.
+> **Concesión DHCP** — asignación temporal de una dirección IP y otros parámetros de red a un cliente.
+> **Imagen de contenedor** — plantilla inmutable a partir de la cual se crean contenedores.
+> **Volumen** — almacenamiento gestionado que permite conservar datos independientemente del ciclo de vida de un contenedor.
+> **Red Docker** — red virtual administrada por Docker que permite conectar contenedores y, según su configuración, publicar servicios hacia el host.
+> **Orquestación** — automatización de la ejecución, escalado, recuperación y coordinación de múltiples cargas de trabajo o contenedores.
+> **Pod** — unidad mínima desplegable de Kubernetes; contiene uno o varios contenedores que comparten determinados recursos.
+> **Virtual host** — configuración que permite que un mismo servidor web atienda distintos sitios o nombres mediante configuraciones diferenciadas.
+> **Certificado digital** — credencial criptográfica que vincula una identidad con una clave pública y que puede estar firmada por una autoridad de certificación.
+> **Códec** — algoritmo que codifica y decodifica audio, vídeo u otro tipo de datos; un códec no es lo mismo que un contenedor multimedia.
+> **Contenedor multimedia** — formato de archivo que agrupa una o varias pistas de audio, vídeo, subtítulos o metadatos.
+> **Streaming** — distribución de contenido de forma que el receptor puede comenzar a consumirlo mientras continúa recibiendo datos.
+> **Commit** — instantánea registrada por Git que conserva un conjunto concreto de cambios.
+> **Staging area** — área intermedia de Git donde se seleccionan los cambios que formarán el próximo commit.
+> **Rama (branch)** — línea de desarrollo independiente dentro de un repositorio Git.
+> **Remoto (remote)** — referencia a un repositorio Git externo con el que se intercambian commits mediante `fetch`, `pull` o `push`.
+> **Codespace** — entorno de desarrollo remoto proporcionado por GitHub para trabajar con un repositorio.
+> **Webmin** — interfaz web de administración de sistemas que permite gestionar determinados servicios y parámetros de un sistema Linux.
+> **Roundcube** — cliente de correo web que accede al buzón mediante IMAP y puede enviar mensajes mediante SMTP.
+> **Sympa** — gestor de listas de distribución que proporciona funciones de suscripción, moderación, administración y distribución de mensajes.
 
 ### Fundamentos de direccionamiento, transporte, encaminamiento, NAT/PAT y modelo cliente/servidor.
 
@@ -20,6 +124,46 @@
 
 > 🧭 **MAPA DE LA UNIDAD**
 >
+> ``` text
+>                         🌐 REDES TCP/IP
+>                               │
+>          ┌────────────────────┼────────────────────┐
+>          │                    │                    │
+>       🏠 IP              🚦 Routing           🔌 TCP/UDP
+>          │                    │                    │
+>          └────────────────────┼────────────────────┘
+>                               │
+>                          🔄 NAT / PAT
+>                               │
+>       ┌───────────────────────┼──────────────────────────────┐
+>       │                       │                              │
+>  🧪 Entorno I           🐧 Entorno II                🖥️ Entorno III
+>  Packet Tracer           WSL2 + Ubuntu                VirtualBox +
+>                                                        Ubuntu 26.04 Server
+>       │                       │                              │
+>       └───────────────────────┴──────────────────────────────┴── 🐳 Entorno IV
+>                                                                   Docker Compose
+> ``` text
+>                         🌐 REDES TCP/IP
+>                               │
+>          ┌────────────────────┼────────────────────┐
+>          │                    │                    │
+>       🏠 IP              🚦 Routing           🔌 TCP/UDP
+>          │                    │                    │
+>          └────────────────────┼────────────────────┘
+>                               │
+>                          🔄 NAT / PAT
+>                               │
+>       ┌───────────────────────┼────────────────────────┐
+>       │                       │                        │
+>  🧪 Entorno I            🐧 Entorno II          🖥️ Entorno III
+>  Packet Tracer            WSL2 + Ubuntu         VirtualBox + Ubuntu
+>                                                    26.04 Server
+>                               │
+>                               └───────────────┐
+>                                               ▼
+>                                         🐳 Entorno IV
+>                                         Docker Compose
 > ``` text
 >                         🌐 REDES TCP/IP
 >                               │
@@ -1181,7 +1325,7 @@ wsl --list --verbose
 Debe comprobarse que la distribución utiliza:
 
 ``` text
-VERSION 2
+CONFIGURACIÓN DE REFERENCIA
 ```
 
 Ubuntu 26.04 LTS dispone de soporte/documentación específica para WSL.
@@ -1240,7 +1384,7 @@ Permite observar sockets TCP y UDP.
 ## `curl`
 
 ``` bash
-curl -I https://www.example.com
+curl -I https://www.juandecolonia.jc
 ```
 
 Permite probar servicios HTTP/HTTPS desde la perspectiva de una
@@ -1275,6 +1419,61 @@ autorización.
 
 ------------------------------------------------------------------------
 
+
+---
+
+# 🗂️ Antes de las prácticas · dónde vive la configuración de red
+
+Antes de tocar una red conviene saber **dónde está escrita su configuración**. Un técnico no trabaja a ciegas: primero localiza el fichero, después lo inspecciona, modifica lo mínimo y finalmente valida el resultado. Piensa en ello como buscar primero el cuadro eléctrico de una casa antes de cambiar un interruptor.
+
+### 🐧 Entorno II · WSL2 + Ubuntu 26.04
+
+```text
+/etc/
+├── resolv.conf                 → resolución DNS efectiva o gestionada
+├── hosts                        → resolución local nombre ↔ IP
+└── netplan/                     → configuración persistente cuando la distribución la utiliza
+
+Comandos de inspección:
+sudo find /etc/netplan -maxdepth 1 -type f -print
+sudo sed -n '1,220p' /etc/netplan/*.yaml
+ip addr
+ip route
+resolvectl status
+```
+
+En WSL2 parte de la red es gestionada por el propio subsistema. Por ello, para estudiar topologías completas con varias interfaces y routers utilizaremos preferentemente VirtualBox o Packet Tracer.
+
+### 🖥️ Entorno III · VirtualBox + Ubuntu 26.04 Server
+
+```text
+/etc/netplan/*.yaml        → direccionamiento, rutas y DNS
+/etc/hosts                  → nombres locales
+/etc/systemd/resolved.conf  → comportamiento de systemd-resolved
+
+Inspección rápida:
+sudo ls -la /etc/netplan
+sudo sed -n '1,220p' /etc/netplan/01-netcfg.yaml
+ip addr
+ip route
+resolvectl status
+```
+
+**Regla profesional:** después de modificar Netplan, valida antes de dar por buena la configuración y comprueba siempre `ip addr`, `ip route` y resolución DNS.
+
+### 🖥️ Desde Webmin
+
+Webmin puede presentar parte de la configuración de red mediante sus módulos de **Networking**, pero no sustituye la comprensión de los ficheros y comandos. La práctica debe poder repetirse desde CLI aunque se haya utilizado la interfaz gráfica.
+
+![Interfaz didáctica de Webmin](img/captura-webmin-didactica.png)
+
+> 💡 **Idea clave:** Webmin es un panel de administración; `/etc` y las herramientas del sistema siguen siendo la fuente técnica que debemos saber localizar.
+
+
+
+> 👨‍🏫 **Criterio de corrección de las prácticas**
+>
+> La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
 # 🧪 25. PRÁCTICA 1 --- IP y encaminamiento con Cisco Packet Tracer
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1374,6 +1573,40 @@ ping 192.168.20.10
 5.  ¿Qué tabla de routing tiene R1?
 
 ------------------------------------------------------------------------
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `show ip interface brief`
+- `show ip route`
+- `show running-config`
+- `ping <destino>`
+- `traceroute <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 26. PRÁCTICA 2 --- Inspección de red con WSL2 + Ubuntu 26.04
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1500,6 +1733,40 @@ ruta
 ```
 
 ------------------------------------------------------------------------
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 27. PRÁCTICA 3 --- Red en VirtualBox con Ubuntu Server 26.04
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1689,6 +1956,40 @@ Explicar por qué el tráfico pasa por:
 
 ------------------------------------------------------------------------
 
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 🧪 28. PRÁCTICA 4 --- NAT en Ubuntu Server
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
@@ -1780,7 +2081,7 @@ ping -c 4 1.1.1.1
 Después:
 
 ``` bash
-curl -4 https://example.com
+curl -4 https://juandecolonia.jc
 ```
 
 Capturar tráfico en el router:
@@ -1792,6 +2093,40 @@ sudo tcpdump -ni enp0s3 host 1.1.1.1
 Analizar qué dirección de origen observa la interfaz WAN.
 
 ------------------------------------------------------------------------
+
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
 
 # 🧪 29. PRÁCTICA 5 --- Comparación de los cuatro entornos
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
@@ -1839,6 +2174,40 @@ y queremos comprobar la conectividad entre dos hosts.
   Topologías complejas   Excelente                   Limitado                     Excelente
 
 ------------------------------------------------------------------------
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
+2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
+3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
+4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
+5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+
+**Comandos de referencia para esta práctica:**
+
+- `ip addr`
+- `ip route`
+- `ss -lntup`
+- `journalctl -b --no-pager`
+- `ping <destino>`
+
+> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
+| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
+| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
+| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
+| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
+| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+
+
 # 📡 30. Actividad de análisis de tráfico
 
 ## Objetivo
@@ -1860,7 +2229,7 @@ ping -c 4 1.1.1.1
 y:
 
 ``` bash
-curl -I https://example.com
+curl -I https://juandecolonia.jc
 ```
 
 Abrir posteriormente:
@@ -1945,7 +2314,7 @@ ping -c 4 192.168.10.1
 ip route get 1.1.1.1
 ping -c 4 1.1.1.1
 resolvectl status
-curl -I https://example.com
+curl -I https://juandecolonia.jc
 ```
 
 ------------------------------------------------------------------------
@@ -2306,6 +2675,84 @@ La idea fundamental es:
 >        ↓
 > 7️⃣ ¿El firewall/NAT está modificando o bloqueando algo?
 > ```
+
+
+# 📝 Test de repaso
+
+## 1. ¿Qué representa `/24` en una dirección IPv4?
+A. 24 hosts disponibles
+B. 24 bits pertenecientes al prefijo de red
+C. 24 bits de broadcast
+D. 24 bytes de dirección
+
+## 2. ¿Qué comando muestra la tabla de rutas de Linux?
+A. `ip route`
+B. `ip addr`
+C. `ss -lnt`
+D. `dig`
+
+## 3. ¿Qué protocolo es orientado a conexión?
+A. UDP
+B. ICMP
+C. TCP
+D. ARP
+
+## 4. ¿Qué función cumple PAT?
+A. Traduce nombres DNS
+B. Permite multiplexar conexiones usando puertos sobre una dirección traducida
+C. Asigna direcciones mediante DHCP
+D. Cifra el tráfico
+
+## 5. ¿Qué herramienta permite observar tráfico directamente en Linux?
+A. `tcpdump`
+B. `passwd`
+C. `hostname`
+D. `mkdir`
+
+## 6. ¿Qué red de VirtualBox permite comunicación entre VMs sin exponerlas directamente a la red física?
+A. Bridged Adapter
+B. NAT
+C. Internal Network
+D. Host-only siempre
+
+## 7. ¿Qué información identifica de forma conjunta un extremo TCP?
+A. Solo la dirección MAC
+B. IP y puerto
+C. Solo el puerto
+D. Nombre DNS y MAC
+
+## 8. ¿Qué diferencia fundamental existe entre NAT y un firewall?
+A. Son exactamente lo mismo
+B. NAT traduce direcciones/puertos; un firewall decide qué tráfico permite o bloquea según reglas
+C. El firewall siempre traduce direcciones
+D. NAT cifra todos los paquetes
+
+## 9. ¿Qué comando permite saber qué ruta usaría Linux hacia un destino?
+A. `ip route get`
+B. `ip neigh flush`
+C. `ss -s`
+D. `hostnamectl`
+
+## 10. ¿Qué entorno es especialmente apropiado para practicar routing con routers Cisco simulados?
+A. Docker Compose
+B. WSL2
+C. VirtualBox
+D. Cisco Packet Tracer
+
+### ✅ Respuestas
+
+| Pregunta | Respuesta |
+|---:|:---:|
+| 1 | **B** |
+| 2 | **A** |
+| 3 | **C** |
+| 4 | **B** |
+| 5 | **A** |
+| 6 | **C** |
+| 7 | **B** |
+| 8 | **B** |
+| 9 | **A** |
+| 10 | **D** |
 
 # 🏆 35. Reto final
 

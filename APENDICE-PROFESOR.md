@@ -343,7 +343,7 @@ El proyecto debe incluir:
 
 # 6. 📚 Sobre las preguntas de evaluación del material de referencia
 
-El repositorio  utiliza el material de referencia para determinar **contenidos, objetivos y bloques de evaluación**, pero las preguntas de este apéndice están **reformuladas y ampliadas** para el currículo y las tecnologías actuales. No se reproduce aquí de forma literal un banco completo de preguntas del libro de referencia.
+El apéndice se ha diseñado a partir de los **contenidos, objetivos y criterios de evaluación del módulo**, y sus preguntas están formuladas específicamente para el currículo y las tecnologías actuales. Se priorizan preguntas que permitan comprobar comprensión conceptual y capacidad de razonamiento técnico.
 
 La cobertura de evaluación se mantiene mediante bloques equivalentes:
 

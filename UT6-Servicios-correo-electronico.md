@@ -29,28 +29,9 @@
 > **«¿Qué ocurre realmente desde que pulso _Enviar_ hasta que el destinatario
 > recibe el mensaje?»**
 
-> 📚 **Base del capítulo**
+> 📚 **Organización didáctica**
 >
-> El libro sitúa esta unidad como **CAPÍTULO 6 — LOS SERVICIOS DE CORREO
-> ELECTRÓNICO**, comenzando en la página 179. La estructura original comprende:
->
-> - 6.1 Introducción.
-> - 6.2 Protocolos involucrados.
-> - 6.2.1 Formatos de mensajes.
-> - 6.2.2 Transferencia de correo.
-> - 6.2.3 Seguridad y privacidad.
-> - 6.2.4 Protección frente a virus.
-> - 6.2.5 Correo basura (spam).
-> - 6.3 Configuración de un cliente de correo.
-> - 6.3.1 Configuración en Windows.
-> - 6.3.2 Configuración en Linux.
-> - Resumen.
-> - Ejercicios propuestos.
-> - Test de conocimientos.
->
-> Esta versión mantiene esa organización conceptual y actualiza la parte
-> práctica a **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y
-> **VirtualBox + Ubuntu 26.04 Server**.
+> La unidad progresa desde la arquitectura general del correo hasta los protocolos, formatos, seguridad, configuración de clientes, administración de servidores y diagnóstico. La parte práctica se desarrolla con **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose** cuando el servicio resulta adecuado para ese entorno.
 
 ---
 
@@ -97,6 +78,11 @@
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
+
+
+> 📬 **ANALOGÍA · EL RECORRIDO DE UNA CARTA**
+>
+> El correo electrónico se entiende mejor si lo imaginamos como una carta: alguien la redacta, una oficina de admisión la recoge, una red de oficinas la transporta y finalmente se deposita en un buzón. **MUA, MSA, MTA, MDA e IMAP/POP3** representan funciones diferentes de ese recorrido. Pulsar «Enviar» no significa que el cliente y el destinatario estén hablando directamente.
 
 # 🎯 0. Objetivos
 
@@ -1027,6 +1013,10 @@ Esto es importante para comprender:
 > 🧭 **ANTES DE EMPEZAR · Seguridad del correo**
 >
 > La seguridad del correo se construye con varias capas: cifrado de transporte, autenticación, validación del dominio emisor y mecanismos antispam/antimalware. Ninguna de ellas resuelve por sí sola todos los problemas.
+
+> ✉️ **ANALOGÍA · ENVIAR UN DOCUMENTO IMPORTANTE**
+>
+> Para enviar un documento confidencial no basta con meterlo en un sobre. Puede ser necesario identificar al remitente, proteger el contenido durante el transporte y comprobar que no ha sido manipulado. En correo electrónico ocurre lo mismo: TLS, autenticación, mecanismos de reputación y firmas digitales resuelven problemas diferentes.
 
 # 🛡️ 25. Seguridad y privacidad
 

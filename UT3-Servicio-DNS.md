@@ -82,6 +82,11 @@
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
 
+
+> 📇 **ANALOGÍA · LA GUÍA TELEFÓNICA**
+>
+> Preguntar «¿dónde está la empresa Juan de Colonia?» y obtener su dirección postal se parece a resolver un nombre mediante DNS. La diferencia fundamental es que DNS no es una guía única: es una **base de datos distribuida y jerárquica**. Si la oficina local no conoce la respuesta, puede preguntar a otros niveles. Por eso conviene distinguir entre servidor autoritativo, servidor de caché y servidor raíz.
+
 # 🎯 0. Objetivos
 
 Al finalizar esta unidad deberás ser capaz de:
@@ -421,6 +426,10 @@ Y las consultas pueden realizarse:
 
 ------------------------------------------------------------------------
 
+> 🧑‍💼 **ANALOGÍA · UN RECEPCIONISTA QUE SE ENCARGA DE TODO**
+>
+> Si preguntas en recepción por una dirección y el recepcionista se compromete a hacer todas las llamadas necesarias hasta conseguirla, está asumiendo la responsabilidad de completar la búsqueda. Esa es la intuición de una consulta recursiva: el cliente espera que el resolvedor continúe preguntando hasta obtener una respuesta final o un error.
+
 # 🔄 10. Resolución recursiva
 
 En una consulta recursiva, el servidor al que pregunta el cliente asume
@@ -448,6 +457,10 @@ DNS RECURSOR
 El cliente no necesita realizar cada consulta intermedia.
 
 ------------------------------------------------------------------------
+
+> 🗺️ **ANALOGÍA · UNA CADENA DE INDICACIONES**
+>
+> En una consulta iterativa, una oficina puede no darte la dirección final, pero sí indicarte cuál es la siguiente oficina que debes consultar. El proceso se parece a seguir un mapa de ventanillas: cada una aporta el siguiente paso de la ruta.
 
 # 🔁 11. Resolución iterativa
 

@@ -74,6 +74,11 @@
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
 
+
+> 🏨 **ANALOGÍA · LA RECEPCIÓN DE UN HOTEL**
+>
+> Cuando llegas a un hotel no tienes que inventarte el número de habitación, la puerta de entrada ni las reglas de acceso: recepción te entrega esos datos y puede renovarte la estancia. DHCP hace algo semejante para un equipo de red: proporciona parámetros, establece una **concesión temporal** y puede renovarla. El cliente no «adivina» su configuración; la obtiene siguiendo un protocolo.
+
 # 🎯 0. Objetivos
 
 Al finalizar esta unidad deberás ser capaz de:
@@ -519,6 +524,10 @@ UDP 68  ◄──── DHCP ─────────── UDP 67
 > 🧭 **ANTES DE EMPEZAR · DHCP Relay**
 >
 > Los routers separan dominios de broadcast. Por ello, un cliente DHCP situado en otra subred no puede depender de que su difusión atraviese el router como si fuera tráfico IP normal. Un **DHCP relay** recibe la petición y la reenvía hacia el servidor, conservando la información necesaria para identificar la red del cliente.
+
+> 📬 **ANALOGÍA · UNA CENTRAL DE CORREOS**
+>
+> Imagina que una oficina de correos recibe cartas de un barrio y las envía a una central situada en otra ciudad. El cartero local no necesita que la central esté en su misma calle. Un agente relay desempeña una función semejante: recibe mensajes DHCP de una red y los reenvía hacia el servidor situado en otra red.
 
 # 🌉 17. DHCP Relay
 ### 📊 DORA de un vistazo

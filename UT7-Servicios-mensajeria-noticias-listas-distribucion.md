@@ -53,6 +53,11 @@
 
 ---
 
+
+> 🗣️ **ANALOGÍA · CONVERSACIÓN, TABLÓN Y LISTA DE CORREO**
+>
+> No todas las comunicaciones colectivas funcionan igual. Una conversación instantánea se parece a hablar en una sala; una lista de distribución se parece a enviar una carta a una secretaría que la reparte a sus inscritos; un grupo de noticias se parece más a un tablón donde las personas consultan y publican mensajes. Las diferencias de modelo explican por qué XMPP, listas y NNTP tienen arquitecturas distintas.
+
 # 1. 🌐 Introducción
 
 Los servicios de comunicación sobre red permiten intercambiar información entre usuarios sin necesidad de que ambos equipos estén conectados físicamente.
@@ -98,6 +103,11 @@ La unidad agrupa tres familias de servicios:
 > 🧭 **ANTES DE EMPEZAR · MENSAJERÍA ≠ CORREO**
 > 
 > La mensajería instantánea prioriza conversación y presencia. El correo prioriza almacenamiento y entrega asíncrona. Algunas infraestructuras comparten protocolos auxiliares, pero el modelo de interacción es diferente.
+
+
+> 📞 **ANALOGÍA · CENTRALITA TELEFÓNICA**
+>
+> En una centralita, una extensión identifica a una persona o dispositivo y la centralita mantiene información sobre disponibilidad y rutas. En XMPP, el identificador y la presencia cumplen funciones comparables, aunque el protocolo y la arquitectura sean completamente diferentes.
 
 # 2. 💬 Servicios de mensajería instantánea
 
@@ -306,7 +316,7 @@ Un cliente XMPP permite:
 - participar en salas;
 - gestionar varias cuentas.
 
-Históricamente el libro utiliza **Pidgin** como ejemplo.
+Como referencia histórica, **Pidgin** es un cliente que permite trabajar con distintos protocolos de mensajería; en las prácticas se priorizan herramientas reproducibles y actuales.
 
 En un laboratorio actual podemos utilizar:
 
@@ -330,7 +340,7 @@ Instala un cliente XMPP y documenta:
 
 # 2.5 🖥️ Servidores de mensajería instantánea
 
-El libro cita servidores como:
+Entre los servidores históricos y actuales que pueden encontrarse en este ámbito están:
 
 - Openfire;
 - ejabberd;
@@ -644,7 +654,7 @@ Actualmente muchos lectores clásicos de noticias han quedado obsoletos, por lo 
 
 # 5.4 🖥️ Servidores NNTP
 
-El libro utiliza **Leafnode** en sus prácticas.
+**Leafnode** es un servidor NNTP ligero que resulta útil para estudiar el concepto de grupos de noticias; las prácticas actuales priorizan herramientas mantenidas y reproducibles.
 
 Para un laboratorio actual también puede estudiarse **INN (InterNetNews)**, que sigue siendo un servidor NNTP relevante y dispone de empaquetado para distribuciones Ubuntu. 
 
@@ -1108,7 +1118,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 
 
-> **Actualización de la práctica original:** el libro propone Openfire/Jabber. En Ubuntu 26.04 utilizaremos Prosody para disponer de una práctica reproducible basada en paquetes de la distribución. Ubuntu 26.04 publica Prosody 13.x en sus repositorios. 
+> **Elección tecnológica de la práctica:** utilizaremos Prosody para disponer de una práctica reproducible basada en paquetes de la distribución. Ubuntu 26.04 publica Prosody 13.x en sus repositorios. 
 
 ### 1. Instalar
 

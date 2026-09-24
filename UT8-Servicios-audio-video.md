@@ -127,6 +127,11 @@ VoIP, videoconferencia y bloques finales de prácticas, resumen y evaluación.
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
 
+
+> 📦 **ANALOGÍA · UNA CAJA Y SU CONTENIDO**
+>
+> Un contenedor multimedia puede imaginarse como una caja que transporta varias cosas: una pista de audio, una de vídeo, subtítulos y metadatos. El códec describe cómo se codifica el contenido que hay dentro. Por eso cambiar de contenedor no equivale necesariamente a cambiar de códec.
+
 # 🎯 3. Objetivos
 
 Al terminar esta UT deberás poder:
@@ -885,6 +890,11 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
 | **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
 
+
+
+> 🚰 **ANALOGÍA · UNA TUBERÍA DE AGUA**
+>
+> En una descarga tradicional puedes imaginar que primero llenas un depósito y después lo utilizas. En streaming, el contenido llega continuamente por una tubería y el reproductor va consumiendo una parte mientras otra sigue llegando. El búfer actúa como una pequeña reserva que absorbe variaciones temporales de la red.
 
 # 🌊 22. ¿Qué es streaming?
 

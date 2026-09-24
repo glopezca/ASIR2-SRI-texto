@@ -125,6 +125,11 @@ Esto resulta especialmente interesante en ASIR porque transforma la administraci
 
 ---
 
+
+> 🧳 **ANALOGÍA · UNA MALETA PREPARADA**
+>
+> Una imagen Docker se parece a una maleta preparada con todo lo necesario para que una persona pueda comenzar un viaje: ropa, documentos y objetos organizados. El contenedor es la maleta abierta y utilizada en un viaje concreto. La analogía ayuda a distinguir **imagen** de **contenedor**: una es la plantilla empaquetada y el otro es una instancia en ejecución.
+
 # 🐳 2. ¿Qué es Docker?
 
 Docker es una plataforma para desarrollar, distribuir y ejecutar aplicaciones mediante contenedores.
@@ -886,6 +891,11 @@ contenedor
 
 ---
 
+
+> 🏗️ **ANALOGÍA · EL PLANO DE UN EDIFICIO**
+>
+> Levantar contenedores uno a uno es parecido a colocar manualmente cada instalación de un edificio. Compose permite describir en un fichero dónde está cada componente, qué necesita y cómo se relaciona con los demás. Después podemos volver a construir la misma instalación siguiendo el mismo plano.
+
 # 🐙 20. Docker Compose: pasar de contenedores a infraestructura
 
 Cuando tenemos varios servicios, ejecutar manualmente decenas de comandos deja de ser cómodo.
@@ -1613,6 +1623,11 @@ Swarm es útil para comprender el concepto de cluster Docker, pero en este curso
 ---
 
 > 📘 **Siguiente paso:** cuando hayas comprendido este modelo, el **[Anexo VII · Migración guiada de Docker Compose a Kubernetes](ANEXO-VII-Compose-a-Kubernetes.md)** te acompaña en la transformación paso a paso de una infraestructura Compose.
+
+
+> 🚢 **ANALOGÍA · UN PUERTO LOGÍSTICO**
+>
+> Kubernetes no se limita a «arrancar contenedores». Se parece más a un puerto que recibe mercancías, decide en qué muelle colocarlas, mantiene varias unidades disponibles y las sustituye cuando alguna falla. El **Pod** es la unidad que se coloca en el puerto; el **Deployment** expresa cuántas unidades queremos; el **Service** proporciona un punto estable para llegar hasta ellas.
 
 # ☸️ 36. Kubernetes: modelo mental
 

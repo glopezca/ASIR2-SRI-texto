@@ -61,6 +61,11 @@
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
 
+
+> 🏠 **ANALOGÍA · UNA RED COMO UNA CIUDAD**
+>
+> Imagina una ciudad. Cada vivienda necesita una dirección para recibir correo; las calles permiten desplazarse de una dirección a otra; los cruces deciden por qué camino continuar y el portal de un edificio distingue qué vecino debe recibir el paquete. En una red ocurre algo parecido: la **dirección IP** identifica el destino, el **encaminamiento** decide por dónde viajar y los **puertos** ayudan a entregar los datos al servicio correcto. Esta analogía no sustituye la definición técnica, pero ayuda a recordar qué problema resuelve cada elemento.
+
 ## 🎯 0. Objetivos
 
 Al finalizar esta unidad el alumnado deberá ser capaz de:
@@ -917,6 +922,10 @@ ACK.
 > 🧭 **ANTES DE EMPEZAR · NAT/PAT**
 >
 > NAT modifica información de direccionamiento cuando un paquete atraviesa un dispositivo intermedio. PAT amplía esta idea permitiendo que múltiples conexiones compartan una dirección mediante la identificación de puertos. Este concepto será útil para comprender redes domésticas, VirtualBox y acceso a servicios.
+
+> 🏠 **ANALOGÍA · UN EDIFICIO CON UNA SOLA DIRECCIÓN POSTAL**
+>
+> Un bloque de viviendas puede tener una única dirección postal visible desde la calle y, al mismo tiempo, muchas puertas interiores. Desde fuera se ve una dirección común; dentro, la portería debe saber a qué vivienda corresponde cada entrega. NAT y PAT permiten que muchos equipos de una red privada compartan una dirección pública y que las conversaciones puedan distinguirse mediante puertos.
 
 # 🔄 16. NAT y PAT
 

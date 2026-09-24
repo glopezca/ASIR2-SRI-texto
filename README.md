@@ -1,6 +1,6 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-## Material docente integral · `ASIR2-SRI-texto` · 
+## Material docente integral · `ASIR2-SRI-texto` · v6.3
 
 Material autónomo de estudio, laboratorio y evaluación para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
@@ -130,24 +130,19 @@ Incluye formatos, códecs, contenedores, bitrate, streaming, VOD, directo, FFmpe
 
 # 🧪 4. Laboratorio tecnológico
 
-Las ocho unidades se pueden trabajar mediante **cuatro entornos complementarios**. Los cuatro forman parte del mismo laboratorio de Servicios de Red e Internet: no son itinerarios alternativos ni niveles excluyentes. Cada entorno responde a una necesidad didáctica distinta.
+Las ocho unidades se pueden trabajar mediante **cuatro entornos complementarios**. Los cuatro forman parte del mismo laboratorio de Servicios de Red e Internet y se complementan entre sí; no son alternativas excluyentes. Cada entorno responde a una necesidad didáctica distinta.
 
 ```text
                          🧪 LABORATORIO SRI
                                 │
-              ┌─────────────────┼─────────────────┐
-              │                 │                 │
-              ▼                 ▼                 ▼
-      🧪 ENTORNO I       🐧 ENTORNO II      🖥️ ENTORNO III
-      Cisco Packet       WSL2 + Ubuntu      VirtualBox +
-      Tracer             26.04              Ubuntu 26.04 Server
-              │                 │                 │
-              └─────────────────┼─────────────────┘
-                                │
-                                ▼
-                         🐳 ENTORNO IV
-                         Docker Compose
-                                │
+      ┌───────────────┬─────────┴─────────┬───────────────┐
+      │               │                   │               │
+      ▼               ▼                   ▼               ▼
+ 🧪 ENTORNO I   🐧 ENTORNO II      🖥️ ENTORNO III   🐳 ENTORNO IV
+ Packet Tracer   WSL2 + Ubuntu     VirtualBox +      Docker Compose
+                 26.04             Ubuntu 26.04
+      │               │                   │               │
+      └───────────────┴─────────┬─────────┴───────────────┘
                                 ▼
                          🌐 SERVICIOS SRI
 ```
@@ -176,7 +171,43 @@ Los entornos se distribuyen por función. No es obligatorio utilizar los cuatro 
 
 La documentación completa del cuarto entorno se encuentra en el **[Anexo VI · Entorno IV · Docker Compose para UT1–UT8](ANEXO-VI-Docker-Compose-UT1-UT8.md)**.
 
-# 📚 6. Anexos
+# ⚖️ 6. Licencia, derechos de reproducción y citación
+
+Este repositorio contiene **material docente original** elaborado para el módulo 0375 · Servicios de red e Internet. La licencia del material original de este repositorio es **Creative Commons Atribución-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)**, salvo que un fichero indique expresamente otra condición.
+
+La licencia permite reutilizar, adaptar y redistribuir el material, incluso con fines comerciales, siempre que se cumplan sus condiciones de **atribución** y **CompartirIgual**. La licencia no sustituye ni modifica las condiciones de materiales de terceros incorporados al repositorio: documentación, logotipos, marcas, capturas o fragmentos de código ajenos conservan los derechos y licencias que les correspondan.
+
+> ⚠️ **Importante sobre material de terceros**
+>
+> Antes de reutilizar un fragmento, imagen, código o documentación procedente de otra fuente, hay que comprobar su licencia concreta. Que una fuente esté disponible gratuitamente en Internet no significa que su contenido pueda reproducirse o redistribuirse sin condiciones.
+
+### Cómo citar este material
+
+Para citar el repositorio completo se recomienda indicar, como mínimo:
+
+1. **Título:** *Servicios de Red e Internet · ASIR2-SRI-texto*.
+2. **Versión:** v6.3.
+3. **Repositorio:** `https://github.com/glopezca/ASIR2-SRI-texto`.
+4. **Fecha de consulta o de la versión utilizada.**
+5. **Licencia:** CC BY-SA 4.0.
+
+Ejemplo:
+
+> *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.3, repositorio GitHub `glopezca/ASIR2-SRI-texto`, CC BY-SA 4.0, consultado en 2026.
+
+Cuando se reutilice **una UT, práctica o fragmento concreto**, debe indicarse además el nombre del fichero o apartado correspondiente y conservarse la atribución exigida por la licencia.
+
+### Fuentes técnicas
+
+Las explicaciones técnicas se han elaborado y contrastado utilizando documentación abierta de organismos de normalización, proyectos de software y fabricantes. Las fuentes relevantes se identifican en el **Anexo IV · Bibliografía y documentación técnica abierta**. Para una reproducción o adaptación técnica, conviene citar la fuente primaria y consultar su licencia actual en lugar de citar únicamente este repositorio.
+
+### Licencia del repositorio
+
+El fichero [`LICENSE.md`](LICENSE.md) contiene la declaración de licencia aplicable al material original. El fichero [`CITATION.cff`](CITATION.cff) proporciona una referencia estructurada para citar el repositorio y [`NOTICE.md`](NOTICE.md) resume las cautelas relativas a materiales de terceros. La licencia oficial puede consultarse en [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+---
+
+# 📚 7. Anexos
 
 Los anexos amplían las UT sin romper su secuencia didáctica. El alumnado puede consultarlos cuando la unidad lo indique.
 
@@ -216,13 +247,13 @@ Glosario acumulativo y ordenado alfabéticamente con las siglas, abreviaturas, p
 >
 > El glosario es una referencia general, no un sustituto de las explicaciones locales. Cuando una UT introduce un concepto que puede resultar nuevo, se presenta **inmediatamente antes de utilizarlo** mediante un cuadro breve y contextualizado. El Anexo VIII permite consultar después la definición completa y localizar rápidamente otros términos relacionados.
 
-# 👨‍🏫 7. Material para el profesor
+# 👨‍🏫 8. Material para el profesor
 
 ## [Apéndice · Evaluación y prácticas](APENDICE-PROFESOR.md)
 
 Incluye bancos de preguntas tipo test, solucionarios, prácticas evaluables de hasta 1 h 45 min, propuestas de resolución y rúbricas.
 
-# 🧭 8. Secuencia didáctica
+# 🧭 9. Secuencia didáctica
 
 ```text
 UT1 · TCP/IP
@@ -259,7 +290,7 @@ Anexos tecnológicos
 
 ---
 
-# 🔬 9. Método común de todas las prácticas
+# 🔬 10. Método común de todas las prácticas
 
 Todas las prácticas deben seguir, en la medida de lo posible:
 
@@ -282,7 +313,7 @@ El alumno debe entregar **evidencias**, no sólo afirmar que una práctica funci
 
 ---
 
-# ⚠️ 10. Estado de las pruebas técnicas
+# ⚠️ 11. Estado de las pruebas técnicas
 
 El paquete incluye revisión estática y coherencia de los ejemplos. Cuando una práctica depende de un daemon, una VM, Docker Desktop, una red virtual específica o GitHub Codespaces, la ejecución final debe realizarse en el entorno indicado.
 
@@ -292,7 +323,7 @@ Esto es deliberado: en administración de sistemas, **una configuración que no 
 
 ---
 
-# 📜 11. Normativa y fuentes curriculares
+# 📜 12. Normativa y fuentes curriculares
 
 El material se ha actualizado tomando como referencia la normativa vigente y, para Castilla y León, la información oficial publicada para el título de ASIR.
 
@@ -305,7 +336,7 @@ El material se ha actualizado tomando como referencia la normativa vigente y, pa
 
 ---
 
-# 🧑‍🎓 12. Cómo utilizar este material
+# 🧑‍🎓 13. Cómo utilizar este material
 
 ### Primera pasada
 
@@ -341,7 +372,7 @@ A:
 
 ---
 
-# 🏁 13. Principio rector
+# 🏁 14. Principio rector
 
 ```text
         ┌───────────────────────────────┐

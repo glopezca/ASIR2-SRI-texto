@@ -88,6 +88,11 @@
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
 
+
+> 🏢 **ANALOGÍA · LA RECEPCIÓN DE UN EDIFICIO**
+>
+> Un servidor web puede imaginarse como la recepción de un edificio. El cliente llega con una petición —«quiero este recurso»—, el servidor identifica qué recurso corresponde y responde. Un **proxy inverso** se parece a un recepcionista que recibe todas las visitas y decide a qué oficina interna debe dirigirlas. Así se entiende por qué el cliente puede no conocer directamente la ubicación del servidor de aplicación.
+
 # 🎯 0. Objetivos
 
 Al finalizar esta unidad deberás ser capaz de:
@@ -980,6 +985,10 @@ Amenazas habituales:
 -   certificados incorrectos.
 
 ------------------------------------------------------------------------
+
+> 🏦 **ANALOGÍA · UNA CONVERSACIÓN EN UN DESPACHO CERRADO**
+>
+> HTTP puede imaginarse como una conversación en una sala abierta: cualquiera situado en el lugar adecuado podría escucharla. HTTPS añade una capa de protección equivalente a entrar en un despacho cerrado y verificar además la identidad de la persona con la que estás tratando. La analogía ayuda a separar **confidencialidad**, **integridad** y **autenticación**, que son propiedades relacionadas pero no idénticas.
 
 # 🔒 25. HTTPS
 

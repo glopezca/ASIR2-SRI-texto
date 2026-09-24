@@ -82,6 +82,11 @@
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
 
+
+> 🚚 **ANALOGÍA · SERVICIOS DE MENSAJERÍA**
+>
+> FTP, SFTP y otros protocolos pueden imaginarse como diferentes empresas de transporte. Todas mueven paquetes, pero no ofrecen las mismas garantías: una puede utilizar un canal separado para control y datos, otra puede transportar todo dentro de una conexión segura y otra puede estar pensada para transferencias muy simples. Comparar solo el comando `get` o `put` sería como decir que dos empresas son iguales porque ambas entregan paquetes.
+
 # 🎯 0. Objetivos
 
 Al finalizar esta unidad deberás ser capaz de:
@@ -806,6 +811,10 @@ CLIENTE ─────────► SERVIDOR:40000
 ```
 
 ------------------------------------------------------------------------
+
+> 🚛 **ANALOGÍA · UN ALMACÉN CON PUERTAS CONTROLADAS**
+>
+> Un almacén puede tener una puerta para recibir órdenes y otra para mover mercancías. Si además existe un control de acceso que solo deja pasar determinadas puertas, el funcionamiento completo depende de las dos cosas. FTP separa control y datos, y NAT o un firewall pueden afectar especialmente al canal de datos. Por eso una conexión que «autentica correctamente» todavía puede fallar al listar o transferir archivos.
 
 # 🧱 18. FTP + NAT + firewall
 
@@ -1572,7 +1581,7 @@ xferlog_enable=YES
 connect_from_port_20=YES
 ```
 
-> ⚠️ No copies ciegamente configuraciones antiguas del libro.
+> ⚠️ No copies ciegamente configuraciones heredadas de otras versiones del servicio.
 >
 > Las directivas disponibles y sus valores predeterminados dependen de
 > la versión de `vsftpd`. Consulta siempre:

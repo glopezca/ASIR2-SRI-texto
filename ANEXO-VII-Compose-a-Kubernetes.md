@@ -30,6 +30,11 @@ La tabla **no significa que exista una equivalencia uno a uno**. Es un mapa ment
 
 ---
 
+
+> 🏭 **ANALOGÍA · UNA FÁBRICA CON SUPERVISIÓN CONTINUA**
+>
+> En una fábrica no basta con encender una máquina una vez: hay que mantener el número de puestos de trabajo deseado, sustituir una máquina averiada y mantener una organización estable. Kubernetes introduce precisamente esa idea de **estado deseado** y supervisión continua. Esta analogía será útil durante toda la migración desde Compose.
+
 # 1. Antes de empezar: ¿qué es Kubernetes?
 
 ## 1.1. El problema que intenta resolver
@@ -210,6 +215,11 @@ Antes de convertirlo, responde:
 Esta lista convierte la migración en un problema de arquitectura y no en un simple cambio de sintaxis.
 
 ---
+
+
+> 🏢 **ANALOGÍA · DE UN PLANO ÚNICO A UN PROYECTO DE INSTALACIONES**
+>
+> En Compose podemos describir una aplicación multicontenedor en un solo documento. En Kubernetes el mismo problema se divide en varios objetos especializados: uno describe cómo ejecutar la carga de trabajo y otro cómo ofrecerle una dirección estable dentro de la red. No es una traducción palabra por palabra; es una adaptación del diseño a otro modelo de administración.
 
 # 4. Traducir `services` a recursos Kubernetes
 
@@ -413,6 +423,11 @@ si existe un Service llamado `app` que expone el puerto correspondiente.
 > En Compose solemos pensar «servicio → nombre DNS del servicio». En Kubernetes debemos añadir una capa: «Deployment/Pods → Service → nombre DNS estable».
 
 ---
+
+
+> 🚪 **ANALOGÍA · PUERTAS INTERIORES Y PUERTA PRINCIPAL**
+>
+> `expose` se parece a indicar que un edificio tiene una puerta interior que otros departamentos pueden utilizar; `ports` se parece a abrir una puerta que conecta el edificio con el exterior. En Kubernetes, esa idea se reparte entre los Services y los distintos mecanismos de exposición.
 
 # 8. Traducir `ports` y `expose`
 

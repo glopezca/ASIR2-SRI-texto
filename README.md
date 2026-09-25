@@ -1,6 +1,6 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-## Material docente integral · `ASIR2-SRI-texto` · v6.3
+## Material docente integral · `ASIR2-SRI-texto` · v6.4
 
 Material autónomo de estudio, laboratorio y evaluación para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
@@ -39,6 +39,36 @@ DOCUMENTACIÓN
 No se pretende que el alumnado memorice comandos. Se pretende que comprenda **qué servicio está desplegando, qué protocolos intervienen, qué puertos utiliza, cómo se comunica, cómo se protege y cómo se demuestra que funciona**.
 
 ---
+
+## 🧠 Método pedagógico común
+
+Las UT y las prácticas siguen una secuencia de aprendizaje progresiva:
+
+```text
+SITUACIÓN
+   ↓
+PROBLEMA
+   ↓
+MODELO MENTAL
+   ↓
+CONCEPTO NUEVO
+   ↓
+EJEMPLO RESUELTO
+   ↓
+PRÁCTICA GUIADA
+   ↓
+PRÁCTICA SEMIGUIADA
+   ↓
+PRÁCTICA AUTÓNOMA
+   ↓
+DIAGNÓSTICO
+   ↓
+TRANSFERENCIA
+```
+
+Antes de introducir un concepto que pueda resultar nuevo, el texto activa los conocimientos necesarios y proporciona una explicación breve. Las prácticas piden anticipar resultados, modificar de forma controlada, validar, probar desde el cliente y justificar las evidencias. La estrategia se alinea con principios de **Diseño Universal para el Aprendizaje (DUA)**, especialmente la conexión entre conocimientos previos y nuevos, la representación mediante múltiples medios y la construcción progresiva de fluidez.
+
+También se fomenta la metacognición: el alumnado debe formular una predicción, comprobarla, interpretar el resultado y explicar qué evidencia respalda su conclusión.
 
 # 🧭 2. Entorno curricular
 
@@ -130,35 +160,21 @@ Incluye formatos, códecs, contenedores, bitrate, streaming, VOD, directo, FFmpe
 
 # 🧪 4. Laboratorio tecnológico
 
-Las ocho unidades se pueden trabajar mediante **cuatro entornos complementarios**. Los cuatro forman parte del mismo laboratorio de Servicios de Red e Internet y se complementan entre sí; no son alternativas excluyentes. Cada entorno responde a una necesidad didáctica distinta.
+Los cuatro entornos son **niveles hermanos** del laboratorio, no una cadena de sustituciones:
 
 ```text
                          🧪 LABORATORIO SRI
                                 │
-      ┌───────────────┬─────────┴─────────┬───────────────┐
-      │               │                   │               │
-      ▼               ▼                   ▼               ▼
- 🧪 ENTORNO I   🐧 ENTORNO II      🖥️ ENTORNO III   🐳 ENTORNO IV
- Packet Tracer   WSL2 + Ubuntu     VirtualBox +      Docker Compose
-                 26.04             Ubuntu 26.04
-      │               │                   │               │
-      └───────────────┴─────────┬─────────┴───────────────┘
-                                ▼
-                         🌐 SERVICIOS SRI
-```
+      ┌─────────────────────────┼─────────────────────────┐
+      │                         │                         │                         │
+      ▼                         ▼                         ▼                         ▼
+ 🧪 ENTORNO I             🐧 ENTORNO II            🖥️ ENTORNO III            🐳 ENTORNO IV
+ Packet Tracer             WSL2 + Ubuntu            VirtualBox + Ubuntu        Docker Compose
+ simulación de red         herramientas Linux       26.04 Server              infraestructura
+````
 
-> 🧭 **Cómo interpretar la arquitectura**
->
-> Los cuatro entornos están conectados pedagógicamente. **Entorno I** permite observar la red y sus protocolos mediante simulación. **Entorno II** proporciona un Linux ligero para utilizar clientes, herramientas de diagnóstico y scripts. **Entorno III** permite administrar servidores completos con sus interfaces, servicios, procesos, firewall y sistema de archivos. **Entorno IV** convierte una arquitectura multicontenedor en una infraestructura reproducible y versionable.
->
-> Una misma práctica puede pasar por varios entornos: primero se observa el fenómeno en Packet Tracer, después se diagnostica con Linux, se implementa como servicio real en VirtualBox y, cuando el servicio lo permite, se reproduce mediante Docker Compose.
+Cada entorno responde a una pregunta diferente: **cómo se comporta la red, qué podemos observar desde Linux, cómo se administra un servidor completo y cómo se reproduce una infraestructura como código**.
 
-| Entorno | Plataforma | Función principal | Pregunta didáctica |
-|---|---|---|---|
-| **I** | Cisco Packet Tracer | Simulación de topologías y protocolos | **¿Cómo se comporta la red?** |
-| **II** | WSL2 + Ubuntu 26.04 | Herramientas, clientes, scripts y diagnóstico | **¿Qué está ocurriendo realmente?** |
-| **III** | VirtualBox + Ubuntu 26.04 Server | Administración de servidores completos | **¿Cómo se instala, configura y mantiene?** |
-| **IV** | Docker Compose | Infraestructura reproducible y multicontenedor | **¿Cómo convierto la arquitectura en infraestructura como código?** |
 
 # 🧪 5. Entornos de prácticas
 
@@ -169,7 +185,13 @@ Los entornos se distribuyen por función. No es obligatorio utilizar los cuatro 
 - **Entorno III · VirtualBox + Ubuntu 26.04 Server:** instalación y administración de servicios reales.
 - **Entorno IV · Docker Compose:** despliegues reproducibles, redes internas, puertos, volúmenes y arquitecturas multicontenedor.
 
-La documentación completa del cuarto entorno se encuentra en el **[Anexo VI · Entorno IV · Docker Compose para UT1–UT8](ANEXO-VI-Docker-Compose-UT1-UT8.md)**.
+La documentación completa del cuarto entorno se encuentra en el **[Entorno IV · Docker Compose para UT1–UT8](ANEXO-VI-Docker-Compose-UT1-UT8.md)**.
+# 🧪 8. Evaluación y transferencia
+
+Cada UT debe permitir comprobar cinco dimensiones: **comprender, interpretar, ejecutar, diagnosticar y diseñar**. Por eso se combinan preguntas conceptuales, interpretación de salidas reales, prácticas guiadas, incidencias deliberadas y problemas abiertos.
+
+El material incluye apoyos graduados para que un alumno con dificultades pueda seguir una práctica sin depender de explicaciones orales continuas, y actividades de transferencia para que el alumno avanzado pueda enfrentarse a escenarios no idénticos al ejemplo. Este enfoque coincide con los principios de conectar conocimientos previos, ofrecer múltiples medios de representación y expresión y retirar gradualmente los apoyos a medida que aumenta la fluidez.
+
 
 # ⚖️ 6. Licencia, derechos de reproducción y citación
 
@@ -186,14 +208,14 @@ La licencia permite reutilizar, adaptar y redistribuir el material, incluso con 
 Para citar el repositorio completo se recomienda indicar, como mínimo:
 
 1. **Título:** *Servicios de Red e Internet · ASIR2-SRI-texto*.
-2. **Versión:** v6.3.
+2. **Versión:** v6.4.
 3. **Repositorio:** `https://github.com/glopezca/ASIR2-SRI-texto`.
 4. **Fecha de consulta o de la versión utilizada.**
 5. **Licencia:** CC BY-SA 4.0.
 
 Ejemplo:
 
-> *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.3, repositorio GitHub `glopezca/ASIR2-SRI-texto`, CC BY-SA 4.0, consultado en 2026.
+> *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.4, repositorio GitHub `glopezca/ASIR2-SRI-texto`, CC BY-SA 4.0, consultado en 2026.
 
 Cuando se reutilice **una UT, práctica o fragmento concreto**, debe indicarse además el nombre del fichero o apartado correspondiente y conservarse la atribución exigida por la licencia.
 
@@ -231,21 +253,21 @@ Bibliografía organizada por áreas y enlaces a documentación oficial de las he
 
 Método transversal para validar servicios, observar procesos, analizar logs, introducir fallos deliberados, diagnosticar incidencias y documentar resultados.
 
-## [🐳 Anexo VI · Entorno IV · Docker Compose para UT1–UT8](ANEXO-VI-Docker-Compose-UT1-UT8.md)
+## [🐳 Entorno IV · Docker Compose para UT1–UT8](ANEXO-VI-Docker-Compose-UT1-UT8.md)
 
 Laboratorio reproducible de las ocho UT mediante Docker Compose. Incluye introducción conceptual, preparación, estructura de proyectos, redes, puertos, volúmenes, comandos, soluciones de referencia, troubleshooting y criterios de validación.
 
-## [☸️ Anexo VII · Migración guiada de Docker Compose a Kubernetes](ANEXO-VII-Compose-a-Kubernetes.md)
+## [☸️ Entorno IVI · Migración guiada de Docker Compose a Kubernetes](ANEXO-VII-Compose-a-Kubernetes.md)
 
 Recorrido paso a paso para transformar una aplicación descrita mediante Compose en recursos Kubernetes. Explica primero Kubernetes desde cero y después traduce progresivamente servicios, redes, puertos, volúmenes, configuración, secretos, dependencias y comprobaciones. Incluye un procedimiento de conversión manual y el uso de Kompose como herramienta auxiliar, dejando claro qué partes requieren revisión humana.
 
-## [📖 Anexo VIII · Glosario técnico completo](ANEXO-VIII-Glosario.md)
+## [📖 Entorno IVII · Glosario técnico completo](ANEXO-VIII-Glosario.md)
 
 Glosario acumulativo y ordenado alfabéticamente con las siglas, abreviaturas, protocolos, tecnologías, objetos de infraestructura y conceptos técnicos empleados en el material.
 
 > 📌 **Criterio de lectura del glosario**
 >
-> El glosario es una referencia general, no un sustituto de las explicaciones locales. Cuando una UT introduce un concepto que puede resultar nuevo, se presenta **inmediatamente antes de utilizarlo** mediante un cuadro breve y contextualizado. El Anexo VIII permite consultar después la definición completa y localizar rápidamente otros términos relacionados.
+> El glosario es una referencia general, no un sustituto de las explicaciones locales. Cuando una UT introduce un concepto que puede resultar nuevo, se presenta **inmediatamente antes de utilizarlo** mediante un cuadro breve y contextualizado. El Entorno IVII permite consultar después la definición completa y localizar rápidamente otros términos relacionados.
 
 # 👨‍🏫 8. Material para el profesor
 

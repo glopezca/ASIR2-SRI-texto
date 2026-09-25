@@ -421,3 +421,10 @@
 - [GitHub Docs](https://docs.github.com/)
 - [Visual Studio Code Documentation](https://code.visualstudio.com/docs)
 - [Microsoft WSL Documentation](https://learn.microsoft.com/windows/wsl/)
+
+| **Metacognición** | Capacidad de observar y regular el propio proceso de aprendizaje: planificar, comprobar, interpretar y ajustar. |
+| **Andamiaje** | Apoyo temporal que facilita una tarea difícil y que debe retirarse progresivamente cuando aumenta la autonomía. |
+| **Transferencia** | Aplicación de un conocimiento aprendido en un escenario nuevo o con condiciones diferentes. |
+| **Readiness probe** | Comprobación de Kubernetes que indica si un contenedor está preparado para recibir tráfico. |
+| **Liveness probe** | Comprobación de Kubernetes utilizada para detectar si un contenedor debe reiniciarse. |
+| **Startup probe** | Comprobación de Kubernetes destinada a determinar cuándo una aplicación ha terminado su inicialización. |

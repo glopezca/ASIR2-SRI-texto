@@ -81,6 +81,18 @@
 
 # 🎯 0. Objetivos
 
+### 🧭 Ruta de aprendizaje
+
+> **Cómo trabajar esta unidad.** Avanza como por una escalera: primero comprende el problema, después observa un ejemplo, repítelo con ayuda y finalmente modifica el escenario por tu cuenta. Cuando aparezca un concepto nuevo, detente un momento y comprueba que puedes explicarlo con tus palabras antes de continuar.
+
+| Nivel | Qué haces | Evidencia de que puedes continuar |
+|---|---|---|
+| 🟢 1 · Comprender | Identificas problema, componentes y recorrido de la comunicación. | Puedes explicarlo sin leer el texto. |
+| 🔵 2 · Reproducir | Sigues una práctica guiada y validas cada paso. | La práctica funciona y sabes por qué. |
+| 🟣 3 · Diagnosticar | Analizas un fallo y contrastas hipótesis con evidencias. | Puedes localizar y justificar la causa. |
+| 🔴 4 · Transferir | Cambias una condición del escenario y adaptas la solución. | Puedes resolver una variante sin copiar la receta. |
+
+
 Al finalizar esta unidad deberás ser capaz de:
 
 -   Explicar qué problema resuelve DHCP.
@@ -101,6 +113,13 @@ Al finalizar esta unidad deberás ser capaz de:
 -   Diagnosticar errores de direccionamiento automático.
 
 ------------------------------------------------------------------------
+
+### 🧪 Escalera de práctica
+
+- **Guiada:** el procedimiento aparece completo y se valida paso a paso.
+- **Semiguiada:** se conserva el objetivo, pero el alumno debe decidir parte de la configuración y las pruebas.
+- **Autónoma:** se proporcionan requisitos y restricciones; la solución y la evidencia deben ser justificadas.
+
 
 # 🚀 1. Introducción
 
@@ -182,12 +201,12 @@ DHCP centraliza esta configuración.
 El funcionamiento puede entenderse mediante cuatro elementos
 principales:
 
-  Componente          Función
-  ------------------- -------------------------------------
-  📡 Servidor DHCP    Asigna direcciones y parámetros
-  💻 Cliente DHCP     Solicita y utiliza la configuración
-  📜 Protocolo DHCP   Define mensajes y reglas
-  🌉 Relay DHCP       Transporta peticiones entre redes
+| Componente | Función |
+|---|---|
+| 📡 Servidor DHCP | Asigna direcciones y parámetros |
+| 💻 Cliente DHCP | Solicita y utiliza la configuración |
+| 📜 Protocolo DHCP | Define mensajes y reglas |
+| 🌉 Relay DHCP | Transporta peticiones entre redes |
 
 ```text
        CLIENTE
@@ -505,10 +524,10 @@ protocolo.
 
 DHCP para IP utiliza **UDP**.
 
-  Función           Puerto
-  --------------- --------
-  Servidor DHCP     UDP 67
-  Cliente DHCP      UDP 68
+| Función | Puerto |
+|---|---|
+| Servidor DHCP | UDP 67 |
+| Cliente DHCP | UDP 68 |
 
 ```text
 CLIENTE                         SERVIDOR
@@ -633,14 +652,14 @@ Una dirección IP no es suficiente para configurar un cliente.
 
 Entre las opciones habituales:
 
-  Opción                  Función
-  ----------------------- ------------------------
-  `routers`               Gateway predeterminado
-  `domain-name-servers`   Servidores DNS
-  `domain-name`           Dominio
-  `host-name`             Nombre del host
-  `ntp-servers`           Servidores NTP
-  `broadcast-address`     Broadcast de la red
+| Opción | Función |
+|---|---|
+| `routers` | Gateway predeterminado |
+| `domain-name-servers` | Servidores DNS |
+| `domain-name` | Dominio |
+| `host-name` | Nombre del host |
+| `ntp-servers` | Servidores NTP |
+| `broadcast-address` | Broadcast de la red |
 
 En Kea se pueden establecer mediante `option-data`.
 
@@ -837,19 +856,23 @@ Si la instalación dispone de un módulo DHCP compatible, localízalo en **Serve
 # 🧪 25. PRÁCTICA 1 --- DHCP básico en Cisco Packet Tracer
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -943,19 +966,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 26. PRÁCTICA 2 --- DHCP en varias redes con relay
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1037,19 +1064,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 27. PRÁCTICA 3 --- DHCP con Kea en VirtualBox + Ubuntu 26.04 Server
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1315,19 +1346,23 @@ Seguir:
 # 🧷 30. PRÁCTICA 4 --- Reservas DHCP con Kea
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1370,19 +1405,23 @@ La documentación de Kea permite reservas mediante `hw-address`,
 # 📡 31. PRÁCTICA 5 --- Analizar DHCP con Wireshark
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1418,12 +1457,12 @@ DHCPACK
 
 Construye una tabla:
 
-  Mensaje    Origen     Destino              Función
-  ---------- ---------- -------------------- -----------------------
-  DISCOVER   Cliente    Broadcast/servidor   Buscar servidores
-  OFFER      Servidor   Cliente              Ofrecer configuración
-  REQUEST    Cliente    Servidor             Solicitar oferta
-  ACK        Servidor   Cliente              Confirmar concesión
+| Mensaje | Origen | Destino | Función |
+|---|---|---|---|
+| DISCOVER | Cliente | Broadcast/servidor | Buscar servidores |
+| OFFER | Servidor | Cliente | Ofrecer configuración |
+| REQUEST | Cliente | Servidor | Solicitar oferta |
+| ACK | Servidor | Cliente | Confirmar concesión |
 
 ### Reto
 
@@ -1441,19 +1480,23 @@ Identifica en una captura:
 # 🌉 32. PRÁCTICA 6 --- DHCP Relay
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1494,19 +1537,23 @@ a `192.168.10.0/24`.
 # 🧪 33. PRÁCTICA 7 --- DHCP en WSL2
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1933,6 +1980,20 @@ virtuales independientes resulta más controlable utilizar Packet Tracer
 o máquinas virtuales con VirtualBox.
 
 ------------------------------------------------------------------------
+
+
+## 🔄 Transferencia profesional
+
+> 👨‍💼 **Cambia una condición sin cambiar el problema.** Una vez resuelto el escenario de referencia, modifica una sola condición —subred, servidor, nombre, firewall, número de clientes o entorno de despliegue— y adapta la solución. Explica qué permanece igual y qué debe cambiar.
+
+### Reto de transferencia
+
+1. Identifica qué ha cambiado.
+2. Predice qué partes de la arquitectura afectará.
+3. Localiza la configuración que tendrás que adaptar.
+4. Haz el cambio mínimo.
+5. Valida y vuelve a probar.
+6. Documenta la diferencia respecto al escenario inicial.
 
 
 # 📝 Test de repaso

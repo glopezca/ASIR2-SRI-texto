@@ -86,6 +86,18 @@
 
 # 🎯 0. Objetivos
 
+### 🧭 Ruta de aprendizaje
+
+> **Cómo trabajar esta unidad.** Avanza como por una escalera: primero comprende el problema, después observa un ejemplo, repítelo con ayuda y finalmente modifica el escenario por tu cuenta. Cuando aparezca un concepto nuevo, detente un momento y comprueba que puedes explicarlo con tus palabras antes de continuar.
+
+| Nivel | Qué haces | Evidencia de que puedes continuar |
+|---|---|---|
+| 🟢 1 · Comprender | Identificas problema, componentes y recorrido de la comunicación. | Puedes explicarlo sin leer el texto. |
+| 🔵 2 · Reproducir | Sigues una práctica guiada y validas cada paso. | La práctica funciona y sabes por qué. |
+| 🟣 3 · Diagnosticar | Analizas un fallo y contrastas hipótesis con evidencias. | Puedes localizar y justificar la causa. |
+| 🔴 4 · Transferir | Cambias una condición del escenario y adaptas la solución. | Puedes resolver una variante sin copiar la receta. |
+
+
 Al finalizar esta unidad deberás ser capaz de:
 
 - Explicar qué es el correo electrónico.
@@ -266,13 +278,13 @@ MAILBOX
 Supongamos:
 
 ```text
-ana@empresa-a.test
+ana@empresa-a.juandecolonia.jc
 ```
 
 envía un correo a:
 
 ```text
-luis@empresa-b.test
+luis@empresa-b.juandecolonia.jc
 ```
 
 Proceso:
@@ -290,7 +302,7 @@ SMTP Submission
 MTA empresa-a
  │
  ▼
-DNS → MX empresa-b.test
+DNS → MX empresa-b.juandecolonia.jc
  │
  ▼
 SMTP
@@ -329,7 +341,7 @@ usuario@dominio
 Ejemplo:
 
 ```text
-ger@asir.test
+ger@juandecolonia.jc
 ```
 
 Separación:
@@ -343,7 +355,7 @@ ger
 │
 └── separador
 
-asir.test
+juandecolonia.jc
 │
 └── dominio
 ```
@@ -450,9 +462,9 @@ SMTP es un protocolo textual basado en comandos y respuestas.
 Ejemplo conceptual:
 
 ```text
-S: 220 mail.example.test
-C: EHLO cliente.example.test
-S: 250-mail.example.test
+S: 220 mail.juandecolonia.jc
+C: EHLO cliente.juandecolonia.jc
+S: 250-mail.juandecolonia.jc
 S: 250 STARTTLS
 C: STARTTLS
 S: 220 Ready to start TLS
@@ -477,11 +489,11 @@ Ejemplo:
 
 ```text
 EHLO cliente.test
-MAIL FROM:<ana@empresa-a.test>
-RCPT TO:<luis@empresa-b.test>
+MAIL FROM:<ana@empresa-a.juandecolonia.jc>
+RCPT TO:<luis@empresa-b.juandecolonia.jc>
 DATA
-From: Ana <ana@empresa-a.test>
-To: Luis <luis@empresa-b.test>
+From: Ana <ana@empresa-a.juandecolonia.jc>
+To: Luis <luis@empresa-b.juandecolonia.jc>
 Subject: Prueba
 
 Hola Luis.
@@ -796,8 +808,8 @@ Conceptualmente:
 Ejemplo:
 
 ```text
-From: ana@example.test
-To: luis@example.test
+From: ana@juandecolonia.jc
+To: luis@juandecolonia.jc
 Date: ...
 Subject: Reunión
 
@@ -832,10 +844,10 @@ MIME-Version:
 Ejemplo:
 
 ```text
-From: Ana <ana@example.test>
-To: Luis <luis@example.test>
+From: Ana <ana@juandecolonia.jc>
+To: Luis <luis@juandecolonia.jc>
 Subject: Prueba
-Message-ID: <12345@example.test>
+Message-ID: <12345@juandecolonia.jc>
 ```
 
 ---
@@ -989,15 +1001,15 @@ message headers
 Por ejemplo:
 
 ```text
-MAIL FROM:<alice@example.test>
-RCPT TO:<bob@example.test>
+MAIL FROM:<alice@juandecolonia.jc>
+RCPT TO:<bob@juandecolonia.jc>
 ```
 
 no equivale necesariamente a:
 
 ```text
-From: Alice <alice@example.test>
-To: Bob <bob@example.test>
+From: Alice <alice@juandecolonia.jc>
+To: Bob <bob@juandecolonia.jc>
 ```
 
 Esto es importante para comprender:
@@ -1382,19 +1394,23 @@ Webmin puede administrar Postfix y Dovecot si los módulos correspondientes est�
 ## 🧪 Práctica 6.X — Recorrido completo con Roundcube
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1467,19 +1483,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 34. PRÁCTICA 6.1 — Correo en Cisco Packet Tracer
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1507,14 +1527,14 @@ Email
 Dominio:
 
 ```text
-asir.test
+juandecolonia.jc
 ```
 
 Cuentas:
 
 ```text
-ana@asir.test
-luis@asir.test
+ana@juandecolonia.jc
+luis@juandecolonia.jc
 ```
 
 Configura los clientes.
@@ -1575,19 +1595,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 35. PRÁCTICA 6.2 — Analizar el correo en Packet Tracer
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1661,19 +1685,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 36. PRÁCTICA 6.3 — DNS y correo
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1681,21 +1709,21 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 En Ubuntu Server configura una zona de laboratorio:
 
 ```text
-asir.test
+juandecolonia.jc
 ```
 
 Incluye:
 
 ```text
-MX 10 mail.asir.test.
-A    mail.asir.test → IP servidor
+MX 10 mail.juandecolonia.jc.
+A    mail.juandecolonia.jc → IP servidor
 ```
 
 Comprueba:
 
 ```bash
-dig MX asir.test
-dig A mail.asir.test
+dig MX juandecolonia.jc
+dig A mail.juandecolonia.jc
 ```
 
 ### Objetivo
@@ -1747,19 +1775,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 37. PRÁCTICA 6.4 — Inspeccionar SMTP desde WSL2
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1767,7 +1799,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 Desde WSL2:
 
 ```bash
-nc -v mail.asir.test 25
+nc -v mail.juandecolonia.jc 25
 ```
 
 Si el servidor responde:
@@ -1779,7 +1811,7 @@ Si el servidor responde:
 prueba:
 
 ```text
-EHLO wsl.asir.test
+EHLO wsl.juandecolonia.jc
 QUIT
 ```
 
@@ -1835,19 +1867,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 38. PRÁCTICA 6.5 — SMTP Submission con TLS
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1856,7 +1892,7 @@ Con un servidor de laboratorio que proporcione submission:
 
 ```bash
 openssl s_client \
-  -connect mail.asir.test:587 \
+  -connect mail.juandecolonia.jc:587 \
   -starttls smtp
 ```
 
@@ -1872,7 +1908,7 @@ nombre del servidor
 Después:
 
 ```text
-EHLO wsl.asir.test
+EHLO wsl.juandecolonia.jc
 ```
 
 Busca capacidades como:
@@ -1922,19 +1958,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 39. PRÁCTICA 6.6 — SMTP con TLS implícito
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1943,15 +1983,15 @@ Prueba:
 
 ```bash
 openssl s_client \
-  -connect mail.asir.test:465 \
-  -servername mail.asir.test
+  -connect mail.juandecolonia.jc:465 \
+  -servername mail.juandecolonia.jc
 ```
 
 Compara con:
 
 ```bash
 openssl s_client \
-  -connect mail.asir.test:587 \
+  -connect mail.juandecolonia.jc:587 \
   -starttls smtp
 ```
 
@@ -2001,19 +2041,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 40. PRÁCTICA 6.7 — POP3
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2022,8 +2066,8 @@ Con un servidor POP3 de laboratorio:
 
 ```bash
 openssl s_client \
-  -connect mail.asir.test:995 \
-  -servername mail.asir.test
+  -connect mail.juandecolonia.jc:995 \
+  -servername mail.juandecolonia.jc
 ```
 
 Observa el saludo:
@@ -2075,19 +2119,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 41. PRÁCTICA 6.8 — IMAP
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2096,8 +2144,8 @@ Con IMAPS:
 
 ```bash
 openssl s_client \
-  -connect mail.asir.test:993 \
-  -servername mail.asir.test
+  -connect mail.juandecolonia.jc:993 \
+  -servername mail.juandecolonia.jc
 ```
 
 Tras establecer TLS:
@@ -2156,19 +2204,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 42. PRÁCTICA 6.9 — Configurar un cliente de correo en WSL2
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2245,19 +2297,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 43. PRÁCTICA 6.10 — Configuración de cliente gráfico
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2332,19 +2388,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 44. PRÁCTICA 6.11 — POP3 frente a IMAP
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2419,19 +2479,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 45. PRÁCTICA 6.12 — Analizar cabeceras
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2503,19 +2567,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 46. PRÁCTICA 6.13 — MIME y adjuntos
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2588,19 +2656,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 47. PRÁCTICA 6.14 — Base64 no es cifrado
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2662,19 +2734,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 48. PRÁCTICA 6.15 — DNS MX y encaminamiento
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2743,19 +2819,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 49. PRÁCTICA 6.16 — Diagnóstico con `dig`
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2763,14 +2843,14 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 Simula un fallo:
 
 ```text
-mail.asir.test no resuelve
+mail.juandecolonia.jc no resuelve
 ```
 
 Ejecuta:
 
 ```bash
-dig A mail.asir.test
-dig MX asir.test
+dig A mail.juandecolonia.jc
+dig MX juandecolonia.jc
 ```
 
 Comprueba:
@@ -2824,19 +2904,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 50. PRÁCTICA 6.17 — Diagnóstico de TLS
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2845,8 +2929,8 @@ Ejecuta:
 
 ```bash
 openssl s_client \
-  -connect mail.asir.test:993 \
-  -servername mail.asir.test
+  -connect mail.juandecolonia.jc:993 \
+  -servername mail.juandecolonia.jc
 ```
 
 Identifica:
@@ -2903,19 +2987,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 51. PRÁCTICA 6.18 — Captura SMTP con Wireshark
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2979,19 +3067,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 52. PRÁCTICA 6.19 — Captura IMAP/POP3 con TLS
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -3062,19 +3154,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 53. PRÁCTICA 6.20 — Seguridad del cliente
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -3133,19 +3229,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 54. PRÁCTICA 6.21 — Analizar spam
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -3215,19 +3315,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 55. PRÁCTICA 6.22 — SPF
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -3235,7 +3339,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 Para un dominio de laboratorio, diseña conceptualmente:
 
 ```text
-asir.test
+juandecolonia.jc
 ```
 
 con una política SPF.
@@ -3243,7 +3347,7 @@ con una política SPF.
 Consulta:
 
 ```bash
-dig TXT asir.test
+dig TXT juandecolonia.jc
 ```
 
 Identifica:
@@ -3299,19 +3403,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 56. PRÁCTICA 6.23 — DKIM
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -3377,19 +3485,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 57. PRÁCTICA 6.24 — DMARC
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -3397,7 +3509,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 Consulta:
 
 ```bash
-dig TXT _dmarc.example.test
+dig TXT _dmarc.juandecolonia.jc
 ```
 
 Interpreta una política:
@@ -3460,19 +3572,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 58. PRÁCTICA 6.25 — Flujo completo
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -3931,8 +4047,8 @@ Incluye, cuando aporte información, una captura de la topología, del fichero o
 ### DNS
 
 ```text
-mail.asir.test
-asir.test MX 10 mail.asir.test
+mail.juandecolonia.jc
+juandecolonia.jc MX 10 mail.juandecolonia.jc
 ```
 
 ### SMTP
@@ -4356,6 +4472,25 @@ DNS permite localizar el servidor que recibe correo para un dominio mediante
 MX. SMTP se utiliza posteriormente para realizar la transferencia.
 
 ---
+
+### 🧪 Escalera de práctica
+
+- **Guiada:** el procedimiento aparece completo y se valida paso a paso.
+- **Semiguiada:** se conserva el objetivo, pero el alumno debe decidir parte de la configuración y de las pruebas.
+- **Autónoma:** se proporcionan requisitos y restricciones; el alumno decide la implementación y justifica la evidencia.
+
+## 🔄 Transferencia profesional
+
+> 👨‍💼 **Cambia una condición y conserva el modelo mental.** Una vez resuelto el escenario inicial, modifica una sola variable —subred, servidor, nombre, firewall, número de clientes o entorno de despliegue— y adapta la solución. Explica qué permanece igual y qué debe cambiar.
+
+### Reto de transferencia
+
+1. Identifica la condición que ha cambiado.
+2. Predice qué componentes resultarán afectados.
+3. Localiza los ficheros o parámetros que deben adaptarse.
+4. Realiza el cambio mínimo.
+5. Valida y prueba de nuevo.
+6. Documenta la diferencia respecto al escenario inicial.
 
 # 📝 72. Test de repaso
 

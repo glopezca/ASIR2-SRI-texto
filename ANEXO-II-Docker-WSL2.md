@@ -31,7 +31,7 @@ Los proyectos se almacenarán preferentemente en `~/sri/` dentro de WSL2.
 
 ## 🧪 Estado de validación
 
-Los ejemplos se han revisado estáticamente y se ha comprobado la coherencia de sus configuraciones. El entorno de generación no dispone de Docker Engine ni de un Codespace ejecutable, por lo que **no se afirma una prueba extremo a extremo que no se haya podido ejecutar**. La matriz final de pruebas se incluye en el Anexo VI, que documenta el Entorno IV.
+Los ejemplos se han revisado estáticamente y se ha comprobado la coherencia de sus configuraciones. El entorno de generación no dispone de Docker Engine ni de un Codespace ejecutable, por lo que **no se afirma una prueba extremo a extremo que no se haya podido ejecutar**. La matriz final de pruebas se incluye en el Entorno IV, documentado en el Anexo VI.
 
 ---
 
@@ -401,6 +401,12 @@ La GUI no sustituye a la CLI.
 | `docker network ls` | Networks |
 
 ---
+
+## 🌐 ¿Por qué Nginx en este laboratorio?
+
+> 🧭 **Antes de empezar:** Nginx y Apache HTTP Server son servidores web maduros. La elección de Nginx aquí es **didáctica**, no una declaración de superioridad. Docker dispone de imágenes oficiales para ambos.
+
+Nginx permite comenzar con un servidor HTTP sencillo y avanzar, sin cambiar de herramienta, hacia proxy inverso, distribución de tráfico y configuraciones basadas en red. Así podemos reutilizar el mismo ejemplo para estudiar contenedores, puertos, DNS interno, redes y Compose. Apache seguirá apareciendo en las UT donde sus características sean relevantes.
 
 # 🐋 8. Primer contenedor: Nginx
 

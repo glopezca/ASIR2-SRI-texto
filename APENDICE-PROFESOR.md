@@ -398,3 +398,51 @@ Antes de utilizar una práctica:
 # 9. 🏁 Principio metodológico
 
 > **No evaluar sólo que el servicio funcione. Evaluar que el alumno sepa explicar por qué funciona, demostrarlo, detectar cuándo deja de funcionar y justificar cómo lo ha solucionado.**
+
+
+## 🧩 Proyecto transversal SRI
+
+Al finalizar las UT se propone un proyecto que obliga a relacionar los aprendizajes en lugar de tratarlos como compartimentos estancos. El alumnado diseña una pequeña infraestructura para una organización ficticia: direccionamiento, DNS, DHCP, web, transferencia de ficheros, correo, webmail, lista de distribución, mensajería y streaming.
+
+La evaluación se realiza sobre cinco productos: arquitectura, implementación, pruebas, diagnóstico y documentación. El profesor puede introducir una incidencia controlada para evaluar la capacidad de recuperación.
+
+### Modalidades de evaluación
+
+| Modalidad | Qué demuestra | Ejemplo |
+|---|---|---|
+| Conceptual | Comprensión | Explicar por qué un cliente usa la puerta de enlace. |
+| Interpretación | Lectura técnica | Interpretar `ip route`, `dig` o cabeceras SMTP. |
+| Procedimental | Ejecución | Desplegar y verificar un servicio. |
+| Diagnóstico | Resolución | Localizar un fallo introducido deliberadamente. |
+| Diseño | Transferencia | Proponer una arquitectura para un escenario nuevo. |
+
+### Incidencias preparables
+
+- DNS activo pero zona no cargable.
+- Web accesible por IP pero no por nombre.
+- Correo recibido pero no enviado.
+- SFTP accesible pero sin permisos de escritura.
+- Contenedor `Up` sin servicio disponible.
+- Service de Kubernetes sin Pods seleccionados.
+- Streaming con bitrate superior al ancho de banda disponible.
+
+
+
+## 🔧 Banco transversal de incidencias
+
+Estas incidencias permiten evaluar diagnóstico sin cambiar el objetivo conceptual de la UT:
+
+| Código | Síntoma | Competencia principal |
+|---|---|---|
+| NET-01 | El equipo llega a su red pero no a otra subred | Interpretar routing |
+| DHCP-01 | El cliente no recibe concesión | Aislar broadcast, servicio y pool |
+| DNS-01 | Resuelve por IP pero no por nombre | Separar conectividad, DNS y servicio |
+| FTP-01 | Control funciona, transferencia no | Analizar canales y firewall |
+| WEB-01 | Nginx activo pero devuelve 403 | Analizar permisos y configuración |
+| MAIL-01 | Recibe correo pero no puede enviarlo | Separar SMTP de IMAP |
+| MSG-01 | Cliente XMPP conecta pero no encuentra al usuario | Analizar JID, dominio y presencia |
+| MEDIA-01 | El audio llega con cortes | Relacionar bitrate, red y búfer |
+| DOCKER-01 | Contenedor `Up`, servicio inaccesible | Separar proceso, puerto y publicación |
+| K8S-01 | Pod `Running`, Service sin backends | Analizar labels/selectors/endpoints |
+
+Cada incidencia debe tener versión para profesor (solución) y versión para alumnado (síntomas + restricciones).

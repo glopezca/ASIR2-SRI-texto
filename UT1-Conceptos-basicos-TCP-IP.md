@@ -66,7 +66,47 @@
 >
 > Imagina una ciudad. Cada vivienda necesita una dirección para recibir correo; las calles permiten desplazarse de una dirección a otra; los cruces deciden por qué camino continuar y el portal de un edificio distingue qué vecino debe recibir el paquete. En una red ocurre algo parecido: la **dirección IP** identifica el destino, el **encaminamiento** decide por dónde viajar y los **puertos** ayudan a entregar los datos al servicio correcto. Esta analogía no sustituye la definición técnica, pero ayuda a recordar qué problema resuelve cada elemento.
 
+
+> **🏙️ **ANALOGÍA · UNA CIUDAD Y SU SISTEMA DE DIRECCIONES****
+>
+> Piensa en una ciudad con calles, números de portal y oficinas. La dirección IP permite localizar el edificio; la ruta es el recorrido por las calles; el puerto identifica la oficina dentro del edificio. El cartero puede conocer el barrio y el portal sin conocer la actividad concreta que ocurre dentro de cada oficina. Esta imagen mental ayuda a separar direccionamiento, encaminamiento y servicios.
+
 ## 🎯 0. Objetivos
+
+## 🧭 Ruta de aprendizaje
+
+> 🧠 **Cómo trabajar esta unidad**
+>
+> Esta unidad está pensada como una escalera: cada peldaño aporta una herramienta que necesitarás en el siguiente. Si un término, comando o procedimiento no te resulta familiar, no lo memorices a ciegas. Busca primero la explicación inmediata anterior, realiza el ejemplo mínimo y comprueba el resultado antes de continuar.
+
+### 🟢 Nivel 1 · Comprender
+
+Identifica el problema que resuelve el servicio, los componentes que participan y el recorrido básico de una comunicación.
+
+### 🔵 Nivel 2 · Reproducir
+
+Sigue una práctica guiada y consigue un funcionamiento verificable. Cada cambio debe ir acompañado de una comprobación.
+
+### 🟣 Nivel 3 · Diagnosticar
+
+Introduce o analiza un fallo, formula una hipótesis y utiliza evidencias —estado, configuración, puertos, red y registros— para localizar la causa.
+
+### 🔴 Nivel 4 · Transferir
+
+Resuelve un escenario nuevo utilizando el mismo modelo mental en otro entorno o con otra herramienta.
+
+### 🧪 Escalera de práctica
+
+- **Práctica guiada:** sigue la secuencia completa y utiliza los comandos de comprobación indicados.
+- **Práctica semiguiada:** se mantiene el objetivo y la arquitectura, pero debes decidir parte de la configuración y las pruebas.
+- **Práctica autónoma:** recibes requisitos y restricciones; decides la implementación y debes justificarla.
+
+Cuando una práctica admita estas tres modalidades, empieza por la guiada y elimina progresivamente las pistas. Esa retirada de apoyos convierte el mismo laboratorio en entrenamiento y, después, en evaluación auténtica.
+
+### 🧪 Evidencia mínima de aprendizaje
+
+Al cerrar una práctica debes poder enseñar **qué cambiaste, dónde lo cambiaste, cómo lo validaste, qué prueba demuestra que funciona y qué harías primero si volviera a fallar**.
+
 
 Al finalizar esta unidad el alumnado deberá ser capaz de:
 
@@ -137,18 +177,11 @@ preguntas como:
 La arquitectura TCP/IP puede representarse mediante cuatro capas
 funcionales:
 
-  -----------------------------------------------------------------------
-  Capa                    Función principal       Ejemplos
-  ----------------------- ----------------------- -----------------------
-  Aplicación              Servicios utilizados    HTTP, DNS, SSH, SMTP,
-                          por las aplicaciones    DHCP
-
-  Transporte              Comunicación extremo a  TCP, UDP
-                          extremo entre procesos  
-
-  Internet                Direccionamiento y      IP, IPv6, ICMP
-                          encaminamiento de       
-                          paquetes                
+| Capa | Función principal | Ejemplos |
+|---|---|---|
+| Aplicación | Servicios utilizados por las aplicaciones | HTTP, DNS, SSH, SMTP, DHCP |
+| Transporte | Comunicación extremo a extremo entre procesos | TCP, UDP |
+| Internet | Direccionamiento y encaminamiento de paquetes | IP, IPv6, ICMP |
 
   Acceso a red            Transmisión sobre una   Ethernet, Wi-Fi
                           tecnología concreta     
@@ -379,17 +412,17 @@ CIDR expresa directamente el número de bits utilizados para la red.
 
 Ejemplos:
 
-    CIDR Máscara             Hosts totales
-  ------ ----------------- ---------------
-      /8 255.0.0.0              16 777 216
-     /16 255.255.0.0                65 536
-     /24 255.255.255.0                 256
-     /25 255.255.255.128               128
-     /26 255.255.255.192                64
-     /27 255.255.255.224                32
-     /28 255.255.255.240                16
-     /29 255.255.255.248                 8
-     /30 255.255.255.252                 4
+| CIDR | Máscara | Hosts totales |
+|---:|---|---:|
+| /8 | 255.0.0.0 | 16 777 216 |
+| /16 | 255.255.0.0 | 65 536 |
+| /24 | 255.255.255.0 | 256 |
+| /25 | 255.255.255.128 | 128 |
+| /26 | 255.255.255.192 | 64 |
+| /27 | 255.255.255.224 | 32 |
+| /28 | 255.255.255.240 | 16 |
+| /29 | 255.255.255.248 | 8 |
+| /30 | 255.255.255.252 | 4 |
 
 En una red IP convencional, la cantidad de direcciones utilizables
 para hosts suele ser:
@@ -829,14 +862,14 @@ operativo.
 
 Ejemplos frecuentes:
 
-  Servicio        Protocolo     Puerto
-  --------------- ----------- --------
-  HTTP            TCP               80
-  HTTPS           TCP              443
-  SSH             TCP               22
-  DNS             UDP/TCP           53
-  DHCP servidor   UDP               67
-  DHCP cliente    UDP               68
+| Servicio | Protocolo | Puerto |
+|---|---|---:|
+| HTTP | TCP | 80 |
+| HTTPS | TCP | 443 |
+| SSH | TCP | 22 |
+| DNS | UDP/TCP | 53 |
+| DHCP servidor | UDP | 67 |
+| DHCP cliente | UDP | 68 |
 
 ------------------------------------------------------------------------
 
@@ -1097,13 +1130,13 @@ VirtualBox proporciona distintos modos de conexión.
 
 Los más importantes para SRI son:
 
-  Modo                Uso didáctico
-  ------------------- -----------------------------------------------------
-  NAT                 Salida sencilla de la VM hacia el exterior
-  NAT Network         Varias VMs en una red NAT gestionada por VirtualBox
-  Bridged Adapter     La VM aparece en la red física como otro equipo
-  Host-only Adapter   Comunicación entre anfitrión y VMs
-  Internal Network    Comunicación entre VMs de la misma red virtual
+| Modo | Uso didáctico |
+|---|---|
+| NAT | Salida sencilla de la VM hacia el exterior |
+| NAT Network | Varias VMs en una red NAT gestionada por VirtualBox |
+| Bridged Adapter | La VM aparece en la red física como otro equipo |
+| Host-only Adapter | Comunicación entre anfitrión y VMs |
+| Internal Network | Comunicación entre VMs de la misma red virtual |
 
 La documentación de VirtualBox distingue explícitamente estos modos,
 incluyendo NAT, bridge, red interna y host-only.
@@ -1351,19 +1384,23 @@ Webmin puede presentar parte de la configuración de red mediante sus módulos d
 # 🧪 25. PRÁCTICA 1 --- IP y encaminamiento con Cisco Packet Tracer
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1485,19 +1522,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 26. PRÁCTICA 2 --- Inspección de red con WSL2 + Ubuntu 26.04
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1645,19 +1686,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 27. PRÁCTICA 3 --- Red en VirtualBox con Ubuntu Server 26.04
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -1867,19 +1912,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 28. PRÁCTICA 4 --- NAT en Ubuntu Server
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2005,19 +2054,23 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 # 🧪 29. PRÁCTICA 5 --- Comparación de los cuatro entornos
 > 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **1 · Sitúate.** Lee primero el objetivo y localiza en la unidad el concepto que estamos llevando a la práctica. No empieces copiando comandos: primero debes poder explicar qué componente estamos construyendo y para qué sirve.
+> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
 >
-> **2 · Prepara el entorno.** Comprueba si esta práctica utiliza **Entorno I · Packet Tracer**, **Entorno II · WSL2**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Anexo VI · Entorno IV · Docker Compose**. Verifica conectividad, nombres, interfaces y estado de los servicios antes de modificar nada.
+> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
 >
-> **3 · Predice.** Antes de ejecutar un comando importante, escribe qué esperas que ocurra. Por ejemplo: «después de `ss -lnt`, espero encontrar el servicio escuchando en TCP/80». Esta pequeña predicción convierte la práctica en una investigación y no en una receta.
+> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
 >
-> **4 · Construye paso a paso.** Cada número debe dejar el sistema en un estado ligeramente más completo que el anterior. Después de cada bloque, realiza una comprobación corta. Si el paso 4 depende del 3, no avances hasta que el 3 funcione.
+> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
 >
-> **5 · Diagnostica si falla.** No empieces reiniciando. Sigue esta secuencia: **estado → configuración → logs → puertos → red → prueba desde el cliente**. Conserva las órdenes utilizadas y la evidencia del fallo.
+> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
 >
-> **6 · Demuestra.** La práctica termina cuando puedes demostrar el resultado con una evidencia: captura, salida de comando, conexión desde cliente, fichero de configuración o tráfico observado.
+> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
 >
-> **7 · Explica.** Cierra con una breve explicación técnica: qué has configurado, qué protocolo interviene, qué puerto utiliza, cómo se verifica y qué error sería el primero que investigarías si dejara de funcionar.
+> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
+>
+> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
+>
+> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
 
 
@@ -2036,16 +2089,16 @@ Tenemos:
 
 y queremos comprobar la conectividad entre dos hosts.
 
-  Tarea                  Packet Tracer               WSL2                         Ubuntu Server + VirtualBox
-  ---------------------- --------------------------- ---------------------------- ----------------------------
-  Configurar IP          GUI/CLI Cisco               `ip` / entorno WSL           Netplan
-  Ver interfaces         `show ip interface brief`   `ip addr`                    `ip addr`
-  Ver rutas              `show ip route`             `ip route`                   `ip route`
-  Ping                   `ping`                      `ping`                       `ping`
-  Routing                Router Cisco                Limitado como laboratorio    Router Linux
-  NAT                    Router Cisco                No es el entorno principal   Router Linux
-  Captura                Simulation Mode             `tcpdump`                    `tcpdump` / Wireshark
-  Topologías complejas   Excelente                   Limitado                     Excelente
+| Tarea | Packet Tracer | WSL2 | Ubuntu Server + VirtualBox |
+|---|---|---|---|
+| Configurar IP | GUI/CLI Cisco | `ip` / entorno WSL | Netplan |
+| Ver interfaces | `show ip interface brief` | `ip addr` | `ip addr` |
+| Ver rutas | `show ip route` | `ip route` | `ip route` |
+| Ping | `ping` | `ping` | `ping` |
+| Routing | Router Cisco | Limitado como laboratorio | Router Linux |
+| NAT | Router Cisco | No es el entorno principal | Router Linux |
+| Captura | Simulation Mode | `tcpdump` | `tcpdump` / Wireshark |
+| Topologías complejas | Excelente | Limitado | Excelente |
 
 ------------------------------------------------------------------------
 
@@ -2549,6 +2602,20 @@ La idea fundamental es:
 >        ↓
 > 7️⃣ ¿El firewall/NAT está modificando o bloqueando algo?
 > ```
+
+
+## 🔄 Transferencia profesional
+
+> 👨‍💼 **Cambia una condición sin cambiar el problema.** Una vez resuelto el escenario de referencia, modifica una sola condición —subred, servidor, nombre, firewall, número de clientes o entorno de despliegue— y adapta la solución. Explica qué permanece igual y qué debe cambiar.
+
+### Reto de transferencia
+
+1. Identifica qué ha cambiado.
+2. Predice qué partes de la arquitectura afectará.
+3. Localiza la configuración que tendrás que adaptar.
+4. Haz el cambio mínimo.
+5. Valida y vuelve a probar.
+6. Documenta la diferencia respecto al escenario inicial.
 
 
 # 📝 Test de repaso

@@ -1,5 +1,12 @@
 # Changelog
 
+## v6.5.3 — 27/09/2026
+
+- Añadido `INDICE-GENERAL.md` como índice de navegación del repositorio.
+- El nuevo índice enlaza directamente las ocho UT, los dieciocho anexos y los materiales complementarios principales.
+- Añadido un enlace visible al índice general desde el README, manteniendo separado el índice alfabético de conceptos.
+
+
 ## v6.5.2 — 27/09/2026
 
 - Añadido enlace directo al **índice alfabético** desde el README.

@@ -1,6 +1,6 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-## Material docente integral · `ASIR2-SRI-texto` · v6.5.2
+## Material docente integral · `ASIR2-SRI-texto` · v6.5.3
 
 **Edición 2026** para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
@@ -24,6 +24,10 @@ Se añaden además plantillas profesionales, matriz curricular, guía de laborat
 | UT6 | SMTP, IMAP, POP3, Postfix, Dovecot, Roundcube y autenticación | RA5 |
 | UT7 | XMPP, IRC, listas de distribución y NNTP | RA6 |
 | UT8 | Audio, vídeo, FFmpeg, Icecast, HLS, RTP y videoconferencia | RA7 + RA8 |
+
+## Índice general
+
+Consulta el **[índice general](INDICE-GENERAL.md)** para acceder directamente a todas las UT, anexos y materiales complementarios.
 
 ## Índice alfabético
 
@@ -67,7 +71,7 @@ La preparación del entorno está en **UT1**, e incluye ficha del puesto, Virtua
 
 ## Material recuperado del CIFP Juan de Colonia
 
-La v6.5.2 vuelve a contrastar el material con el libro **Preparación del entorno** del CIFP Juan de Colonia. Se fusionan y sintetizan sus contenidos útiles con la documentación del repositorio, evitando duplicaciones y manteniendo una única referencia práctica.
+La v6.5.3 vuelve a contrastar el material con el libro **Preparación del entorno** del CIFP Juan de Colonia. Se fusionan y sintetizan sus contenidos útiles con la documentación del repositorio, evitando duplicaciones y manteniendo una única referencia práctica.
 
 En particular, se amplía la **chuleta de comandos de red de Ubuntu** para cubrir, además de la consulta de interfaces y rutas, conectividad, DNS, puertos y sockets, Netplan, `systemd`, firewall `ufw`, diagnóstico con `nmap`, registros y herramientas auxiliares. También se conserva la preparación común del puesto: identificación del equipo, comprobación TCP/IP, instalación de Ubuntu Server, SSH y comprobación final.
 
@@ -75,7 +79,7 @@ El contenido del libro no se copia de forma literal: se **fusiona, sintetiza y a
 
 ## Fuentes y control de actualidad
 
-`INFORME-REVISION-FUENTES-v6.5.2.md` documenta qué materiales aportados se integran, cuáles se corrigen y cuáles se conservan únicamente como referencia histórica o pedagógica.
+`INFORME-REVISION-FUENTES-v6.5.3.md` documenta qué materiales aportados se integran, cuáles se corrigen y cuáles se conservan únicamente como referencia histórica o pedagógica.
 
 El material usa documentación oficial de Ubuntu, BIND9, Kea, Apache, Nginx, Postfix, Dovecot, Mailman 3, Docker, Kubernetes, MDN y RFC Editor como fuentes técnicas primarias.
 
@@ -85,7 +89,7 @@ El material original del repositorio se distribuye bajo **CC BY-SA 4.0**.
 
 **Atribución recomendada:**
 
-> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.5.2, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
+> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.5.3, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
 
 Los materiales de terceros mantienen sus propias licencias, marcas y derechos.
 
@@ -116,5 +120,5 @@ El actualizador no reemplaza recetas técnicas mediante búsquedas globales. Sol
 - `ANEXO-XVI-Auditoria-Obsolescencia.md`: criterio de sustitución tecnológica.
 - `ANEXO-XVII-Algoritmo-Actualizacion.md`: procedimiento de futuras iteraciones.
 - `ANEXO-XVIII-Chuleta-Comandos-Red-Ubuntu.md`: consulta rápida de comandos de red para el laboratorio.
-- `INFORME-REVISION-FUENTES-v6.5.2.md`: auditoría de las fuentes aportadas.
+- `INFORME-REVISION-FUENTES-v6.5.3.md`: auditoría de las fuentes aportadas.
 - `INDICE-ALFABETICO.md`: índice rápido de conceptos.

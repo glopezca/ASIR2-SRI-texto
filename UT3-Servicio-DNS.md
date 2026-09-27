@@ -1,10 +1,50 @@
+## 🏆 Capa Premium de la UT
+
+**Misión de dominio:** Administrar resolución, autoridad, caché y zonas.
+
+### 🚪 Puerta de entrada diagnóstica
+
+Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerrequisitos recuperar.
+
+1. ¿Qué concepto previo necesitas dominar?
+2. ¿Qué problema resuelve la UT?
+3. ¿Qué evidencia demostraría que funciona?
+4. ¿Qué herramienta usarías primero para diagnosticar?
+5. ¿Qué cambiarías solo después de obtener evidencia?
+
+### 🧠 Núcleo de dominio
+
+| Debes dominar | Evidencia observable |
+|---|---|
+| **jerarquía DNS** | Explicación, comando, diagrama o evidencia verificable. |
+| **recursión e iteración** | Explicación, comando, diagrama o evidencia verificable. |
+| **registros** | Explicación, comando, diagrama o evidencia verificable. |
+| **zonas/transferencias** | Explicación, comando, diagrama o evidencia verificable. |
+
+### 🛠️ Criterios de salida
+
+- Debes poder interpretar `dig`.
+- Debes poder distinguir NXDOMAIN/SERVFAIL.
+- Debes poder validar una zona.
+- Debes poder demostrar autoridad.
+
+### 🚀 Puente profesional
+
+- Conecta con DNSSEC.
+- Conecta con TSIG/DDNS.
+- Conecta con DoT/DoH.
+
+### 🧯 Regla Premium de diagnóstico
+
+**Predice → observa → formula hipótesis → cambia una sola variable → valida → documenta → revierte si procede.** Una incidencia no se considera cerrada hasta que puedes explicar su causa y reproducir la verificación.
+
 # 🌐⚡ Unidad de Trabajo 3 · SERVICIO DE NOMBRES DE DOMINIO (DNS) ⚡🌐
 
 ### RA1 · Resolución de nombres.
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultado de aprendizaje trabajado
 >
@@ -81,6 +121,18 @@
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
+### 🧪 Entornos hermanos de esta UT
+
+Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el modelo mental: **necesidad → protocolo → servicio → configuración → evidencia → diagnóstico**.
+
+| Entorno | Función didáctica | Uso recomendado |
+|---|---|---|
+| **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
+| **Entorno II · WSL2 + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
+| **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
+| **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
+
+> 🧠 **Transferencia:** no todas las prácticas deben ejecutarse en los cuatro entornos; la elección se justifica por el objetivo didáctico y la naturaleza técnica del servicio.
 
 
 > 📇 **ANALOGÍA · LA GUÍA TELEFÓNICA**
@@ -126,7 +178,21 @@ Al finalizar esta unidad deberás ser capaz de:
 
 ------------------------------------------------------------------------
 
+
+
+> 🧭 **PREPARACIÓN COMÚN DE LAS PRÁCTICAS**
+>
+> Todas las prácticas utilizan la misma rutina profesional: **situarse en el escenario → comprobar prerrequisitos → formular una predicción → cambiar una sola variable → validar → probar desde un cliente → recoger evidencias → diagnosticar si falla → documentar y, cuando proceda, revertir**. Esta guía común se explica una sola vez en la UT. Cada práctica añade únicamente las pistas que son propias de su objetivo.
+
 ### 🧪 Escalera de práctica
+
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 Escalera de práctica**
+>
+> **Qué debes fijar:** Explicita qué comportamiento debe observarse al finalizar y qué dato objetivo demostrará que el servicio está funcionando.
+>
+> **Evidencia:** Usa como evidencia principal el artefacto que mejor demuestre el objetivo de esta práctica; evita capturas sin contexto y conserva comando, salida y fecha de la prueba.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 - **Guiada:** el procedimiento aparece completo y se valida paso a paso.
 - **Semiguiada:** se conserva el objetivo, pero el alumno debe decidir parte de la configuración y las pruebas.
@@ -613,7 +679,6 @@ primary y secondary dependiendo de las zonas que sirva.
 | `TXT` | Texto asociado al nombre | SPF, verificaciones, etc. |
 
 
-
 La información DNS se almacena mediante **Resource Records (RR)**.
 
 Formato conceptual:
@@ -1051,32 +1116,18 @@ En Webmin, el módulo **Servers → BIND DNS Server** permite inspeccionar y edi
 > 💡 **Secuencia profesional:** localizar → leer → modificar → validar → recargar → consultar con `dig` → revisar logs.
 
 
-
 > 👨‍🏫 **Criterio de corrección de las prácticas**
 >
 > La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
 # 🧪 32. PRÁCTICA 1 --- Explorar DNS desde WSL2
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Explorar DNS desde WSL2**
+>
+> **Qué debes fijar:** Empieza por observar antes de modificar: identifica interlocutores, puertos, protocolo y resultado esperado. Formula qué campo o paquete debería confirmar tu hipótesis. Indica qué servidor debe responder, qué zona es autoritativa y qué respuesta esperas (NOERROR, NXDOMAIN o SERVFAIL). Valida sintaxis antes de recargar.
+>
+> **Evidencia:** La evidencia mínima debe contener la consulta ejecutada, el servidor consultado y el resultado relevante.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 ## Objetivo
@@ -1165,27 +1216,14 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 
 # 🧪 33. PRÁCTICA 2 --- Instalar BIND9 en VirtualBox + Ubuntu 26.04 Server
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Instalar BIND9 en VirtualBox + Ubuntu 26.04 Server**
+>
+> **Qué debes fijar:** Indica qué servidor debe responder, qué zona es autoritativa y qué respuesta esperas (NOERROR, NXDOMAIN o SERVFAIL). Valida sintaxis antes de recargar.
+>
+> **Evidencia:** La evidencia mínima debe contener la consulta ejecutada, el servidor consultado y el resultado relevante.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 ## Topología
@@ -1264,27 +1302,14 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 
 # 🧪 34. PRÁCTICA 3 --- Servidor DNS caché/reenviador
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Servidor DNS caché/reenviador**
+>
+> **Qué debes fijar:** Indica qué servidor debe responder, qué zona es autoritativa y qué respuesta esperas (NOERROR, NXDOMAIN o SERVFAIL). Valida sintaxis antes de recargar.
+>
+> **Evidencia:** La evidencia mínima debe contener la consulta ejecutada, el servidor consultado y el resultado relevante.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 ## Objetivo
@@ -1372,27 +1397,14 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 
 # 🧪 35. PRÁCTICA 4 --- Crear una zona autoritativa
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Crear una zona autoritativa**
+>
+> **Qué debes fijar:** Indica qué servidor debe responder, qué zona es autoritativa y qué respuesta esperas (NOERROR, NXDOMAIN o SERVFAIL). Valida sintaxis antes de recargar.
+>
+> **Evidencia:** La evidencia mínima debe contener la consulta ejecutada, el servidor consultado y el resultado relevante.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 Dominio de laboratorio:
@@ -1518,27 +1530,14 @@ dig @192.168.10.10 www.juandecolonia.jc
 ------------------------------------------------------------------------
 
 # 🧪 37. PRÁCTICA 5 --- Zona inversa
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Zona inversa**
+>
+> **Qué debes fijar:** Indica qué servidor debe responder, qué zona es autoritativa y qué respuesta esperas (NOERROR, NXDOMAIN o SERVFAIL). Valida sintaxis antes de recargar.
+>
+> **Evidencia:** La evidencia mínima debe contener la consulta ejecutada, el servidor consultado y el resultado relevante.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 Para:
@@ -1634,27 +1633,14 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 
 # 🧪 38. PRÁCTICA 6 --- Registros DNS
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Registros DNS**
+>
+> **Qué debes fijar:** Indica qué servidor debe responder, qué zona es autoritativa y qué respuesta esperas (NOERROR, NXDOMAIN o SERVFAIL). Valida sintaxis antes de recargar.
+>
+> **Evidencia:** La evidencia mínima debe contener la consulta ejecutada, el servidor consultado y el resultado relevante.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 Amplía la zona `juandecolonia.jc` con:
@@ -1744,27 +1730,14 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 
 # 🧪 39. PRÁCTICA 7 --- Servidor secundario y transferencia de zona
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Servidor secundario y transferencia de zona**
+>
+> **Qué debes fijar:** Indica qué servidor debe responder, qué zona es autoritativa y qué respuesta esperas (NOERROR, NXDOMAIN o SERVFAIL). Valida sintaxis antes de recargar. Separa autenticación, canal de control/datos, permisos y transporte seguro. Comprueba primero quién puede entrar y después qué operación puede realizar.
+>
+> **Evidencia:** La evidencia mínima debe contener la consulta ejecutada, el servidor consultado y el resultado relevante.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 ## Topología
@@ -1897,27 +1870,14 @@ No se debe incluir una clave TSIG real en un repositorio Git público.
 ------------------------------------------------------------------------
 
 # 🧪 42. PRÁCTICA 8 --- Transferencia autenticada
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Transferencia autenticada**
+>
+> **Qué debes fijar:** Separa autenticación, canal de control/datos, permisos y transporte seguro. Comprueba primero quién puede entrar y después qué operación puede realizar.
+>
+> **Evidencia:** Usa como evidencia principal el artefacto que mejor demuestre el objetivo de esta práctica; evita capturas sin contexto y conserva comando, salida y fecha de la prueba.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 Configura:
@@ -1998,27 +1958,14 @@ Puede utilizarse para integrar DHCP y DNS en determinados entornos.
 ------------------------------------------------------------------------
 
 # 🧪 44. PRÁCTICA 9 --- DHCP + DNS dinámico
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- DHCP + DNS dinámico**
+>
+> **Qué debes fijar:** Distingue cliente, servidor, ámbito, reserva y relay. Comprueba la concesión real y no des por válida la configuración hasta verificar las opciones recibidas. Indica qué servidor debe responder, qué zona es autoritativa y qué respuesta esperas (NOERROR, NXDOMAIN o SERVFAIL). Valida sintaxis antes de recargar.
+>
+> **Evidencia:** La evidencia mínima debe contener la consulta ejecutada, el servidor consultado y el resultado relevante.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 Utilizando la infraestructura de la UT2:
@@ -2176,27 +2123,14 @@ encuentran:
 ------------------------------------------------------------------------
 
 # 🧪 48. PRÁCTICA 10 --- Diagnóstico DNS con Wireshark
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Diagnóstico DNS con Wireshark**
+>
+> **Qué debes fijar:** Empieza por observar antes de modificar: identifica interlocutores, puertos, protocolo y resultado esperado. Formula qué campo o paquete debería confirmar tu hipótesis. Indica qué servidor debe responder, qué zona es autoritativa y qué respuesta esperas (NOERROR, NXDOMAIN o SERVFAIL). Valida sintaxis antes de recargar. Conserva el estado inicial, reproduce el fallo una vez y cambia una sola variable por intento. Registra síntoma, evidencia, hipótesis, intervención y resultado.
+>
+> **Evidencia:** La evidencia debe incluir el filtro aplicado y al menos un paquete/campo que confirme la hipótesis.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 Captura tráfico mientras ejecutas:
@@ -2270,27 +2204,14 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 
 # 🧪 49. PRÁCTICA 11 --- Diagnóstico con `dig`
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Diagnóstico con `dig`**
+>
+> **Qué debes fijar:** Empieza por observar antes de modificar: identifica interlocutores, puertos, protocolo y resultado esperado. Formula qué campo o paquete debería confirmar tu hipótesis. Conserva el estado inicial, reproduce el fallo una vez y cambia una sola variable por intento. Registra síntoma, evidencia, hipótesis, intervención y resultado.
+>
+> **Evidencia:** La evidencia mínima debe contener la consulta ejecutada, el servidor consultado y el resultado relevante.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 Realiza:
@@ -2447,27 +2368,14 @@ Puede indicar un problema más profundo:
 ------------------------------------------------------------------------
 
 # 🧪 52. PRÁCTICA 12 --- Reto integral DNS
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Reto integral DNS**
+>
+> **Qué debes fijar:** Indica qué servidor debe responder, qué zona es autoritativa y qué respuesta esperas (NOERROR, NXDOMAIN o SERVFAIL). Valida sintaxis antes de recargar.
+>
+> **Evidencia:** La evidencia mínima debe contener la consulta ejecutada, el servidor consultado y el resultado relevante.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 Construye:
@@ -2575,6 +2483,44 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
 | **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
 
+
+## 📘 Glosario esencial de la UT
+
+| Término | Definición |
+|---|---|
+| **Autoritativo** | Servidor que conoce de forma oficial los datos de una zona que sirve. |
+| **AXFR** | Transferencia completa de una zona DNS. |
+| **CNAME** | Registro que proporciona un alias de otro nombre canónico. |
+| **DNSSEC** | Extensiones que permiten validar autenticidad e integridad de datos DNS mediante firmas. |
+| **FQDN** | Nombre de dominio completo dentro de la jerarquía DNS. |
+| **MX** | Registro que indica los servidores responsables del correo de un dominio. |
+| **PTR** | Registro usado habitualmente en resolución inversa. |
+| **RR** | Resource Record, unidad de datos que describe un tipo de información DNS. |
+| **SOA** | Start of Authority, registro que describe parámetros de autoridad de una zona. |
+| **TTL** | Tiempo que una respuesta puede permanecer válida en caché. |
+| **TSIG** | Mecanismo de autenticación de mensajes DNS basado en un secreto compartido. |
+| **mDNS** | Resolución de nombres en el enlace local sin depender de DNS jerárquico convencional. |
+
+
+## 🧩 Banco de ejercicios propuestos
+
+Estos ejercicios complementan las prácticas. Se pueden utilizar para clase, trabajo autónomo, recuperación o examen práctico.
+
+### 1. Una zona carga pero devuelve NXDOMAIN para un host recién añadido. Enumera cuatro hipótesis.
+
+**Solución de referencia:** Nombre consultado distinto del propietario del RR, zona no cargada, registro ausente o consulta contra otro servidor/caché.
+
+### 2. Compara autoridad y recursión con un ejemplo de consulta.
+
+**Solución de referencia:** Autoridad significa fuente oficial de datos de una zona; recursión significa que un resolver obtiene una respuesta final por cuenta del cliente.
+
+### 3. ¿Qué evidencias demuestran que una transferencia de zona ha ocurrido realmente?
+
+**Solución de referencia:** Logs/serial, presencia de la zona en el secundario y consulta autoritativa contra ambos servidores.
+
+### 4. Explica qué problema resuelve DNSSEC y qué problema no resuelve.
+
+**Solución de referencia:** Aporta validación criptográfica de autenticidad/integridad de datos DNS; no cifra por sí mismo toda la comunicación DNS ni sustituye TLS de las aplicaciones.
 
 # 🧠 53. Resumen
 
@@ -2885,6 +2831,13 @@ la cadena de confianza.
 4. Realiza el cambio mínimo.
 5. Valida y prueba de nuevo.
 6. Documenta la diferencia respecto al escenario inicial.
+
+## 🔗 Recursos oficiales y ampliación
+
+- **Ubuntu DNS/BIND9:** https://ubuntu.com/server/docs/how-to/networking/install-dns/
+- **BIND 9 documentation:** https://bind9.readthedocs.io/en/latest/
+
+**Uso recomendado:** consultar la documentación oficial para comprobar sintaxis, compatibilidad y cambios de versión antes de reutilizar una receta.
 
 # 📝 55. Test de repaso
 

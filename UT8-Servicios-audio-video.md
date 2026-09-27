@@ -1,10 +1,50 @@
+## 🏆 Capa Premium de la UT
+
+**Misión de dominio:** Diseñar una cadena audiovisual verificable.
+
+### 🚪 Puerta de entrada diagnóstica
+
+Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerrequisitos recuperar.
+
+1. ¿Qué concepto previo necesitas dominar?
+2. ¿Qué problema resuelve la UT?
+3. ¿Qué evidencia demostraría que funciona?
+4. ¿Qué herramienta usarías primero para diagnosticar?
+5. ¿Qué cambiarías solo después de obtener evidencia?
+
+### 🧠 Núcleo de dominio
+
+| Debes dominar | Evidencia observable |
+|---|---|
+| **códec/contenedor** | Explicación, comando, diagrama o evidencia verificable. |
+| **bitrate/resolución/FPS** | Explicación, comando, diagrama o evidencia verificable. |
+| **FFmpeg** | Explicación, comando, diagrama o evidencia verificable. |
+| **HLS/RTP/WebRTC** | Explicación, comando, diagrama o evidencia verificable. |
+
+### 🛠️ Criterios de salida
+
+- Debes poder calcular capacidad.
+- Debes poder validar manifest/segmentos.
+- Debes poder separar red y codificación.
+- Debes poder documentar parámetros.
+
+### 🚀 Puente profesional
+
+- Conecta con HLS.
+- Conecta con WebRTC.
+- Conecta con observabilidad y escalado.
+
+### 🧯 Regla Premium de diagnóstico
+
+**Predice → observa → formula hipótesis → cambia una sola variable → valida → documenta → revierte si procede.** Una incidencia no se considera cerrada hasta que puedes explicar su causa y reproducir la verificación.
+
 # 🎧📺⚡ Unidad de Trabajo 8 · SERVICIOS DE AUDIO Y VÍDEO ⚡🎧
 
 ### RA7 y RA8 · Servicios de audio y vídeo.
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultados de aprendizaje trabajados
 >
@@ -126,6 +166,18 @@ VoIP, videoconferencia y bloques finales de prácticas, resumen y evaluación.
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
+### 🧪 Entornos hermanos de esta UT
+
+Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el modelo mental: **necesidad → protocolo → servicio → configuración → evidencia → diagnóstico**.
+
+| Entorno | Función didáctica | Uso recomendado |
+|---|---|---|
+| **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
+| **Entorno II · WSL2 + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
+| **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
+| **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
+
+> 🧠 **Transferencia:** no todas las prácticas deben ejecutarse en los cuatro entornos; la elección se justifica por el objetivo didáctico y la naturaleza técnica del servicio.
 
 
 > 📦 **ANALOGÍA · UNA CAJA Y SU CONTENIDO**
@@ -521,7 +573,6 @@ más imágenes por segundo
 | Latencia | ¿Cuánto tarda en llegar/procesarse? | 2 s |
 
 
-
 El bitrate indica la cantidad de bits utilizados por unidad de tiempo.
 
 Ejemplo:
@@ -620,32 +671,17 @@ sudo ss -lntup
 La administración multimedia depende de los módulos disponibles. La CLI sigue siendo la referencia: localiza el fichero, valida la configuración y comprueba los puertos antes de utilizar cualquier interfaz gráfica.
 
 
-
 > 👨‍🏫 **Criterio de corrección de las prácticas**
 >
 > La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
 # 🧪 18. PRÁCTICA 8.1 — Inspección multimedia
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 18. PRÁCTICA 8.1 — Inspección multimedia**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Instala FFmpeg:
@@ -717,27 +753,13 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 
 # 🧪 19. PRÁCTICA 8.2 — Comparar contenedores
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 19. PRÁCTICA 8.2 — Comparar contenedores**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **criterios comunes y evidencia comparable** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Utiliza un mismo contenido y genera:
@@ -818,27 +840,13 @@ listas
 ---
 
 # 🧪 21. PRÁCTICA 8.3 — VLC
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 21. PRÁCTICA 8.3 — VLC**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Instala VLC en el cliente que corresponda.
@@ -913,7 +921,6 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
 | Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
 | **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
-
 
 
 > 🚰 **ANALOGÍA · UNA TUBERÍA DE AGUA**
@@ -1220,27 +1227,13 @@ por mountpoint.
 ---
 
 # 🧪 32. PRÁCTICA 8.4 — Instalar Icecast
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 32. PRÁCTICA 8.4 — Instalar Icecast**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 En **VirtualBox + Ubuntu 26.04 Server**:
@@ -1357,27 +1350,13 @@ publiques en GitHub.
 ---
 
 # 🧪 35. PRÁCTICA 8.5 — Configurar Icecast
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 35. PRÁCTICA 8.5 — Configurar Icecast**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Configura:
@@ -1464,27 +1443,13 @@ servidor y de la autenticación requerida.
 ---
 
 # 🧪 37. PRÁCTICA 8.6 — Publicar un stream de audio
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 37. PRÁCTICA 8.6 — Publicar un stream de audio**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Objetivo:
@@ -1589,27 +1554,13 @@ journalctl -u icecast2
 ---
 
 # 🧪 39. PRÁCTICA 8.7 — Provocar un fallo
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 39. PRÁCTICA 8.7 — Provocar un fallo**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Cambia temporalmente:
@@ -1732,27 +1683,13 @@ El elemento `enclosure` permite asociar el recurso multimedia.
 ---
 
 # 🧪 42. PRÁCTICA 8.8 — Mini-podcast
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 42. PRÁCTICA 8.8 — Mini-podcast**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Crea:
@@ -1953,27 +1890,13 @@ navegador
 ---
 
 # 🧪 48. PRÁCTICA 8.9 — Nginx RTMP
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 48. PRÁCTICA 8.9 — Nginx RTMP**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 El módulo RTMP no está integrado necesariamente de la misma forma en todas
@@ -2072,27 +1995,13 @@ El esquema anterior pertenece al modelo habitual del módulo
 ---
 
 # 🧪 50. PRÁCTICA 8.10 — Publicar RTMP con FFmpeg
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 50. PRÁCTICA 8.10 — Publicar RTMP con FFmpeg**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Una vez disponible el servidor RTMP:
@@ -2198,27 +2107,13 @@ curl -I http://video.juandecolonia.jc/hls/ut8.m3u8
 ---
 
 # 🧪 52. PRÁCTICA 8.11 — Reproducir HLS
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 52. PRÁCTICA 8.11 — Reproducir HLS**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Desde VLC:
@@ -2314,27 +2209,13 @@ No existe un valor universalmente óptimo.
 ---
 
 # 🧪 54. PRÁCTICA 8.12 — Medir comportamiento
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 54. PRÁCTICA 8.12 — Medir comportamiento**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Realiza una transmisión:
@@ -2425,27 +2306,13 @@ Por eso no es correcto afirmar:
 ---
 
 # 🧪 56. PRÁCTICA 8.13 — Comparar códecs
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 56. PRÁCTICA 8.13 — Comparar códecs**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **criterios comunes y evidencia comparable** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Genera versiones de un mismo vídeo utilizando un tamaño objetivo comparable.
@@ -2543,27 +2410,13 @@ web con ficheros pequeños.
 ---
 
 # 🧪 58. PRÁCTICA 8.14 — Capacidad del servidor
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 58. PRÁCTICA 8.14 — Capacidad del servidor**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Calcula el ancho de banda necesario para:
@@ -2827,27 +2680,13 @@ para suavizar esas variaciones.
 ---
 
 # 🧪 66. PRÁCTICA 8.15 — Analizar RTP
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 66. PRÁCTICA 8.15 — Analizar RTP**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Con una captura autorizada de laboratorio:
@@ -2976,27 +2815,13 @@ y servidores auxiliares cuando es necesario.
 ---
 
 # 🧪 69. PRÁCTICA 8.16 — Videoconferencia
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 69. PRÁCTICA 8.16 — Videoconferencia**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Utiliza una herramienta de videoconferencia autorizada por el centro.
@@ -3061,27 +2886,13 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 
 # 🧪 70. PRÁCTICA 8.17 — Red degradada
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 70. PRÁCTICA 8.17 — Red degradada**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Simula o provoca en un entorno controlado:
@@ -3237,27 +3048,13 @@ ffprobe video.mp4
 ---
 
 # 🧪 73. PRÁCTICA 8.18 — Diagnóstico completo
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 73. PRÁCTICA 8.18 — Diagnóstico completo**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **síntoma → evidencia → hipótesis → corrección → prueba** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Síntoma:
@@ -3391,27 +3188,13 @@ secrets/
 ---
 
 # 🧪 76. PRÁCTICA 8.19 — Git seguro
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 76. PRÁCTICA 8.19 — Git seguro**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Crea:
@@ -3489,27 +3272,13 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 ---
 
 # 🧪 78. PRÁCTICA 8.20 — Proyecto integrado
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 78. PRÁCTICA 8.20 — Proyecto integrado**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Construye:
@@ -3711,28 +3480,18 @@ buffer
 
 ---
 
+> 🧭 **PREPARACIÓN COMÚN DE LAS PRÁCTICAS**
+>
+> Todas las prácticas siguen una única rutina profesional: **sitúate → prepara el entorno → formula una predicción → cambia una sola cosa → valida → prueba desde el cliente → diagnostica con evidencias → documenta y revierte si procede**. Esta explicación aparece una sola vez en la UT; cada práctica añade solo sus **pistas específicas**.
+
 # 🧪 82. Práctica de integración con Packet Tracer
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 82. Práctica de integración con Packet Tracer**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Packet Tracer no sustituye a Icecast, Nginx RTMP o FFmpeg.
@@ -3944,27 +3703,13 @@ Arquitectura:
 ---
 
 # 🧪 86. PRÁCTICA 8.21 — Monitorización
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 86. PRÁCTICA 8.21 — Monitorización**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Comprueba:
@@ -4075,27 +3820,13 @@ errores
 ---
 
 # 🧪 88. PRÁCTICA 8.22 — Captura de tráfico
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 88. PRÁCTICA 8.22 — Captura de tráfico**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Audio Icecast:
@@ -4191,27 +3922,13 @@ Ejemplo HLS:
 ---
 
 # 🧪 90. PRÁCTICA 8.23 — Analizar HLS
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 90. PRÁCTICA 8.23 — Analizar HLS**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Captura:
@@ -4319,27 +4036,13 @@ cambio de contenedor sin recodificar
 ---
 
 # 🧪 92. PRÁCTICA 8.24 — Remux frente a transcodificación
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 92. PRÁCTICA 8.24 — Remux frente a transcodificación**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 ### Remux
@@ -4443,27 +4146,13 @@ sin considerar audio adicional, contenedor y otros factores.
 ---
 
 # 🧪 94. PRÁCTICA 8.25 — Planificar almacenamiento
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 94. PRÁCTICA 8.25 — Planificar almacenamiento**
 >
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
+> **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
+> **Evidencia:** Conserva parámetros de codificación, URL/manifiesto/stream o captura de tráfico y la evidencia de reproducción.
 >
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
-
-
+> **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
 Calcula cuánto espacio necesitas para:
@@ -4742,6 +4431,45 @@ CONCLUSIÓN
 
 ---
 
+## 📘 Glosario esencial de la UT
+
+| Término | Definición |
+|---|---|
+| **Códec** | Método o componente utilizado para codificar y decodificar un flujo audiovisual. |
+| **Contenedor** | Formato que empaqueta una o varias pistas, metadatos y, cuando procede, subtítulos. |
+| **Bitrate** | Cantidad de bits por unidad de tiempo de un flujo codificado. |
+| **HLS** | Tecnología de distribución segmentada de medios basada en HTTP y playlists. |
+| **RTMP** | Protocolo de transporte/ingesta de streaming históricamente muy usado en producción de directos. |
+| **RTP** | Protocolo para transportar audio/vídeo en tiempo real sobre redes IP. |
+| **SIP** | Protocolo de señalización para establecer y controlar sesiones multimedia. |
+| **Jitter** | Variación en el tiempo de llegada de paquetes, relevante en comunicaciones en tiempo real. |
+| **Latencia** | Tiempo transcurrido entre un evento en la fuente y su reproducción o recepción. |
+| **VOD** | Video On Demand; contenido disponible para reproducción bajo demanda. |
+| **ABR** | Adaptive Bitrate; adaptación de la representación multimedia a las condiciones de red/dispositivo. |
+| **Icecast** | Servidor de streaming de audio basado en HTTP. |
+| **FFmpeg** | Conjunto de herramientas para procesar, codificar, transcodificar y transportar multimedia. |
+
+
+## 🧩 Banco de ejercicios propuestos
+
+Estos ejercicios complementan las prácticas. Se pueden utilizar para clase, trabajo autónomo, recuperación o examen práctico.
+
+### 1. Explica por qué un vídeo puede cambiar de calidad sin cambiar necesariamente de contenedor.
+
+**Solución de referencia:** La calidad depende de resolución, bitrate y códec; el contenedor puede seguir siendo el mismo mientras cambian las representaciones.
+
+### 2. Un stream HLS carga la playlist pero no reproduce. ¿Qué comprobarías?
+
+**Solución de referencia:** URLs de segmentos, existencia de ficheros, MIME/servidor HTTP, permisos y coherencia entre playlist y segmentos.
+
+### 3. Calcula el ancho de banda agregado de 20 clientes a 3,5 Mb/s cada uno.
+
+**Solución de referencia:** 20 × 3,5 = **70 Mb/s** de carga sostenida, sin contar sobrecargas ni margen de operación.
+
+### 4. Diseña una estrategia de diagnóstico para jitter audible en un flujo RTP.
+
+**Solución de referencia:** Capturar tráfico, medir variación temporal/pérdidas, comprobar congestión y buffering, y separar problema de red del problema de codificación.
+
 # 📚 100. Resumen
 
 ```text
@@ -4947,6 +4675,8 @@ servidor. Si se expone, otra persona podría utilizarla.
 - **Semiguiada:** se conserva el objetivo, pero el alumno debe decidir parte de la configuración y de las pruebas.
 - **Autónoma:** se proporcionan requisitos y restricciones; el alumno decide la implementación y justifica la evidencia.
 
+
+
 ## 🔄 Transferencia profesional
 
 > 👨‍💼 **Cambia una condición y conserva el modelo mental.** Una vez resuelto el escenario inicial, modifica una sola variable —subred, servidor, nombre, firewall, número de clientes o entorno de despliegue— y adapta la solución. Explica qué permanece igual y qué debe cambiar.
@@ -4959,6 +4689,14 @@ servidor. Si se expone, otra persona podría utilizarla.
 4. Realiza el cambio mínimo.
 5. Valida y prueba de nuevo.
 6. Documenta la diferencia respecto al escenario inicial.
+
+## 🔗 Recursos oficiales y ampliación
+
+- **FFmpeg documentation:** https://ffmpeg.org/documentation.html
+- **Icecast documentation:** https://icecast.org/docs/
+- **MDN Media:** https://developer.mozilla.org/docs/Web/Media
+
+**Uso recomendado:** consultar la documentación oficial para comprobar sintaxis, compatibilidad y cambios de versión antes de reutilizar una receta.
 
 # 📝 103. Test de repaso
 

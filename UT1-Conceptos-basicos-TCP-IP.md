@@ -4,7 +4,7 @@
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04** y **VirtualBox + Ubuntu 26.04 Server**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Función curricular
 >
@@ -60,6 +60,18 @@
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
+### 🧪 Entornos hermanos de esta UT
+
+Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el modelo mental: **necesidad → protocolo → servicio → configuración → evidencia → diagnóstico**.
+
+| Entorno | Función didáctica | Uso recomendado |
+|---|---|---|
+| **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
+| **Entorno II · WSL2 + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
+| **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
+| **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
+
+> 🧠 **Transferencia:** no todas las prácticas deben ejecutarse en los cuatro entornos; la elección se justifica por el objetivo didáctico y la naturaleza técnica del servicio.
 
 
 > 🏠 **ANALOGÍA · UNA RED COMO UNA CIUDAD**
@@ -67,11 +79,154 @@
 > Imagina una ciudad. Cada vivienda necesita una dirección para recibir correo; las calles permiten desplazarse de una dirección a otra; los cruces deciden por qué camino continuar y el portal de un edificio distingue qué vecino debe recibir el paquete. En una red ocurre algo parecido: la **dirección IP** identifica el destino, el **encaminamiento** decide por dónde viajar y los **puertos** ayudan a entregar los datos al servicio correcto. Esta analogía no sustituye la definición técnica, pero ayuda a recordar qué problema resuelve cada elemento.
 
 
-> **🏙️ **ANALOGÍA · UNA CIUDAD Y SU SISTEMA DE DIRECCIONES****
+> 🏙️ **ANALOGÍA · UNA CIUDAD Y SU SISTEMA DE DIRECCIONES**
 >
 > Piensa en una ciudad con calles, números de portal y oficinas. La dirección IP permite localizar el edificio; la ruta es el recorrido por las calles; el puerto identifica la oficina dentro del edificio. El cartero puede conocer el barrio y el portal sin conocer la actividad concreta que ocurre dentro de cada oficina. Esta imagen mental ayuda a separar direccionamiento, encaminamiento y servicios.
 
+## 🧪 0.1 Preparación común del laboratorio
+
+La **preparación del entorno** se realiza una sola vez en la UT1. Las prácticas posteriores parten de este estado base y añaden únicamente sus requisitos específicos.
+
+### 1. Identificar el puesto de trabajo
+
+En Windows 11 recoge, como mínimo, nombre del equipo, interfaces, IPv4, máscara/prefijo, puerta de enlace, DNS y MAC. Puedes obtener los datos con:
+
+```powershell
+ipconfig /all
+hostname
+```
+
+Conviene conservarlos en la **ficha del puesto** del laboratorio. Esa ficha sustituye al inventario informal y permite reconstruir una incidencia.
+
+### 2. Preparar VirtualBox + Ubuntu Server 26.04 LTS
+
+Crea una VM base con recursos suficientes para el laboratorio. Como punto de partida razonable: **2 vCPU, 2-4 GB de RAM y 20-30 GB de disco dinámico**. Ajusta los valores al equipo anfitrión y a la práctica.
+
+Configura al menos una interfaz de administración y, cuando la práctica lo requiera, una segunda interfaz conectada a una red interna o solo-anfitrión.
+
+Después de la instalación:
+
+```bash
+sudo apt update
+sudo apt full-upgrade -y
+sudo apt install -y openssh-server curl wget dnsutils net-tools tcpdump traceroute
+```
+
+Crea un **snapshot de estado limpio** antes de comenzar la primera práctica de administración de servicios.
+
+### 3. Preparar Netplan
+
+Localiza la configuración con:
+
+```bash
+ls -l /etc/netplan/
+cat /etc/netplan/*.yaml
+ip addr
+ip route
+```
+
+Un cambio de red debe seguir siempre la secuencia:
+
+```text
+editar → validar → aplicar → comprobar → registrar
+```
+
+Nunca des por buena una configuración porque `netplan apply` termine sin mostrar un error: comprueba `ip addr`, `ip route` y, cuando proceda, DNS y conectividad desde otro host.
+
+### 4. Preparar SSH
+
+El laboratorio debe poder administrarse sin depender de la consola de VirtualBox. Desde Linux o Windows 11 utiliza OpenSSH. Para nuevas claves se recomienda **Ed25519**; RSA 4096 puede mantenerse como alternativa de compatibilidad.
+
+```bash
+ssh-keygen -t ed25519
+ssh-copy-id usuario@IP_DEL_SERVIDOR
+ssh usuario@IP_DEL_SERVIDOR
+```
+
+La clave privada **no se comparte**. La evidencia que se entrega es la configuración pública y la prueba de acceso, nunca la clave privada.
+
+### 5. WSL2 + Ubuntu 26.04
+
+WSL2 se utiliza como entorno cliente y de diagnóstico: `ip`, `ss`, `dig`, `curl`, `tcpdump`, scripts y automatización. No sustituye a VirtualBox para las prácticas que necesiten varias interfaces, routers o topologías completas.
+
+### 6. Cisco Packet Tracer
+
+Se reserva para simulación de topologías, direccionamiento, routing, VLAN y aquellas prácticas donde el objetivo sea observar el comportamiento de la red sin desplegar un servidor completo.
+
+### 7. Docker Compose
+
+El **Entorno IV** se mantiene al mismo nivel que los demás. Antes de usar Compose, comprueba:
+
+```bash
+docker version
+docker compose version
+```
+
+El material usa Compose para reproducibilidad, redes de servicio, puertos, volúmenes y healthchecks; la preparación profunda está en el Anexo II y el Anexo VI.
+
+### 8. Webmin como capa de apoyo
+
+Webmin puede ser útil para relacionar una directiva con su representación gráfica, pero no sustituye la administración CLI. La regla del laboratorio es:
+
+> **Si puedes cambiarlo desde Webmin, debes poder localizar el cambio en el sistema y comprobarlo desde la terminal.**
+
+No se incluyen recetas antiguas de repositorios; las instrucciones del panel deben seguir la documentación actual del proveedor.
+
+### 9. Estado base verificable
+
+Antes de pasar a UT2, el alumno debería poder demostrar:
+
+```bash
+ip addr
+ip route
+ss -lntup
+systemctl --failed
+hostnamectl
+```
+
+**Evidencia de preparación:** ficha del puesto, topología, estado de la VM, prueba SSH y captura de la configuración de red. A partir de aquí, cada práctica añade solo su configuración específica.
+
 ## 🎯 0. Objetivos
+
+## 🏆 Capa Premium de la UT
+
+**Misión de dominio:** Explicar y demostrar el recorrido de un paquete.
+
+### 🚪 Puerta de entrada diagnóstica
+
+Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerrequisitos recuperar.
+
+1. ¿Qué concepto previo necesitas dominar?
+2. ¿Qué problema resuelve la UT?
+3. ¿Qué evidencia demostraría que funciona?
+4. ¿Qué herramienta usarías primero para diagnosticar?
+5. ¿Qué cambiarías solo después de obtener evidencia?
+
+### 🧠 Núcleo de dominio
+
+| Debes dominar | Evidencia observable |
+|---|---|
+| **IP/MAC y CIDR** | Explicación, comando, diagrama o evidencia verificable. |
+| **rutas y siguiente salto** | Explicación, comando, diagrama o evidencia verificable. |
+| **TCP/UDP y puertos** | Explicación, comando, diagrama o evidencia verificable. |
+| **NAT/PAT** | Explicación, comando, diagrama o evidencia verificable. |
+
+### 🛠️ Criterios de salida
+
+- Debes poder calcular una red.
+- Debes poder demostrar una ruta.
+- Debes poder relacionar puerto y proceso.
+- Debes poder aislar un fallo por capas.
+
+### 🚀 Puente profesional
+
+- Conecta con IPv6.
+- Conecta con namespaces de red.
+- Conecta con observabilidad de red.
+
+### 🧯 Regla Premium de diagnóstico
+
+**Predice → observa → formula hipótesis → cambia una sola variable → valida → documenta → revierte si procede.** Una incidencia no se considera cerrada hasta que puedes explicar su causa y reproducir la verificación.
 
 ## 🧭 Ruta de aprendizaje
 
@@ -95,13 +250,28 @@ Introduce o analiza un fallo, formula una hipótesis y utiliza evidencias —est
 
 Resuelve un escenario nuevo utilizando el mismo modelo mental en otro entorno o con otra herramienta.
 
+
+
+> 🧭 **PREPARACIÓN COMÚN DE LAS PRÁCTICAS**
+>
+> Todas las prácticas utilizan la misma rutina profesional: **situarse en el escenario → comprobar prerrequisitos → formular una predicción → cambiar una sola variable → validar → probar desde un cliente → recoger evidencias → diagnosticar si falla → documentar y, cuando proceda, revertir**. Esta guía común se explica una sola vez en la UT. Cada práctica añade únicamente las pistas que son propias de su objetivo.
+
 ### 🧪 Escalera de práctica
+
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 Escalera de práctica**
+>
+> **Qué debes fijar:** Explicita qué comportamiento debe observarse al finalizar y qué dato objetivo demostrará que el servicio está funcionando.
+>
+> **Evidencia:** Usa como evidencia principal el artefacto que mejor demuestre el objetivo de esta práctica; evita capturas sin contexto y conserva comando, salida y fecha de la prueba.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 - **Práctica guiada:** sigue la secuencia completa y utiliza los comandos de comprobación indicados.
 - **Práctica semiguiada:** se mantiene el objetivo y la arquitectura, pero debes decidir parte de la configuración y las pruebas.
 - **Práctica autónoma:** recibes requisitos y restricciones; decides la implementación y debes justificarla.
 
 Cuando una práctica admita estas tres modalidades, empieza por la guiada y elimina progresivamente las pistas. Esa retirada de apoyos convierte el mismo laboratorio en entrenamiento y, después, en evaluación auténtica.
+
 
 ### 🧪 Evidencia mínima de aprendizaje
 
@@ -743,7 +913,6 @@ En ASIR es importante distinguir el concepto de **routing** del de
 | Captura | `sudo tcpdump -ni INTERFAZ` | Paquetes que realmente circulan |
 
 
-
 ## 🌐 Mostrar interfaces
 
 ``` bash
@@ -1372,37 +1541,23 @@ resolvectl status
 
 Webmin puede presentar parte de la configuración de red mediante sus módulos de **Networking**, pero no sustituye la comprensión de los ficheros y comandos. La práctica debe poder repetirse desde CLI aunque se haya utilizado la interfaz gráfica.
 
-![Interfaz didáctica de Webmin](img/captura-webmin-didactica.png)
+![Captura didáctica de Webmin](img/captura-webmin-didactica.png)
 
 > 💡 **Idea clave:** Webmin es un panel de administración; `/etc` y las herramientas del sistema siguen siendo la fuente técnica que debemos saber localizar.
-
 
 
 > 👨‍🏫 **Criterio de corrección de las prácticas**
 >
 > La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
 # 🧪 25. PRÁCTICA 1 --- IP y encaminamiento con Cisco Packet Tracer
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- IP y encaminamiento con Cisco Packet Tracer**
+>
+> **Qué debes fijar:** Dibuja la topología y marca IP, máscara, puerta de enlace, interfaz y siguiente salto. No pruebes una capa superior hasta demostrar que la inferior funciona.
+>
+> **Evidencia:** Usa como evidencia principal el artefacto que mejor demuestre el objetivo de esta práctica; evita capturas sin contexto y conserva comando, salida y fecha de la prueba.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 ## Objetivo
@@ -1520,27 +1675,14 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 
 # 🧪 26. PRÁCTICA 2 --- Inspección de red con WSL2 + Ubuntu 26.04
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Inspección de red con WSL2 + Ubuntu 26.04**
+>
+> **Qué debes fijar:** Empieza por observar antes de modificar: identifica interlocutores, puertos, protocolo y resultado esperado. Formula qué campo o paquete debería confirmar tu hipótesis.
+>
+> **Evidencia:** Usa como evidencia principal el artefacto que mejor demuestre el objetivo de esta práctica; evita capturas sin contexto y conserva comando, salida y fecha de la prueba.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 ## Objetivo
@@ -1684,27 +1826,14 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 
 # 🧪 27. PRÁCTICA 3 --- Red en VirtualBox con Ubuntu Server 26.04
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Red en VirtualBox con Ubuntu Server 26.04**
+>
+> **Qué debes fijar:** Explicita qué comportamiento debe observarse al finalizar y qué dato objetivo demostrará que el servicio está funcionando.
+>
+> **Evidencia:** Usa como evidencia principal el artefacto que mejor demuestre el objetivo de esta práctica; evita capturas sin contexto y conserva comando, salida y fecha de la prueba.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 ## Objetivo
@@ -1910,27 +2039,14 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 
 # 🧪 28. PRÁCTICA 4 --- NAT en Ubuntu Server
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- NAT en Ubuntu Server**
+>
+> **Qué debes fijar:** Dibuja la topología y marca IP, máscara, puerta de enlace, interfaz y siguiente salto. No pruebes una capa superior hasta demostrar que la inferior funciona.
+>
+> **Evidencia:** Usa como evidencia principal el artefacto que mejor demuestre el objetivo de esta práctica; evita capturas sin contexto y conserva comando, salida y fecha de la prueba.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 Partimos de la práctica anterior.
@@ -2052,27 +2168,14 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 
 # 🧪 29. PRÁCTICA 5 --- Comparación de los cuatro entornos
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> 🧭 **PREPARACIÓN DE LA PRÁCTICA**
->
-> **1 · Sitúate.** Antes de tocar el sistema, identifica el problema que vas a resolver y localiza la explicación teórica que lo prepara. Debes poder decir con tus palabras qué servicio estás construyendo y qué función cumple.
->
-> **2 · Prepara.** Comprueba el entorno: **Entorno I · Cisco Packet Tracer**, **Entorno II · WSL2 + Ubuntu 26.04**, **Entorno III · VirtualBox + Ubuntu 26.04 Server** o **Entorno IV · Docker Compose**. Anota la IP, el nombre del equipo, las interfaces, el servicio y los puertos relevantes.
->
-> **3 · Predice.** Antes de un cambio importante, escribe qué esperas observar. Por ejemplo: «después de `ss -lnt`, espero ver el proceso escuchando en TCP/80». Si la predicción no se cumple, detente: acabas de encontrar una pista.
->
-> **4 · Construye en pasos pequeños.** Modifica una cosa cada vez. Después de cada paso realiza una prueba corta. Piensa en montar un mueble siguiendo el manual: si aprietas veinte tornillos a la vez y algo queda torcido, no sabrás cuál fue la causa.
->
-> **5 · Valida.** Si existe un comprobador específico, úsalo antes de reiniciar el servicio. Ejemplos: `named-checkconf`, `named-checkzone`, `nginx -t`, `apache2ctl configtest`, `postfix check` o el validador propio del servicio.
->
-> **6 · Prueba como usuario.** Una configuración correcta no termina en el servidor. Desde el cliente utiliza la herramienta correspondiente: `curl`, `dig`, `nc`, un cliente FTP/SFTP, un cliente de correo, VLC u otra herramienta del servicio.
->
-> **7 · Diagnostica.** Si falla, sigue el orden **estado → configuración → logs → puertos → red → prueba desde cliente**. No cambies cinco parámetros a la vez. Conserva la evidencia del fallo.
->
-> **8 · Demuestra y explica.** Una práctica queda terminada cuando puedes mostrar una evidencia reproducible y explicar por qué el sistema se comporta así.
 
-
+> 🔎 **PISTAS ESPECÍFICAS · -- Comparación de los cuatro entornos**
+>
+> **Qué debes fijar:** Explicita qué comportamiento debe observarse al finalizar y qué dato objetivo demostrará que el servicio está funcionando. No compares por intuición: fija criterios comunes y utiliza la misma prueba para las alternativas.
+>
+> **Evidencia:** Usa como evidencia principal el artefacto que mejor demuestre el objetivo de esta práctica; evita capturas sin contexto y conserva comando, salida y fecha de la prueba.
+>
+> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
 ## Objetivo
@@ -2349,6 +2452,44 @@ preferentemente:
 > poder relacionarse con una dirección, una ruta, un puerto, un paquete
 > o una configuración observable.
 
+## 📘 Glosario esencial de la UT
+
+| Término | Definición |
+|---|---|
+| **CIDR** | Forma de expresar una red mediante dirección y longitud de prefijo, como `/24`. |
+| **Gateway / puerta de enlace** | Dispositivo o dirección de siguiente salto usado para llegar a otras redes. |
+| **IP** | Protocolo de la capa de Internet que proporciona direccionamiento y encaminamiento de paquetes. |
+| **MAC** | Dirección de enlace asociada a una interfaz de red. |
+| **MTU** | Unidad máxima de transmisión de una interfaz o camino de red. |
+| **NAT** | Traducción de direcciones entre espacios de direccionamiento. |
+| **PAT** | Forma de NAT que distingue múltiples flujos usando puertos. |
+| **Puerto** | Identificador de extremo lógico usado por TCP o UDP para entregar tráfico a un proceso. |
+| **Routing** | Proceso de decidir el siguiente salto de un paquete. |
+| **TCP** | Protocolo de transporte orientado a conexión y con control de entrega. |
+| **UDP** | Protocolo de transporte sin establecimiento de conexión y con mínima sobrecarga. |
+| **NDP** | Neighbor Discovery Protocol de IPv6, usado entre otras funciones para descubrimiento de vecinos. |
+
+
+## 🧩 Banco de ejercicios propuestos
+
+Estos ejercicios complementan las prácticas. Se pueden utilizar para clase, trabajo autónomo, recuperación o examen práctico.
+
+### 1. Explica por qué un host que conoce la IP del destino aún puede necesitar un gateway.
+
+**Solución de referencia:** La tabla de rutas determina que el destino es remoto; el gateway es el siguiente salto elegido por la ruta adecuada.
+
+### 2. Un servicio escucha en TCP/8080 pero `curl` no conecta. Diseña una secuencia de cinco comprobaciones.
+
+**Solución de referencia:** Interfaz/ruta → `ss -lntp` → firewall → prueba local → prueba desde cliente; interpretar evidencia en cada paso.
+
+### 3. Diseña una red con dos subredes y explica qué equipos necesitan una ruta estática.
+
+**Solución de referencia:** Cada subred debe tener su prefijo, gateway y rutas necesarias; el router necesita conocer ambos prefijos y cada host el gateway apropiado.
+
+### 4. Compara NAT de salida y port forwarding en un caso doméstico.
+
+**Solución de referencia:** El primero modifica conexiones salientes; el segundo publica un servicio interno mediante una regla de traducción de destino/puerto.
+
 # 📝 33. Resumen
 
 En esta unidad hemos estudiado:
@@ -2617,6 +2758,13 @@ La idea fundamental es:
 5. Valida y vuelve a probar.
 6. Documenta la diferencia respecto al escenario inicial.
 
+
+## 🔗 Recursos oficiales y ampliación
+
+- **Cisco Networking Academy / Skills for All:** https://skillsforall.com/
+- **Ubuntu Server documentation:** https://ubuntu.com/server/docs
+
+**Uso recomendado:** consultar la documentación oficial para comprobar sintaxis, compatibilidad y cambios de versión antes de reutilizar una receta.
 
 # 📝 Test de repaso
 

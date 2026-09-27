@@ -1,37 +1,51 @@
 # 🧠 ANEXO IX · Metodología docente y diseño de aprendizaje
 
-## 1. Principio general
+## 1. Arquitectura didáctica Premium
 
-Este material no se organiza como una colección de recetas. Cada unidad debe ayudar al alumno a pasar de **comprender → hacer → comprobar → diagnosticar → transferir**.
+Cada UT se articula en diez movimientos:
 
-## 2. Apoyo graduado
+```text
+situación → diagnóstico inicial → modelo mental → concepto → demostración
+→ práctica guiada → práctica semiguiada → práctica autónoma
+→ diagnóstico/transferencia → evaluación y reflexión
+```
 
-Las prácticas pasan progresivamente de guiadas a autónomas. Las pistas se retiran conforme el alumno gana fluidez.
+El objetivo es que el alumno deje de depender de la receta y pueda transferir el modelo a otro servicio o entorno.
 
-## 3. Analogia como puente
+## 2. Preparación común y pistas específicas
 
-Las analogías de vida real se utilizan antes o durante los conceptos abstractos. Deben indicar también en qué punto dejan de ser una equivalencia exacta.
+La **preparación común de las prácticas aparece una sola vez por UT**. Debe contener únicamente el método transversal. Cada práctica contiene después sus **pistas específicas**: foco técnico, evidencia esperada y pista de diagnóstico.
 
-## 4. Práctica en espiral
+No se debe duplicar un mismo bloque textual en veinte prácticas. La repetición útil es conceptual, no literal.
 
-Una misma operación reaparece con dificultad creciente: por ejemplo, consultar un puerto, interpretar un servicio, publicar un puerto, conectar servicios y finalmente diagnosticar una arquitectura multicontenedor.
+## 3. Apoyo graduado
 
-## 5. Transferencia
+La práctica guiada muestra el procedimiento completo; la semiguiada retira decisiones ya aprendidas; la autónoma presenta requisitos y restricciones. La retirada de apoyo debe ser observable.
 
-Cada UT debe contener al menos una actividad que cambie una condición del escenario inicial y exija adaptar la solución.
+## 4. Modelo mental antes de herramienta
 
-## 6. Modalidad presencial y online
+Antes de enseñar un comando se explica qué pregunta responde. Ejemplo: `ss` sirve para preguntar qué sockets existen; `dig` sirve para preguntar a un servidor DNS; `curl` permite observar una interacción de aplicación HTTP.
 
-El material debe permitir trabajar sin explicación oral del profesor: objetivos explícitos, conceptos previos, pasos numerados, resultados esperados, pistas, solución de referencia y evidencia final. En presencial, esos elementos se pueden convertir en discusión y demostración; online, actúan como guía autónoma.
+## 5. Error productivo
 
-## 7. Accesibilidad
+Una práctica Premium puede introducir un fallo controlado. El alumno debe registrar **síntoma → hipótesis → evidencia → corrección → prueba de regresión**.
 
-Las imágenes deben tener texto alternativo, los diagramas deben poder explicarse verbalmente, las capturas deben señalar qué se debe observar y las tablas no deben depender solo del color.
+## 6. Multimodalidad y accesibilidad
 
-## 8. Escalabilidad
+Cada concepto importante debe poder explicarse mediante texto, tabla, diagrama o ejemplo. Las capturas se acompañan de un pie que indique qué observar. Los diagramas se describen también con palabras.
 
-Un nuevo entorno tecnológico debe incorporarse sin cambiar el modelo conceptual. Cada adaptación nueva debería indicar: objetivo, prerrequisitos, instalación, configuración, prueba, diagnóstico, seguridad y relación con los cuatro entornos existentes.
+## 7. Transferencia profesional
 
-## 9. Referencia
+Cada UT contiene al menos un cambio de condición: otra subred, otro puerto, otra interfaz, otro cliente, otro formato, otro backend o un despliegue equivalente en otro entorno.
 
-El planteamiento se inspira en los principios actuales de Diseño Universal para el Aprendizaje y en estrategias de metacognición y autorregulación del aprendizaje.
+## 8. Metacognición
+
+Las actividades de mayor valor piden tres respuestas: **qué esperaba, qué observé y qué evidencia justifica mi explicación**.
+
+## 9. Presencial y online
+
+El texto debe permitir trabajo autónomo con instrucciones, resultados esperados, pistas y solucionario. En presencial el profesor puede retirar deliberadamente esas ayudas y convertirlas en preguntas orales o problemas de diagnóstico.
+
+## 10. Fuente de contraste
+
+La estructura editorial de los materiales de referencia aportados por el docente aporta elementos que ahora quedan sistematizados: objetivos, mapas conceptuales, glosario, resumen, prácticas, autoevaluación, ejercicios, test, material adicional e índice. Los contenidos obsoletos no se trasladan al laboratorio principal.

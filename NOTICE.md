@@ -1,8 +1,13 @@
-# Aviso sobre fuentes y materiales de terceros
+# Aviso sobre fuentes, autoría y materiales de terceros
 
-Este repositorio combina material docente original con referencias, herramientas y documentación de proyectos de terceros.
+**Autor del material original:** Germán López Castro
 
-- Las **fuentes técnicas** se identifican en el Anexo IV y deben consultarse en su ubicación oficial.
-- Las **marcas y nombres de productos** pertenecen a sus respectivos titulares.
-- Las **capturas de interfaces** incluidas con finalidad didáctica no transfieren los derechos sobre las aplicaciones representadas.
-- Antes de redistribuir una copia de este repositorio fuera del ámbito docente habitual, revise las licencias de los elementos de terceros y mantenga las atribuciones correspondientes.
+**Repositorio:** https://github.com/glopezca/ASIR2-SRI-texto
+
+El material original de este repositorio se distribuye bajo CC BY-SA 4.0.
+
+Para reutilizarlo, la atribución recomendada es:
+
+> Germán López Castro, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.5, https://github.com/glopezca/ASIR2-SRI-texto, CC BY-SA 4.0.
+
+Las marcas, documentación, capturas, logotipos y fragmentos de terceros mantienen sus licencias. La disponibilidad pública de una página web no implica permiso para reproducirla sin condiciones.

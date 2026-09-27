@@ -1,18 +1,15 @@
 # Licencia
 
-El material docente original de este repositorio se distribuye bajo la licencia **Creative Commons Atribución-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)**.
+El **material original** de este repositorio se distribuye bajo la licencia **Creative Commons Atribución-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)**.
 
-Puede:
+**Autoría:** Germán López Castro.
 
-- compartir el material;
-- copiarlo y redistribuirlo en cualquier medio o formato;
-- adaptarlo y crear material derivado;
-- utilizarlo incluso con fines comerciales;
+**Repositorio:** https://github.com/glopezca/ASIR2-SRI-texto
 
-siempre que cumpla las condiciones de atribución y CompartirIgual de la licencia.
+**Atribución recomendada:** Germán López Castro, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.5, https://github.com/glopezca/ASIR2-SRI-texto, CC BY-SA 4.0.
 
-**Licencia oficial:** https://creativecommons.org/licenses/by-sa/4.0/
+Se permite compartir, adaptar y redistribuir el material conforme a las condiciones de la licencia, incluyendo la obligación de atribución y CompartirIgual.
 
-Esta declaración se refiere al material original de este repositorio. Las obras, imágenes, marcas, fragmentos de documentación, ejemplos de terceros y otros materiales ajenos mantienen sus propias condiciones de uso. Cuando un fichero indique una licencia diferente, prevalece la licencia indicada en ese fichero.
+La licencia cubre el material original del repositorio. Documentación, imágenes, marcas, capturas, fragmentos de código y otros materiales de terceros mantienen sus propias condiciones de licencia y derechos.
 
-Para reutilizar material de terceros, consulte siempre la fuente primaria y su licencia actual.
+Licencia oficial: https://creativecommons.org/licenses/by-sa/4.0/

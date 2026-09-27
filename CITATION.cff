@@ -1,9 +1,11 @@
 cff-version: 1.2.0
 title: "Servicios de Red e Internet · ASIR2-SRI-texto"
-version: "6.4"
-doi: null
-date-released: 2026-09-24
-url: "https://github.com/glopezca/ASIR2-SRI-texto"
+version: "6.5"
+date-released: 2026-09-27
+authors:
+  - family-names: "López Castro"
+    given-names: "Germán"
+type: software
 license: "CC-BY-SA-4.0"
 repository-code: "https://github.com/glopezca/ASIR2-SRI-texto"
-abstract: "Material docente integral para el módulo 0375 · Servicios de red e Internet del CFGS ASIR."
+abstract: "Material docente integral y laboratorio reproducible para el módulo 0375 Servicios de red e Internet del CFGS ASIR."

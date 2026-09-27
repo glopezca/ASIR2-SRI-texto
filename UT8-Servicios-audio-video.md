@@ -1,8 +1,11 @@
-## 🏆 Capa Premium de la UT
+# 🎧📺⚡ Unidad de Trabajo 8 · SERVICIOS DE AUDIO Y VÍDEO ⚡🎧
 
-**Misión de dominio:** Diseñar una cadena audiovisual verificable.
 
-### 🚪 Puerta de entrada diagnóstica
+## 🧭 Guía de aprendizaje de la UT
+
+**Objetivo principal:** Diseñar una cadena audiovisual verificable.
+
+### 🚪 Antes de empezar
 
 Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerrequisitos recuperar.
 
@@ -12,7 +15,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 4. ¿Qué herramienta usarías primero para diagnosticar?
 5. ¿Qué cambiarías solo después de obtener evidencia?
 
-### 🧠 Núcleo de dominio
+### 🎯 Lo que debes aprender
 
 | Debes dominar | Evidencia observable |
 |---|---|
@@ -21,24 +24,22 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 | **FFmpeg** | Explicación, comando, diagrama o evidencia verificable. |
 | **HLS/RTP/WebRTC** | Explicación, comando, diagrama o evidencia verificable. |
 
-### 🛠️ Criterios de salida
+### ✅ Al terminar deberás poder
 
 - Debes poder calcular capacidad.
 - Debes poder validar manifest/segmentos.
 - Debes poder separar red y codificación.
 - Debes poder documentar parámetros.
 
-### 🚀 Puente profesional
+### 🔗 Para qué te sirve
 
 - Conecta con HLS.
 - Conecta con WebRTC.
 - Conecta con observabilidad y escalado.
 
-### 🧯 Regla Premium de diagnóstico
+### 🧯 Regla de diagnóstico
 
 **Predice → observa → formula hipótesis → cambia una sola variable → valida → documenta → revierte si procede.** Una incidencia no se considera cerrada hasta que puedes explicar su causa y reproducir la verificación.
-
-# 🎧📺⚡ Unidad de Trabajo 8 · SERVICIOS DE AUDIO Y VÍDEO ⚡🎧
 
 ### RA7 y RA8 · Servicios de audio y vídeo.
 

@@ -44,6 +44,6 @@ Este anexo funciona como una bibliografía técnica viva. Los enlaces se deben r
 
 ## Recursos multimedia
 
-Los vídeos y demostraciones se deben incorporar con fecha de consulta y procedencia clara. En una edición Premium, un vídeo no sustituye a la explicación: debe señalar **qué concepto observar, qué resultado esperar y qué preguntas responder tras verlo**.
+Los vídeos y demostraciones se deben incorporar con fecha de consulta y procedencia clara. En esta edición, un vídeo no sustituye a la explicación: debe señalar **qué concepto observar, qué resultado esperar y qué preguntas responder tras verlo**.
 
 La selección preferente es: documentación oficial, organizaciones profesionales, universidades y materiales educativos que indiquen autoría, fecha y objetivos. Los vídeos de canales personales se usan como refuerzo y no como única fuente de una afirmación técnica.

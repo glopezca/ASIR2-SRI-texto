@@ -1,4 +1,4 @@
-# Auditoría de fuentes y materiales incorporados · v6.5
+# Auditoría de fuentes y materiales incorporados · v6.5.1
 
 **Fecha de revisión:** 2026-09-27
 
@@ -36,7 +36,7 @@ Esta auditoría separa tres decisiones: **integrar**, **integrar tras corregir**
 | Elemento | Motivo |
 |---|---|
 | `apt-key` para instalar Webmin | Flujo obsoleto; se exige el método de repositorio y clave actual documentado por el proveedor. |
-| `disable_plaintext_auth = no` como configuración general de Dovecot | Permite autenticación sin exigir canal protegido; la edición Premium enseña TLS y autenticación segura antes de habilitar acceso remoto. |
+| `disable_plaintext_auth = no` como configuración general de Dovecot | Permite autenticación sin exigir canal protegido; esta edición enseña TLS y autenticación segura antes de habilitar acceso remoto. |
 | Roundcube enviando por `25/tcp` | El puerto 25 es principalmente transporte SMTP entre MTAs; para clientes se enseña Submission (habitualmente 587/STARTTLS o 465/TLS). |
 | `ProxyPass /rtmp rtmp://...` en Apache | No se mantiene como receta general de proxy HTTP; RTMP y HTTP son protocolos diferentes. |
 | WINS, Windows Server 2003/2008, Windows XP, recetas antiguas de Skype | Se citan solo cuando aportan contexto histórico; no forman el laboratorio principal. |
@@ -64,3 +64,14 @@ Esta auditoría separa tres decisiones: **integrar**, **integrar tras corregir**
 ## Regla para futuras versiones
 
 No se promueve una receta a “actual” por antigüedad o popularidad. Debe existir una fuente primaria vigente, una prueba reproducible y una justificación pedagógica para que entre en el camino principal del alumnado.
+
+
+## Recuperación explícita en v6.5.1
+
+Se recupera como material visible para el alumnado la sección **«Comandos de red en Ubuntu»** del PDF `Preparación del entorno · CIFP Juan de Colonia`, reorganizada en `ANEXO-XVIII-Chuleta-Comandos-Red-Ubuntu.md`. La nueva versión distingue entre comandos de consulta, resolución DNS, configuración persistente mediante Netplan, comprobación de servicios, registros y herramientas de diagnóstico.
+
+También se conserva como criterio editorial la preparación común del puesto: **identificar → configurar → probar → documentar**.
+
+## Webmin en v6.5.1
+
+Se eliminan las capturas sintéticas de Webmin. El material pasa a utilizar documentación oficial de Webmin como referencia visual y de procedimiento, y las prácticas indican que cualquier captura local debe proceder de una instalación real y de la versión utilizada en el aula. Esto evita que una imagen con textos superpuestos transmita una interfaz que no coincide con el sistema real.

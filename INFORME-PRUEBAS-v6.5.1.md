@@ -1,14 +1,14 @@
-# Informe de pruebas · ASIR2-SRI-texto · v6.5
+# Informe de pruebas · ASIR2-SRI-texto · v6.5.1
 
 ## Resultado
 
 **PASS condicionado a las pruebas de runtime que requieren infraestructura externa.**
 
-Se valida de forma automática: estructura, versión, licencias/atribución, duplicación de preparación común, pistas específicas, enlaces internos, fences de código, orden de test/soluciones y presencia de materiales Premium.
+Se valida de forma automática: estructura, versión, licencias/atribución, duplicación de preparación común, pistas específicas, enlaces internos, fences de código, orden de test/soluciones y presencia de materiales y recursos didácticos.
 
 Las pruebas que requieren Docker Engine, Kubernetes o máquinas virtuales no se marcan como ejecutadas si el entorno de construcción no dispone de esos runtimes.
 
-## Criterios específicos de v6.5
+## Criterios específicos de v6.5.1
 
 - 8 UT presentes.
 - Una única preparación común por UT.

@@ -1,8 +1,11 @@
-## 🏆 Capa Premium de la UT
+# 🌐⚡ Unidad de Trabajo 3 · SERVICIO DE NOMBRES DE DOMINIO (DNS) ⚡🌐
 
-**Misión de dominio:** Administrar resolución, autoridad, caché y zonas.
 
-### 🚪 Puerta de entrada diagnóstica
+## 🧭 Guía de aprendizaje de la UT
+
+**Objetivo principal:** Administrar resolución, autoridad, caché y zonas.
+
+### 🚪 Antes de empezar
 
 Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerrequisitos recuperar.
 
@@ -12,7 +15,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 4. ¿Qué herramienta usarías primero para diagnosticar?
 5. ¿Qué cambiarías solo después de obtener evidencia?
 
-### 🧠 Núcleo de dominio
+### 🎯 Lo que debes aprender
 
 | Debes dominar | Evidencia observable |
 |---|---|
@@ -21,24 +24,22 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 | **registros** | Explicación, comando, diagrama o evidencia verificable. |
 | **zonas/transferencias** | Explicación, comando, diagrama o evidencia verificable. |
 
-### 🛠️ Criterios de salida
+### ✅ Al terminar deberás poder
 
 - Debes poder interpretar `dig`.
 - Debes poder distinguir NXDOMAIN/SERVFAIL.
 - Debes poder validar una zona.
 - Debes poder demostrar autoridad.
 
-### 🚀 Puente profesional
+### 🔗 Para qué te sirve
 
 - Conecta con DNSSEC.
 - Conecta con TSIG/DDNS.
 - Conecta con DoT/DoH.
 
-### 🧯 Regla Premium de diagnóstico
+### 🧯 Regla de diagnóstico
 
 **Predice → observa → formula hipótesis → cambia una sola variable → valida → documenta → revierte si procede.** Una incidencia no se considera cerrada hasta que puedes explicar su causa y reproducir la verificación.
-
-# 🌐⚡ Unidad de Trabajo 3 · SERVICIO DE NOMBRES DE DOMINIO (DNS) ⚡🌐
 
 ### RA1 · Resolución de nombres.
 

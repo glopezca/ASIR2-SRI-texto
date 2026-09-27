@@ -1,8 +1,11 @@
-## 🏆 Capa Premium de la UT
+# 🌍⚡ Unidad de Trabajo 5 · SERVIDORES WEB Y PROTOCOLO DE TRANSFERENCIA DE HIPERTEXTO (HTTP) ⚡🌍
 
-**Misión de dominio:** Desplegar sitios web reproducibles y seguros.
 
-### 🚪 Puerta de entrada diagnóstica
+## 🧭 Guía de aprendizaje de la UT
+
+**Objetivo principal:** Desplegar sitios web reproducibles y seguros.
+
+### 🚪 Antes de empezar
 
 Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerrequisitos recuperar.
 
@@ -12,7 +15,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 4. ¿Qué herramienta usarías primero para diagnosticar?
 5. ¿Qué cambiarías solo después de obtener evidencia?
 
-### 🧠 Núcleo de dominio
+### 🎯 Lo que debes aprender
 
 | Debes dominar | Evidencia observable |
 |---|---|
@@ -21,24 +24,22 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 | **Virtual Hosts** | Explicación, comando, diagrama o evidencia verificable. |
 | **TLS/SNI** | Explicación, comando, diagrama o evidencia verificable. |
 
-### 🛠️ Criterios de salida
+### ✅ Al terminar deberás poder
 
 - Debes poder interpretar `curl -I`.
 - Debes poder separar DNS/TCP/TLS/HTTP.
 - Debes poder demostrar selección de vhost.
 - Debes poder validar logs.
 
-### 🚀 Puente profesional
+### 🔗 Para qué te sirve
 
 - Conecta con HTTP/2 y HTTP/3.
 - Conecta con ACME.
 - Conecta con OWASP Top 10:2025.
 
-### 🧯 Regla Premium de diagnóstico
+### 🧯 Regla de diagnóstico
 
 **Predice → observa → formula hipótesis → cambia una sola variable → valida → documenta → revierte si procede.** Una incidencia no se considera cerrada hasta que puedes explicar su causa y reproducir la verificación.
-
-# 🌍⚡ Unidad de Trabajo 5 · SERVIDORES WEB Y PROTOCOLO DE TRANSFERENCIA DE HIPERTEXTO (HTTP) ⚡🌍
 
 ### RA3 · Administración de servidores Web.
 

@@ -18,7 +18,7 @@ REQUIRED = [
     'ANEXO-XII-Plantillas-Entregables.md','ANEXO-XIII-Matriz-Curricular.md',
     'ANEXO-XIV-Recursos-Abiertos.md','ANEXO-XV-Guia-Laboratorio-Reproducible.md',
     'ANEXO-XVI-Auditoria-Obsolescencia.md','ANEXO-XVII-Algoritmo-Actualizacion.md',
-    'INFORME-REVISION-FUENTES-v6.5.md','INDICE-ALFABETICO.md',
+    'INFORME-REVISION-FUENTES-v6.5.1.md','INDICE-ALFABETICO.md',
 ]
 
 
@@ -54,7 +54,7 @@ def check(verbose=True):
     errors = []
     notices = []
     v = version()
-    if not re.fullmatch(r'\d+\.\d+', v):
+    if not re.fullmatch(r'\d+\.\d+\.\d+', v):
         errors.append(f'VERSION inválida: {v!r}')
     errors.extend(f'Falta {x}' for x in REQUIRED if not (ROOT / x).exists())
 
@@ -102,7 +102,7 @@ def check(verbose=True):
                 errors.append(f'{p.name}: falta {env}')
         errors.extend(validate_bash(s, p.name))
 
-    for asset in ['img/captura-webmin-didactica.png','img/captura-roundcube-didactica.png','img/captura-sympa-didactica.png']:
+    for asset in ['img/captura-roundcube-didactica.png','img/captura-sympa-didactica.png']:
         if not (ROOT / asset).exists():
             errors.append(f'Falta recurso gráfico {asset}')
 
@@ -124,7 +124,7 @@ def check(verbose=True):
             for e in errors:
                 print(' -', e)
         else:
-            print('PASS: todos los controles Premium superados')
+            print('PASS: todos los controles superados')
         for n in notices:
             print('NOTICE:', n)
     return not errors

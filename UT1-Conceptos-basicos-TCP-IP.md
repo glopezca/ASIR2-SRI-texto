@@ -166,11 +166,15 @@ El material usa Compose para reproducibilidad, redes de servicio, puertos, volú
 
 ### 8. Webmin como capa de apoyo
 
-Webmin puede ser útil para relacionar una directiva con su representación gráfica, pero no sustituye la administración CLI. La regla del laboratorio es:
+Webmin puede ser útil para relacionar una directiva con su representación gráfica, pero no sustituye la administración CLI.
 
 > **Si puedes cambiarlo desde Webmin, debes poder localizar el cambio en el sistema y comprobarlo desde la terminal.**
 
-No se incluyen recetas antiguas de repositorios; las instrucciones del panel deben seguir la documentación actual del proveedor.
+**Material visual:** no se utilizan capturas sintéticas. Cuando una práctica necesite una pantalla de Webmin, se debe usar una captura real de la versión instalada o consultar la documentación oficial.
+
+- [Webmin · documentación general](https://webmin.com/docs/)
+- [Webmin · Network Configuration](https://webmin.com/docs/modules/network-configuration/)
+- [Webmin · BIND DNS Server](https://webmin.com/docs/modules/bind-dns-server/)
 
 ### 9. Estado base verificable
 
@@ -188,11 +192,11 @@ hostnamectl
 
 ## 🎯 0. Objetivos
 
-## 🏆 Capa Premium de la UT
+## 🧭 Guía de aprendizaje de la UT
 
-**Misión de dominio:** Explicar y demostrar el recorrido de un paquete.
+**Objetivo principal:** Explicar y demostrar el recorrido de un paquete.
 
-### 🚪 Puerta de entrada diagnóstica
+### 🚪 Antes de empezar
 
 Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerrequisitos recuperar.
 
@@ -202,7 +206,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 4. ¿Qué herramienta usarías primero para diagnosticar?
 5. ¿Qué cambiarías solo después de obtener evidencia?
 
-### 🧠 Núcleo de dominio
+### 🎯 Lo que debes aprender
 
 | Debes dominar | Evidencia observable |
 |---|---|
@@ -211,20 +215,20 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 | **TCP/UDP y puertos** | Explicación, comando, diagrama o evidencia verificable. |
 | **NAT/PAT** | Explicación, comando, diagrama o evidencia verificable. |
 
-### 🛠️ Criterios de salida
+### ✅ Al terminar deberás poder
 
 - Debes poder calcular una red.
 - Debes poder demostrar una ruta.
 - Debes poder relacionar puerto y proceso.
 - Debes poder aislar un fallo por capas.
 
-### 🚀 Puente profesional
+### 🔗 Para qué te sirve
 
 - Conecta con IPv6.
 - Conecta con namespaces de red.
 - Conecta con observabilidad de red.
 
-### 🧯 Regla Premium de diagnóstico
+### 🧯 Regla de diagnóstico
 
 **Predice → observa → formula hipótesis → cambia una sola variable → valida → documenta → revierte si procede.** Una incidencia no se considera cerrada hasta que puedes explicar su causa y reproducir la verificación.
 
@@ -1541,7 +1545,6 @@ resolvectl status
 
 Webmin puede presentar parte de la configuración de red mediante sus módulos de **Networking**, pero no sustituye la comprensión de los ficheros y comandos. La práctica debe poder repetirse desde CLI aunque se haya utilizado la interfaz gráfica.
 
-![Captura didáctica de Webmin](img/captura-webmin-didactica.png)
 
 > 💡 **Idea clave:** Webmin es un panel de administración; `/etc` y las herramientas del sistema siguen siendo la fuente técnica que debemos saber localizar.
 

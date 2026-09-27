@@ -1,6 +1,29 @@
 # Changelog
 
-## v6.5 · Edición Premium
+## v6.5.1 · Revisión didáctica y recuperación de materiales
+
+### Presentación para el alumnado
+- Se sustituye la representación gráfica de los cuatro entornos por una cuadrícula 2×2 estable para evitar que el Entorno IV aparezca separado.
+- Se reorganizan las guías iniciales de UT2–UT8 para que el alumno vea primero el título, el objetivo y la forma de trabajo.
+- Se simplifican etiquetas para dirigir el texto directamente al alumno.
+- Se refuerza el patrón visual **mira → entiende → prueba → configura → comprueba → explica**.
+
+### Materiales del CIFP Juan de Colonia
+- Se incorpora `ANEXO-XVIII-Chuleta-Comandos-Red-Ubuntu.md`.
+- Se recupera explícitamente la preparación común del puesto y los comandos de diagnóstico presentes en los materiales del CIFP.
+- Se mantiene la corrección técnica de procedimientos antiguos antes de incorporarlos al camino principal.
+
+### Webmin
+- Se elimina `img/captura-webmin-didactica.png`.
+- Se eliminan las capturas sintéticas de Webmin del material principal.
+- Se añaden referencias a la documentación oficial de Webmin para BIND, red y DHCP/Kea.
+- Las capturas utilizadas en clase deben proceder de una instalación real y de la versión del aula.
+
+### Terminología
+- Se elimina la palabra de carácter publicitario indicada en la revisión de v6.5.1 de todo el texto de la versión.
+
+
+## v6.5 · Edición 2026
 
 ### Pedagogía y edición
 

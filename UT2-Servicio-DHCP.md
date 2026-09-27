@@ -1,8 +1,11 @@
-## 🏆 Capa Premium de la UT
+# 📡⚡ Unidad de Trabajo 2 · SERVICIO DE CONFIGURACIÓN DINÁMICA DE HOST (DHCP) ⚡📡
 
-**Misión de dominio:** Diseñar y diagnosticar asignación automática.
 
-### 🚪 Puerta de entrada diagnóstica
+## 🧭 Guía de aprendizaje de la UT
+
+**Objetivo principal:** Diseñar y diagnosticar asignación automática.
+
+### 🚪 Antes de empezar
 
 Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerrequisitos recuperar.
 
@@ -12,7 +15,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 4. ¿Qué herramienta usarías primero para diagnosticar?
 5. ¿Qué cambiarías solo después de obtener evidencia?
 
-### 🧠 Núcleo de dominio
+### 🎯 Lo que debes aprender
 
 | Debes dominar | Evidencia observable |
 |---|---|
@@ -21,24 +24,22 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 | **relay** | Explicación, comando, diagrama o evidencia verificable. |
 | **Kea y DHCPv6** | Explicación, comando, diagrama o evidencia verificable. |
 
-### 🛠️ Criterios de salida
+### ✅ Al terminar deberás poder
 
 - Debes poder explicar el broadcast.
 - Debes poder validar antes de arrancar.
 - Debes poder demostrar una concesión.
 - Debes poder separar red/relay/servidor.
 
-### 🚀 Puente profesional
+### 🔗 Para qué te sirve
 
 - Conecta con SLAAC.
 - Conecta con alta disponibilidad.
 - Conecta con trazabilidad de concesiones.
 
-### 🧯 Regla Premium de diagnóstico
+### 🧯 Regla de diagnóstico
 
 **Predice → observa → formula hipótesis → cambia una sola variable → valida → documenta → revierte si procede.** Una incidencia no se considera cerrada hasta que puedes explicar su causa y reproducir la verificación.
-
-# 📡⚡ Unidad de Trabajo 2 · SERVICIO DE CONFIGURACIÓN DINÁMICA DE HOST (DHCP) ⚡📡
 
 ### RA2 · Configuración automática de red.
 
@@ -856,9 +857,13 @@ La administración de servicios mediante terminal es una competencia fundamental
 >
 > Imagina un automóvil: el volante y el salpicadero facilitan la conducción, pero no sustituyen el conocimiento del motor. En ASIR debemos saber qué cambia Webmin, dónde se almacena esa configuración y cómo comprobarla desde la terminal.
 
-![Captura didáctica de Webmin](img/captura-webmin-didactica.png)
+**No se usa una recreación de la interfaz.** Las capturas deben proceder de una instalación real y corresponder a la versión utilizada en el laboratorio. Para esta UT se recomienda consultar la documentación oficial de Webmin:
 
-**Captura didáctica.** La interfaz real puede variar según la versión y los módulos instalados.
+- [Webmin · documentación general](https://webmin.com/docs/)
+- [Webmin · módulo DHCP Server](https://webmin.com/docs/modules/dhcp-server/)
+- [Webmin · módulo Kea DHCP Server](https://webmin.com/docs/modules/kea-dhcp-server/)
+
+> **Para el alumno:** si la pantalla de tu versión no coincide con una captura antigua, sigue los nombres de los módulos y comprueba el resultado en la configuración y desde la terminal.
 
 ### Flujo recomendado
 

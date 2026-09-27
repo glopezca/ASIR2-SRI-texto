@@ -45,7 +45,7 @@ situarse → prerrequisitos → predicción → cambio mínimo
 
 Cada práctica contiene después una **Pista específica**, adaptada a su objetivo. No se permite clonar el bloque común en cada práctica.
 
-## 5. Arquitectura Premium obligatoria de una UT
+## 5. Arquitectura didáctica obligatoria de una UT
 
 Cada UT debe contener:
 
@@ -127,7 +127,7 @@ El actualizador debe:
 
 - leer `VERSION`;
 - validar coherencia de README, CFF y changelog;
-- comprobar estructura Premium;
+- comprobar estructura didáctica;
 - detectar duplicación de preparación común;
 - detectar pistas clonadas exactamente;
 - validar enlaces internos;

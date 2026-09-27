@@ -1,6 +1,6 @@
 # 🧠 ANEXO IX · Metodología docente y diseño de aprendizaje
 
-## 1. Arquitectura didáctica Premium
+## 1. Arquitectura didáctica
 
 Cada UT se articula en diez movimientos:
 
@@ -28,7 +28,7 @@ Antes de enseñar un comando se explica qué pregunta responde. Ejemplo: `ss` si
 
 ## 5. Error productivo
 
-Una práctica Premium puede introducir un fallo controlado. El alumno debe registrar **síntoma → hipótesis → evidencia → corrección → prueba de regresión**.
+Una práctica puede introducir un fallo controlado. El alumno debe registrar **síntoma → hipótesis → evidencia → corrección → prueba de regresión**.
 
 ## 6. Multimodalidad y accesibilidad
 

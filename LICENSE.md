@@ -6,7 +6,7 @@ El **material original** de este repositorio se distribuye bajo la licencia **Cr
 
 **Repositorio:** https://github.com/glopezca/ASIR2-SRI-texto
 
-**Atribución recomendada:** Germán López Castro, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.5, https://github.com/glopezca/ASIR2-SRI-texto, CC BY-SA 4.0.
+**Atribución recomendada:** Germán López Castro, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.5.1, https://github.com/glopezca/ASIR2-SRI-texto, CC BY-SA 4.0.
 
 Se permite compartir, adaptar y redistribuir el material conforme a las condiciones de la licencia, incluyendo la obligación de atribución y CompartirIgual.
 

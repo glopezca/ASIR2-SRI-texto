@@ -1,8 +1,11 @@
-## 🏆 Capa Premium de la UT
+# 💬⚡ Unidad de Trabajo 7 · MENSAJERÍA, NOTICIAS Y LISTAS DE DISTRIBUCIÓN ⚡💬
 
-**Misión de dominio:** Administrar comunicación síncrona y asíncrona.
 
-### 🚪 Puerta de entrada diagnóstica
+## 🧭 Guía de aprendizaje de la UT
+
+**Objetivo principal:** Administrar comunicación síncrona y asíncrona.
+
+### 🚪 Antes de empezar
 
 Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerrequisitos recuperar.
 
@@ -12,7 +15,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 4. ¿Qué herramienta usarías primero para diagnosticar?
 5. ¿Qué cambiarías solo después de obtener evidencia?
 
-### 🧠 Núcleo de dominio
+### 🎯 Lo que debes aprender
 
 | Debes dominar | Evidencia observable |
 |---|---|
@@ -21,24 +24,22 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 | **listas y moderación** | Explicación, comando, diagrama o evidencia verificable. |
 | **NNTP** | Explicación, comando, diagrama o evidencia verificable. |
 
-### 🛠️ Criterios de salida
+### ✅ Al terminar deberás poder
 
 - Debes poder separar identidad y conectividad.
 - Debes poder demostrar moderación.
 - Debes poder diagnosticar de DNS a aplicación.
 - Debes poder justificar arquitectura.
 
-### 🚀 Puente profesional
+### 🔗 Para qué te sirve
 
 - Conecta con federación moderna.
 - Conecta con automatización.
 - Conecta con observabilidad.
 
-### 🧯 Regla Premium de diagnóstico
+### 🧯 Regla de diagnóstico
 
 **Predice → observa → formula hipótesis → cambia una sola variable → valida → documenta → revierte si procede.** Una incidencia no se considera cerrada hasta que puedes explicar su causa y reproducir la verificación.
-
-# 💬⚡ Unidad de Trabajo 7 · MENSAJERÍA, NOTICIAS Y LISTAS DE DISTRIBUCIÓN ⚡💬
 
 ### RA6 · Mensajería instantánea, noticias y listas de distribución.
 

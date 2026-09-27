@@ -1,8 +1,11 @@
-## 🏆 Capa Premium de la UT
+# 📂⚡ Unidad de Trabajo 4 · SERVICIOS DE TRANSFERENCIA DE FICHEROS ⚡📂
 
-**Misión de dominio:** Administrar transferencia segura y permisos.
 
-### 🚪 Puerta de entrada diagnóstica
+## 🧭 Guía de aprendizaje de la UT
+
+**Objetivo principal:** Administrar transferencia segura y permisos.
+
+### 🚪 Antes de empezar
 
 Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerrequisitos recuperar.
 
@@ -12,7 +15,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 4. ¿Qué herramienta usarías primero para diagnosticar?
 5. ¿Qué cambiarías solo después de obtener evidencia?
 
-### 🧠 Núcleo de dominio
+### 🎯 Lo que debes aprender
 
 | Debes dominar | Evidencia observable |
 |---|---|
@@ -21,24 +24,22 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 | **FTPS/SFTP** | Explicación, comando, diagrama o evidencia verificable. |
 | **permisos y confinamiento** | Explicación, comando, diagrama o evidencia verificable. |
 
-### 🛠️ Criterios de salida
+### ✅ Al terminar deberás poder
 
 - Debes poder identificar canal.
 - Debes poder verificar puertos.
 - Debes poder demostrar permisos.
 - Debes poder justificar seguridad.
 
-### 🚀 Puente profesional
+### 🔗 Para qué te sirve
 
 - Conecta con SSH.
 - Conecta con automatización con claves.
 - Conecta con mínimos privilegios.
 
-### 🧯 Regla Premium de diagnóstico
+### 🧯 Regla de diagnóstico
 
 **Predice → observa → formula hipótesis → cambia una sola variable → valida → documenta → revierte si procede.** Una incidencia no se considera cerrada hasta que puedes explicar su causa y reproducir la verificación.
-
-# 📂⚡ Unidad de Trabajo 4 · SERVICIOS DE TRANSFERENCIA DE FICHEROS ⚡📂
 
 ### RA4 · Transferencia de archivos.
 

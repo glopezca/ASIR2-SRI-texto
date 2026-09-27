@@ -1,12 +1,12 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-## Material docente integral · `ASIR2-SRI-texto` · v6.5
+## Material docente integral · `ASIR2-SRI-texto` · v6.5.1
 
-**Edición Premium 2026** para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
+**Edición 2026** para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
 Este repositorio se concibe como un sistema completo de aprendizaje y operación técnica: **teoría → laboratorio → diagnóstico → evaluación → documentación → transferencia profesional**.
 
-## Qué aporta una edición Premium
+## Qué encontrarás en esta edición
 
 Cada UT integra objetivos observables, mapa conceptual, activación de conocimientos previos, analogías, conceptos con definiciones contextuales, rutas de aprendizaje, prácticas guiadas/semiguiadas/autónomas, incidencias, diagnóstico sistemático, evidencia, rúbricas, autoevaluación, test, solucionario y recursos de ampliación.
 
@@ -25,28 +25,31 @@ Se añaden además plantillas profesionales, matriz curricular, guía de laborat
 | UT7 | XMPP, IRC, listas de distribución y NNTP | RA6 |
 | UT8 | Audio, vídeo, FFmpeg, Icecast, HLS, RTP y videoconferencia | RA7 + RA8 |
 
-## Cuatro entornos hermanos
+## Cuatro entornos de trabajo
 
-```text
-                         🧪 LABORATORIO SRI
-                                │
-      ┌─────────────────────────┼─────────────────────────┐
-      │                         │                         │                         │
-      ▼                         ▼                         ▼                         ▼
- 🧪 ENTORNO I             🐧 ENTORNO II            🖥️ ENTORNO III            🐳 ENTORNO IV
- Packet Tracer             WSL2 + Ubuntu            VirtualBox + Ubuntu        Docker Compose
- simulación                26.04                     26.04 Server             despliegue reproducible
-```
+Los cuatro entornos se presentan al mismo nivel. Cada uno sirve para una tarea distinta y no es necesario usar los cuatro en todas las prácticas.
 
-El mismo modelo mental se traslada entre entornos; no se obliga a ejecutar una práctica en los cuatro.
+| 🧪 Entorno I | 🐧 Entorno II |
+|---|---|
+| **Packet Tracer** | **WSL2 + Ubuntu 26.04** |
+| Simular redes, routing y topologías. | Trabajar con herramientas Linux desde Windows. |
 
-## Arquitectura didáctica
+| 🖥️ Entorno III | 🐳 Entorno IV |
+|---|---|
+| **VirtualBox + Ubuntu Server 26.04** | **Docker Compose** |
+| Ejecutar servidores y topologías completas. | Desplegar servicios de forma reproducible. |
 
-```text
-situación → modelo mental → concepto → ejemplo
-→ guiada → semiguiada → autónoma
-→ incidencia → diagnóstico → transferencia → evaluación
-```
+> **Idea clave:** los cuatro entornos son herramientas del mismo laboratorio. Elige el que indique la práctica; no tienes que repetir el trabajo en todos.
+
+## Cómo está organizada cada UT
+
+1. **Situación:** qué problema vas a resolver.
+2. **Idea clave:** qué necesitas entender antes de tocar la configuración.
+3. **Ejemplo:** cómo se hace en un caso sencillo.
+4. **Práctica:** primero guiada, después con menos ayuda y finalmente autónoma.
+5. **Diagnóstico:** qué hacer cuando el resultado no coincide con lo esperado.
+6. **Evidencia:** qué debes enseñar para demostrar que funciona.
+7. **Evaluación:** preguntas, pruebas y actividades.
 
 La **preparación común de las prácticas aparece una sola vez en cada UT**. Cada práctica conserva únicamente sus **pistas específicas**.
 
@@ -58,9 +61,15 @@ La preparación del entorno está en **UT1**, e incluye ficha del puesto, Virtua
 
 `APENDICE-PROFESOR.md` reúne banco de tests, propuestas evaluables, rúbricas y banco de incidencias. La matriz curricular de `ANEXO-XIII-Matriz-Curricular.md` permite relacionar RA, prácticas, evidencias e instrumentos.
 
+## Material recuperado del CIFP Juan de Colonia
+
+La v6.5.1 recupera de forma explícita materiales prácticos que eran útiles para el alumnado y que no deben perderse durante la reorganización del texto. En particular, se incorpora una **chuleta de comandos de red de Ubuntu** con `ip`, `ss`, `ping`, `tracepath`, `resolvectl`, `networkctl`, `netplan` y comprobaciones habituales de servicios.
+
+También se conserva la idea de una **preparación común del puesto**: identificación del equipo, comprobación TCP/IP, Netplan, SSH, herramientas de diagnóstico y comprobación final. El contenido se ha reorganizado para que el alumno encuentre primero la acción que necesita y después la explicación.
+
 ## Fuentes y control de actualidad
 
-`INFORME-REVISION-FUENTES-v6.5.md` documenta qué materiales aportados se integran, cuáles se corrigen y cuáles se conservan únicamente como referencia histórica o pedagógica.
+`INFORME-REVISION-FUENTES-v6.5.1.md` documenta qué materiales aportados se integran, cuáles se corrigen y cuáles se conservan únicamente como referencia histórica o pedagógica.
 
 El material usa documentación oficial de Ubuntu, BIND9, Kea, Apache, Nginx, Postfix, Dovecot, Mailman 3, Docker, Kubernetes, MDN y RFC Editor como fuentes técnicas primarias.
 
@@ -70,7 +79,7 @@ El material original del repositorio se distribuye bajo **CC BY-SA 4.0**.
 
 **Atribución recomendada:**
 
-> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.5, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
+> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.5.1, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
 
 Los materiales de terceros mantienen sus propias licencias, marcas y derechos.
 
@@ -100,5 +109,6 @@ El actualizador no reemplaza recetas técnicas mediante búsquedas globales. Sol
 - `ANEXO-XV-Guia-Laboratorio-Reproducible.md`: preparación y reseteo.
 - `ANEXO-XVI-Auditoria-Obsolescencia.md`: criterio de sustitución tecnológica.
 - `ANEXO-XVII-Algoritmo-Actualizacion.md`: procedimiento de futuras iteraciones.
-- `INFORME-REVISION-FUENTES-v6.5.md`: auditoría de las fuentes aportadas.
+- `ANEXO-XVIII-Chuleta-Comandos-Red-Ubuntu.md`: consulta rápida de comandos de red para el laboratorio.
+- `INFORME-REVISION-FUENTES-v6.5.1.md`: auditoría de las fuentes aportadas.
 - `INDICE-ALFABETICO.md`: índice rápido de conceptos.

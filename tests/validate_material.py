@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validador ligero de la edición Premium."""
+"""Validador ligero del material docente."""
 from pathlib import Path
 import re, subprocess, sys
 ROOT=Path(__file__).resolve().parents[1]
@@ -23,7 +23,7 @@ for p in UT:
         if re.search(r'<[^>]+>|\$\{[^}]+\}',b) or not b.strip(): continue
         if subprocess.run(["bash","-n"],input=b,text=True,capture_output=True).returncode:
             errors.append(f"{p.name}: Bash {i} inválido")
-for asset in ["img/captura-webmin-didactica.png","img/captura-roundcube-didactica.png","img/captura-sympa-didactica.png"]:
+for asset in ["img/captura-roundcube-didactica.png","img/captura-sympa-didactica.png"]:
     if not (ROOT/asset).exists(): errors.append(f"falta recurso gráfico {asset}")
 if len(UT)!=8: errors.append("No hay exactamente 8 UT")
 if errors:

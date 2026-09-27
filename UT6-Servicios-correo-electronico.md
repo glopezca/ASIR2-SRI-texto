@@ -1,8 +1,11 @@
-## 🏆 Capa Premium de la UT
+# ✉️⚡ Unidad de Trabajo 6 · SERVICIOS DE CORREO ELECTRÓNICO ⚡✉️
 
-**Misión de dominio:** Diseñar y diagnosticar un flujo moderno de correo.
 
-### 🚪 Puerta de entrada diagnóstica
+## 🧭 Guía de aprendizaje de la UT
+
+**Objetivo principal:** Diseñar y diagnosticar un flujo moderno de correo.
+
+### 🚪 Antes de empezar
 
 Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerrequisitos recuperar.
 
@@ -12,7 +15,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 4. ¿Qué herramienta usarías primero para diagnosticar?
 5. ¿Qué cambiarías solo después de obtener evidencia?
 
-### 🧠 Núcleo de dominio
+### 🎯 Lo que debes aprender
 
 | Debes dominar | Evidencia observable |
 |---|---|
@@ -21,24 +24,22 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 | **MUA/MSA/MTA** | Explicación, comando, diagrama o evidencia verificable. |
 | **TLS/SPF/DKIM/DMARC** | Explicación, comando, diagrama o evidencia verificable. |
 
-### 🛠️ Criterios de salida
+### ✅ Al terminar deberás poder
 
 - Debes poder localizar dónde se detiene el mensaje.
 - Debes poder leer colas/logs.
 - Debes poder comprobar autenticación.
 - Debes poder distinguir entrega y políticas.
 
-### 🚀 Puente profesional
+### 🔗 Para qué te sirve
 
 - Conecta con identidad del dominio.
 - Conecta con observabilidad.
 - Conecta con credenciales y certificados.
 
-### 🧯 Regla Premium de diagnóstico
+### 🧯 Regla de diagnóstico
 
 **Predice → observa → formula hipótesis → cambia una sola variable → valida → documenta → revierte si procede.** Una incidencia no se considera cerrada hasta que puedes explicar su causa y reproducir la verificación.
-
-# ✉️⚡ Unidad de Trabajo 6 · SERVICIOS DE CORREO ELECTRÓNICO ⚡✉️
 
 ### RA5 · Administración de servidores de correo.
 

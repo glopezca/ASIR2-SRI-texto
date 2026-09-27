@@ -1,81 +1,57 @@
 # Anexo XVIII · Chuleta de comandos de red en Ubuntu
 
-> **Objetivo:** tener en una sola página los comandos que más vas a utilizar para comprobar una red. Sirve para **consultar, probar y diagnosticar**.
+> **Objetivo:** tener en un solo sitio los comandos que más vas a utilizar para **observar, comprobar y diagnosticar** una red en Ubuntu Server.
 
-## 1. ¿Qué interfaces tengo?
+> **Idea clave:** primero observa; después formula una hipótesis; cambia una sola cosa; vuelve a probar.
+
+## 1. Ver interfaces, direcciones y estado
 
 | Necesito saber… | Comando |
 |---|---|
-| Direcciones y estado de las interfaces | `ip addr` |
-| Una interfaz concreta | `ip addr show ens33` |
-| Estado de los enlaces | `ip link show` |
-| Estadísticas de una interfaz | `ip -s link show ens33` |
+| Direcciones y configuración | `ip addr` |
+| Una interfaz concreta | `ip addr show enp0s3` |
+| Estado de las interfaces | `ip link show` |
+| Estadísticas de una interfaz | `ip -s link show enp0s3` |
+| Vecinos de la red local (ARP/ND) | `ip neigh` |
 
-## 2. ¿Por dónde salen los paquetes?
+También puedes encontrar `ifconfig` en material antiguo, pero en Ubuntu actual la herramienta principal es `ip`.
+
+## 2. Ver las rutas
 
 ```bash
 ip route
 ip route get 8.8.8.8
+ip route | grep default
 ```
 
-`ip route` muestra la tabla de rutas. `ip route get DESTINO` indica qué ruta utilizaría el kernel.
+- `ip route`: muestra la tabla de rutas.
+- `ip route get DESTINO`: indica qué ruta utilizaría el sistema para llegar a ese destino.
 
-## 3. ¿Tengo conectividad?
+## 3. Comprobar conectividad
+
+Empieza por un destino cercano y avanza hacia fuera:
 
 ```bash
 ping -c 4 192.168.1.1
 ping -c 4 8.8.8.8
+ping -c 4 example.com
 ```
 
-Prueba en este orden: **tu configuración → puerta de enlace → conectividad por IP → DNS**.
+Si responde la IP pero no el nombre de dominio, la conectividad IP funciona y debes investigar **DNS**.
 
-> Si funciona `ping 8.8.8.8` pero falla `ping google.com`, la conectividad IP existe y debes investigar la resolución de nombres.
-
-## 4. ¿Qué DNS estoy usando?
+## 4. Comprobar DNS
 
 ```bash
 resolvectl status
 resolvectl dns
 resolvectl query example.com
-systemctl status systemd-resolved
 ```
 
-No edites `/etc/resolv.conf` a ciegas: en Ubuntu moderno puede estar gestionado por el sistema.
-
-## 5. ¿Qué servicios están escuchando?
-
-```bash
-ss -lntup
-ss -lntup | grep ':53'
-ss -lntup | grep ':22'
-ss -lntup | grep ':80'
-```
-
-- `-l` → escucha
-- `-n` → no resuelve nombres
-- `-t` → TCP
-- `-u` → UDP
-- `-p` → muestra el proceso, si tienes permisos
-
-## 6. ¿Qué proceso utiliza un puerto?
-
-```bash
-sudo ss -lntup
-sudo lsof -i :80
-```
-
-## 7. ¿Qué vecinos tengo en la red local?
-
-```bash
-ip neigh
-```
-
-Es útil para diagnosticar ARP/ND.
-
-## 8. ¿Cómo pruebo DNS?
+Consultas DNS:
 
 ```bash
 host example.com
+nslookup example.com
 dig example.com
 dig @192.168.1.10 example.com
 dig example.com A
@@ -84,20 +60,65 @@ dig example.com MX
 dig -x 192.168.1.10
 ```
 
-## 9. ¿Cómo pruebo un puerto TCP?
+Servicio de resolución local:
+
+```bash
+systemctl status systemd-resolved
+```
+
+> En Ubuntu moderno, no edites `/etc/resolv.conf` a ciegas: comprueba antes quién gestiona la resolución.
+
+## 5. Ver qué servicios están escuchando
+
+La herramienta principal es `ss`:
+
+```bash
+ss -lntup
+ss -lntup | grep ':22'
+ss -lntup | grep ':53'
+ss -lntup | grep ':80'
+```
+
+- `-l` → sockets en escucha.
+- `-n` → no resolver nombres.
+- `-t` → TCP.
+- `-u` → UDP.
+- `-p` → proceso asociado, cuando se dispone de permisos.
+
+Para localizar un proceso concreto:
+
+```bash
+sudo lsof -i :80
+```
+
+También puede aparecer `netstat` en documentación antigua:
+
+```bash
+sudo netstat -plnt
+sudo netstat -tuln
+```
+
+Si necesitas `netstat`:
+
+```bash
+sudo apt update
+sudo apt install net-tools
+```
+
+## 6. Probar un puerto TCP
 
 ```bash
 nc -vz 192.168.1.10 22
 nc -vz 192.168.1.10 80
 ```
 
-Si no está instalado:
+Si `nc` no está instalado:
 
 ```bash
 sudo apt install netcat-openbsd
 ```
 
-## 10. ¿Cómo veo el camino hasta un destino?
+## 7. Ver el camino hasta un destino
 
 ```bash
 tracepath 8.8.8.8
@@ -110,34 +131,74 @@ sudo apt install traceroute
 traceroute 8.8.8.8
 ```
 
-## 11. ¿Cómo consulto y aplico Netplan?
+## 8. Configurar y comprobar Netplan
+
+Los archivos están en:
 
 ```bash
-sudo netplan get
+/etc/netplan/
+```
+
+Consultar:
+
+```bash
 sudo ls -l /etc/netplan/
+sudo netplan get
 sudo sed -n '1,240p' /etc/netplan/*.yaml
+```
+
+Ejemplo:
+
+```yaml
+network:
+  version: 2
+  ethernets:
+    enp0s3:
+      dhcp4: false
+      addresses:
+        - 192.168.1.10/24
+      routes:
+        - to: default
+          via: 192.168.1.1
+      nameservers:
+        addresses:
+          - 8.8.8.8
+          - 8.8.4.4
+```
+
+Comprobar y aplicar:
+
+```bash
 sudo netplan generate
+sudo netplan try
 sudo netplan apply
 ```
 
-Para cambios delicados, especialmente por SSH:
+> Si estás conectado por SSH, `netplan try` es especialmente útil porque permite comprobar el cambio antes de dejarlo aplicado de forma permanente.
+
+## 9. Gestionar interfaces
 
 ```bash
-sudo netplan try
+sudo ip link set enp0s3 down
+sudo ip link set enp0s3 up
 ```
 
-> `netplan try` permite confirmar el cambio y recuperar la configuración anterior si no lo confirmas.
+Los comandos `ifdown`/`ifup` pueden aparecer en documentación antigua:
 
-## 12. ¿Qué gestor de red está activo?
+```bash
+sudo ifdown enp0s3 && sudo ifup enp0s3
+```
 
-En Ubuntu Server es habitual encontrar `systemd-networkd` junto con Netplan:
+En Ubuntu Server moderno con Netplan, no deben ser la primera opción.
+
+## 10. ¿Qué componente gestiona la red?
 
 ```bash
 systemctl status systemd-networkd
 networkctl status
 ```
 
-Si utiliza NetworkManager:
+Si el sistema utiliza NetworkManager:
 
 ```bash
 systemctl status NetworkManager
@@ -145,18 +206,7 @@ nmcli device status
 nmcli connection show
 ```
 
-Comprueba primero qué renderer utiliza Netplan.
-
-## 13. ¿Cómo reinicio una interfaz?
-
-```bash
-sudo ip link set ens33 down
-sudo ip link set ens33 up
-```
-
-Para cambios permanentes, modifica Netplan y valida/aplica la configuración. Los comandos históricos `ifup`/`ifdown` pueden aparecer en documentación antigua, pero no son la vía principal en un Ubuntu Server moderno basado en Netplan.
-
-## 14. ¿Cómo compruebo un servicio?
+## 11. Gestionar servicios
 
 ```bash
 systemctl status NOMBRE_SERVICIO
@@ -164,12 +214,75 @@ systemctl is-active NOMBRE_SERVICIO
 systemctl is-enabled NOMBRE_SERVICIO
 ```
 
-## 15. ¿Dónde miro los errores?
+```bash
+sudo systemctl start NOMBRE_SERVICIO
+sudo systemctl stop NOMBRE_SERVICIO
+sudo systemctl restart NOMBRE_SERVICIO
+sudo systemctl reload NOMBRE_SERVICIO
+sudo systemctl enable NOMBRE_SERVICIO
+sudo systemctl disable NOMBRE_SERVICIO
+```
+
+Ver servicios instalados:
 
 ```bash
-journalctl -u NOMBRE_SERVICIO -n 50 --no-pager
-journalctl -u NOMBRE_SERVICIO -f
+sudo systemctl list-unit-files --type=service --all
 ```
+
+## 12. Comprobar el firewall UFW
+
+```bash
+sudo ufw status
+sudo ufw enable
+sudo ufw disable
+sudo ufw allow 22/tcp
+sudo ufw deny 22/tcp
+```
+
+> Antes de activar un firewall remoto, asegúrate de haber permitido el acceso que necesitas, por ejemplo SSH.
+
+## 13. Escanear puertos con Nmap
+
+```bash
+nmap localhost
+nmap -p- localhost
+nmap -sV localhost
+sudo nmap -A localhost
+nmap -p 80,443 localhost
+nmap -p 20-80 localhost
+nmap --script=banner localhost
+```
+
+Si no está instalado:
+
+```bash
+sudo apt update
+sudo apt install nmap
+```
+
+> Utiliza Nmap sobre sistemas y redes donde tengas autorización para realizar el escaneo.
+
+## 14. Consultar registros
+
+```bash
+sudo journalctl -u NOMBRE_SERVICIO -n 50 --no-pager
+sudo journalctl -u NOMBRE_SERVICIO -f
+```
+
+Si el sistema dispone de `syslog`:
+
+```bash
+sudo tail -f /var/log/syslog
+```
+
+## 15. Herramientas que pueden faltar
+
+```bash
+sudo apt update
+sudo apt install net-tools iproute2 traceroute dnsutils netcat-openbsd nmap
+```
+
+No necesitas instalar `iproute2` en una instalación normal de Ubuntu: `ip` forma parte del sistema base. La línea anterior sirve como referencia cuando se prepara un entorno mínimo.
 
 ## 16. Diagnóstico rápido
 
@@ -201,11 +314,8 @@ journalctl -u NOMBRE_SERVICIO -f
 
 ## Procedencia
 
-Esta chuleta recupera y reorganiza la sección **«Comandos de red en Ubuntu»** del material `Preparación del entorno` del CIFP Juan de Colonia. Se han mantenido los comandos útiles y se han actualizado las recomendaciones que podían inducir a utilizar procedimientos antiguos como vía principal.
+Esta chuleta integra y sintetiza la sección **«Comandos de red en Ubuntu»** del libro **Preparación del entorno** del CIFP Juan de Colonia, junto con la chuleta ya incorporada al repositorio.
 
-## Fuentes técnicas
+Se han recuperado los apartados que faltaban o estaban menos representados: `ifconfig`/`ifup`/`ifdown` como referencia histórica, `systemctl`, `ping`, `traceroute`, `nslookup`, `netstat`, `ufw`, instalación de herramientas, `nmap` y consulta de registros.
 
-- Ubuntu 26.04 LTS: https://documentation.ubuntu.com/release-notes/26.04/
-- Netplan: https://netplan.io/
-- systemd-networkd: https://www.freedesktop.org/software/systemd/man/latest/systemd-networkd.service.html
-- iproute2: https://www.kernel.org/pub/linux/utils/net/iproute2/
+El resultado no reproduce literalmente el libro: organiza sus contenidos por **pregunta o problema que el alumno quiere resolver**, para facilitar su uso durante las prácticas.

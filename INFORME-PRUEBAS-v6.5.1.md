@@ -1,4 +1,4 @@
-# Informe de pruebas · ASIR2-SRI-texto · v6.5.1
+# Informe de pruebas · ASIR2-SRI-texto · v6.5.2
 
 ## Resultado
 
@@ -8,7 +8,7 @@ Se valida de forma automática: estructura, versión, licencias/atribución, dup
 
 Las pruebas que requieren Docker Engine, Kubernetes o máquinas virtuales no se marcan como ejecutadas si el entorno de construcción no dispone de esos runtimes.
 
-## Criterios específicos de v6.5.1
+## Criterios específicos de v6.5.2
 
 - 8 UT presentes.
 - Una única preparación común por UT.

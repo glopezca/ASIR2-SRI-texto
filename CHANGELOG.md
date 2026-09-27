@@ -1,6 +1,16 @@
 # Changelog
 
-## v6.5.1 · Revisión didáctica y recuperación de materiales
+## v6.5.2 — 27/09/2026
+
+- Añadido enlace directo al **índice alfabético** desde el README.
+- Reincorporado como fuente de revisión el libro **Preparación del entorno** del CIFP Juan de Colonia.
+- Fusionada y sintetizada su sección de comandos de red con `ANEXO-XVIII-Chuleta-Comandos-Red-Ubuntu.md`.
+- Incorporados a la chuleta: interfaces, rutas, vecinos, conectividad, DNS, puertos, Netplan, `systemctl`, UFW, Nmap, registros y herramientas auxiliares.
+- Conservados como referencia histórica los comandos y herramientas que pueden aparecer en material anterior (`ifconfig`, `ifup`/`ifdown`, `netstat`).
+- Corregida la referencia de instalación de `netstat`: se utiliza `net-tools`, no `netstat-nat`.
+
+
+## v6.5.2 · Revisión didáctica y recuperación de materiales
 
 ### Presentación para el alumnado
 - Se sustituye la representación gráfica de los cuatro entornos por una cuadrícula 2×2 estable para evitar que el Entorno IV aparezca separado.
@@ -20,7 +30,7 @@
 - Las capturas utilizadas en clase deben proceder de una instalación real y de la versión del aula.
 
 ### Terminología
-- Se elimina la palabra de carácter publicitario indicada en la revisión de v6.5.1 de todo el texto de la versión.
+- Se elimina la palabra de carácter publicitario indicada en la revisión de v6.5.2 de todo el texto de la versión.
 
 
 ## v6.5 · Edición 2026

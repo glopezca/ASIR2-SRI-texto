@@ -4,7 +4,7 @@
 
 Una tecnología se mantiene en la edición principal cuando sigue siendo válida para el objetivo didáctico y dispone de un camino razonable de aprendizaje. Cuando envejece, hay tres opciones: **actualizar**, **mantener como histórico** o **retirar**.
 
-| Tecnología/tema | Estado v6.5.1 | Tratamiento |
+| Tecnología/tema | Estado v6.5.2 | Tratamiento |
 |---|---|---|
 | Ubuntu 26.04 LTS | principal | laboratorio de referencia |
 | BIND9 | principal | DNS autoritativo, caché, transferencias |

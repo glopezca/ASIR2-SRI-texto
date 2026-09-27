@@ -18,7 +18,7 @@ REQUIRED = [
     'ANEXO-XII-Plantillas-Entregables.md','ANEXO-XIII-Matriz-Curricular.md',
     'ANEXO-XIV-Recursos-Abiertos.md','ANEXO-XV-Guia-Laboratorio-Reproducible.md',
     'ANEXO-XVI-Auditoria-Obsolescencia.md','ANEXO-XVII-Algoritmo-Actualizacion.md',
-    'INFORME-REVISION-FUENTES-v6.5.1.md','INDICE-ALFABETICO.md',
+    'INDICE-ALFABETICO.md',
 ]
 
 

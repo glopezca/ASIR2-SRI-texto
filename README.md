@@ -1,124 +1,837 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-## Material docente integral · `ASIR2-SRI-texto` · v6.5.3
+Material docente y de laboratorio para el módulo **Servicios de Red e Internet (SRI)** del **CFGS Administración de Sistemas Informáticos en Red (ASIR)**.
 
-**Edición 2026** para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
+**Versión de esta iteración: 6.5.4**
 
-Este repositorio se concibe como un sistema completo de aprendizaje y operación técnica: **teoría → laboratorio → diagnóstico → evaluación → documentación → transferencia profesional**.
+Este repositorio reúne las **8 primeras unidades de trabajo (UT1–UT8)** desarrolladas a partir del libro:
 
-## Qué encontrarás en esta edición
+> **_Servicios de Red e Internet_**  
+> Álvaro García Sánchez · Luis Enamorado Sarmiento · Javier Sanz Rodríguez  
+> Garceta Grupo Editorial  
+> **ISBN: 978-84-9281-285-1**
 
-Cada UT integra objetivos observables, mapa conceptual, activación de conocimientos previos, analogías, conceptos con definiciones contextuales, rutas de aprendizaje, prácticas guiadas/semiguiadas/autónomas, incidencias, diagnóstico sistemático, evidencia, rúbricas, autoevaluación, test, solucionario y recursos de ampliación.
+El libro está orientado al segundo curso del ciclo de **Técnico Superior en Administración de Sistemas Informáticos en Red** y parte de los conocimientos adquiridos previamente en **Planificación y Administración de Redes**.
 
-Se añaden además plantillas profesionales, matriz curricular, guía de laboratorio reproducible, auditoría de obsolescencia, índice alfabético y un algoritmo reproducible de actualización.
+---
 
-## Unidades de trabajo
+## 📚 ¿Para qué sirve este repositorio?
 
-| UT | Contenido | RA |
-|---|---|---|
-| UT1 | TCP/IP, direccionamiento, routing, NAT/PAT y preparación del laboratorio | base transversal |
-| UT2 | DHCP, concesiones, relay, Kea y seguridad | RA2 |
-| UT3 | DNS, BIND9, zonas, registros, transferencias y DNSSEC | RA1 |
-| UT4 | FTP, FTPS, SFTP, TFTP, permisos y diagnóstico | RA4 |
-| UT5 | HTTP, HTTPS, Apache, Nginx, Virtual Hosts, proxy y observabilidad | RA3 |
-| UT6 | SMTP, IMAP, POP3, Postfix, Dovecot, Roundcube y autenticación | RA5 |
-| UT7 | XMPP, IRC, listas de distribución y NNTP | RA6 |
-| UT8 | Audio, vídeo, FFmpeg, Icecast, HLS, RTP y videoconferencia | RA7 + RA8 |
+El propósito es disponer de un material de estudio que combine:
 
-## Índice general
-
-Consulta el **[índice general](INDICE-GENERAL.md)** para acceder directamente a todas las UT, anexos y materiales complementarios.
-
-## Índice alfabético
-
-Consulta el **[índice alfabético de conceptos](INDICE-ALFABETICO.md)** para localizar rápidamente términos, servicios, protocolos y conceptos trabajados en las UT.
-
-## Cuatro entornos de trabajo
-
-Los cuatro entornos se presentan al mismo nivel. Cada uno sirve para una tarea distinta y no es necesario usar los cuatro en todas las prácticas.
-
-| 🧪 Entorno I | 🐧 Entorno II |
-|---|---|
-| **Packet Tracer** | **WSL2 + Ubuntu 26.04** |
-| Simular redes, routing y topologías. | Trabajar con herramientas Linux desde Windows. |
-
-| 🖥️ Entorno III | 🐳 Entorno IV |
-|---|---|
-| **VirtualBox + Ubuntu Server 26.04** | **Docker Compose** |
-| Ejecutar servidores y topologías completas. | Desplegar servicios de forma reproducible. |
-
-> **Idea clave:** los cuatro entornos son herramientas del mismo laboratorio. Elige el que indique la práctica; no tienes que repetir el trabajo en todos.
-
-## Cómo está organizada cada UT
-
-1. **Situación:** qué problema vas a resolver.
-2. **Idea clave:** qué necesitas entender antes de tocar la configuración.
-3. **Ejemplo:** cómo se hace en un caso sencillo.
-4. **Práctica:** primero guiada, después con menos ayuda y finalmente autónoma.
-5. **Diagnóstico:** qué hacer cuando el resultado no coincide con lo esperado.
-6. **Evidencia:** qué debes enseñar para demostrar que funciona.
-7. **Evaluación:** preguntas, pruebas y actividades.
-
-La **preparación común de las prácticas aparece una sola vez en cada UT**. Cada práctica conserva únicamente sus **pistas específicas**.
-
-## Laboratorio base
-
-La preparación del entorno está en **UT1**, e incluye ficha del puesto, VirtualBox + Ubuntu Server 26.04 LTS, Netplan, SSH, WSL2, Packet Tracer y orientación sobre Docker Compose. Los anexos contienen la profundidad específica de Docker/Compose, Git y Kubernetes.
-
-## Material para el profesor
-
-`APENDICE-PROFESOR.md` reúne banco de tests, propuestas evaluables, rúbricas y banco de incidencias. La matriz curricular de `ANEXO-XIII-Matriz-Curricular.md` permite relacionar RA, prácticas, evidencias e instrumentos.
-
-## Material recuperado del CIFP Juan de Colonia
-
-La v6.5.3 vuelve a contrastar el material con el libro **Preparación del entorno** del CIFP Juan de Colonia. Se fusionan y sintetizan sus contenidos útiles con la documentación del repositorio, evitando duplicaciones y manteniendo una única referencia práctica.
-
-En particular, se amplía la **chuleta de comandos de red de Ubuntu** para cubrir, además de la consulta de interfaces y rutas, conectividad, DNS, puertos y sockets, Netplan, `systemd`, firewall `ufw`, diagnóstico con `nmap`, registros y herramientas auxiliares. También se conserva la preparación común del puesto: identificación del equipo, comprobación TCP/IP, instalación de Ubuntu Server, SSH y comprobación final.
-
-El contenido del libro no se copia de forma literal: se **fusiona, sintetiza y adapta** a un formato de consulta rápida para el alumno. Los procedimientos más extensos siguen ubicados en las UT y anexos correspondientes.
-
-## Fuentes y control de actualidad
-
-`INFORME-REVISION-FUENTES-v6.5.3.md` documenta qué materiales aportados se integran, cuáles se corrigen y cuáles se conservan únicamente como referencia histórica o pedagógica.
-
-El material usa documentación oficial de Ubuntu, BIND9, Kea, Apache, Nginx, Postfix, Dovecot, Mailman 3, Docker, Kubernetes, MDN y RFC Editor como fuentes técnicas primarias.
-
-## Licencia y atribución
-
-El material original del repositorio se distribuye bajo **CC BY-SA 4.0**.
-
-**Atribución recomendada:**
-
-> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.5.3, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
-
-Los materiales de terceros mantienen sus propias licencias, marcas y derechos.
-
-## Herramientas de actualización
-
-Desde la raíz del repositorio:
-
-```bash
-python3 tools/update_material.py --check
-python3 tools/update_material.py --dry-run --bump 6.6
-python3 tools/update_material.py --bump 6.6
-python3 tools/update_material.py --check
-python3 tools/update_material.py --package
+```text
+                 📚 CONCEPTOS
+                     │
+                     ▼
+              🌐 PROTOCOLOS
+                     │
+                     ▼
+              🖥️ SERVICIOS
+                     │
+                     ▼
+              🧪 LABORATORIO
+             ┌───────┼────────┐
+             ▼       ▼        ▼
+          Packet    WSL2    VirtualBox
+          Tracer   Ubuntu     Ubuntu
+                    26.04     26.04
+             │       │        │
+             └───────┼────────┘
+                     ▼
+               🔎 DIAGNÓSTICO
+                     │
+                     ▼
+                📝 DOCUMENTACIÓN
 ```
 
-El actualizador no reemplaza recetas técnicas mediante búsquedas globales. Solo cambia metadatos canónicos y genera plantillas de release; el contenido técnico requiere auditoría y pruebas.
+No se pretende que el alumnado memorice únicamente comandos. El objetivo es comprender **qué servicio se está desplegando, cómo funciona sobre TCP/IP, qué componentes intervienen, cómo se configura y cómo se diagnostica una incidencia**.
 
-## Estructura destacada
+---
 
-- `UT1`-`UT8`: material principal.
-- `ANEXO-II-Docker-WSL2.md`: Docker desde cero.
-- `ANEXO-VI-Docker-Compose-UT1-UT8.md`: Entorno IV.
-- `ANEXO-VII-Compose-a-Kubernetes.md`: transición a Kubernetes.
-- `ANEXO-XII-Plantillas-Entregables.md`: entregables profesionales.
-- `ANEXO-XIII-Matriz-Curricular.md`: RA → evidencia → evaluación.
-- `ANEXO-XIV-Recursos-Abiertos.md`: documentación técnica y recursos abiertos.
-- `ANEXO-XV-Guia-Laboratorio-Reproducible.md`: preparación y reseteo.
-- `ANEXO-XVI-Auditoria-Obsolescencia.md`: criterio de sustitución tecnológica.
-- `ANEXO-XVII-Algoritmo-Actualizacion.md`: procedimiento de futuras iteraciones.
-- `ANEXO-XVIII-Chuleta-Comandos-Red-Ubuntu.md`: consulta rápida de comandos de red para el laboratorio.
-- `INFORME-REVISION-FUENTES-v6.5.3.md`: auditoría de las fuentes aportadas.
-- `INDICE-ALFABETICO.md`: índice rápido de conceptos.
+# 🧭 Material del libro que sirve de base
+
+El libro comienza estableciendo una base común antes de entrar en los servicios concretos.
+
+## 1. Arquitectura TCP/IP y modelo cliente/servidor
+
+El capítulo inicial presenta la arquitectura TCP/IP, el modelo cliente/servidor y el concepto de servicio de red.
+
+El esquema conceptual que se desprende del libro es:
+
+```text
+                    SERVICIO DE RED
+                         │
+              ┌──────────┴──────────┐
+              │                     │
+           CLIENTE                SERVIDOR
+              │                     │
+              └──────── RED ────────┘
+                         │
+                    TCP/IP
+```
+
+La idea de **cliente/servidor** es transversal a prácticamente todas las unidades posteriores.
+
+El cliente solicita un servicio y el servidor lo proporciona. El servicio se materializa mediante procesos que se comunican utilizando protocolos de red.
+
+---
+
+## 2. 🧩 Capas y protocolos
+
+El libro utiliza la arquitectura TCP/IP como marco para entender los servicios.
+
+Una forma útil de visualizarla es:
+
+```text
+┌───────────────────────────────┐
+│       APLICACIÓN              │
+│ DNS · DHCP · HTTP · FTP ·     │
+│ SMTP · IMAP · XMPP · etc.     │
+├───────────────────────────────┤
+│       TRANSPORTE              │
+│          TCP / UDP            │
+├───────────────────────────────┤
+│         INTERNET              │
+│              IP               │
+├───────────────────────────────┤
+│     ACCESO A LA RED           │
+└───────────────────────────────┘
+```
+
+Por tanto, para estudiar cualquier servicio conviene preguntar:
+
+1. ¿Qué problema resuelve?
+2. ¿Qué protocolo utiliza?
+3. ¿Sobre qué transporte funciona?
+4. ¿Qué puerto utiliza?
+5. ¿Quién actúa como cliente?
+6. ¿Quién actúa como servidor?
+7. ¿Cómo se autentican los usuarios?
+8. ¿Qué mecanismos de seguridad existen?
+9. ¿Cómo podemos comprobar que funciona?
+
+---
+
+# 🖥️ El modelo de laboratorio del libro
+
+Una de las ideas metodológicas importantes del libro es utilizar **máquinas virtuales** para realizar las prácticas.
+
+El capítulo inicial introduce la virtualización y la configuración de máquinas virtuales como base para el trabajo práctico posterior.
+
+En este repositorio se actualiza ese planteamiento a:
+
+### 🧪 Cisco Packet Tracer
+
+Para representar y probar:
+
+- topologías;
+- switches;
+- routers;
+- direccionamiento IP;
+- gateways;
+- conectividad;
+- segmentación de redes.
+
+### 🐧 WSL2 + Ubuntu 26.04
+
+Como estación de trabajo para:
+
+- administración;
+- clientes de servicios;
+- pruebas TCP/IP;
+- resolución DNS;
+- conexiones TCP;
+- captura y análisis;
+- scripting.
+
+### 🖥️ VirtualBox + Ubuntu 26.04 Server
+
+Como plataforma principal para desplegar los servidores de las prácticas.
+
+```text
+             🧪 LABORATORIO SRI
+                    │
+        ┌───────────┼───────────┐
+        │           │           │
+        ▼           ▼           ▼
+   PacketTracer    WSL2     VirtualBox
+                  Ubuntu       │
+                   26.04       ▼
+                           Ubuntu 26.04
+                              Server
+```
+
+> **Importante:** las UT actualizadas utilizan Ubuntu 26.04 como referencia de laboratorio. Cuando el libro emplea software que ha quedado obsoleto, se mantiene el concepto didáctico y se propone una alternativa actual cuando es posible.
+
+---
+
+# 📖 Cómo está organizado el libro
+
+Cada capítulo del libro sigue una estructura didáctica bastante regular:
+
+```text
+INTRODUCCIÓN
+     │
+     ▼
+CONCEPTOS Y FUNDAMENTOS
+     │
+     ▼
+CONFIGURACIÓN / SERVICIOS
+     │
+     ├──────────────┐
+     ▼              ▼
+PRÁCTICAS       ACTIVIDADES
+     │              │
+     └──────┬───────┘
+            ▼
+         RESUMEN
+            │
+            ▼
+      TEST DE REPASO
+            │
+            ▼
+   COMPRUEBA TU APRENDIZAJE
+```
+
+Las unidades de este repositorio conservan esa filosofía y la amplían con prácticas reproducibles para el laboratorio actual.
+
+---
+
+# 🗂️ Índice general del libro
+
+El índice del libro organiza los contenidos en los siguientes grandes bloques:
+
+| Capítulo | Contenido |
+|---:|---|
+| **1** | Conceptos básicos de TCP/IP |
+| **2** | Servicios de configuración automática de red (DHCP) |
+| **3** | Servicio de nombres de dominio (DNS) |
+| **4** | Servicios de transferencia de ficheros |
+| **5** | Servidores Web (HTTP) |
+| **6** | Los servicios de correo electrónico |
+| **7** | Servicios de mensajería instantánea, noticias y listas de distribución |
+| **8** | Servicios de audio y vídeo |
+
+> El PDF utilizado como fuente tiene **389 páginas** y el capítulo 7 comienza en la página 315. El capítulo 8 es el último capítulo del documento utilizado como fuente.
+
+---
+
+# 🧱 Secuencia de aprendizaje
+
+La secuencia de las ocho UT no es arbitraria:
+
+```text
+UT1
+TCP/IP
+ │
+ ▼
+UT2
+DHCP
+ │
+ ▼
+UT3
+DNS
+ │
+ ▼
+UT4
+Transferencia
+de ficheros
+ │
+ ▼
+UT5
+Web / HTTP
+ │
+ ▼
+UT6
+Correo
+ │
+ ▼
+UT7
+Mensajería · IRC · NNTP
+ │
+ ▼
+UT8
+Audio · Vídeo · Streaming
+```
+
+Primero se estudia la infraestructura de red sobre la que posteriormente se apoyan los servicios.
+
+Después se incorporan progresivamente servicios de aplicación con diferentes modelos de funcionamiento.
+
+---
+
+# 📂 Unidades de trabajo
+
+
+---
+
+# 🆕 v6.5.4 · Laboratorio Packet Tracer Tierra Media
+
+Esta iteración incorpora una topología común de **Cisco Packet Tracer** para las tres primeras UT, basada en la infraestructura de Tierra Media. La secuencia didáctica es acumulativa:
+
+```text
+UT1 · IPv4 y routing
+        ↓
+UT2 · DHCP en Mordor
+        ↓
+UT3 · DNS en Lothlorien
+```
+
+### Direccionamiento de referencia
+
+| Equipo | IP | Función |
+|---|---|---|
+| Mordor Fa0/0 | `10.0.2.15/16` | Gateway Comarca |
+| Hobbiton | `10.0.32.64/16` | Cliente |
+| Mordor Fa1/0 | `192.168.10.254/24` | Gateway Hombres + DHCP |
+| Gondor | `192.168.10.64/24` | Cliente DHCP reservado |
+| Rohan | `192.168.10.65/24` | Cliente DHCP reservado |
+| Mordor Fa4/0 | `192.168.20.254/24` | Gateway Elfos |
+| Lothlorien | `192.168.20.192/24` | Servidor DNS |
+| Rivendel | `192.168.20.193/24` | Servidor/cliente |
+
+Dominio de laboratorio: **`tierramedia.jc`**.
+
+La topología gráfica utilizada en las prácticas se incluye en `img/topologia-tierramedia-packettracer.png`.
+
+## 🌐 UT1 · Conceptos básicos de TCP/IP
+
+Fundamentos necesarios para comprender los servicios posteriores:
+
+- arquitectura TCP/IP;
+- direccionamiento IPv4;
+- IPv6;
+- subredes;
+- TCP y UDP;
+- puertos;
+- NAT/PAT;
+- encaminamiento;
+- virtualización;
+- modelo cliente/servidor.
+
+➡️ [**Abrir UT1 — Conceptos básicos de TCP/IP**](UT1-Conceptos-basicos-TCP-IP-final-v2.md)
+
+---
+
+## 📡 UT2 · Servicio DHCP
+
+Configuración automática de parámetros de red:
+
+- DHCP;
+- proceso DORA;
+- ámbitos;
+- concesiones;
+- reservas;
+- opciones;
+- relay;
+- DHCPv6;
+- Kea DHCP.
+
+➡️ [**Abrir UT2 — Servicio DHCP**](UT2-Servicio-DHCP-visual-solucionario-v2.md)
+
+---
+
+## 🌐 UT3 · Servicio de nombres de dominio (DNS)
+
+Resolución de nombres y administración DNS:
+
+- DNS;
+- FQDN;
+- zonas;
+- registros;
+- resolución directa e inversa;
+- BIND9;
+- delegaciones;
+- transferencias de zona;
+- DNS dinámico;
+- seguridad DNS.
+
+➡️ [**Abrir UT3 — Servicio DNS**](UT3-Servicio-DNS-visual-solucionario-v2.md)
+
+---
+
+## 📂 UT4 · Servicios de transferencia de ficheros
+
+Servicios y protocolos para transferencia de archivos:
+
+- FTP;
+- FTPS;
+- SFTP;
+- SCP;
+- TFTP;
+- servidores y clientes;
+- autenticación;
+- permisos;
+- modos activo/pasivo;
+- seguridad.
+
+➡️ [**Abrir UT4 — Servicios de transferencia de ficheros**](UT4-Servicios-transferencia-ficheros-visual-solucionario-v2.md)
+
+---
+
+## 🌍 UT5 · Servidores Web (HTTP)
+
+Publicación y administración de contenidos web:
+
+- HTTP/HTTPS;
+- URL y URI;
+- Apache;
+- Nginx;
+- virtual hosts;
+- autenticación;
+- proxy inverso;
+- TLS;
+- certificados;
+- diagnóstico;
+- seguridad web.
+
+➡️ [**Abrir UT5 — Servidores Web (HTTP)**](UT5-Servidores-Web-HTTP-visual-solucionario-v2.md)
+
+---
+
+## ✉️ UT6 · Servicios de correo electrónico
+
+Infraestructura de correo:
+
+- arquitectura del correo;
+- MTA;
+- MUA;
+- SMTP/ESMTP;
+- IMAP;
+- POP3;
+- Postfix;
+- Dovecot;
+- autenticación;
+- TLS;
+- SPF;
+- DKIM;
+- DMARC;
+- diagnóstico.
+
+➡️ [**Abrir UT6 — Servicios de correo electrónico**](UT6-Servicios-correo-electronico-visual-solucionario-v2.md)
+
+---
+
+## 💬 UT7 · Mensajería instantánea, noticias y listas de distribución
+
+Comunicación síncrona y asíncrona:
+
+- mensajería instantánea;
+- XMPP;
+- Jabber;
+- presencia;
+- IRC;
+- canales;
+- listas de distribución;
+- Mailman;
+- NNTP;
+- grupos de noticias;
+- Prosody;
+- InspIRCd;
+- INN/Leafnode;
+- diagnóstico.
+
+➡️ [**Abrir UT7 — Mensajería, noticias y listas de distribución**](UT7-Servicios-mensajeria-noticias-listas-distribucion-v2.md)
+
+---
+
+## 🎧 UT8 · Servicios de audio y vídeo
+
+Servicios multimedia sobre red:
+
+- audio digital;
+- vídeo digital;
+- códecs;
+- contenedores;
+- bitrate;
+- streaming;
+- VOD;
+- streaming en directo;
+- FFmpeg;
+- Icecast;
+- RTMP;
+- Nginx;
+- HLS;
+- podcast;
+- VoIP;
+- WebRTC;
+- diagnóstico y dimensionamiento.
+
+➡️ [**Abrir UT8 — Servicios de audio y vídeo**](UT8-Servicios-audio-video-visual-solucionario-v2.md)
+
+---
+
+# 🧪 Cómo utilizar las UT
+
+Cada UT está pensada para poder utilizarse en cuatro niveles.
+
+## ① 📚 Estudio
+
+Leer los conceptos y comprender:
+
+```text
+PROBLEMA
+   ↓
+PROTOCOLO
+   ↓
+ARQUITECTURA
+   ↓
+SERVICIO
+```
+
+---
+
+## ② 🧪 Práctica
+
+Reproducir la instalación y configuración en el laboratorio.
+
+La mayoría de las prácticas siguen esta secuencia:
+
+```bash
+# 1. Instalar
+sudo apt update
+sudo apt install <paquete>
+
+# 2. Configurar
+sudo nano /etc/<servicio>/
+
+# 3. Validar
+<comando-de-validación>
+
+# 4. Iniciar/reiniciar
+sudo systemctl restart <servicio>
+
+# 5. Comprobar
+systemctl status <servicio>
+ss -lntup
+
+# 6. Probar desde el cliente
+<cliente o herramienta>
+
+# 7. Diagnosticar
+journalctl -u <servicio>
+tcpdump ...
+```
+
+---
+
+## ③ 🔎 Diagnóstico
+
+No basta con que un servicio funcione.
+
+Las UT incorporan herramientas para localizar problemas:
+
+| Herramienta | Uso |
+|---|---|
+| `ip` | configuración y rutas |
+| `ping` | conectividad IP |
+| `ss` | sockets y puertos |
+| `nc` | pruebas TCP/UDP |
+| `dig` | DNS |
+| `curl` | HTTP y otros servicios |
+| `openssl s_client` | TLS |
+| `tcpdump` | captura de tráfico |
+| `journalctl` | registros de systemd |
+| `systemctl` | gestión de servicios |
+
+---
+
+## ④ 📝 Documentación
+
+En un entorno profesional, una práctica debe dejar evidencias:
+
+```text
+┌─────────────────────────────┐
+│  ¿QUÉ SE HA CONFIGURADO?    │
+├─────────────────────────────┤
+│  ¿CÓMO FUNCIONA?            │
+├─────────────────────────────┤
+│  ¿QUÉ PUERTOS UTILIZA?      │
+├─────────────────────────────┤
+│  ¿CÓMO SE HA PROBADO?       │
+├─────────────────────────────┤
+│  ¿QUÉ EVIDENCIAS TENEMOS?   │
+├─────────────────────────────┤
+│  ¿QUÉ INCIDENCIAS HUBO?     │
+├─────────────────────────────┤
+│  ¿CÓMO SE RESOLVIERON?      │
+└─────────────────────────────┘
+```
+
+---
+
+# 🔬 Convenciones de las prácticas
+
+En las UT se utilizan diferentes tipos de bloques.
+
+### 💻 Comandos
+
+```bash
+sudo systemctl status bind9
+```
+
+### 📄 Ficheros de configuración
+
+```text
+/etc/bind/named.conf
+/etc/ssh/sshd_config
+/etc/nginx/nginx.conf
+```
+
+### 🧪 Comprobaciones
+
+```bash
+ss -lntup
+```
+
+### ⚠️ Advertencias
+
+> Una configuración válida sintácticamente no implica necesariamente que el servicio funcione correctamente.
+
+### 🛡️ Seguridad
+
+> Las prácticas deben realizarse en el laboratorio. No se deben aplicar configuraciones experimentales sobre servidores de producción sin revisar previamente sus consecuencias.
+
+---
+
+# 🧠 Filosofía de aprendizaje
+
+La idea central del material puede resumirse así:
+
+```text
+        NO SOLO...
+        "¿QUÉ COMANDO EJECUTO?"
+                 │
+                 ▼
+        SINO TAMBIÉN...
+        "¿QUÉ ESTÁ OCURRIENDO?"
+                 │
+                 ▼
+        "¿QUÉ PROTOCOLO INTERVIENE?"
+                 │
+                 ▼
+        "¿QUÉ PROCESO ESCUCHA?"
+                 │
+                 ▼
+        "¿QUÉ TRAFICO SE GENERA?"
+                 │
+                 ▼
+        "¿CÓMO PUEDO DIAGNOSTICARLO?"
+```
+
+Esto conecta directamente los conocimientos de **TCP/IP** con la administración de servicios de red.
+
+---
+
+# 🛠️ Entorno recomendado
+
+## Requisitos
+
+### Host
+
+- VirtualBox actualizado.
+- WSL2.
+- Cisco Packet Tracer.
+- suficiente RAM para ejecutar simultáneamente el laboratorio necesario.
+
+### Máquina virtual
+
+```text
+Nombre:       sri-server
+SO:           Ubuntu 26.04 Server
+CPU:          2 vCPU
+RAM:          2–4 GB
+Disco:        ≥ 20 GB
+Red:          Adaptador adecuado al escenario
+```
+
+La configuración exacta puede modificarse según la práctica.
+
+---
+
+# 🌐 Esquema de red recomendado
+
+Como referencia común:
+
+```text
+                    ROUTER
+                 192.168.50.1
+                       │
+                  ┌────┴────┐
+                  │ SWITCH  │
+                  └────┬────┘
+                       │
+          ┌────────────┼────────────┐
+          │            │            │
+          ▼            ▼            ▼
+      SERVIDOR     CLIENTE 01   CLIENTE 02
+    192.168.50.10 192.168.50.101 192.168.50.102
+```
+
+Los direccionamientos pueden cambiar en cada práctica si la unidad establece otro escenario.
+
+---
+
+# 🔐 Seguridad
+
+El material debe utilizarse en **entornos de laboratorio controlados**.
+
+Especialmente:
+
+- no utilizar contraseñas reales;
+- no reutilizar credenciales de producción;
+- no exponer servicios de laboratorio directamente a Internet;
+- utilizar redes privadas o NAT según el escenario;
+- limitar los puertos mediante firewall;
+- detener servicios que no sean necesarios;
+- no publicar claves privadas;
+- no incluir secretos en el repositorio Git.
+
+### 🚨 Nunca subir al repositorio
+
+```text
+.env
+*.key
+*.pem
+id_rsa
+id_ed25519
+contraseñas
+tokens
+API keys
+certificados privados
+backups con credenciales
+```
+
+Se recomienda utilizar `.gitignore`.
+
+---
+
+# 📁 Estructura recomendada del repositorio
+
+```text
+sri/
+│
+├── README.md
+│
+├── UT1-Conceptos-basicos-TCP-IP-final-v2.md
+├── UT2-Servicio-DHCP-visual-solucionario-v2.md
+├── UT3-Servicio-DNS-visual-solucionario-v2.md
+├── UT4-Servicios-transferencia-ficheros-visual-solucionario-v2.md
+├── UT5-Servidores-Web-HTTP-visual-solucionario-v2.md
+├── UT6-Servicios-correo-electronico-visual-solucionario-v2.md
+├── UT7-Servicios-mensajeria-noticias-listas-distribucion-v2.md
+└── UT8-Servicios-audio-video-visual-solucionario-v2.md
+```
+
+Al estar todos los ficheros en la misma carpeta, los enlaces anteriores funcionan como **enlaces relativos de GitHub**.
+
+---
+
+# 📌 Sobre la versión v2
+
+Las UT incluidas aquí constituyen una **segunda revisión técnica**.
+
+En esta revisión se han:
+
+- revisado comandos;
+- corregido ejemplos de configuración;
+- revisado bloques JSON/YAML;
+- contrastado paquetes disponibles para Ubuntu 26.04;
+- revisado configuraciones de servicios;
+- probado sintaxis de comandos cuando ha sido posible;
+- probado ejemplos representativos de Apache/Nginx;
+- probado operaciones de FFmpeg;
+- actualizado software que había quedado obsoleto;
+- separado claramente el contenido conceptual del libro de las adaptaciones prácticas actuales.
+
+### ⚠️ Alcance de las pruebas
+
+La validación realizada **no equivale a ejecutar cada práctica completa sobre una infraestructura física real**.
+
+Se han realizado pruebas ejecutables y comprobaciones de compatibilidad, pero determinadas prácticas requieren:
+
+- una VM real de Ubuntu 26.04 Server;
+- una topología de red;
+- servicios funcionando simultáneamente;
+- clientes;
+- Packet Tracer;
+- y, en algunos casos, varias máquinas.
+
+Por ello, cualquier práctica utilizada en producción debe probarse previamente en el laboratorio.
+
+---
+
+# 📚 Relación con el libro original
+
+Este repositorio **no pretende sustituir al libro**.
+
+El libro proporciona:
+
+- la estructura conceptual;
+- la explicación de los protocolos;
+- la arquitectura de los servicios;
+- actividades;
+- prácticas;
+- resúmenes;
+- tests;
+- comprobaciones de aprendizaje.
+
+Las UT de este repositorio reorganizan y actualizan ese material para facilitar su utilización como **material docente en Markdown y laboratorio ASIR**.
+
+La fuente utilizada para la reconstrucción es:
+
+> **_Servicios de Red e Internet_**  
+> Álvaro García Sánchez  
+> Luis Enamorado Sarmiento  
+> Javier Sanz Rodríguez  
+> Garceta Grupo Editorial  
+> ISBN 978-84-9281-285-1
+
+---
+
+# ⚖️ Uso académico
+
+Este repositorio se utiliza en el contexto docente del departamento y cuenta con la **autorización expresa disponible para el uso académico del material**.
+
+La publicación, redistribución o reutilización del contenido debe respetar en todo momento las condiciones de la autorización y los derechos correspondientes a la obra original.
+
+Las partes que constituyen una **adaptación, actualización o elaboración docente propia** se identifican conceptualmente como tales.
+
+---
+
+# 🎯 Objetivo final
+
+Al finalizar el recorrido por las ocho UT, el alumnado debería ser capaz de pasar de:
+
+```text
+"Quiero instalar un servicio"
+```
+
+a:
+
+```text
+┌──────────────────────────────────────┐
+│ 1. Analizar necesidades              │
+│ 2. Diseñar la arquitectura           │
+│ 3. Elegir el protocolo               │
+│ 4. Instalar el software              │
+│ 5. Configurar el servicio            │
+│ 6. Protegerlo                        │
+│ 7. Verificar su funcionamiento       │
+│ 8. Analizar el tráfico               │
+│ 9. Diagnosticar incidencias          │
+│ 10. Documentar la solución           │
+└──────────────────────────────────────┘
+```
+
+Ese es el enfoque que debe guiar el trabajo con **Servicios de Red e Internet**.
+
+---
+
+## 🚀 Comenzar
+
+👉 **[UT1 · Conceptos básicos de TCP/IP](UT1-Conceptos-basicos-TCP-IP-final-v2.md)**
+
+y continuar secuencialmente hasta:
+
+👉 **[UT8 · Servicios de audio y vídeo](UT8-Servicios-audio-video-visual-solucionario-v2.md)**

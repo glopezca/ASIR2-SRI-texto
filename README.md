@@ -4,14 +4,11 @@ Material docente y de laboratorio para el módulo **Servicios de Red e Internet 
 
 **Versión de esta iteración: 6.5.4**
 
-Este repositorio reúne las **8 primeras unidades de trabajo (UT1–UT8)** desarrolladas a partir del libro:
+> 🧭 **Acceso rápido:** [Índice general](#-índice-general-del-repositorio) · [UT1](UT1-Conceptos-basicos-TCP-IP-visual-solucionario-v2.md) · [UT2](UT2-Servicio-DHCP-visual-solucionario-v2.md) · [UT3](UT3-Servicio-DNS-visual-solucionario-v2.md)
 
-> **_Servicios de Red e Internet_**  
-> Álvaro García Sánchez · Luis Enamorado Sarmiento · Javier Sanz Rodríguez  
-> Garceta Grupo Editorial  
-> **ISBN: 978-84-9281-285-1**
+Este repositorio reúne las **8 unidades de trabajo (UT1–UT8)** del módulo, junto con anexos, guías, recursos de laboratorio y documentación de apoyo.
 
-El libro está orientado al segundo curso del ciclo de **Técnico Superior en Administración de Sistemas Informáticos en Red** y parte de los conocimientos adquiridos previamente en **Planificación y Administración de Redes**.
+El material está planteado como un recorrido práctico de **Servicios de Red e Internet**, combinando fundamentos de TCP/IP, administración de servicios, diagnóstico, automatización y documentación técnica.
 
 ---
 
@@ -48,15 +45,15 @@ No se pretende que el alumnado memorice únicamente comandos. El objetivo es com
 
 ---
 
-# 🧭 Material del libro que sirve de base
+# 🧭 Marco conceptual del material
 
-El libro comienza estableciendo una base común antes de entrar en los servicios concretos.
+El material establece una base común antes de entrar en los servicios concretos.
 
 ## 1. Arquitectura TCP/IP y modelo cliente/servidor
 
-El capítulo inicial presenta la arquitectura TCP/IP, el modelo cliente/servidor y el concepto de servicio de red.
+La arquitectura TCP/IP, el modelo cliente/servidor y el concepto de servicio de red constituyen la base de las unidades posteriores.
 
-El esquema conceptual que se desprende del libro es:
+El esquema conceptual de partida es:
 
 ```text
                     SERVICIO DE RED
@@ -78,7 +75,7 @@ El cliente solicita un servicio y el servidor lo proporciona. El servicio se mat
 
 ## 2. 🧩 Capas y protocolos
 
-El libro utiliza la arquitectura TCP/IP como marco para entender los servicios.
+La arquitectura TCP/IP se utiliza como marco para entender los servicios.
 
 Una forma útil de visualizarla es:
 
@@ -112,11 +109,9 @@ Por tanto, para estudiar cualquier servicio conviene preguntar:
 
 ---
 
-# 🖥️ El modelo de laboratorio del libro
+# 🖥️ Modelo de laboratorio
 
-Una de las ideas metodológicas importantes del libro es utilizar **máquinas virtuales** para realizar las prácticas.
-
-El capítulo inicial introduce la virtualización y la configuración de máquinas virtuales como base para el trabajo práctico posterior.
+El laboratorio combina simulación de redes, estaciones Linux y máquinas virtuales para reproducir escenarios de administración de sistemas y servicios de red.
 
 En este repositorio se actualiza ese planteamiento a:
 
@@ -161,13 +156,13 @@ Como plataforma principal para desplegar los servidores de las prácticas.
                               Server
 ```
 
-> **Importante:** las UT actualizadas utilizan Ubuntu 26.04 como referencia de laboratorio. Cuando el libro emplea software que ha quedado obsoleto, se mantiene el concepto didáctico y se propone una alternativa actual cuando es posible.
+> **Importante:** las UT utilizan Ubuntu 26.04 como referencia de laboratorio y sustituyen tecnologías obsoletas por alternativas actuales cuando corresponde.
 
 ---
 
-# 📖 Cómo está organizado el libro
+# 📖 Cómo está organizado el material
 
-Cada capítulo del libro sigue una estructura didáctica bastante regular:
+Cada UT sigue una estructura didáctica progresiva:
 
 ```text
 INTRODUCCIÓN
@@ -197,22 +192,39 @@ Las unidades de este repositorio conservan esa filosofía y la amplían con prá
 
 ---
 
-# 🗂️ Índice general del libro
+# 🗂️ Índice general del repositorio
 
-El índice del libro organiza los contenidos en los siguientes grandes bloques:
+El README funciona como puerta de entrada al material. Desde aquí se puede acceder directamente a las ocho UT y a los anexos de apoyo.
 
-| Capítulo | Contenido |
-|---:|---|
-| **1** | Conceptos básicos de TCP/IP |
-| **2** | Servicios de configuración automática de red (DHCP) |
-| **3** | Servicio de nombres de dominio (DNS) |
-| **4** | Servicios de transferencia de ficheros |
-| **5** | Servidores Web (HTTP) |
-| **6** | Los servicios de correo electrónico |
-| **7** | Servicios de mensajería instantánea, noticias y listas de distribución |
-| **8** | Servicios de audio y vídeo |
+### Unidades de trabajo
 
-> El PDF utilizado como fuente tiene **389 páginas** y el capítulo 7 comienza en la página 315. El capítulo 8 es el último capítulo del documento utilizado como fuente.
+| Unidad | Contenido | Acceso |
+|---|---|---|
+| **UT1** | Conceptos básicos de TCP/IP | [Abrir UT1](UT1-Conceptos-basicos-TCP-IP-visual-solucionario-v2.md) |
+| **UT2** | Servicio DHCP | [Abrir UT2](UT2-Servicio-DHCP-visual-solucionario-v2.md) |
+| **UT3** | Servicio DNS | [Abrir UT3](UT3-Servicio-DNS-visual-solucionario-v2.md) |
+| **UT4** | Servicios de transferencia de ficheros | [Abrir UT4](UT4-Servicios-transferencia-ficheros-visual-solucionario-v2.md) |
+| **UT5** | Servidores Web (HTTP) | [Abrir UT5](UT5-Servidores-Web-HTTP-visual-solucionario-v2.md) |
+| **UT6** | Servicios de correo electrónico | [Abrir UT6](UT6-Servicios-correo-electronico-visual-solucionario-v2.md) |
+| **UT7** | Mensajería instantánea, noticias y listas de distribución | [Abrir UT7](UT7-Servicios-mensajeria-noticias-listas-distribucion-v2.md) |
+| **UT8** | Servicios de audio y vídeo | [Abrir UT8](UT8-Servicios-audio-video-visual-solucionario-v2.md) |
+
+### Anexos de apoyo
+
+| Anexo | Contenido |
+|---|---|
+| **Anexo I** | Preparación y edición del entorno de trabajo |
+| **Anexo II** | Docker, WSL2 y Docker Compose |
+| **Anexo III** | Git, GitHub, Codespaces y flujo de trabajo |
+| **Anexo IV** | Docker Compose aplicado a las UT |
+| **Anexo XII** | Plantillas de entregables |
+| **Anexo XIII** | Matriz curricular |
+| **Anexo XIV** | Recursos abiertos |
+| **Anexo XV** | Guía de laboratorio reproducible |
+| **Anexo XVI** | Auditoría de obsolescencia |
+| **Anexo XVII** | Algoritmo de actualización del material |
+
+> Los anexos I–IV constituyen la preparación y los entornos de trabajo; los anexos XII–XVII reúnen documentación transversal del proyecto.
 
 ---
 
@@ -309,7 +321,7 @@ Fundamentos necesarios para comprender los servicios posteriores:
 - virtualización;
 - modelo cliente/servidor.
 
-➡️ [**Abrir UT1 — Conceptos básicos de TCP/IP**](UT1-Conceptos-basicos-TCP-IP-final-v2.md)
+➡️ [**Abrir UT1 — Conceptos básicos de TCP/IP**](UT1-Conceptos-basicos-TCP-IP-visual-solucionario-v2.md)
 
 ---
 
@@ -713,7 +725,7 @@ sri/
 │
 ├── README.md
 │
-├── UT1-Conceptos-basicos-TCP-IP-final-v2.md
+├── UT1-Conceptos-basicos-TCP-IP-visual-solucionario-v2.md
 ├── UT2-Servicio-DHCP-visual-solucionario-v2.md
 ├── UT3-Servicio-DNS-visual-solucionario-v2.md
 ├── UT4-Servicios-transferencia-ficheros-visual-solucionario-v2.md
@@ -727,65 +739,23 @@ Al estar todos los ficheros en la misma carpeta, los enlaces anteriores funciona
 
 ---
 
-# 📌 Sobre la versión v2
+# 📌 Sobre las revisiones técnicas
 
-Las UT incluidas aquí constituyen una **segunda revisión técnica**.
+Las UT se mantienen mediante revisiones técnicas periódicas. En ellas se:
 
-En esta revisión se han:
-
-- revisado comandos;
-- corregido ejemplos de configuración;
-- revisado bloques JSON/YAML;
-- contrastado paquetes disponibles para Ubuntu 26.04;
-- revisado configuraciones de servicios;
-- probado sintaxis de comandos cuando ha sido posible;
-- probado ejemplos representativos de Apache/Nginx;
-- probado operaciones de FFmpeg;
-- actualizado software que había quedado obsoleto;
-- separado claramente el contenido conceptual del libro de las adaptaciones prácticas actuales.
+- revisan comandos y configuraciones;
+- corrigen ejemplos de configuración;
+- comprueban bloques JSON/YAML;
+- contrastan paquetes disponibles para Ubuntu 26.04;
+- revisan configuraciones de servicios;
+- comprueba la sintaxis de los bloques ejecutables cuando es posible;
+- actualizan tecnologías obsoletas;
+- separan el contenido conceptual de las adaptaciones prácticas;
+- documentan las pruebas que requieren infraestructura externa.
 
 ### ⚠️ Alcance de las pruebas
 
-La validación realizada **no equivale a ejecutar cada práctica completa sobre una infraestructura física real**.
-
-Se han realizado pruebas ejecutables y comprobaciones de compatibilidad, pero determinadas prácticas requieren:
-
-- una VM real de Ubuntu 26.04 Server;
-- una topología de red;
-- servicios funcionando simultáneamente;
-- clientes;
-- Packet Tracer;
-- y, en algunos casos, varias máquinas.
-
-Por ello, cualquier práctica utilizada en producción debe probarse previamente en el laboratorio.
-
----
-
-# 📚 Relación con el libro original
-
-Este repositorio **no pretende sustituir al libro**.
-
-El libro proporciona:
-
-- la estructura conceptual;
-- la explicación de los protocolos;
-- la arquitectura de los servicios;
-- actividades;
-- prácticas;
-- resúmenes;
-- tests;
-- comprobaciones de aprendizaje.
-
-Las UT de este repositorio reorganizan y actualizan ese material para facilitar su utilización como **material docente en Markdown y laboratorio ASIR**.
-
-La fuente utilizada para la reconstrucción es:
-
-> **_Servicios de Red e Internet_**  
-> Álvaro García Sánchez  
-> Luis Enamorado Sarmiento  
-> Javier Sanz Rodríguez  
-> Garceta Grupo Editorial  
-> ISBN 978-84-9281-285-1
+La validación automática y editorial **no equivale a ejecutar cada práctica completa en una infraestructura física real**. Las prácticas que dependen de Packet Tracer, máquinas virtuales, varios equipos o servicios simultáneos deben probarse en el laboratorio correspondiente antes de utilizarse en producción.
 
 ---
 
@@ -793,7 +763,7 @@ La fuente utilizada para la reconstrucción es:
 
 Este repositorio se utiliza en el contexto docente del departamento y cuenta con la **autorización expresa disponible para el uso académico del material**.
 
-La publicación, redistribución o reutilización del contenido debe respetar en todo momento las condiciones de la autorización y los derechos correspondientes a la obra original.
+La publicación, redistribución o reutilización del contenido debe respetar las condiciones de licencia y las atribuciones indicadas en la documentación del repositorio.
 
 Las partes que constituyen una **adaptación, actualización o elaboración docente propia** se identifican conceptualmente como tales.
 
@@ -830,7 +800,7 @@ Ese es el enfoque que debe guiar el trabajo con **Servicios de Red e Internet**.
 
 ## 🚀 Comenzar
 
-👉 **[UT1 · Conceptos básicos de TCP/IP](UT1-Conceptos-basicos-TCP-IP-final-v2.md)**
+👉 **[UT1 · Conceptos básicos de TCP/IP](UT1-Conceptos-basicos-TCP-IP-visual-solucionario-v2.md)**
 
 y continuar secuencialmente hasta:
 

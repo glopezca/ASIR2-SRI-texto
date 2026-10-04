@@ -11,7 +11,7 @@
 > Unidad de fundamentos y prerrequisitos para interpretar los resultados de aprendizaje del módulo.
 
 ---
-> 🧭 **Arquitectura común v6.5.5:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.5.7:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.7.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 
 
 
@@ -1927,68 +1927,114 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
 
 
-# 🧪 27. PRÁCTICA 3 --- Red en VirtualBox con Ubuntu Server 26.04
+# 🧪 27. PRÁCTICA 3 --- Tierra Media en VirtualBox: Mordor como router Linux
 
-> 🔎 **PISTAS ESPECÍFICAS · -- Red en VirtualBox con Ubuntu Server 26.04**
+> 🔎 **PISTAS ESPECÍFICAS · -- Tierra Media en VirtualBox**
 >
-> **Qué debes fijar:** Explicita qué comportamiento debe observarse al finalizar y qué dato objetivo demostrará que el servicio está funcionando.
+> **Qué debes fijar:** no construyas una red nueva para esta práctica. Parte del **ecosistema Tierra Media común** y reproduce en VirtualBox las mismas tres zonas que ya has utilizado en Packet Tracer.
 >
-> **Evidencia:** Usa como evidencia principal el artefacto que mejor demuestre el objetivo de esta práctica; evita capturas sin contexto y conserva comando, salida y fecha de la prueba.
+> **Evidencia:** entrega el esquema de red, la asignación de adaptadores de las cinco VMs, `ip addr`, `ip route`, las pruebas de conectividad y una breve explicación de por qué cada paquete utiliza una determinada interfaz.
 >
-> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
+> **Pista de troubleshooting:** si una prueba falla, comprueba en este orden: adaptador VirtualBox → enlace → IP/máscara → ruta → forwarding de Mordor → firewall/NAT → servicio de destino.
 
+## 1. Partimos del ecosistema Tierra Media
 
-## Objetivo
-
-Crear una topología de tres máquinas:
+La infraestructura de VirtualBox **no es una topología alternativa**: es la versión Linux de la misma arquitectura didáctica que ya has construido en Packet Tracer.
 
 ```text
-                         Internet
-                            │
-                           NAT
-                            │
-                     ┌─────────────┐
-                     │ Router-Ubuntu│
-                     │   26.04     │
-                     └─────┬───┬───┘
-                           │   │
-                    SRI-LAN-A SRI-LAN-B
-                       │          │
-                 ┌─────┴──┐  ┌───┴─────┐
-                 │ Cliente │  │ Servidor│
-                 │  .10    │  │  .10    │
-                 └─────────┘  └─────────┘
+                         🟨 RED EXTERNA
+                          10.0.0.0/16
+                               │
+                         ┌─────┴─────┐
+                         │   MORDOR  │
+                         │ Linux     │
+                         │  ROUTER   │
+                         └──┬─────┬──┘
+                            │     │
+             🟩 INTERNA     │     │     🟧 DMZ
+             192.168.10.0/24│     │     192.168.20.0/24
+                            │     │
+                 ┌──────────┼─┐ ┌─┼──────────┐
+                 │          │ │ │ │          │
+              Gondor      Rohan│ │ Lothlorien Rivendel
+              .64          .65 │ │   .192       .193
+                               │ │
+                         (servicios)
 ```
 
-## Direccionamiento
+La correspondencia con Packet Tracer es:
 
-### LAN-A
+| Zona | Red | Gateway Mordor | Equipos principales |
+|---|---|---|---|
+| 🟨 Externa | `10.0.0.0/16` | `10.0.2.15` en PT | Hobbiton `10.0.32.64` |
+| 🟩 Interna | `192.168.10.0/24` | `192.168.10.254` | Gondor `.64`, Rohan `.65` |
+| 🟧 DMZ | `192.168.20.0/24` | `192.168.20.254` | Lothlorien `.192`, Rivendel `.193` |
+
+> **Importante:** `10.0.2.15` es la dirección de Mordor en el escenario de Packet Tracer. En VirtualBox la interfaz externa puede obtener otra dirección mediante DHCP. **No copies mecánicamente la IP externa de Packet Tracer**; conserva, en cambio, la función de la zona y el direccionamiento interno/DMZ del ecosistema.
+
+## 2. Las cinco VMs del laboratorio
+
+La arquitectura de VirtualBox queda fijada así:
+
+| VM | Zona | Dirección | Función |
+|---|---|---|---|
+| **Mordor** | Externa + interna + DMZ | `192.168.10.254`, `192.168.20.254` + IP externa | router/gateway Linux y, posteriormente, DHCP |
+| **Gondor** | Interna | `192.168.10.64/24` | cliente interno |
+| **Rohan** | Interna | `192.168.10.65/24` | cliente interno |
+| **Lothlorien** | DMZ | `192.168.20.192/24` | servidor principal de servicios y DNS |
+| **Rivendel** | DMZ | `192.168.20.193/24` | servidor auxiliar, secundario y de pruebas |
+
+**Arnor no forma parte de las cinco VMs de VirtualBox.** Se utiliza en Packet Tracer para la primera fase pedagógica de DHCP y después el servicio DHCP real se concentra en Mordor.
+
+## 3. Diseñar primero las redes de VirtualBox
+
+Antes de arrancar Ubuntu, representa mentalmente las tres zonas:
 
 ```text
-192.168.10.0/24
-Router:  192.168.10.1
-Cliente: 192.168.10.10
+VirtualBox
+│
+├── Adaptador externo de Mordor
+│      └── salida hacia la red exterior
+│
+├── Red interna TIERRAMEDIA-INTERNA
+│      ├── Mordor
+│      ├── Gondor
+│      └── Rohan
+│
+└── Red interna TIERRAMEDIA-DMZ
+       ├── Mordor
+       ├── Lothlorien
+       └── Rivendel
 ```
 
-### LAN-B
+Una configuración didáctica habitual es:
+
+- adaptador externo de **Mordor** → NAT de VirtualBox o el mecanismo de salida definido por el laboratorio;
+- red `TIERRAMEDIA-INTERNA` → conectada a Mordor, Gondor y Rohan;
+- red `TIERRAMEDIA-DMZ` → conectada a Mordor, Lothlorien y Rivendel.
+
+> **Regla:** Gondor/Rohan no necesitan un adaptador externo. Lothlorien/Rivendel tampoco. **Mordor es el único equipo que une las tres zonas.**
+
+## 4. Configurar Mordor con Netplan
+
+Primero descubre los nombres reales de las interfaces:
+
+```bash
+ip -br link
+ip -br addr
+```
+
+Supongamos, únicamente como ejemplo, que:
 
 ```text
-192.168.20.0/24
-Router:  192.168.20.1
-Servidor:192.168.20.10
+enp0s3 → externa
+ enp0s8 → interna
+ enp0s9 → DMZ
 ```
 
-## Configuración del router
+Crea `/etc/netplan/01-mordor.yaml`:
 
-Identificar interfaces:
-
-``` bash
-ip link
-```
-
-Crear `/etc/netplan/01-sri.yaml`:
-
-``` yaml
+```yaml
 network:
   version: 2
   ethernets:
@@ -1997,314 +2043,447 @@ network:
 
     enp0s8:
       addresses:
-        - 192.168.10.1/24
+        - 192.168.10.254/24
 
     enp0s9:
       addresses:
-        - 192.168.20.1/24
+        - 192.168.20.254/24
 ```
 
-Aplicar:
+Observa la idea clave: **solo la interfaz externa necesita una ruta por defecto obtenida del exterior**. Las interfaces interna y DMZ son redes directamente conectadas a Mordor.
 
-``` bash
+Validar y aplicar:
+
+```bash
+sudo netplan generate
 sudo netplan try
 sudo netplan apply
 ```
 
 Comprobar:
 
-``` bash
-ip addr
+```bash
+ip -br addr
 ip route
 ```
 
-## Activar encaminamiento IP
+Debes reconocer tres piezas en la tabla de rutas:
+
+```text
+red externa      → obtenida por la interfaz externa
+192.168.10.0/24  → conectada directamente a Mordor
+192.168.20.0/24  → conectada directamente a Mordor
+```
+
+## 5. Convertir Mordor en router
+
+Un router no es simplemente un equipo con tres tarjetas de red: debe **permitir el reenvío de paquetes entre interfaces**.
 
 Comprobar:
 
-``` bash
-sysctl net.ip.ip_forward
+```bash
+sysctl net.ipv4.ip_forward
 ```
 
 Activar temporalmente:
 
-``` bash
-sudo sysctl -w net.ip.ip_forward=1
+```bash
+sudo sysctl -w net.ipv4.ip_forward=1
 ```
 
-Para hacerlo persistente:
+Hacerlo persistente:
 
-``` bash
-echo 'net.ip.ip_forward=1' | sudo tee /etc/sysctl.d/99-sri-router.conf
+```bash
+printf 'net.ipv4.ip_forward=1\n' | sudo tee /etc/sysctl.d/99-sri-router.conf
 sudo sysctl --system
 ```
 
-## Configurar el cliente
+Volver a comprobar:
 
-``` yaml
+```bash
+sysctl net.ipv4.ip_forward
+```
+
+> **Analogía:** las tres interfaces son las tres puertas de Mordor; `ip_forward=1` permite que Mordor actúe como **aduana de tránsito**, no solo como destino final.
+
+## 6. Configurar los equipos de la red interna
+
+### Gondor
+
+```yaml
 network:
   version: 2
   ethernets:
     enp0s3:
       addresses:
-        - 192.168.10.10/24
+        - 192.168.10.64/24
       routes:
         - to: default
-          via: 192.168.10.1
+          via: 192.168.10.254
 ```
 
-## Configurar el servidor
+### Rohan
 
-``` yaml
+```yaml
 network:
   version: 2
   ethernets:
     enp0s3:
       addresses:
-        - 192.168.20.10/24
+        - 192.168.10.65/24
       routes:
         - to: default
-          via: 192.168.20.1
+          via: 192.168.10.254
 ```
 
-## Verificación
+## 7. Configurar la DMZ
 
-Desde el cliente:
+### Lothlorien
 
-``` bash
-ping -c 4 192.168.10.1
-ping -c 4 192.168.20.1
-ping -c 4 192.168.20.10
+```yaml
+network:
+  version: 2
+  ethernets:
+    enp0s3:
+      addresses:
+        - 192.168.20.192/24
+      routes:
+        - to: default
+          via: 192.168.20.254
 ```
 
-Desde el servidor:
+### Rivendel
 
-``` bash
-ping -c 4 192.168.10.10
+```yaml
+network:
+  version: 2
+  ethernets:
+    enp0s3:
+      addresses:
+        - 192.168.20.193/24
+      routes:
+        - to: default
+          via: 192.168.20.254
 ```
 
-## Análisis
+En esta fase **no configures todavía DHCP en VirtualBox ni en los clientes**. La finalidad es demostrar primero que entiendes y controlas el direccionamiento y el encaminamiento. DHCP se introduce posteriormente en UT2.
 
-Ejecutar en el router:
+## 8. Batería de pruebas progresiva
 
-``` bash
-ip route
-ip neigh
+### Nivel 1 · cada equipo llega a su gateway
+
+Desde Gondor:
+
+```bash
+ping -c 4 192.168.10.254
 ```
 
-Y en el cliente:
+Desde Lothlorien:
 
-``` bash
-ip route get 192.168.20.10
+```bash
+ping -c 4 192.168.20.254
 ```
 
-Explicar por qué el tráfico pasa por:
+### Nivel 2 · Mordor llega a ambas redes
 
-```text
-192.168.10.1
+En Mordor:
+
+```bash
+ping -c 4 192.168.10.64
+ping -c 4 192.168.10.65
+ping -c 4 192.168.20.192
+ping -c 4 192.168.20.193
 ```
 
-------------------------------------------------------------------------
+### Nivel 3 · routing entre zonas
 
+Desde Gondor:
 
-### 🧭 Guía de resolución y comprobación
-
-Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
-
-1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
-2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
-3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
-4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
-5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
-
-**Comandos de referencia para esta práctica:**
-
-- `ip addr`
-- `ip route`
-- `ss -lntup`
-- `journalctl -b --no-pager`
-- `ping <destino>`
-
-> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
-
-### 🧪 Rúbrica de evaluación
-
-| Criterio | Puntos | Evidencia esperada |
-|---|---:|---|
-| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
-| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
-| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
-| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
-| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
-| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
-| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
-
-
-# 🧪 28. PRÁCTICA 4 --- NAT en Ubuntu Server
-
-> 🔎 **PISTAS ESPECÍFICAS · -- NAT en Ubuntu Server**
->
-> **Qué debes fijar:** Dibuja la topología y marca IP, máscara, puerta de enlace, interfaz y siguiente salto. No pruebes una capa superior hasta demostrar que la inferior funciona.
->
-> **Evidencia:** Usa como evidencia principal el artefacto que mejor demuestre el objetivo de esta práctica; evita capturas sin contexto y conserva comando, salida y fecha de la prueba.
->
-> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
-
-
-Partimos de la práctica anterior.
-
-El router dispone de:
-
-```text
-WAN:     DHCP
-LAN-A:   192.168.10.1/24
-LAN-B:   192.168.20.1/24
+```bash
+ping -c 4 192.168.20.192
+ping -c 4 192.168.20.193
 ```
 
-El objetivo es que los equipos de la red privada puedan acceder al
-exterior.
+Desde Lothlorien:
 
-## Comprobación inicial
-
-En el router:
-
-``` bash
-ip route
+```bash
+ping -c 4 192.168.10.64
+ping -c 4 192.168.10.65
 ```
 
-Debe existir una ruta por defecto proporcionada por la interfaz WAN.
+### Nivel 4 · salida exterior
 
-## NAT con nftables
+Solo cuando los niveles anteriores funcionen:
 
-Ubuntu moderno utiliza Netfilter y dispone de `nftables` como
-infraestructura de filtrado.
-
-Instalar:
-
-``` bash
-sudo apt install nftables
-```
-
-Ejemplo conceptual de NAT:
-
-``` nft
-table ip nat {
-    chain postrouting {
-        type nat hook postrouting priority srcnat;
-        oifname "enp0s3" ip saddr 192.168.10.0/24 masquerade
-        oifname "enp0s3" ip saddr 192.168.20.0/24 masquerade
-    }
-}
-```
-
-**No copies esta configuración sin comprobar antes el nombre real de la
-interfaz WAN.**
-
-Identificarla:
-
-``` bash
-ip route | grep default
-```
-
-La infraestructura de filtrado de Ubuntu se basa en Netfilter; `ufw` es
-la herramienta de firewall de alto nivel habitual, mientras que
-`nftables` permite trabajar de forma más directa con las reglas.
-
-
-## Comprobación
-
-Desde un cliente:
-
-``` bash
+```bash
 ping -c 4 1.1.1.1
 ```
 
-Después:
+Si este último nivel falla pero los anteriores funcionan, **no vuelvas a tocar Netplan sin motivo**: el problema ya está probablemente en la salida, el forwarding, el filtrado o el NAT. Esa distinción prepara la práctica siguiente.
 
-``` bash
-curl -4 https://juandecolonia.jc
-```
+## 9. Qué debes ser capaz de explicar
 
-Capturar tráfico en el router:
+Al finalizar, debes poder responder sin mirar los comandos:
 
-``` bash
-sudo tcpdump -ni enp0s3 host 1.1.1.1
-```
-
-Analizar qué dirección de origen observa la interfaz WAN.
+1. ¿Por qué Gondor usa `192.168.10.254` como gateway?
+2. ¿Por qué Lothlorien usa `192.168.20.254`?
+3. ¿Por qué Mordor necesita tres interfaces?
+4. ¿Por qué una interfaz interna no debe recibir una puerta de enlace adicional?
+5. ¿Qué diferencia hay entre tener una ruta hacia una red y permitir el forwarding?
+6. ¿Qué parte de esta arquitectura es idéntica a Packet Tracer y qué parte cambia al pasar a Ubuntu/VirtualBox?
 
 ------------------------------------------------------------------------
-
 
 ### 🧭 Guía de resolución y comprobación
 
 Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
 
-1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
-2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
-3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
-4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
-5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+1. **Identifica el estado inicial.** Anota adaptadores de VirtualBox, interfaces, direcciones y rutas.
+2. **Compara con el esquema Tierra Media.** No inventes una red nueva para solucionar un fallo.
+3. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez.
+4. **Valida inmediatamente.** Comprueba sintaxis y estado antes de continuar.
+5. **Prueba por capas.** Gateway → red remota → salida exterior.
+6. **Observa evidencias.** Conserva salidas de `ip`, `ping`, `tracepath` y logs cuando sean relevantes.
 
-**Comandos de referencia para esta práctica:**
-
-- `ip addr`
-- `ip route`
-- `ss -lntup`
-- `journalctl -b --no-pager`
-- `ping <destino>`
-
-> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+> 💡 **Si algo falla:** vuelve al último nivel demostrado. Si Gondor llega a Mordor pero no a Lothlorien, no empieces comprobando Internet: céntrate en forwarding/rutas/firewall entre las dos zonas internas.
 
 ### 🧪 Rúbrica de evaluación
 
 | Criterio | Puntos | Evidencia esperada |
 |---|---:|---|
-| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
-| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
-| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
-| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
-| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
-| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
+| Comprensión del ecosistema | 2 | Relaciona las cinco VMs con las tres zonas y explica el papel de Mordor. |
+| Preparación y configuración | 2 | Adaptadores VirtualBox, Netplan y forwarding correctamente preparados. |
+| Verificación funcional | 2 | Demuestra gateway, routing entre zonas y salida cuando corresponda. |
+| Diagnóstico y razonamiento | 2 | Aísla la capa donde aparece un fallo y justifica el diagnóstico. |
+| Documentación técnica | 1 | Incluye esquema, comandos, configuración y evidencias. |
+| Seguridad y buenas prácticas | 1 | Mantiene separadas las zonas y evita configuraciones innecesarias. |
 | **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
 
+# 🧪 28. PRÁCTICA 4 --- NAT en Ubuntu Server con nftables
 
-## 🔥 v6.5.5 · nftables: tablas, cadenas y reglas
+> 🔎 **PISTAS ESPECÍFICAS · -- NAT y nftables en Tierra Media**
+>
+> **Qué debes fijar:** NAT y firewall son conceptos relacionados, pero **no son lo mismo**. En esta práctica debes ser capaz de explicar qué hace cada uno antes de escribir una regla.
+>
+> **Evidencia:** entrega el recorrido de un paquete de Gondor hacia Internet, el ruleset utilizado y las pruebas que demuestran qué ocurre antes y después de aplicar NAT.
+>
+> **Pista de troubleshooting:** primero demuestra routing; después forwarding; después filtrado; finalmente NAT. No intentes resolver con `masquerade` un problema que en realidad sea una ruta ausente.
 
-En este material `nftables` se documenta como un **lenguaje declarativo de reglas del kernel**, no como YAML ni JSON. La ruta persistente de referencia del laboratorio es:
+## 1. Volvemos al esquema Tierra Media
+
+La práctica parte **exactamente de la red construida en el punto 27**:
 
 ```text
-/etc/nftables.conf
+                       INTERNET
+                           ▲
+                           │
+                    🟨 EXTERNA
+                           │
+                     ┌─────┴─────┐
+                     │   MORDOR  │
+                     │ nftables  │
+                     └──┬─────┬──┘
+                        │     │
+              🟩 INTERNA     🟧 DMZ
+            192.168.10.0/24 192.168.20.0/24
+                 │                 │
+          Gondor / Rohan     Lothlorien / Rivendel
 ```
 
-Instalación en Ubuntu:
+El problema que queremos resolver es:
+
+> **¿Cómo puede Gondor, cuya dirección `192.168.10.64` pertenece a una red privada, salir a Internet a través de Mordor sin que Internet necesite una ruta de retorno hacia `192.168.10.0/24`?**
+
+La respuesta combina **routing + forwarding + NAT**.
+
+## 2. Antes de nftables: tres conceptos que no debes mezclar
+
+### Routing: «¿por qué puerta debe salir?»
+
+El routing decide el **camino**.
+
+Analogía: Gondor quiere enviar una caravana fuera de Tierra Media. La tabla de rutas indica que debe dirigirse a **Mordor**, porque Mordor es la puerta de salida de la red.
+
+En Gondor:
+
+```bash
+ip route
+```
+
+Debes encontrar una ruta por defecto semejante a:
+
+```text
+default via 192.168.10.254
+```
+
+### Forwarding: «¿Mordor permite que la caravana atraviese su territorio?»
+
+Mordor recibe un paquete que **no está destinado a Mordor**. Debe decidir si lo reenvía por otra interfaz.
+
+```bash
+sysctl net.ipv4.ip_forward
+```
+
+Debe estar a `1`.
+
+### NAT: «¿qué dirección presenta la caravana al salir?»
+
+Gondor utiliza una dirección privada:
+
+```text
+192.168.10.64
+```
+
+Internet no debe recibir esa dirección como origen de una comunicación normal de salida. NAT modifica la información de dirección para que el tráfico salga utilizando la dirección de la interfaz externa de Mordor.
+
+En Linux, para este escenario utilizaremos **masquerade**, una forma de NAT especialmente útil cuando la dirección externa puede cambiar.
+
+> **Idea clave:** routing decide **por dónde**, forwarding decide **si se puede atravesar Mordor** y NAT decide **con qué dirección sale hacia el exterior**.
+
+## 3. ¿Qué es nftables? Una analogía con Mordor
+
+Piensa en Mordor como una fortaleza con distintos accesos.
+
+```text
+                 MORDOR
+        ┌──────────────────────┐
+        │ 📖 REGLAMENTO        │ ← table
+        │                      │
+        │ 🚪 Puerta de entrada│ ← input
+        │ 🔀 Aduana de tránsito│ ← forward
+        │ 🚪 Puerta de salida │ ← output
+        │                      │
+        │ 🏷️ Reescritura      │ ← NAT/postrouting
+        └──────────────────────┘
+```
+
+`nftables` es el mecanismo con el que escribimos las reglas que determinan **qué tráfico se acepta, qué tráfico se rechaza y qué transformación se aplica**.
+
+### La jerarquía
+
+```text
+table
+  └── chain
+       └── rule
+```
+
+Piensa en ello así:
+
+- **tabla** → un **reglamento** para una familia de tráfico;
+- **chain (cadena)** → un **puesto de control** donde se examina el tráfico;
+- **rule (regla)** → una **instrucción concreta**: «si ocurre X, haz Y».
+
+No confundas esta jerarquía con una configuración YAML o JSON: `/etc/nftables.conf` utiliza la **sintaxis propia de nftables**.
+
+## 4. ¿Dónde se aplican las cadenas?
+
+Las cadenas principales de un router se entienden mejor siguiendo el recorrido real de un paquete. Primero entra en el sistema, después Linux decide si el destino es el propio Mordor o si debe reenviarlo.
+
+```text
+                    llega a Mordor
+                          │
+                    PREROUTING
+                          │
+                   decisión de ruta
+                    ┌─────┴─────┐
+                    │           │
+              destino local   otro destino
+                    │           │
+                 input       forward
+                    │           │
+                 Mordor       │
+                                ▼
+                          postrouting
+                                │
+                         interfaz de salida
+                                │
+                             exterior
+```
+
+Simplificación pedagógica: `input` trata tráfico destinado al propio Mordor, `forward` trata tráfico que **atraviesa** Mordor y `postrouting` permite realizar transformaciones de salida como `masquerade`. `output` se aplica al tráfico generado por el propio Mordor.
+
+> **Idea importante:** un paquete de Gondor destinado a `1.1.1.1` **no entra en `input` para después pasar a `forward`**. Como el destino no es Mordor, la decisión de encaminamiento lo lleva por `forward`. Esta distinción evita una confusión muy habitual al comenzar con Netfilter.
+
+## 5. El viaje de Gondor a Internet, paso a paso
+
+Supongamos que Gondor hace:
+
+```bash
+ping -c 4 1.1.1.1
+```
+
+El paquete comienza conceptualmente así:
+
+```text
+Gondor
+192.168.10.64
+      │
+      │ destino 1.1.1.1
+      ▼
+Mordor · 192.168.10.254
+      │
+      │ FORWARD
+      ▼
+Mordor · interfaz externa
+      │
+      │ POSTROUTING + MASQUERADE
+      ▼
+Internet
+```
+
+Antes de NAT, el origen es:
+
+```text
+192.168.10.64 → 1.1.1.1
+```
+
+Después de NAT, el origen visible desde el exterior será la **dirección externa de Mordor**.
+
+La respuesta vuelve por la interfaz externa. El seguimiento de estado de Netfilter permite asociarla a la conexión original y deshacer la traducción para entregar la respuesta a Gondor.
+
+> 🎓 **Pregunta para comprobar que lo has entendido:** si eliminas la regla `masquerade` pero mantienes routing y forwarding, ¿por qué puede llegar el paquete hasta Internet y, sin embargo, la comunicación de vuelta no funcionar correctamente?
+
+## 6. Instalar y localizar nftables
+
+En Mordor:
 
 ```bash
 sudo apt update
 sudo apt install nftables
 ```
 
-### Estructura
+El fichero persistente del laboratorio es:
 
 ```text
-tables
- └── chains
-      └── rules
+/etc/nftables.conf
 ```
 
-Una tabla pertenece a una familia (`inet`, `ip`, `ip6`, `bridge`, …). Las cadenas pueden ser base, asociadas a un hook del kernel, o cadenas auxiliares. Las reglas se evalúan en orden.
+Pero **no empieces editando el fichero**. Primero observa qué hay activo:
 
-### Ejemplo de filtro y NAT para Mordor
+```bash
+sudo nft list ruleset
+```
 
-Supondremos en esta práctica:
+También identifica las interfaces reales:
+
+```bash
+ip -br addr
+ip route
+```
+
+## 7. Primera regla: permitir el tránsito de las redes de Tierra Media
+
+En esta práctica suponemos como ejemplo:
 
 ```text
-ens3/enp0s3 → red externa
-ens8/enp0s8 → red interna
-ens9/enp0s9 → DMZ
+enp0s3 → externa
+ enp0s8 → interna 192.168.10.0/24
+ enp0s9 → DMZ 192.168.20.0/24
 ```
 
-Adapta los nombres a `ip link` de tu VM.
+**Comprueba los nombres con `ip -br addr` y sustitúyelos si son diferentes.**
+
+Un ruleset didáctico inicial puede ser:
 
 ```nft
 #!/usr/sbin/nft -f
@@ -2313,42 +2492,93 @@ flush ruleset
 
 table inet filter {
     chain input {
-        type filter hook input priority 0; policy drop;
+        type filter hook input priority 0;
+        policy drop;
+
         iif "lo" accept
         ct state established,related accept
         ip protocol icmp accept
-        tcp dport 22 accept
+        iifname "enp0s8" tcp dport 22 accept
     }
 
     chain forward {
-        type filter hook forward priority 0; policy drop;
+        type filter hook forward priority 0;
+        policy drop;
+
         ct state established,related accept
         iifname "enp0s8" oifname "enp0s3" accept
-        iifname "enp0s9" oifname "enp0s3" tcp dport { 80, 443 } accept
+        iifname "enp0s9" oifname "enp0s3" accept
     }
 
     chain output {
-        type filter hook output priority 0; policy accept;
-    }
-}
-
-table ip nat {
-    chain postrouting {
-        type nat hook postrouting priority srcnat; policy accept;
-        oifname "enp0s3" ip saddr { 192.168.10.0/24, 192.168.20.0/24 } masquerade
+        type filter hook output priority 0;
+        policy accept;
     }
 }
 ```
 
-### Flujo correcto de trabajo
+### Leer una regla en lenguaje humano
 
-**1. Inspeccionar el estado activo:**
+Esta línea:
+
+```nft
+iifname "enp0s8" oifname "enp0s3" accept
+```
+
+significa:
+
+> «Si el paquete entra por la red interna de Tierra Media y va a salir por la interfaz externa, **permítelo**».
+
+Y esta:
+
+```nft
+ct state established,related accept
+```
+
+significa, de forma simplificada:
+
+> «Si este paquete pertenece a una comunicación que ya está permitida o está relacionada con ella, permite su retorno».
+
+## 8. Añadir NAT: la etiqueta de salida de Mordor
+
+Ahora añadimos una segunda tabla. Su función no es decidir si el tráfico está permitido, sino **transformar la dirección de origen cuando sale**.
+
+```nft
+table ip nat {
+    chain postrouting {
+        type nat hook postrouting priority srcnat;
+        policy accept;
+
+        oifname "enp0s3" ip saddr {
+            192.168.10.0/24,
+            192.168.20.0/24
+        } masquerade
+    }
+}
+```
+
+La regla se puede leer como:
+
+> «Si tráfico de la red interna o de la DMZ sale por la interfaz externa, traduce su dirección de origen usando `masquerade`».
+
+Observa la separación conceptual:
+
+```text
+inet filter  → ¿puede pasar?
+ip nat        → ¿cómo sale su dirección?
+```
+
+## 9. Flujo completo de trabajo: primero temporal, después persistente
+
+### Paso 1 · inspeccionar
 
 ```bash
 sudo nft list ruleset
 ```
 
-**2. Probar un cambio temporal primero:**
+### Paso 2 · hacer una prueba temporal
+
+Puedes crear una tabla de laboratorio para entender la estructura:
 
 ```bash
 sudo nft add table inet prueba
@@ -2356,25 +2586,31 @@ sudo nft add chain inet prueba input '{ type filter hook input priority 0; polic
 sudo nft list ruleset
 ```
 
-Si el cambio no interesa, se puede eliminar:
+Eliminarla:
 
 ```bash
 sudo nft delete table inet prueba
 ```
 
-**3. Validar el fichero sin aplicarlo:**
+### Paso 3 · editar el fichero persistente
+
+```bash
+sudo nano /etc/nftables.conf
+```
+
+### Paso 4 · comprobar sintaxis sin aplicar
 
 ```bash
 sudo nft -c -f /etc/nftables.conf
 ```
 
-**4. Aplicar el fichero:**
+Si no aparecen errores, cargar:
 
 ```bash
 sudo nft -f /etc/nftables.conf
 ```
 
-**5. Comprobar:**
+### Paso 5 · verificar el estado real
 
 ```bash
 sudo nft list ruleset
@@ -2382,7 +2618,7 @@ sudo nft list table inet filter
 sudo nft list table ip nat
 ```
 
-**6. Hacer persistente después de probar:**
+### Paso 6 · comprobar la persistencia
 
 ```bash
 sudo systemctl enable nftables
@@ -2390,21 +2626,105 @@ sudo systemctl restart nftables
 sudo systemctl status nftables --no-pager
 ```
 
-> **Regla didáctica:** primero cambia el **estado activo**, valida el comportamiento, documenta el resultado y solo después actualiza `/etc/nftables.conf` y el arranque. No confundas una regla cargada en el kernel con una configuración persistente.
+> **Regla didáctica fundamental:** primero aprende qué hace una regla en el **estado activo**, después la documentas en `/etc/nftables.conf` y finalmente compruebas que sobrevive al reinicio. No confundas «está cargada ahora» con «está configurada para el próximo arranque».
 
-### Webmin
+## 10. Verificación desde Tierra Media
 
-Webmin dispone actualmente de un módulo **Linux Firewall (nftables)** en **Networking**. Permite trabajar con tablas, cadenas, conjuntos y reglas, ver el ruleset activo, aplicar cambios y activar la carga al arranque. No se deben mezclar simultáneamente varios gestores de firewall que puedan sobrescribir el mismo ruleset.
+Desde Gondor:
 
-La práctica debe seguir siempre:
+```bash
+ping -c 4 192.168.10.254
+ping -c 4 192.168.20.192
+ping -c 4 1.1.1.1
+```
+
+Desde Lothlorien:
+
+```bash
+ping -c 4 192.168.20.254
+ping -c 4 192.168.10.64
+ping -c 4 1.1.1.1
+```
+
+En Mordor:
+
+```bash
+sudo nft list ruleset
+ip route
+```
+
+Para observar el tránsito:
+
+```bash
+sudo tcpdump -ni enp0s3 host 1.1.1.1
+```
+
+> **Actividad de análisis:** captura una petición de Gondor hacia `1.1.1.1` y explica qué dirección de origen aparece antes de salir por Mordor y cuál se observa en la interfaz externa.
+
+## 11. Webmin: la misma arquitectura, otra interfaz
+
+Webmin dispone de un módulo **Linux Firewall (nftables)** dentro de **Networking**. Puede utilizarse para visualizar y gestionar tablas, cadenas y reglas.
+
+La pedagogía debe seguir esta correspondencia:
 
 ```text
-Webmin → observar/editar → Apply Changes
-                    ↓
-              nft list ruleset
-                    ↓
-             nft -c -f /etc/nftables.conf
+CLI nftables                         Webmin
+────────────────────────────────────────────────
+table                              → tabla
+chain                              → cadena
+rule                               → regla
+Apply / cargar ruleset             → Apply Changes
+nft list ruleset                   → comprobar estado
+/etc/nftables.conf                → referencia persistente
 ```
+
+Después de cualquier cambio realizado desde Webmin, vuelve a la CLI para comprobar el resultado:
+
+```bash
+sudo nft list ruleset
+sudo nft -c -f /etc/nftables.conf
+```
+
+**No mezcles varios gestores de firewall sin saber cuál mantiene el estado activo.** En este laboratorio, `nftables` y su ruleset son la referencia técnica.
+
+## 12. Preguntas de comprensión
+
+1. ¿Por qué Gondor necesita a Mordor como gateway?
+2. ¿Qué diferencia hay entre routing y forwarding?
+3. ¿Qué problema resuelve `masquerade` que no resuelve una ruta?
+4. ¿Por qué `forward` es más importante que `input` para un paquete que atraviesa Mordor?
+5. ¿Qué representa una tabla? ¿Y una cadena? ¿Y una regla?
+6. ¿Qué diferencia hay entre una regla cargada con `nft` y una regla guardada en `/etc/nftables.conf`?
+7. ¿Por qué `nft -c -f /etc/nftables.conf` debe ejecutarse antes de recargar el servicio?
+8. Si Gondor puede hacer ping a `192.168.20.192` pero no a `1.1.1.1`, ¿en qué parte del camino empezarías a investigar y por qué?
+
+------------------------------------------------------------------------
+
+### 🧭 Guía de resolución y comprobación
+
+Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+
+1. **Estado:** `ip addr`, `ip route`, `nft list ruleset`.
+2. **Routing:** demuestra que existe camino hacia el gateway y hacia el exterior.
+3. **Forwarding:** demuestra `net.ipv4.ip_forward=1`.
+4. **Filtrado:** identifica qué regla de `forward` permite o bloquea el tráfico.
+5. **NAT:** comprueba la regla `postrouting` y `masquerade`.
+6. **Persistencia:** valida `/etc/nftables.conf` y el servicio `nftables`.
+7. **Evidencia:** conserva comandos, capturas y conclusiones.
+
+> 💡 **Si algo falla:** no añadas reglas al azar. Formula primero una hipótesis: «el paquete no tiene ruta», «Mordor no reenvía», «el firewall lo bloquea» o «falta NAT». Después utiliza una evidencia que permita confirmar o descartar esa hipótesis.
+
+### 🧪 Rúbrica de evaluación
+
+| Criterio | Puntos | Evidencia esperada |
+|---|---:|---|
+| Comprensión de NAT/nftables | 2 | Explica routing, forwarding, filtrado y NAT sin confundirlos. |
+| Configuración | 2 | Construye tablas, cadenas y reglas coherentes con Tierra Media. |
+| Verificación funcional | 2 | Demuestra conectividad y salida mediante pruebas reproducibles. |
+| Diagnóstico | 2 | Utiliza evidencias para localizar un fallo en el recorrido del paquete. |
+| Documentación | 1 | Incluye fichero, sintaxis, comandos y explicación. |
+| Buenas prácticas | 1 | Valida antes de aplicar y persiste solo después de probar. |
+| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
 
 # 🧪 29. PRÁCTICA 5 --- Comparación de los cuatro entornos
 
@@ -3142,7 +3462,7 @@ cliente hasta que llega al servidor**, indicando:
 
 ---
 
-## 🔷 v6.5.5 · Laboratorio Tierra Media
+## 🔷 v6.5.7 · Laboratorio Tierra Media
 
 ### Caso integrado
 

@@ -26,7 +26,7 @@
 - [Anexo VII · De Compose a Kubernetes](ANEXO-VII-Compose-a-Kubernetes.md)
 - [Anexo XV · Guía de laboratorio reproducible](ANEXO-XV-Guia-Laboratorio-Reproducible.md)
 - [Anexo XVIII · Chuleta de comandos de red de Ubuntu](ANEXO-XVIII-Chuleta-Comandos-Red-Ubuntu.md)
-- [Anexo XIX · Arquitectura de laboratorio v6.5.6](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.6.md)
+- [Anexo XIX · Arquitectura de laboratorio v6.5.7](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.7.md)
 
 ### Referencia, seguridad y metodología
 
@@ -46,7 +46,10 @@
 
 - [Apéndice · Materiales para el profesor](APENDICE-PROFESOR.md)
 - [Índice alfabético de conceptos](INDICE-ALFABETICO.md)
-- [Informe de integración v6.5.6](INFORME-INTEGRACION-v6.5.6.md)
+- [Informe de integración v6.5.7](INFORME-INTEGRACION-v6.5.7.md)
+- [Informe de pruebas v6.5.7](INFORME-PRUEBAS-v6.5.7.md)
+- [Informe de revisión de fuentes v6.5.7](INFORME-REVISION-FUENTES-v6.5.7.md)
+- [Changelog v6.5.7](CHANGELOG-v6.5.7.md)
 - [Changelog](CHANGELOG.md)
 - [Licencia](LICENSE.md)
 - [Aviso y atribución](NOTICE.md)

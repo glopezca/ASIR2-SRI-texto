@@ -1,6 +1,6 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-## Material docente integral · `ASIR2-SRI-texto` · v6.5.6
+## Material docente integral · `ASIR2-SRI-texto` · v6.5.7
 
 **Edición 2026** para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
@@ -35,18 +35,18 @@ Consulta el **[índice alfabético de conceptos](INDICE-ALFABETICO.md)** para lo
 
 ## Tres entornos de trabajo + Docker como extensión
 
-La v6.5.6 fija **tres entornos primarios y coherentes** para las prácticas: **Cisco Packet Tracer**, **WSL** y **VirtualBox + Ubuntu Server**. Docker Compose queda como extensión reproducible en los anexos y no sustituye al laboratorio principal.
+La v6.5.7 fija **tres entornos primarios y coherentes** para las prácticas: **Cisco Packet Tracer**, **WSL** y **VirtualBox + Ubuntu Server**. Docker Compose queda como extensión reproducible en los anexos y no sustituye al laboratorio principal.
 
-| Entorno | Papel en v6.5.6 |
+| Entorno | Papel en v6.5.7 |
 |---|---|
 | 🧪 **Packet Tracer** | Topología, routing y demostración gráfica de DHCP; en UT2 se compara **Arnor (DHCP gráfico)** con **Mordor (DHCP por CLI)**. |
 | 🐧 **WSL + Ubuntu** | Cliente, herramientas de diagnóstico, captura, consultas y automatización. **No se despliega un servidor DHCP en WSL.** |
 | 🖥️ **VirtualBox + Ubuntu Server** | Servidores reales del laboratorio. Las cinco VMs son **Mordor, Gondor, Rohan, Lothlorien y Rivendel**. Mordor presta DHCP; Lothlorien centraliza la práctica de servicios; Rivendel se reserva para configuraciones auxiliares. |
 | 🐳 **Docker Compose** | Extensión opcional para reproducibilidad, tratada en los anexos; no redefine la arquitectura principal. |
 
-### Ecosistema Tierra Media v6.5.6
+### Ecosistema Tierra Media v6.5.7
 
-![Topología Tierra Media v6.5.6](img/topologia-tierramedia-packettracer.png)
+![Topología Tierra Media v6.5.7](img/topologia-tierramedia-packettracer.png)
 
 | Zona | Red | Elementos principales | Papel |
 |---|---|---|---|
@@ -68,9 +68,9 @@ Rivendel     → servidor auxiliar / secundario / pruebas
 
 > **Regla de continuidad:** una UT posterior no inventa una red nueva si puede completar la infraestructura anterior. Cuando el servicio real se despliega en Ubuntu, se centraliza en **Lothlorien** salvo que el objetivo de la práctica exija específicamente **Mordor** o **Rivendel**.
 
-## v6.5.6 · Cambio de arquitectura de laboratorio
+## v6.5.7 · Cambio de arquitectura de laboratorio
 
-La v6.5.6 fija una arquitectura acumulativa única para las ocho UT. El objetivo es que cada unidad **añada un servicio al mismo escenario**, no que reinicie el laboratorio con una topología distinta.
+La v6.5.7 fija una arquitectura acumulativa única para las ocho UT. El objetivo es que cada unidad **añada un servicio al mismo escenario**, no que reinicie el laboratorio con una topología distinta.
 
 ### Regla de oro de documentación técnica
 
@@ -87,7 +87,7 @@ Para **cada servicio** se exige:
 9. incorporación de comandos al glosario/chuleta;
 10. módulo Webmin equivalente, cuando exista, y declaración expresa cuando no exista.
 
-La matriz y la arquitectura completa están en [Anexo XIX](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.6.md).
+La matriz y la arquitectura completa están en [Anexo XIX](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.7.md).
 
 ## Cómo está organizada cada UT
 
@@ -111,7 +111,7 @@ La preparación del entorno está en **UT1**, e incluye ficha del puesto, Virtua
 
 ## Material recuperado del CIFP Juan de Colonia
 
-La v6.5.6 vuelve a contrastar el material con el libro **Preparación del entorno** del CIFP Juan de Colonia. Se fusionan y sintetizan sus contenidos útiles con la documentación del repositorio, evitando duplicaciones y manteniendo una única referencia práctica.
+La v6.5.7 vuelve a contrastar el material con el libro **Preparación del entorno** del CIFP Juan de Colonia. Se fusionan y sintetizan sus contenidos útiles con la documentación del repositorio, evitando duplicaciones y manteniendo una única referencia práctica.
 
 En particular, se amplía la **chuleta de comandos de red de Ubuntu** para cubrir, además de la consulta de interfaces y rutas, conectividad, DNS, puertos y sockets, Netplan, `systemd`, firewall `ufw`, diagnóstico con `nmap`, registros y herramientas auxiliares. También se conserva la preparación común del puesto: identificación del equipo, comprobación TCP/IP, instalación de Ubuntu Server, SSH y comprobación final.
 
@@ -119,7 +119,7 @@ El contenido del libro no se copia de forma literal: se **fusiona, sintetiza y a
 
 ## Fuentes y control de actualidad
 
-`INFORME-REVISION-FUENTES-v6.5.6.md` documenta qué materiales aportados se integran, cuáles se corrigen y cuáles se conservan únicamente como referencia histórica o pedagógica.
+`INFORME-REVISION-FUENTES-v6.5.7.md` documenta qué materiales aportados se integran, cuáles se corrigen y cuáles se conservan únicamente como referencia histórica o pedagógica.
 
 El material usa documentación oficial de Ubuntu, BIND9, Kea, Apache, Nginx, Postfix, Dovecot, Mailman 3, Docker, Kubernetes, MDN y RFC Editor como fuentes técnicas primarias.
 
@@ -129,7 +129,7 @@ El material original del repositorio se distribuye bajo **CC BY-SA 4.0**.
 
 **Atribución recomendada:**
 
-> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.5.6, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
+> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.5.7, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
 
 Los materiales de terceros mantienen sus propias licencias, marcas y derechos.
 
@@ -160,11 +160,11 @@ El actualizador no reemplaza recetas técnicas mediante búsquedas globales. Sol
 - `ANEXO-XVI-Auditoria-Obsolescencia.md`: criterio de sustitución tecnológica.
 - `ANEXO-XVII-Algoritmo-Actualizacion.md`: procedimiento de futuras iteraciones.
 - `ANEXO-XVIII-Chuleta-Comandos-Red-Ubuntu.md`: consulta rápida de comandos de red para el laboratorio.
-- `ANEXO-XIX-Arquitectura-Laboratorio-v6.5.6.md`: arquitectura común de Packet Tracer, WSL y VirtualBox.
-- `INFORME-REVISION-FUENTES-v6.5.6.md`: auditoría de las fuentes aportadas.
+- `ANEXO-XIX-Arquitectura-Laboratorio-v6.5.7.md`: arquitectura común de Packet Tracer, WSL y VirtualBox.
+- `INFORME-REVISION-FUENTES-v6.5.7.md`: auditoría de las fuentes aportadas.
 - `INDICE-ALFABETICO.md`: índice rápido de conceptos.
 
 
 ## Auditoría de continuidad
 
-La integración y no regresión respecto a v6.5.4 se documenta en [INFORME-INTEGRACION-v6.5.6.md](INFORME-INTEGRACION-v6.5.6.md).
+La integración y no regresión respecto a v6.5.4 se documenta en [INFORME-INTEGRACION-v6.5.7.md](INFORME-INTEGRACION-v6.5.7.md).

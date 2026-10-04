@@ -1,10 +1,10 @@
-# Anexo XIX · Arquitectura de laboratorio v6.5.6
+# Anexo XIX · Arquitectura de laboratorio v6.5.7
 
 ## 1. Principio de continuidad
 
 Las UT1–UT8 comparten una única infraestructura didáctica. Se añaden servicios; no se reinventa la red en cada unidad.
 
-![Topología Tierra Media v6.5.6](img/topologia-tierramedia-packettracer.png)
+![Topología Tierra Media v6.5.7](img/topologia-tierramedia-packettracer.png)
 
 ## 2. Tres zonas
 

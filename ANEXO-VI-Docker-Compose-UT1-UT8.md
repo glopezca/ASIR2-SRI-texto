@@ -205,7 +205,7 @@ Un contenedor ejecutándose no implica que la aplicación esté lista.
 
 En el entorno de generación de esta  no existe Docker Engine ni un Codespace ejecutable. Por tanto, esta guía **no afirma haber ejecutado extremo a extremo** los ocho Compose. Antes de usar estos despliegues como evaluación práctica deben probarse en:
 
-1. WSL2 + Docker Desktop;
+1. WSL + Docker Desktop;
 2. un Codespace con Docker operativo;
 3. VirtualBox para protocolos que requieren capacidades de red específicas.
 

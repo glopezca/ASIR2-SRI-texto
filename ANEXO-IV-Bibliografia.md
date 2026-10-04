@@ -96,7 +96,7 @@ La documentación oficial del proyecto es la referencia primaria. Las fuentes se
 - Networking: https://docs.docker.com/engine/network/
 - Volumes: https://docs.docker.com/engine/storage/volumes/
 - Docker Desktop: https://docs.docker.com/desktop/
-- Docker + WSL2: https://docs.docker.com/desktop/features/wsl/
+- Docker + WSL: https://docs.docker.com/desktop/features/wsl/
 
 ## 11. ☸️ Kubernetes
 

@@ -26,4 +26,4 @@ Además del contenido técnico se observa: lectura de logs, línea de comandos, 
 | Diagnóstico | Aísla un fallo con evidencias y modifica una variable cada vez. |
 | Profesional | Diseña, justifica, documenta, automatiza parcialmente y propone reversión. |
 
-La matriz es deliberadamente independiente de una herramienta concreta para facilitar la transferencia entre Packet Tracer, WSL2, VirtualBox y Compose.
+La matriz es deliberadamente independiente de una herramienta concreta para facilitar la transferencia entre Packet Tracer, WSL, VirtualBox y Compose.

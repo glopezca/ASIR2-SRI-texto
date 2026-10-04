@@ -18,7 +18,9 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 ### 🎯 Lo que debes aprender
 
 | Debes dominar | Evidencia observable |
-|---|---|
+|---
+> 🧭 **Arquitectura común v6.5.5:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.5.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+|---|
 | **códec/contenedor** | Explicación, comando, diagrama o evidencia verificable. |
 | **bitrate/resolución/FPS** | Explicación, comando, diagrama o evidencia verificable. |
 | **FFmpeg** | Explicación, comando, diagrama o evidencia verificable. |
@@ -45,7 +47,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultados de aprendizaje trabajados
 >
@@ -119,7 +121,7 @@ VoIP, videoconferencia y bloques finales de prácticas, resumen y evaluación.
 > tecnologías actuales:
 >
 > - 🐧 **VirtualBox + Ubuntu 26.04 Server**
-> - 🐧 **WSL2 + Ubuntu 26.04**
+> - 🐧 **WSL + Ubuntu 26.04**
 > - 🎧 **Icecast** para streaming de audio
 > - 🎬 **FFmpeg** para codificación y pruebas
 > - 📺 **Nginx + RTMP** como laboratorio de vídeo en directo
@@ -154,7 +156,7 @@ VoIP, videoconferencia y bloques finales de prácticas, resumen y evaluación.
                           │
                           ▼
                          VLC
-        🧪 I Packet Tracer · II WSL2 · III VirtualBox · IV Docker Compose
+        🧪 I Packet Tracer · II WSL · III VirtualBox · IV Docker Compose
 ```
 
 ---
@@ -163,7 +165,7 @@ VoIP, videoconferencia y bloques finales de prácticas, resumen y evaluación.
 > 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
 > **I · Cisco Packet Tracer** — simulación de red y protocolos.  
-> **II · WSL2 + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
+> **II · WSL + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
@@ -174,7 +176,7 @@ Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el mode
 | Entorno | Función didáctica | Uso recomendado |
 |---|---|---|
 | **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
-| **Entorno II · WSL2 + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
+| **Entorno II · WSL + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
 | **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
 | **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
 
@@ -1373,7 +1375,7 @@ Mount:
 radio.mp3
 ```
 
-Comprueba desde WSL2:
+Comprueba desde WSL:
 
 ```bash
 curl -I http://radio.juandecolonia.jc:8000/
@@ -3630,9 +3632,9 @@ servicio multimedia
 
 ---
 
-# 🐧 84. WSL2 como estación de análisis
+# 🐧 84. WSL como estación de análisis
 
-WSL2 proporciona herramientas especialmente útiles:
+WSL proporciona herramientas especialmente útiles:
 
 ```bash
 sudo apt update
@@ -4951,3 +4953,39 @@ DIAGNÓSTICO
 
 ---
 
+---
+
+## 🔷 v6.5.5 · Laboratorio Tierra Media
+
+### Caso integrado
+
+**Lothlorien** concentra Icecast, Nginx/RTMP y HLS. **Rivendel** se reserva para pruebas auxiliares. WSL aporta FFmpeg, VLC, `curl` y captura.
+
+### Ficheros y sintaxis
+
+- Icecast: `/etc/icecast2/icecast.xml` → **XML**.
+- Nginx: `/etc/nginx/nginx.conf` y `/etc/nginx/conf.d/*.conf` → bloques/directivas Nginx.
+
+Validación/persistencia:
+
+```bash
+xmllint --noout /etc/icecast2/icecast.xml
+sudo nginx -t
+sudo systemctl reload nginx
+sudo systemctl restart icecast2
+sudo ss -lntp | grep -E ':80|:8000|:1935'
+```
+
+### Webmin
+
+Para Nginx puede utilizarse **Servers → Nginx Webserver**. Para Icecast no se debe asumir un módulo oficial equivalente; la configuración XML y el servicio son la fuente de verdad.
+
+### Chuleta
+
+`ffprobe`, `ffmpeg`, `curl`, `xmllint`, `nginx -t`, `ss`, `tcpdump`, `journalctl -u icecast2`, `journalctl -u nginx`.
+
+### Ruta práctica de tres entornos
+
+**Packet Tracer:** representar la red cliente → Mordor → Lothlorien y demostrar conectividad, puertos y rutas. PT no sustituye a Icecast, FFmpeg ni Nginx RTMP.  
+**WSL:** estación de análisis con `ffprobe`, `ffmpeg`, `curl`, VLC y `tcpdump`.  
+**VirtualBox:** Icecast y Nginx/RTMP/HLS en Lothlorien; Rivendel queda disponible para pruebas de cliente/servidor auxiliares.

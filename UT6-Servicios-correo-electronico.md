@@ -18,7 +18,9 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 ### 🎯 Lo que debes aprender
 
 | Debes dominar | Evidencia observable |
-|---|---|
+|---
+> 🧭 **Arquitectura común v6.5.5:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.5.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+|---|
 | **SMTP** | Explicación, comando, diagrama o evidencia verificable. |
 | **IMAP/POP** | Explicación, comando, diagrama o evidencia verificable. |
 | **MUA/MSA/MTA** | Explicación, comando, diagrama o evidencia verificable. |
@@ -45,7 +47,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultado de aprendizaje trabajado
 >
@@ -72,7 +74,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > 📚 **Organización didáctica**
 >
-> La unidad progresa desde la arquitectura general del correo hasta los protocolos, formatos, seguridad, configuración de clientes, administración de servidores y diagnóstico. La parte práctica se desarrolla con **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose** cuando el servicio resulta adecuado para ese entorno.
+> La unidad progresa desde la arquitectura general del correo hasta los protocolos, formatos, seguridad, configuración de clientes, administración de servidores y diagnóstico. La parte práctica se desarrolla con **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose** cuando el servicio resulta adecuado para ese entorno.
 
 ---
 
@@ -106,7 +108,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
                            ▼
                          MUA
 
-                 🧪 I Packet Tracer · II WSL2 · III VirtualBox · IV Docker Compose
+                 🧪 I Packet Tracer · II WSL · III VirtualBox · IV Docker Compose
 ```
 
 ---
@@ -115,7 +117,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 > 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
 > **I · Cisco Packet Tracer** — simulación de red y protocolos.  
-> **II · WSL2 + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
+> **II · WSL + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
@@ -126,7 +128,7 @@ Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el mode
 | Entorno | Función didáctica | Uso recomendado |
 |---|---|---|
 | **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
-| **Entorno II · WSL2 + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
+| **Entorno II · WSL + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
 | **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
 | **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
 
@@ -177,7 +179,7 @@ Al finalizar esta unidad deberás ser capaz de:
 - Analizar SMTP, POP3 e IMAP desde terminal.
 - Observar sesiones mediante herramientas de red.
 - Utilizar Packet Tracer para simular un servicio de correo.
-- Utilizar WSL2 para probar protocolos de correo.
+- Utilizar WSL para probar protocolos de correo.
 - Relacionar correo, DNS, TCP/IP y seguridad.
 
 ---
@@ -1779,9 +1781,9 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
 
 
-# 🧪 37. PRÁCTICA 6.4 — Inspeccionar SMTP desde WSL2
+# 🧪 37. PRÁCTICA 6.4 — Inspeccionar SMTP desde WSL
 
-> 🔎 **PISTAS ESPECÍFICAS · Inspeccionar SMTP desde WSL2**
+> 🔎 **PISTAS ESPECÍFICAS · Inspeccionar SMTP desde WSL**
 >
 > **Qué debes fijar:** Empieza por observar antes de modificar: identifica interlocutores, puertos, protocolo y resultado esperado. Formula qué campo o paquete debería confirmar tu hipótesis. Dibuja el recorrido MUA → submission/MTA → DNS → MTA destino → buzón/IMAP. Identifica dónde queda el mensaje cuando aparece un error y busca evidencia en cola, sesión, DNS o logs.
 >
@@ -1790,7 +1792,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 > **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
-Desde WSL2:
+Desde WSL:
 
 ```bash
 nc -v mail.juandecolonia.jc 25
@@ -2143,9 +2145,9 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
 
 
-# 🧪 42. PRÁCTICA 6.9 — Configurar un cliente de correo en WSL2
+# 🧪 42. PRÁCTICA 6.9 — Configurar un cliente de correo en WSL
 
-> 🔎 **PISTAS ESPECÍFICAS · Configurar un cliente de correo en WSL2**
+> 🔎 **PISTAS ESPECÍFICAS · Configurar un cliente de correo en WSL**
 >
 > **Qué debes fijar:** Dibuja el recorrido MUA → submission/MTA → DNS → MTA destino → buzón/IMAP. Identifica dónde queda el mensaje cuando aparece un error y busca evidencia en cola, sesión, DNS o logs.
 >
@@ -3756,7 +3758,7 @@ Incluye, cuando aporte información, una captura de la topología, del fichero o
                        │
              ┌─────────┴─────────┐
              │                   │
-           WSL2              Packet Tracer
+           WSL              Packet Tracer
         Ubuntu 26.04          simulación
              │
              ▼
@@ -4442,7 +4444,7 @@ Incluye, cuando aporte información, una captura de la topología, del fichero o
 ┌─────────────────────────────────────────────────────────────┐
 │                    LABORATORIO ASIR                         │
 ├─────────────────┬─────────────────┬─────────────────────────┤
-│ Packet Tracer   │ WSL2            │ VirtualBox              │
+│ Packet Tracer   │ WSL            │ VirtualBox              │
 │                 │                 │                         │
 │ SMTP/POP3       │ Cliente CLI     │ Ubuntu 26.04 Server    │
 │ DNS             │ OpenSSL         │ DNS + servicios         │
@@ -4462,7 +4464,7 @@ POP3
 flujo de paquetes
 ```
 
-### WSL2
+### WSL
 
 Ideal para:
 
@@ -4622,3 +4624,44 @@ DIAGNÓSTICO
 
 ---
 
+---
+
+## 🔷 v6.5.5 · Laboratorio Tierra Media
+
+### Caso integrado
+
+**Lothlorien** concentra Postfix + Dovecot y **Rivendel** se reserva para pruebas de relay, DNS MX o servicios auxiliares. WSL actúa como cliente y analizador.
+
+### Ficheros y sintaxis
+
+```text
+/etc/postfix/main.cf      → parámetros clave=valor
+/etc/postfix/master.cf    → servicios y transporte Postfix
+/etc/dovecot/dovecot.conf → directivas Dovecot
+/etc/dovecot/conf.d/*.conf
+/etc/roundcube/config/config.inc.php → PHP
+```
+
+Validación/persistencia:
+
+```bash
+sudo postfix check
+sudo dovecot -n
+sudo systemctl reload postfix
+sudo systemctl reload dovecot
+sudo ss -lntp | grep -E ':25|:143|:587|:993'
+```
+
+### Webmin
+
+**Servers → Postfix Mail Server** y **Servers → Dovecot IMAP/POP3 Server** cuando los módulos estén disponibles. Roundcube se administra por sus ficheros de aplicación y no debe tratarse como un daemon de systemd equivalente.
+
+### Chuleta
+
+`postfix check`, `dovecot -n`, `postconf`, `postconf -n`, `doveconf -n`, `openssl s_client`, `journalctl -u postfix`, `journalctl -u dovecot`.
+
+### Ruta práctica de tres entornos
+
+**Packet Tracer:** usar el servicio Email de Server-PT para representar el flujo SMTP/POP3 y relacionarlo con DNS y puertos; la simulación no sustituye Postfix/Dovecot.  
+**WSL:** analizar SMTP/IMAP/POP3 con `openssl s_client`, `nc`, `dig` y `tcpdump`.  
+**VirtualBox:** Postfix + Dovecot en Lothlorien; Rivendel se utiliza para pruebas de relay, MX o cliente auxiliar.

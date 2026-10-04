@@ -98,3 +98,13 @@
 | **XMPP** | UT7 | [UT7-Servicios-mensajeria-noticias-listas-distribucion.md](UT7-Servicios-mensajeria-noticias-listas-distribucion.md) |
 
 > El índice se genera a partir de los glosarios esenciales de las ocho UT. En futuras iteraciones, el actualizador comprobará que el índice sigue siendo coherente con esos glosarios.
+
+## 🆕 Entradas v6.5.5
+
+- **Arnor** → UT2 · DHCP gráfico en Packet Tracer.
+- **Kea** → UT2 · DHCP en VirtualBox/Mordor · `/etc/kea/kea-dhcp4.conf`.
+- **nftables** → UT1 · `/etc/nftables.conf` · tablas, cadenas y reglas.
+- **Lothlorien** → arquitectura común · servidor principal de servicios.
+- **Rivendel** → arquitectura común · servidor auxiliar.
+- **tierramedia.jc** → dominio común del laboratorio.
+- **WSL** → entorno cliente/diagnóstico; no servidor DHCP.

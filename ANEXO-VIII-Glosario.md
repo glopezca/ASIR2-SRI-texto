@@ -395,7 +395,7 @@
 | **Wireshark** | Analizador gráfico de protocolos de red que permite capturar e inspeccionar tráfico. |
 | **Workload** | Carga de trabajo que Kubernetes ejecuta y gestiona, por ejemplo mediante un Deployment, StatefulSet, Job o DaemonSet. |
 | **WSL** | Windows Subsystem for Linux, plataforma de Windows para ejecutar entornos Linux. |
-| **WSL2** | Windows Subsystem for Linux 2: tecnología de Windows que ejecuta un entorno Linux mediante una máquina virtual ligera. |
+| **WSL** | Windows Subsystem for Linux 2: tecnología de Windows que ejecuta un entorno Linux mediante una máquina virtual ligera. |
 | **WWW** | World Wide Web: sistema de recursos enlazados accesibles principalmente mediante HTTP. |
 ## X
 
@@ -428,3 +428,16 @@
 | **Readiness probe** | Comprobación de Kubernetes que indica si un contenedor está preparado para recibir tráfico. |
 | **Liveness probe** | Comprobación de Kubernetes utilizada para detectar si un contenedor debe reiniciarse. |
 | **Startup probe** | Comprobación de Kubernetes destinada a determinar cuándo una aplicación ha terminado su inicialización. |
+
+## 🆕 Términos operativos v6.5.5
+
+- **Arnor:** Server-PT usado en Packet Tracer como demostración gráfica inicial del servicio DHCP en la red interna.
+- **Mordor DHCP:** función DHCP del router Packet Tracer y, en VirtualBox, función DHCP de la VM Linux Mordor mediante Kea.
+- **Lothlorien:** servidor principal de servicios de la DMZ (`192.168.20.192`).
+- **Rivendel:** servidor auxiliar (`192.168.20.193`) destinado a pruebas, secundarios o funciones complementarias.
+- **nftables table:** contenedor superior de reglas, perteneciente a una familia como `inet` o `ip`.
+- **nftables chain:** conjunto ordenado de reglas; una cadena base se asocia a un hook del kernel.
+- **nftables rule:** expresión que coincide con tráfico y aplica una acción como `accept`, `drop`, `masquerade` o `dnat`.
+- **persistencia:** capacidad de que una configuración sobreviva a la recarga o reinicio; en nftables se materializa en `/etc/nftables.conf` y el servicio de arranque.
+- **regla de oro:** secuencia común de documentación: ecosistema → ubicación → estructura/sintaxis → ejemplo → caso práctico → persistencia → pruebas → validación → chuleta/glosario → Webmin.
+

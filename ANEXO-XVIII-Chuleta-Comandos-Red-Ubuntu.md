@@ -319,3 +319,92 @@ Esta chuleta integra y sintetiza la sección **«Comandos de red en Ubuntu»** d
 Se han recuperado los apartados que faltaban o estaban menos representados: `ifconfig`/`ifup`/`ifdown` como referencia histórica, `systemctl`, `ping`, `traceroute`, `nslookup`, `netstat`, `ufw`, instalación de herramientas, `nmap` y consulta de registros.
 
 El resultado no reproduce literalmente el libro: organiza sus contenidos por **pregunta o problema que el alumno quiere resolver**, para facilitar su uso durante las prácticas.
+
+---
+
+## 18. 🆕 v6.5.5 · Comandos incorporados al laboratorio
+
+### Netplan
+
+```bash
+sudo netplan generate
+sudo netplan try
+sudo netplan apply
+sudo netplan get
+```
+
+### sysctl
+
+```bash
+sysctl net.ipv4.ip_forward
+sudo sysctl --system
+sudo sysctl -w net.ipv4.ip_forward=1
+```
+
+### nftables
+
+```bash
+sudo nft list ruleset
+sudo nft -c -f /etc/nftables.conf
+sudo nft -f /etc/nftables.conf
+sudo nft list table inet filter
+sudo nft list table ip nat
+sudo systemctl enable nftables
+sudo systemctl restart nftables
+```
+
+**Ruta persistente:** `/etc/nftables.conf`.
+
+### DHCP / Kea
+
+```bash
+python3 -m json.tool /etc/kea/kea-dhcp4.conf >/dev/null
+sudo systemctl status kea-dhcp4-server
+sudo journalctl -u kea-dhcp4-server -b --no-pager
+sudo ss -lunp | grep ':67'
+```
+
+### DNS / BIND9
+
+```bash
+sudo named-checkconf
+sudo named-checkzone tierramedia.jc /etc/bind/db.tierramedia.jc
+sudo rndc reload
+```
+
+### Web
+
+```bash
+sudo apache2ctl configtest
+sudo nginx -t
+```
+
+### SSH / transferencia
+
+```bash
+sudo sshd -t
+sftp usuario@192.168.20.192
+scp fichero usuario@192.168.20.192:/ruta/
+```
+
+### Correo
+
+```bash
+sudo postfix check
+sudo dovecot -n
+```
+
+### Mensajería
+
+```bash
+sudo prosodyctl check config
+```
+
+### Multimedia
+
+```bash
+xmllint --noout /etc/icecast2/icecast.xml
+ffprobe fichero.mp4
+```
+
+> **Regla:** validar → aplicar/recargar → comprobar → persistir. Nunca confundir la configuración escrita en disco con el estado activo del kernel o del daemon.

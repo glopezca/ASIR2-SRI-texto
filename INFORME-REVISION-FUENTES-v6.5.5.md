@@ -1,4 +1,4 @@
-# Auditoría de fuentes y materiales incorporados · v6.5.2
+# Auditoría de fuentes y materiales incorporados · v6.5.5
 
 **Fecha de revisión:** 2026-09-27
 
@@ -65,12 +65,12 @@ Esta auditoría separa tres decisiones: **integrar**, **integrar tras corregir**
 No se promueve una receta a “actual” por antigüedad o popularidad. Debe existir una fuente primaria vigente, una prueba reproducible y una justificación pedagógica para que entre en el camino principal del alumnado.
 
 
-## Recuperación explícita en v6.5.2
+## Recuperación explícita en v6.5.5
 
 Se recupera como material visible para el alumnado la sección **«Comandos de red en Ubuntu»** del PDF `Preparación del entorno · CIFP Juan de Colonia`, reorganizada en `ANEXO-XVIII-Chuleta-Comandos-Red-Ubuntu.md`. La nueva versión distingue entre comandos de consulta, resolución DNS, configuración persistente mediante Netplan, comprobación de servicios, registros y herramientas de diagnóstico.
 
 También se conserva como criterio editorial la preparación común del puesto: **identificar → configurar → probar → documentar**.
 
-## Webmin en v6.5.2
+## Webmin en v6.5.5
 
 Se eliminan las capturas sintéticas de Webmin. El material pasa a utilizar documentación oficial de Webmin como referencia visual y de procedimiento, y las prácticas indican que cualquier captura local debe proceder de una instalación real y de la versión utilizada en el aula. Esto evita que una imagen con textos superpuestos transmita una interfaz que no coincide con el sistema real.

@@ -1,10 +1,10 @@
-# 🧰 ANEXO I · Visual Studio Code + WSL2 para administración de servicios
+# 🧰 ANEXO I · Visual Studio Code + WSL para administración de servicios
 
 > **Material docente integral · CFGS ASIR**
 
 > 🧭 **ANTES DE UTILIZAR EL ENTORNO DE EDICIÓN**
 >
-> **VS Code** es un editor extensible; **WSL2** proporciona un entorno Linux integrado en Windows; la **CLI (interfaz de línea de comandos)** permite administrar archivos y programas escribiendo órdenes. En esta guía la ventana de trabajo se organiza en explorador de archivos, editor y terminal para que el alumno pueda ver simultáneamente el archivo que modifica, su contenido y el resultado de ejecutarlo.
+> **VS Code** es un editor extensible; **WSL** proporciona un entorno Linux integrado en Windows; la **CLI (interfaz de línea de comandos)** permite administrar archivos y programas escribiendo órdenes. En esta guía la ventana de trabajo se organiza en explorador de archivos, editor y terminal para que el alumno pueda ver simultáneamente el archivo que modifica, su contenido y el resultado de ejecutarlo.
 
 ## 1. 🎯 Objetivos
 
@@ -12,7 +12,7 @@ Aprender a utilizar VS Code como centro de trabajo para configuración, código,
 
 - Explorador de archivos;
 - editor;
-- terminal WSL2;
+- terminal WSL;
 - YAML, JSON, Markdown, Bash y Dockerfile;
 - Git;
 - validación de configuraciones;
@@ -29,14 +29,14 @@ Aprender a utilizar VS Code como centro de trabajo para configuración, código,
 │ config/               named.conf                           │
 │                                                            │
 ├────────────────────────────────────────────────────────────┤
-│ 🐧 TERMINAL WSL2                                          │
+│ 🐧 TERMINAL WSL                                          │
 │ $ docker compose config                                   │
 │ $ sudo nginx -t                                           │
 │ $ git status                                              │
 └────────────────────────────────────────────────────────────┘
 ```
 
-La interfaz puede ejecutarse en Windows mientras el proyecto y las herramientas Linux trabajan en WSL2.
+La interfaz puede ejecutarse en Windows mientras el proyecto y las herramientas Linux trabajan en WSL.
 
 ## 3. 📦 Instalación y primer proyecto
 
@@ -66,7 +66,7 @@ laboratorio/
 └── README.md
 ```
 
-Mantén una única ubicación de trabajo principal. Para proyectos con mucha E/S, es preferible trabajar en el sistema de archivos de WSL2 en lugar de mantener el proyecto bajo `/mnt/c`.
+Mantén una única ubicación de trabajo principal. Para proyectos con mucha E/S, es preferible trabajar en el sistema de archivos de WSL en lugar de mantener el proyecto bajo `/mnt/c`.
 
 ## 5. ✍️ Editor y atajos
 
@@ -80,7 +80,7 @@ Mantén una única ubicación de trabajo principal. Para proyectos con mucha E/S
 
 > Las combinaciones que contienen una comilla invertida deben escribirse en Markdown de forma que la combinación no aparezca como escape literal.
 
-## 6. 🐧 Terminal WSL2
+## 6. 🐧 Terminal WSL
 
 ```bash
 pwd
@@ -90,7 +90,7 @@ ip route
 ss -lntup
 ```
 
-La terminal debe estar realmente asociada a WSL2 cuando trabajemos con servicios Linux.
+La terminal debe estar realmente asociada a WSL cuando trabajemos con servicios Linux.
 
 ## 7. 🧪 Flujo profesional de configuración
 
@@ -167,7 +167,7 @@ Nunca almacenes en el repositorio contraseñas, claves privadas, tokens, secreto
 
 ## 11. 🧪 Práctica de 60 minutos
 
-1. Crear un proyecto WSL2.
+1. Crear un proyecto WSL.
 2. Abrirlo con `code .`.
 3. Crear una página HTML y un `compose.yaml`.
 4. Dividir editor y terminal.

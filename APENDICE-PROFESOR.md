@@ -12,7 +12,7 @@ Este apéndice contiene instrumentos de evaluación y propuestas de laboratorio 
 
 Las pruebas tipo test están diseñadas como instrumentos de comprobación, no como sustituto de la evaluación práctica. Cada UT contiene **3 preguntas**, con **una única respuesta válida**. La posición de la respuesta correcta se distribuye deliberadamente para evitar patrones previsibles.
 
-Las actividades prácticas están diseñadas para una duración máxima de **1 h 45 min** y se pueden ejecutar en VirtualBox + Ubuntu 26.04 Server, WSL2 o, cuando proceda, Cisco Packet Tracer.
+Las actividades prácticas están diseñadas para una duración máxima de **1 h 45 min** y se pueden ejecutar en VirtualBox + Ubuntu 26.04 Server, WSL o, cuando proceda, Cisco Packet Tracer.
 
 ---
 

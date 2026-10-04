@@ -18,7 +18,9 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 ### 🎯 Lo que debes aprender
 
 | Debes dominar | Evidencia observable |
-|---|---|
+|---
+> 🧭 **Arquitectura común v6.5.5:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.5.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+|---|
 | **FTP y canales** | Explicación, comando, diagrama o evidencia verificable. |
 | **modo pasivo** | Explicación, comando, diagrama o evidencia verificable. |
 | **FTPS/SFTP** | Explicación, comando, diagrama o evidencia verificable. |
@@ -45,7 +47,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultado de aprendizaje trabajado
 >
@@ -76,7 +78,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 > El laboratorio actual utiliza herramientas y sistemas contemporáneos, manteniendo los conceptos fundamentales:
 >
 > - 🧪 **Cisco Packet Tracer**
-> - 🐧 **WSL2 + Ubuntu 26.04**
+> - 🐧 **WSL + Ubuntu 26.04**
 > - 🖥️ **VirtualBox + Ubuntu 26.04 Server**
 >
 > Para transferencias seguras se da especial importancia a **SFTP/SCP sobre OpenSSH**. Ubuntu recomienda utilizar SFTP para transferencias seguras y advierte que FTP transmite credenciales y datos sin cifrar.
@@ -109,7 +111,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
                        ▼
                   🛡️ SEGURIDAD
 ┌──────────────────────────────────────────────────────────────────────┐
-│ 🧪 ENTORNOS · I Packet Tracer · II WSL2 · III VirtualBox · IV Compose │
+│ 🧪 ENTORNOS · I Packet Tracer · II WSL · III VirtualBox · IV Compose │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -118,7 +120,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 > 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
 > **I · Cisco Packet Tracer** — simulación de red y protocolos.  
-> **II · WSL2 + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
+> **II · WSL + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
@@ -129,7 +131,7 @@ Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el mode
 | Entorno | Función didáctica | Uso recomendado |
 |---|---|---|
 | **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
-| **Entorno II · WSL2 + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
+| **Entorno II · WSL + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
 | **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
 | **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
 
@@ -741,9 +743,9 @@ Webmin puede administrar **SSH** y otros servicios mediante módulos de servidor
 > 👨‍🏫 **Criterio de corrección de las prácticas**
 >
 > La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
-# 🧪 15. PRÁCTICA 4.1 --- Explorar FTP desde WSL2
+# 🧪 15. PRÁCTICA 4.1 --- Explorar FTP desde WSL
 
-> 🔎 **PISTAS ESPECÍFICAS · -- Explorar FTP desde WSL2**
+> 🔎 **PISTAS ESPECÍFICAS · -- Explorar FTP desde WSL**
 >
 > **Qué debes fijar:** Empieza por observar antes de modificar: identifica interlocutores, puertos, protocolo y resultado esperado. Formula qué campo o paquete debería confirmar tu hipótesis. Separa autenticación, canal de control/datos, permisos y transporte seguro. Comprueba primero quién puede entrar y después qué operación puede realizar.
 >
@@ -2440,9 +2442,9 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
 
 
-# 🧪 53. PRÁCTICA 4.10 --- SFTP desde WSL2
+# 🧪 53. PRÁCTICA 4.10 --- SFTP desde WSL
 
-> 🔎 **PISTAS ESPECÍFICAS · -- SFTP desde WSL2**
+> 🔎 **PISTAS ESPECÍFICAS · -- SFTP desde WSL**
 >
 > **Qué debes fijar:** Separa autenticación, canal de control/datos, permisos y transporte seguro. Comprueba primero quién puede entrar y después qué operación puede realizar.
 >
@@ -2451,7 +2453,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 > **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
-Desde WSL2:
+Desde WSL:
 
 ``` bash
 sftp alumno@192.168.10.10
@@ -2684,7 +2686,7 @@ Construye:
                         │
                         │
                  ┌──────┴───────┐
-                 │    WSL2      │
+                 │    WSL      │
                  └──────────────┘
 ```
 
@@ -2894,7 +2896,7 @@ Comprueba:
 systemctl status ssh
 ```
 
-Desde WSL2:
+Desde WSL:
 
 ``` bash
 sftp alumno@192.168.10.10
@@ -3179,7 +3181,7 @@ Construye en VirtualBox:
                 │             │
              CLIENTE       SERVIDOR
              Ubuntu        Ubuntu 26.04
-             / WSL2             │
+             / WSL             │
                                 │
                     ┌───────────┼───────────┐
                     │           │           │
@@ -3826,3 +3828,47 @@ DIAGNÓSTICO
 
 ------------------------------------------------------------------------
 
+---
+
+## 🔷 v6.5.5 · Laboratorio Tierra Media
+
+### Caso integrado
+
+**Lothlorien** es el servidor principal de transferencia. **Rivendel** se usa para pruebas auxiliares. WSL actúa como cliente.
+
+### Ficheros y sintaxis
+
+- OpenSSH/SFTP: `/etc/ssh/sshd_config` y `/etc/ssh/sshd_config.d/*.conf` → directivas `clave valor`.
+- vsftpd: `/etc/vsftpd.conf` → directivas `opción=valor`.
+
+Ejemplo SFTP:
+
+```text
+Subsystem sftp internal-sftp
+PasswordAuthentication yes
+```
+
+Validación/persistencia:
+
+```bash
+sudo sshd -t
+sudo systemctl reload ssh
+sudo systemctl enable --now ssh
+sftp usuario@192.168.20.192
+```
+
+Para vsftpd, valida la configuración iniciando el daemon con su fichero de configuración en una prueba controlada y revisa `journalctl -u vsftpd`; no confundas una prueba de servicio con una validación sintáctica genérica.
+
+### Webmin
+
+Webmin dispone de **SSH Server**; úsalo para relacionar directivas con `sshd_config`. Para vsftpd no se debe asumir un módulo oficial equivalente; la CLI es la fuente de verdad.
+
+### Chuleta
+
+`sshd -t`, `systemctl reload ssh`, `sftp`, `scp`, `journalctl -u ssh`, `ss -lntp`, `tcpdump`.
+
+### Ruta práctica de tres entornos
+
+**Packet Tracer:** utilizar las funciones FTP/TFTP disponibles en Server-PT para comprender cliente, servidor, puerto y flujo; no presentarlas como sustituto de SFTP real.  
+**WSL:** actuar como cliente con `ftp`, `sftp`, `scp`, `curl` y `tcpdump`.  
+**VirtualBox:** centralizar el servidor real en Lothlorien con OpenSSH/SFTP y, cuando la práctica lo requiera, vsftpd; Rivendel sirve como segundo extremo de prueba.

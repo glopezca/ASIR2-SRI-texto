@@ -19,13 +19,14 @@
 
 ### Entornos y herramientas
 
-- [Anexo I · Visual Studio Code + WSL2](ANEXO-I-VSCode-WSL2.md)
-- [Anexo II · Docker + WSL2](ANEXO-II-Docker-WSL2.md)
+- [Anexo I · Visual Studio Code + WSL](ANEXO-I-VSCode-WSL.md)
+- [Anexo II · Docker + WSL](ANEXO-II-Docker-WSL.md)
 - [Anexo III · Git, GitHub y Codespaces](ANEXO-III-Git-GitHub-Codespaces.md)
 - [Anexo VI · Docker Compose en UT1–UT8](ANEXO-VI-Docker-Compose-UT1-UT8.md)
 - [Anexo VII · De Compose a Kubernetes](ANEXO-VII-Compose-a-Kubernetes.md)
 - [Anexo XV · Guía de laboratorio reproducible](ANEXO-XV-Guia-Laboratorio-Reproducible.md)
 - [Anexo XVIII · Chuleta de comandos de red de Ubuntu](ANEXO-XVIII-Chuleta-Comandos-Red-Ubuntu.md)
+- [Anexo XIX · Arquitectura de laboratorio v6.5.5](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.5.md)
 
 ### Referencia, seguridad y metodología
 

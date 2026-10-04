@@ -18,7 +18,9 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 ### 🎯 Lo que debes aprender
 
 | Debes dominar | Evidencia observable |
-|---|---|
+|---
+> 🧭 **Arquitectura común v6.5.5:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.5.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+|---|
 | **HTTP** | Explicación, comando, diagrama o evidencia verificable. |
 | **cabeceras y códigos** | Explicación, comando, diagrama o evidencia verificable. |
 | **Virtual Hosts** | Explicación, comando, diagrama o evidencia verificable. |
@@ -45,7 +47,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultado de aprendizaje trabajado
 >
@@ -75,7 +77,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 > El enfoque práctico actual utiliza versiones y herramientas contemporáneas, manteniendo los conceptos fundamentales:
 >
 > - 🧪 **Cisco Packet Tracer** para la parte de red y servicios básicos.
-> - 🐧 **WSL2 + Ubuntu 26.04** como cliente y entorno de pruebas.
+> - 🐧 **WSL + Ubuntu 26.04** como cliente y entorno de pruebas.
 > - 🖥️ **VirtualBox + Ubuntu 26.04 Server** como plataforma principal de servidor.
 >
 > La documentación actual de Ubuntu organiza la configuración de Apache mediante `apache2.conf`, `ports.conf`, `mods-*`, `conf-*` y `sites-*`.
@@ -115,7 +117,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
                      │
           TLS · permisos · logs
 ┌──────────────────────────────────────────────────────────────────────┐
-│ 🧪 ENTORNOS · I Packet Tracer · II WSL2 · III VirtualBox · IV Compose │
+│ 🧪 ENTORNOS · I Packet Tracer · II WSL · III VirtualBox · IV Compose │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -124,7 +126,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 > 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
 > **I · Cisco Packet Tracer** — simulación de red y protocolos.  
-> **II · WSL2 + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
+> **II · WSL + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
@@ -135,7 +137,7 @@ Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el mode
 | Entorno | Función didáctica | Uso recomendado |
 |---|---|---|
 | **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
-| **Entorno II · WSL2 + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
+| **Entorno II · WSL + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
 | **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
 | **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
 
@@ -1413,7 +1415,7 @@ En Webmin, los módulos de **Servers → Apache Webserver** o **Servers → Ngin
 > **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
-Desde WSL2:
+Desde WSL:
 
 ``` bash
 curl -I https://juandecolonia.jc
@@ -2394,7 +2396,7 @@ PRIVADO
 Prueba desde:
 
 -   servidor;
--   WSL2;
+-   WSL;
 -   otra VM.
 
 ------------------------------------------------------------------------
@@ -2775,7 +2777,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 Construye:
 
 ```text
-WSL2
+WSL
   │
   ▼
 PROXY
@@ -3633,13 +3635,13 @@ VirtualBox + Ubuntu 26.04 Server
 con un cliente:
 
 ```text
-WSL2 + Ubuntu 26.04
+WSL + Ubuntu 26.04
 ```
 
 ## Infraestructura
 
 ```text
-WSL2
+WSL
  │
  │ DNS / HTTP / HTTPS
  ▼
@@ -4382,7 +4384,7 @@ d)  El puerto de HTTP.
                         │
         ┌───────────────┼────────────────┐
         │               │                │
-      WSL2          VirtualBox       Packet Tracer
+      WSL          VirtualBox       Packet Tracer
     cliente        Ubuntu Server      red/simulación
 ```
 
@@ -4438,3 +4440,58 @@ DIAGNÓSTICO
 
 ------------------------------------------------------------------------
 
+---
+
+## 🔷 v6.5.5 · Laboratorio Tierra Media
+
+### Caso integrado
+
+**Lothlorien** centraliza Apache/Nginx en la DMZ. Rivendel puede actuar como backend o servidor auxiliar. WSL es el cliente de pruebas.
+
+### Ficheros y sintaxis
+
+**Apache:**
+
+```text
+/etc/apache2/apache2.conf
+/etc/apache2/ports.conf
+/etc/apache2/sites-available/*.conf
+/etc/apache2/sites-enabled/*.conf
+```
+
+Sintaxis: directivas Apache en texto estructurado por contexto.
+
+**Nginx:**
+
+```text
+/etc/nginx/nginx.conf
+/etc/nginx/sites-available/*
+/etc/nginx/sites-enabled/*
+```
+
+Sintaxis: bloques `{}` y directivas terminadas en `;`.
+
+Validación/persistencia:
+
+```bash
+sudo apache2ctl configtest
+sudo systemctl reload apache2
+sudo nginx -t
+sudo systemctl reload nginx
+curl -I http://192.168.20.192
+sudo ss -lntp | grep -E ':80|:443'
+```
+
+### Webmin
+
+**Servers → Apache Webserver** y **Servers → Nginx Webserver** cuando estén instalados. Tras guardar desde Webmin, vuelve a ejecutar `apache2ctl configtest` o `nginx -t`.
+
+### Chuleta
+
+`apache2ctl configtest`, `a2ensite`, `a2enmod`, `nginx -t`, `curl -I`, `journalctl -u apache2`, `journalctl -u nginx`.
+
+### Ruta práctica de tres entornos
+
+**Packet Tracer:** representar cliente → switch → Mordor → Lothlorien y utilizar HTTP de Server-PT para observar direccionamiento, puerto 80 y DNS.  
+**WSL:** cliente HTTP/HTTPS con `curl`, `openssl s_client`, `ss` y `tcpdump`.  
+**VirtualBox:** Apache/Nginx en Lothlorien; Rivendel puede actuar como backend para el reverse proxy.

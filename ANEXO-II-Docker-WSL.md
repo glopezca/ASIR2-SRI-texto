@@ -1,4 +1,4 @@
-# 🐳 ANEXO II · Docker, Docker Compose y Kubernetes con WSL2
+# 🐳 ANEXO II · Docker, Docker Compose y Kubernetes con WSL
 
 > **Material docente integral · CFGS ASIR · Servicios de Red e Internet**
 >
@@ -23,11 +23,11 @@ Windows 11
    ├── Docker Desktop
    │      └── Docker Engine / Compose
    ├── Visual Studio Code
-   │      └── WSL2 + Ubuntu 26.04
+   │      └── WSL + Ubuntu 26.04
    └── opcional: Kubernetes local
 ```
 
-Los proyectos se almacenarán preferentemente en `~/sri/` dentro de WSL2.
+Los proyectos se almacenarán preferentemente en `~/sri/` dentro de WSL.
 
 ## 🧪 Estado de validación
 
@@ -36,7 +36,7 @@ Los ejemplos se han revisado estáticamente y se ha comprobado la coherencia de 
 ---
 
 
-> **Entorno de trabajo:** Windows 11 + WSL2 + Ubuntu 26.04 + Docker Desktop + Visual Studio Code  
+> **Entorno de trabajo:** Windows 11 + WSL + Ubuntu 26.04 + Docker Desktop + Visual Studio Code  
 > **Nivel:** CFGS ASIR · Servicios en Red e Internet  
 > **Propósito:** aprender a crear, ejecutar, inspeccionar, conectar, publicar, diagnosticar y orquestar servicios de red mediante contenedores.
 
@@ -48,7 +48,7 @@ Al terminar este anexo deberás poder:
 
 - explicar qué problema resuelve la contenerización;
 - diferenciar **imagen, contenedor, volumen, red, servicio y registro**;
-- instalar y comprobar Docker Desktop con backend WSL2;
+- instalar y comprobar Docker Desktop con backend WSL;
 - trabajar con Docker desde la terminal Linux y desde Docker Desktop;
 - crear y administrar contenedores;
 - entrar mediante **shell** en un contenedor y ejecutar comandos;
@@ -262,7 +262,7 @@ Un proceso dentro de un contenedor puede escuchar en un puerto, pero eso **no im
 
 ---
 
-# 🪟 5. Entorno de trabajo: Windows + WSL2 + Docker Desktop
+# 🪟 5. Entorno de trabajo: Windows + WSL + Docker Desktop
 
 Para este material utilizaremos:
 
@@ -273,7 +273,7 @@ Para este material utilizaremos:
 │       │                                  │                             │
 │       │ WSL extension                    │ Docker Engine               │
 │       ▼                                  │ Docker Compose               │
-│  ┌──────────── WSL2 ────────────┐        │ Kubernetes (opcional)       │
+│  ┌──────────── WSL ────────────┐        │ Kubernetes (opcional)       │
 │  │ Ubuntu 26.04                 │◄───────┘                             │
 │  │                              │                                      │
 │  │ código + Git + terminal      │                                      │
@@ -281,11 +281,11 @@ Para este material utilizaremos:
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-Docker Desktop puede utilizar WSL2 como backend en Windows y proporciona Docker Engine, CLI y Compose. La integración WSL permite ejecutar `docker` desde la distribución Linux integrada. [Documentación oficial: Docker Desktop + WSL2](https://docs.docker.com/desktop/features/wsl/)
+Docker Desktop puede utilizar WSL como backend en Windows y proporciona Docker Engine, CLI y Compose. La integración WSL permite ejecutar `docker` desde la distribución Linux integrada. [Documentación oficial: Docker Desktop + WSL](https://docs.docker.com/desktop/features/wsl/)
 
 ## ⚠️ Una decisión importante: dónde guardar los proyectos
 
-Para este curso trabajaremos preferentemente dentro del sistema de ficheros Linux de WSL2:
+Para este curso trabajaremos preferentemente dentro del sistema de ficheros Linux de WSL:
 
 ```text
 /home/alumno/proyectos/
@@ -297,7 +297,7 @@ y no:
 /mnt/c/Users/alumno/proyectos/
 ```
 
-En proyectos con muchos ficheros, trabajar en el sistema de archivos de WSL2 proporciona un mejor rendimiento de E/S. [Docker: desarrollo con WSL2](https://docs.docker.com/desktop/features/wsl/use-wsl/)
+En proyectos con muchos ficheros, trabajar en el sistema de archivos de WSL proporciona un mejor rendimiento de E/S. [Docker: desarrollo con WSL](https://docs.docker.com/desktop/features/wsl/use-wsl/)
 
 ---
 
@@ -317,7 +317,7 @@ La distribución utilizada deberá aparecer con versión `2`.
 
 ## 6.2 Instalar Docker Desktop
 
-Instala Docker Desktop para Windows y selecciona el backend WSL2 cuando corresponda.
+Instala Docker Desktop para Windows y selecciona el backend WSL cuando corresponda.
 
 Después:
 
@@ -2182,7 +2182,7 @@ La ventana de trabajo será:
 │ html/          │      nginx.conf                │
 │                │                                │
 ├────────────────┴────────────────────────────────┤
-│ 🐧 TERMINAL WSL2                                │
+│ 🐧 TERMINAL WSL                                │
 │ $ docker compose up -d                          │
 │ $ docker compose ps                             │
 │ $ docker compose logs -f                        │
@@ -2461,7 +2461,7 @@ Utiliza la documentación oficial como referencia primaria.
 - [Docker networking](https://docs.docker.com/engine/network/)
 - [Docker volumes](https://docs.docker.com/engine/storage/volumes/)
 - [Docker Desktop](https://docs.docker.com/desktop/)
-- [Docker Desktop + WSL2](https://docs.docker.com/desktop/features/wsl/)
+- [Docker Desktop + WSL](https://docs.docker.com/desktop/features/wsl/)
 - [Docker Compose installation](https://docs.docker.com/compose/install/)
 
 ## Nginx
@@ -2487,7 +2487,7 @@ Utiliza la documentación oficial como referencia primaria.
 
 - [WSL documentation](https://learn.microsoft.com/windows/wsl/)
 - [VS Code + WSL](https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-vscode)
-- [Docker + WSL2](https://docs.docker.com/desktop/features/wsl/use-wsl/)
+- [Docker + WSL](https://docs.docker.com/desktop/features/wsl/use-wsl/)
 
 ---
 
@@ -2594,7 +2594,7 @@ Y, sobre todo:
 
 ## 📌 Fuentes oficiales consultadas para esta versión
 
-Esta versión se ha contrastado con la documentación oficial actual de Docker, Kubernetes, Nginx y Microsoft. Entre otros aspectos, se han verificado el backend WSL2 de Docker Desktop, Compose, publicación de puertos, acceso mediante `exec`, redes, Pods, `kubectl`, `port-forward` y el flujo VS Code + WSL2.
+Esta versión se ha contrastado con la documentación oficial actual de Docker, Kubernetes, Nginx y Microsoft. Entre otros aspectos, se han verificado el backend WSL de Docker Desktop, Compose, publicación de puertos, acceso mediante `exec`, redes, Pods, `kubectl`, `port-forward` y el flujo VS Code + WSL.
 
 
 

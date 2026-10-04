@@ -18,7 +18,9 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 ### 🎯 Lo que debes aprender
 
 | Debes dominar | Evidencia observable |
-|---|---|
+|---
+> 🧭 **Arquitectura común v6.5.5:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.5.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+|---|
 | **XMPP** | Explicación, comando, diagrama o evidencia verificable. |
 | **IRC** | Explicación, comando, diagrama o evidencia verificable. |
 | **listas y moderación** | Explicación, comando, diagrama o evidencia verificable. |
@@ -45,7 +47,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL2 + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultado de aprendizaje trabajado
 >
@@ -888,14 +890,14 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 # 6. 🧪 Arquitectura de laboratorio
 
-La unidad se trabajará mediante cuatro entornos complementarios: simulación de red con Packet Tracer, herramientas y clientes en WSL2, servidores completos en VirtualBox y despliegues reproducibles con Docker Compose.
+La unidad se trabajará mediante cuatro entornos complementarios: simulación de red con Packet Tracer, herramientas y clientes en WSL, servidores completos en VirtualBox y despliegues reproducibles con Docker Compose.
 
 ```text
               🧪 ENTORNOS DE PRÁCTICAS
                        │
        ┌───────────────┼───────────────┬───────────────┐
        ▼               ▼               ▼               ▼
- Packet Tracer       WSL2          VirtualBox      Docker Compose
+ Packet Tracer       WSL          VirtualBox      Docker Compose
  simulación       clientes/tools    servidores      servicios
 ```
 
@@ -932,9 +934,9 @@ Se utilizará para representar:
 
 ---
 
-## 6.2 WSL2 + Ubuntu 26.04
+## 6.2 WSL + Ubuntu 26.04
 
-WSL2 se utilizará principalmente como:
+WSL se utilizará principalmente como:
 
 - cliente;
 - estación de diagnóstico;
@@ -2880,7 +2882,7 @@ D. Utilizar siempre contraseñas triviales
 > 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
 > **I · Cisco Packet Tracer** — simulación de red y protocolos.  
-> **II · WSL2 + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
+> **II · WSL + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
 
@@ -2891,7 +2893,7 @@ Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el mode
 | Entorno | Función didáctica | Uso recomendado |
 |---|---|---|
 | **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
-| **Entorno II · WSL2 + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
+| **Entorno II · WSL + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
 | **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
 | **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
 
@@ -2944,3 +2946,49 @@ La estructura conceptual conserva los apartados del material previo:
 La edición original propone, entre otras prácticas, **OpenFire/XMPP, InspIRCd, Mailman y Leafnode**. En esta adaptación se mantiene el objetivo de cada práctica, pero se actualiza el laboratorio a **Ubuntu 26.04**, sustituyendo cuando procede herramientas obsoletas por alternativas actuales o dejando explícita la diferencia histórica.
 
 > **Uso docente:** material destinado al entorno académico del departamento y a prácticas controladas de laboratorio.
+
+---
+
+## 🔷 v6.5.5 · Laboratorio Tierra Media
+
+### Caso integrado
+
+**Lothlorien** concentra los servicios de mensajería y listas; **Rivendel** puede emplearse como servidor auxiliar o cliente de pruebas. WSL se utiliza como cliente y analizador.
+
+### Ficheros y sintaxis
+
+- Prosody: `/etc/prosody/prosody.cfg.lua` → **Lua**.
+- Mailman 3: `/etc/mailman3/` → configuración de la aplicación; revisar la ruta concreta del despliegue.
+- INN/NNTP: `/etc/news/` → ficheros de configuración del servidor.
+- IRC: la ruta depende del daemon elegido; documentarla antes de editar.
+
+Ejemplo Prosody:
+
+```lua
+VirtualHost "tierramedia.jc"
+    authentication = "internal_hashed"
+```
+
+Validación/persistencia:
+
+```bash
+sudo prosodyctl check config
+sudo systemctl reload prosody
+sudo systemctl status prosody --no-pager
+```
+
+Para Mailman/INN/IRC, utilizar el comprobador específico del paquete cuando exista y después `systemctl status` + logs.
+
+### Webmin
+
+No se debe inventar un módulo Webmin específico para Prosody, IRC, Mailman o INN. Cuando no exista módulo dedicado, Webmin puede utilizarse como apoyo general, pero la administración permanece en CLI y en los ficheros propios de cada servicio.
+
+### Chuleta
+
+`prosodyctl check config`, `systemctl reload`, `journalctl -u prosody`, `ss -lntup`, `tcpdump`, y los comandos de diagnóstico propios del daemon elegido.
+
+### Ruta práctica de tres entornos
+
+**Packet Tracer:** representar la conectividad de los clientes con Lothlorien y documentar IP, puertos y rutas; los servicios XMPP/IRC/NNTP se ejecutan fuera de PT.  
+**WSL:** utilizar clientes CLI, `nc`, `ss` y `tcpdump` para observar los protocolos.  
+**VirtualBox:** desplegar Prosody y los servicios de listas/noticias en Lothlorien; Rivendel sirve como cliente o nodo auxiliar.

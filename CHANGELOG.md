@@ -1,6 +1,6 @@
 # Changelog
 
-## v6.5.3 — 27/09/2026
+## v6.5.5 — 27/09/2026
 
 - Añadido `INDICE-GENERAL.md` como índice de navegación del repositorio.
 - El nuevo índice enlaza directamente las ocho UT, los dieciocho anexos y los materiales complementarios principales.

@@ -19,7 +19,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 | Debes dominar | Evidencia observable |
 |---
-> 🧭 **Arquitectura común v6.5.5:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.5.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.5.5:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 |---|
 | **jerarquía DNS** | Explicación, comando, diagrama o evidencia verificable. |
 | **recursión e iteración** | Explicación, comando, diagrama o evidencia verificable. |
@@ -1122,6 +1122,169 @@ En Webmin, el módulo **Servers → BIND DNS Server** permite inspeccionar y edi
 > 👨‍🏫 **Criterio de corrección de las prácticas**
 >
 > La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
+# 🧪 PRÁCTICA INTEGRADORA --- DNS en Cisco Packet Tracer · Tierra Media
+
+## Objetivo
+
+Completar la topología acumulativa de UT1 y UT2 incorporando el servicio DNS en **Lothlorien**. Arnor `192.168.10.192` ya existe como servidor DHCP didáctico de UT2, pero el DNS permanece centralizado en Lothlorien. El dominio de laboratorio será `tierramedia.jc` y Lothlorien será su servidor DNS principal en Packet Tracer.
+
+### Topología
+
+![Topología Tierra Media en Cisco Packet Tracer](img/topologia-tierramedia-packettracer.png)
+
+Servidor DNS:
+
+``` text
+Lothlorien
+IP:   192.168.20.192/24
+GW:   192.168.20.254
+DNS:  192.168.20.192
+FQDN: lothlorien.tierramedia.jc
+```
+
+## 1. Preparar Lothlorien
+
+En **Server-PT Lothlorien → Desktop → IP Configuration**:
+
+``` text
+IP Address:      192.168.20.192
+Subnet Mask:     255.255.255.0
+Default Gateway: 192.168.20.254
+DNS Server:      192.168.20.192
+```
+
+En **Services → DNS**:
+
+``` text
+DNS Service: ON
+```
+
+Añade los registros `A` siguientes:
+
+| Nombre | Tipo | Dirección |
+|---|---|---|
+| `mordor.tierramedia.jc` | A | `192.168.10.254` |
+| `hobbiton.tierramedia.jc` | A | `10.0.32.64` |
+| `gondor.tierramedia.jc` | A | `192.168.10.64` |
+| `rohan.tierramedia.jc` | A | `192.168.10.65` |
+| `lothlorien.tierramedia.jc` | A | `192.168.20.192` |
+| `rivendel.tierramedia.jc` | A | `192.168.20.193` |
+
+Como alias opcional para identificar el servidor DNS:
+
+``` text
+dns.tierramedia.jc    CNAME    lothlorien.tierramedia.jc
+```
+
+> 💡 Packet Tracer proporciona una implementación DNS simplificada orientada a laboratorio. Esta práctica trabaja con registros y resolución desde clientes; la configuración autoritativa completa con BIND9 se estudia en las prácticas de Ubuntu de esta misma UT.
+
+## 2. Configurar el DNS de los clientes
+
+Todos los equipos que deban resolver nombres de Tierra Media utilizarán:
+
+``` text
+DNS Server: 192.168.20.192
+```
+
+En la versión DHCP de UT2, esta dirección se entrega automáticamente mediante la opción `dns-server` del pool `HOMBRES`.
+
+## 3. Comprobar resolución desde Gondor
+
+En Gondor:
+
+``` text
+C:\> nslookup lothlorien.tierramedia.jc
+C:\> nslookup rivendel.tierramedia.jc
+C:\> nslookup hobbiton.tierramedia.jc
+C:\> nslookup mordor.tierramedia.jc
+```
+
+Resultados esperados:
+
+``` text
+lothlorien.tierramedia.jc → 192.168.20.192
+rivendel.tierramedia.jc   → 192.168.20.193
+hobbiton.tierramedia.jc   → 10.0.32.64
+mordor.tierramedia.jc     → 192.168.10.254
+```
+
+Después comprueba conectividad utilizando nombres:
+
+``` text
+C:\> ping lothlorien.tierramedia.jc
+C:\> ping rivendel.tierramedia.jc
+C:\> ping hobbiton.tierramedia.jc
+```
+
+## 4. Comprobar DNS desde Hobbiton
+
+Hobbiton pertenece a `10.0.0.0/16`, pero puede consultar el DNS de Elfos mediante Mordor:
+
+``` text
+C:\> nslookup gondor.tierramedia.jc
+C:\> nslookup rohan.tierramedia.jc
+C:\> nslookup lothlorien.tierramedia.jc
+```
+
+Esto permite demostrar conjuntamente:
+
+``` text
+DHCP / configuración IP (Arnor → Mordor)
+        ↓
+Gateway / routing
+        ↓
+DNS
+        ↓
+Resolución de nombres
+        ↓
+Ping por FQDN
+```
+
+## 5. Integración con DHCP
+
+Comprueba en Gondor o Rohan que la configuración recibida por DHCP incluye:
+
+``` text
+IP       → 192.168.10.64 / .65
+Gateway  → 192.168.10.254
+DNS      → 192.168.20.192
+Dominio  → tierramedia.jc
+```
+
+En Mordor:
+
+``` text
+show ip dhcp binding
+show running-config | section dhcp
+```
+
+## 6. Diagnóstico de DNS
+
+Si `ping 192.168.20.192` funciona pero `ping lothlorien.tierramedia.jc` falla, separar el problema de red del problema DNS:
+
+``` text
+1. ping 192.168.20.192
+2. comprobar DNS Server del cliente
+3. nslookup lothlorien.tierramedia.jc
+4. comprobar DNS Service = ON
+5. revisar el registro A
+6. comprobar conectividad entre cliente y DNS
+```
+
+No debe concluirse que «DNS no funciona» únicamente porque un `ping` falle: primero hay que determinar si falla la resolución de nombres o la conectividad IP.
+
+## 7. Preguntas
+
+1. ¿Por qué Lothlorien necesita una dirección IP estática?
+2. ¿Qué diferencia hay entre `lothlorien.tierramedia.jc` y `192.168.20.192`?
+3. ¿Qué información proporciona DHCP para que un cliente pueda utilizar DNS?
+4. ¿Por qué un cliente de la red `10.0.0.0/16` puede consultar un DNS de `192.168.20.0/24`?
+5. ¿Qué componente permite que el paquete DNS atraviese de una red a otra?
+6. ¿Qué diferencia hay entre resolver un nombre y hacer ping a una dirección IP?
+
+------------------------------------------------------------------------
+
+
 # 🧪 32. PRÁCTICA 1 --- Explorar DNS desde WSL
 
 > 🔎 **PISTAS ESPECÍFICAS · -- Explorar DNS desde WSL**
@@ -3049,6 +3212,26 @@ sudo named-checkzone tierramedia.jc /etc/bind/db.tierramedia.jc
 sudo rndc reload
 sudo dig @192.168.20.192 lothlorien.tierramedia.jc
 ```
+
+### Persistencia y recarga
+
+Los cambios de BIND se guardan en los ficheros de `/etc/bind/`; no basta con modificar el estado en memoria. La secuencia didáctica es:
+
+```bash
+sudo named-checkconf
+sudo named-checkzone tierramedia.jc /etc/bind/db.tierramedia.jc
+sudo rndc reload
+sudo systemctl status bind9 --no-pager
+```
+
+Tras una modificación, conserva el fichero de configuración y comprueba que la zona sigue cargando después de reiniciar el servicio. En la VM de laboratorio, una prueba de persistencia mínima es:
+
+```bash
+sudo systemctl restart bind9
+sudo dig @192.168.20.192 lothlorien.tierramedia.jc +short
+```
+
+La configuración persistente es la que permanece en `/etc/bind/`; la respuesta obtenida con `dig` demuestra el estado efectivo del servicio.
 
 ### Webmin
 

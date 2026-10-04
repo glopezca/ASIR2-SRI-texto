@@ -11,7 +11,7 @@
 > Unidad de fundamentos y prerrequisitos para interpretar los resultados de aprendizaje del módulo.
 
 ---
-> 🧭 **Arquitectura común v6.5.5:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.5.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.5.5:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 
 
 
@@ -1554,54 +1554,64 @@ Webmin puede presentar parte de la configuración de red mediante sus módulos d
 > 👨‍🏫 **Criterio de corrección de las prácticas**
 >
 > La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
-# 🧪 25. PRÁCTICA 1 --- IP y encaminamiento con Cisco Packet Tracer
-
-> 🔎 **PISTAS ESPECÍFICAS · -- IP y encaminamiento con Cisco Packet Tracer**
->
-> **Qué debes fijar:** Dibuja la topología y marca IP, máscara, puerta de enlace, interfaz y siguiente salto. No pruebes una capa superior hasta demostrar que la inferior funciona.
->
-> **Evidencia:** Usa como evidencia principal el artefacto que mejor demuestre el objetivo de esta práctica; evita capturas sin contexto y conserva comando, salida y fecha de la prueba.
->
-> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
-
+# 🧪 25. PRÁCTICA 1 --- IPv4 y encaminamiento con Cisco Packet Tracer · Tierra Media
 
 ## Objetivo
 
-Construir una red con dos subredes y un router.
+Construir y verificar una topología de tres redes IPv4 utilizando un único router Cisco, **Mordor**, como dispositivo de encaminamiento. La práctica sustituye el ejemplo genérico de dos LAN por una topología común que se reutilizará progresivamente en UT2 (DHCP) y UT3 (DNS).
 
-## Topología
+### Topología de referencia
 
-```text
-PC-A
-192.168.10.10/24
-GW 192.168.10.1
-        │
-        │
-   G0/0 R1
-   192.168.10.1
-      R1
-   192.168.20.1
-   G0/1
-        │
-        │
-PC-B
-192.168.20.10/24
-GW 192.168.20.1
+![Topología Tierra Media en Cisco Packet Tracer](img/topologia-tierramedia-packettracer.png)
+
+La topología está organizada en tres LAN:
+
+``` text
+                         MORDOR
+              ┌────────────┼────────────┐
+              │            │            │
+        Fa0/0 │      Fa1/0 │      Fa4/0 │
+        10.0.2.15     192.168.10.254  192.168.20.254
+              │            │            │
+        MEDIANOS       HOMBRES        ELFOS
+              │            │            │
+          Hobbiton    Gondor  Rohan  Lothlorien  Rivendel
+          10.0.32.64  .64    .65     .192        .193
 ```
 
-## Configuración de R1
+## 25.1. Plan de direccionamiento
 
-```text
+| Zona | Red | Máscara | Gateway/router | Equipos principales |
+|---|---|---|---|---|
+| Comarca / Medianos | `10.0.0.0/16` | `255.255.0.0` | `10.0.2.15` | Hobbiton `10.0.32.64` |
+| Hombres | `192.168.10.0/24` | `255.255.255.0` | `192.168.10.254` | Gondor `192.168.10.64`, Rohan `192.168.10.65`, Arnor `192.168.10.192` |
+| Elfos / DMZ | `192.168.20.0/24` | `255.255.255.0` | `192.168.20.254` | Lothlorien `192.168.20.192`, Rivendel `192.168.20.193` |
+
+En esta primera práctica las direcciones se configuran **manualmente**. En UT2, Gondor y Rohan pasarán a obtener su configuración mediante DHCP, conservando esas direcciones mediante reservas. En UT3, Lothlorien proporcionará el servicio DNS para el dominio `tierramedia.jc`.
+
+> ⚠️ `10.0.32.64/16` pertenece a la red `10.0.0.0/16`, no a `10.0.32.0/24`. Es importante mantener esta máscara para que Hobbiton pueda comunicarse con la interfaz `10.0.2.15` de Mordor como parte de la misma LAN.
+
+## 25.2. Configuración del router Mordor
+
+En la CLI de Mordor:
+
+``` text
 enable
 configure terminal
+hostname Mordor
 
-interface gigabitEthernet 0/0
- ip address 192.168.10.1 255.255.255.0
+interface FastEthernet0/0
+ ip address 10.0.2.15 255.255.0.0
  no shutdown
 exit
 
-interface gigabitEthernet 0/1
- ip address 192.168.20.1 255.255.255.0
+interface FastEthernet1/0
+ ip address 192.168.10.254 255.255.255.0
+ no shutdown
+exit
+
+interface FastEthernet4/0
+ ip address 192.168.20.254 255.255.255.0
  no shutdown
 exit
 
@@ -1609,75 +1619,162 @@ end
 write memory
 ```
 
-## Configuración de PC-A
+Comprobar:
 
-```text
-IP:       192.168.10.10
-Mask:     255.255.255.0
-Gateway:  192.168.10.1
+``` text
+Mordor# show ip interface brief
+Mordor# show ip route
+Mordor# show running-config
 ```
 
-## Configuración de PC-B
+Se deben observar tres redes directamente conectadas (`C`) en la tabla de routing:
 
-```text
-IP:       192.168.20.10
-Mask:     255.255.255.0
-Gateway:  192.168.20.1
+``` text
+10.0.0.0/16
+192.168.10.0/24
+192.168.20.0/24
 ```
 
-## Comprobaciones
+## 25.3. Configuración de switches y enlaces de capa 2
 
-Desde PC-A:
+Los tres switches son dispositivos de capa 2 y, en esta práctica, **no necesitan configuración de VLAN ni de routing**: todos sus puertos utilizados permanecen en la VLAN por defecto. Basta con conservar las conexiones de la topología y asignarles los nombres indicados:
 
-```text
-ping 192.168.10.1
-ping 192.168.20.1
-ping 192.168.20.10
+Si se desea configurar el nombre desde CLI:
+
+``` text
+enable
+configure terminal
+hostname Medianos
+end
+write memory
 ```
 
-## Preguntas
+Repetir con `hostname Hombres` y `hostname Elfos` en los otros dos switches.
 
-1.  ¿Por qué PC-A necesita una puerta de enlace para alcanzar PC-B?
-2.  ¿Qué red está directamente conectada a G0/0?
-3.  ¿Qué red está directamente conectada a G0/1?
-4.  ¿Qué ocurriría si PC-A tuviera como gateway `192.168.10.254`?
-5.  ¿Qué tabla de routing tiene R1?
+| Switch | Zona | Enlaces principales de la imagen | Configuración IP necesaria |
+|---|---|---|---|
+| `Medianos` | Comarca | Mordor `Fa0/0` ↔ `Fa2/1`; Hobbiton `Fa0` ↔ `Fa1/1`; Cloud `Eth6` ↔ `Fa0/1` | Ninguna |
+| `Hombres` | Hombres | Mordor `Fa1/0` ↔ `Fa0/1`; Gondor `Fa0` ↔ `Fa1/1`; Rohan `Fa0` ↔ `Fa2/1` | Ninguna |
+| `Elfos` | Elfos | Mordor `Fa4/0` ↔ `Fa4/1`; Lothlorien `Fa0`; Rivendel `Fa0` | Ninguna |
 
-------------------------------------------------------------------------
+> La topología mostrada utiliza switches como elementos de concentración. No es necesario asignarles una dirección IP para que reenvíen tráfico Ethernet. Una IP de gestión sería una ampliación independiente y no forma parte de esta práctica.
 
+`Cloud-PT Cudernas` tampoco necesita configuración IP para demostrar el routing interno solicitado. Puede mantenerse como elemento gráfico de una futura ampliación hacia otra red.
 
-### 🧭 Guía de resolución y comprobación
+## 25.4. Configuración de los equipos
 
-Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el resultado, no solo cuando el comando termina sin errores. Sigue siempre esta secuencia:
+### Hobbiton
 
-1. **Identifica el estado inicial.** Anota interfaces, direcciones, rutas y servicios que ya estaban activos.
-2. **Aplica el cambio mínimo.** No modifiques varias cosas a la vez: si algo falla, necesitas saber qué cambio lo provocó.
-3. **Valida inmediatamente.** Comprueba la sintaxis o el estado del servicio antes de probar desde el cliente.
-4. **Prueba desde el punto de vista del usuario.** Una configuración correcta debe producir el comportamiento esperado desde el cliente, no solo desde el servidor.
-5. **Observa evidencias.** Conserva la salida de comandos, logs, capturas de tráfico y capturas de pantalla que demuestren el resultado.
+**Desktop → IP Configuration → Static**:
 
-**Comandos de referencia para esta práctica:**
+``` text
+IP Address:      10.0.32.64
+Subnet Mask:     255.255.0.0
+Default Gateway: 10.0.2.15
+DNS Server:      192.168.20.192
+```
 
-- `show ip interface brief`
-- `show ip route`
-- `show running-config`
-- `ping <destino>`
-- `traceroute <destino>`
+### Gondor
 
-> 💡 **Si algo falla:** no empieces reiniciando. Compara primero **estado → configuración → logs → puertos → red → cliente**. Un reinicio puede ocultar la causa y hacer más difícil aprender de la incidencia.
+``` text
+IP Address:      192.168.10.64
+Subnet Mask:     255.255.255.0
+Default Gateway: 192.168.10.254
+DNS Server:      192.168.20.192
+```
 
-### 🧪 Rúbrica de evaluación
+### Rohan
 
-| Criterio | Puntos | Evidencia esperada |
-|---|---:|---|
-| Comprensión del objetivo y del protocolo | 2 | Explica qué servicio/protocolo está utilizando y por qué. |
-| Preparación y configuración | 2 | Ficheros, comandos o topología correctamente preparados. |
-| Verificación funcional | 2 | Demuestra el resultado desde un cliente o herramienta adecuada. |
-| Diagnóstico y razonamiento | 2 | Utiliza evidencias para justificar la solución. |
-| Documentación técnica | 1 | Incluye comandos, configuraciones y capturas relevantes. |
-| Seguridad y buenas prácticas | 1 | Aplica permisos, exposición de puertos y credenciales con criterio. |
-| **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
+``` text
+IP Address:      192.168.10.65
+Subnet Mask:     255.255.255.0
+Default Gateway: 192.168.10.254
+DNS Server:      192.168.20.192
+```
 
+### Lothlorien
+
+Servidor DNS de la infraestructura:
+
+``` text
+IP Address:      192.168.20.192
+Subnet Mask:     255.255.255.0
+Default Gateway: 192.168.20.254
+DNS Server:      192.168.20.192
+```
+
+### Rivendel
+
+``` text
+IP Address:      192.168.20.193
+Subnet Mask:     255.255.255.0
+Default Gateway: 192.168.20.254
+DNS Server:      192.168.20.192
+```
+
+## 25.5. Comprobación progresiva
+
+Desde Mordor:
+
+``` text
+Mordor# ping 10.0.32.64
+Mordor# ping 192.168.10.64
+Mordor# ping 192.168.10.65
+Mordor# ping 192.168.20.192
+Mordor# ping 192.168.20.193
+```
+
+Desde Hobbiton:
+
+``` text
+C:\> ping 10.0.2.15
+C:\> ping 192.168.10.64
+C:\> ping 192.168.10.65
+C:\> ping 192.168.20.192
+C:\> ping 192.168.20.193
+```
+
+Desde Gondor o Rohan:
+
+``` text
+C:\> ping 192.168.10.254
+C:\> ping 10.0.32.64
+C:\> ping 192.168.20.192
+C:\> ping 192.168.20.193
+```
+
+Desde Lothlorien:
+
+``` text
+C:\> ping 192.168.20.254
+C:\> ping 192.168.10.64
+C:\> ping 192.168.10.65
+C:\> ping 10.0.32.64
+```
+
+## 25.6. Diagnóstico
+
+Si falla un ping, seguir este orden:
+
+``` text
+1. Estado de la interfaz       → show ip interface brief
+2. Dirección y máscara         → IP/máscara del host
+3. Puerta de enlace             → gateway correcto
+4. Tabla de routing             → show ip route
+5. ARP                          → arp -a
+6. Ping al gateway              → conectividad local
+7. Ping a una red remota        → encaminamiento
+```
+
+## 25.7. Preguntas
+
+1. ¿Por qué `10.0.32.64/16` pertenece a `10.0.0.0/16`?
+2. ¿Por qué Mordor necesita tres interfaces?
+3. ¿Qué redes aparecen como directamente conectadas en `show ip route`?
+4. ¿Qué ocurre si Hobbiton utiliza `/24` en lugar de `/16`?
+5. ¿Por qué Gondor necesita como gateway `192.168.10.254`?
+6. ¿Qué función tendrá Lothlorien en UT3?
+7. ¿Qué diferencia existe entre alcanzar una IP del mismo segmento y alcanzar una IP de otra red?
 
 # 🧪 26. PRÁCTICA 2 --- Inspección de red con WSL + Ubuntu 26.04
 

@@ -322,7 +322,7 @@ El resultado no reproduce literalmente el libro: organiza sus contenidos por **p
 
 ---
 
-## 18. 🆕 v6.5.5 · Comandos incorporados al laboratorio
+## 18. 🆕 v6.5.6 · Comandos incorporados al laboratorio
 
 ### Netplan
 

@@ -924,7 +924,7 @@ Si la instalación dispone de un módulo DHCP compatible, localízalo en **Serve
 > La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
 # 🧪 25. PRÁCTICA 1 --- DHCP gráfico en Packet Tracer · Arnor
 
-> **Escenario v6.5.5:** Arnor es el primer servidor DHCP de la red interna. Se configura exclusivamente mediante la interfaz gráfica de **Server-PT** para que el alumno comprenda el ámbito, las opciones y las reservas antes de trasladar exactamente el mismo servicio al router Mordor mediante CLI.
+> **Escenario v6.5.6:** Arnor es el primer servidor DHCP de la red interna. Se configura exclusivamente mediante la interfaz gráfica de **Server-PT** para que el alumno comprenda el ámbito, las opciones y las reservas antes de trasladar exactamente el mismo servicio al router Mordor mediante CLI.
 
 ## Objetivo
 
@@ -1227,7 +1227,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | Lothlorien | `192.168.20.192/24` | servicios principales |
 | Rivendel | `192.168.20.193/24` | servicios auxiliares/pruebas |
 
-La topología física/virtual se documenta en el [Anexo de arquitectura v6.5.5](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.5.md).
+La topología física/virtual se documenta en el [Anexo de arquitectura v6.5.5](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.6.md).
 
 ## 27.2. Ubicación y sintaxis de Kea
 

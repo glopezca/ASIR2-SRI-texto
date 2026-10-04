@@ -429,7 +429,7 @@
 | **Liveness probe** | Comprobación de Kubernetes utilizada para detectar si un contenedor debe reiniciarse. |
 | **Startup probe** | Comprobación de Kubernetes destinada a determinar cuándo una aplicación ha terminado su inicialización. |
 
-## 🆕 Términos operativos v6.5.5
+## 🆕 Términos operativos v6.5.6
 
 - **Arnor:** Server-PT usado en Packet Tracer como demostración gráfica inicial del servicio DHCP en la red interna.
 - **Mordor DHCP:** función DHCP del router Packet Tracer y, en VirtualBox, función DHCP de la VM Linux Mordor mediante Kea.

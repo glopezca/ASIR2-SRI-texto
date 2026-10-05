@@ -1,4 +1,4 @@
-# Changelog · v6.5.8
+# Changelog · v6.5.8a
 
 ## Cambios principales
 
@@ -30,7 +30,7 @@
 
 ### Navegación y mantenimiento
 
-- README e índice general actualizados a v6.5.8.
-- Anexo XIX renombrado a la versión 6.5.8.
-- Referencias de arquitectura de las UT actualizadas a v6.5.8.
+- README e índice general actualizados a v6.5.8a.
+- Anexo XIX renombrado a la versión 6.5.8a.
+- Referencias de arquitectura de las UT actualizadas a v6.5.8a.
 - Se mantiene WSL como denominación canónica.

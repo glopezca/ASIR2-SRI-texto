@@ -1,8 +1,8 @@
-# Informe de integración · v6.5.8
+# Informe de integración · v6.5.8a
 
 ## Alcance
 
-La v6.5.8 amplía la v6.5.7 mediante dos anexos orientados a la operación profesional del laboratorio:
+La v6.5.8a amplía la v6.5.7 mediante dos anexos orientados a la operación profesional del laboratorio:
 
 1. **Anexo XX · Scripts personalizados de ASIR2-SRI**.
 2. **Anexo XXI · Chuleta de utilidades TUI para administración de sistemas**.

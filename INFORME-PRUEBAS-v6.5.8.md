@@ -1,16 +1,16 @@
-# Informe de pruebas · v6.5.8
+# Informe de pruebas · v6.5.8a
 
 ## Pruebas estructurales
 
-- [x] README en v6.5.8.
+- [x] README en v6.5.8a.
 - [x] Índice general enlaza Anexos XX y XXI.
-- [x] Anexo XIX actualizado a v6.5.8.
+- [x] Anexo XIX actualizado a v6.5.8a.
 - [x] Referencias de arquitectura de las UT actualizadas.
 - [x] WSL utilizado como denominación canónica en los documentos activos.
 - [x] Anexo XX presente.
 - [x] Anexo XXI presente.
-- [x] Changelog v6.5.8 presente.
-- [x] Informe de integración v6.5.8 presente.
+- [x] Changelog v6.5.8a presente.
+- [x] Informe de integración v6.5.8a presente.
 
 ## Pruebas de contenido
 

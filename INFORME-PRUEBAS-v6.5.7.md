@@ -17,7 +17,7 @@ Resultados de esta construcción:
 - `python3 tests/validate_material.py` → `PASS: validator.py`.
 - Comprobación de enlaces Markdown internos → `MISSING 0`.
 - Bloques Markdown balanceados → `0` bloques con número impar de delimitadores.
-- Referencias activas a `WSL2` → `0`.
+- Referencias activas a `la denominación anterior` → `0`.
 - Referencias activas a Garceta/García/Enamorado/ISBN → `0`.
 - Las ocho UT contienen referencia a Webmin.
 - Solo existe el Anexo XIX activo en versión v6.5.7.

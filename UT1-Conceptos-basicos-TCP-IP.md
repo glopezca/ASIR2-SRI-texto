@@ -11,7 +11,7 @@
 > Unidad de fundamentos y prerrequisitos para interpretar los resultados de aprendizaje del módulo.
 
 ---
-> 🧭 **Arquitectura común v6.5.7:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.7.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.5.8:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 
 
 
@@ -3462,7 +3462,7 @@ cliente hasta que llega al servidor**, indicando:
 
 ---
 
-## 🔷 v6.5.7 · Laboratorio Tierra Media
+## 🔷 v6.5.8 · Laboratorio Tierra Media
 
 ### Caso integrado
 

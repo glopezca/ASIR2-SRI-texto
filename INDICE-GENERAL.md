@@ -26,7 +26,7 @@
 - [Anexo VII · De Compose a Kubernetes](ANEXO-VII-Compose-a-Kubernetes.md)
 - [Anexo XV · Guía de laboratorio reproducible](ANEXO-XV-Guia-Laboratorio-Reproducible.md)
 - [Anexo XVIII · Chuleta de comandos de red de Ubuntu](ANEXO-XVIII-Chuleta-Comandos-Red-Ubuntu.md)
-- [Anexo XIX · Arquitectura de laboratorio v6.5.8a](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8a.md)
+- [Anexo XIX · Arquitectura de laboratorio v6.5.8b](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8b.md)
 - [Anexo XX · Scripts personalizados de ASIR2-SRI](ANEXO-XX-Scripts-Personalizados-ASIR2-SRI.md)
 - [Anexo XXI · Chuleta de utilidades TUI](ANEXO-XXI-Chuleta-TUI-Administracion.md)
 
@@ -48,10 +48,10 @@
 
 - [Apéndice · Materiales para el profesor](APENDICE-PROFESOR.md)
 - [Índice alfabético de conceptos](INDICE-ALFABETICO.md)
-- [Informe de integración v6.5.8a](INFORME-INTEGRACION-v6.5.8a.md)
-- [Informe de pruebas v6.5.8a](INFORME-PRUEBAS-v6.5.8a.md)
-- [Informe de revisión de fuentes v6.5.8a](INFORME-REVISION-FUENTES-v6.5.8a.md)
-- [Changelog v6.5.8a](CHANGELOG-v6.5.8a.md)
+- [Informe de integración v6.5.8b](INFORME-INTEGRACION-v6.5.8b.md)
+- [Informe de pruebas v6.5.8b](INFORME-PRUEBAS-v6.5.8b.md)
+- [Informe de revisión de fuentes v6.5.8b](INFORME-REVISION-FUENTES-v6.5.8b.md)
+- [Changelog v6.5.8b](CHANGELOG-v6.5.8b.md)
 - [Changelog](CHANGELOG.md)
 - [Licencia](LICENSE.md)
 - [Aviso y atribución](NOTICE.md)

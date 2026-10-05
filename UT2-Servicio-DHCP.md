@@ -924,7 +924,7 @@ Si la instalación dispone de un módulo DHCP compatible, localízalo en **Serve
 > La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
 # 🧪 25. PRÁCTICA 1 --- DHCP gráfico en Packet Tracer · Arnor
 
-> **Escenario v6.5.8a:** Arnor es el primer servidor DHCP de la red interna. Se configura exclusivamente mediante la interfaz gráfica de **Server-PT** para que el alumno comprenda el ámbito, las opciones y las reservas antes de trasladar exactamente el mismo servicio al router Mordor mediante CLI.
+> **Escenario v6.5.8b:** Arnor es el primer servidor DHCP de la red interna. Se configura exclusivamente mediante la interfaz gráfica de **Server-PT** para que el alumno comprenda el ámbito, las opciones y las reservas antes de trasladar exactamente el mismo servicio al router Mordor mediante CLI.
 
 ## Objetivo
 
@@ -1215,7 +1215,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 # 🧪 28. PRÁCTICA 4 --- DHCP en VirtualBox · Mordor + Kea
 
-> **Arquitectura v6.5.8a:** en VirtualBox no se utiliza Arnor como servidor DHCP. La función DHCP se concentra en la VM **Mordor**. Gondor y Rohan son clientes; Lothlorien es el servidor de servicios; Rivendel queda reservado para tareas auxiliares.
+> **Arquitectura v6.5.8b:** en VirtualBox no se utiliza Arnor como servidor DHCP. La función DHCP se concentra en la VM **Mordor**. Gondor y Rohan son clientes; Lothlorien es el servidor de servicios; Rivendel queda reservado para tareas auxiliares.
 
 ## 27.1. Inventario de las cinco VMs
 
@@ -1227,7 +1227,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | Lothlorien | `192.168.20.192/24` | servicios principales |
 | Rivendel | `192.168.20.193/24` | servicios auxiliares/pruebas |
 
-La topología física/virtual se documenta en el [Anexo de arquitectura v6.5.8a](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8a.md).
+La topología física/virtual se documenta en el [Anexo de arquitectura v6.5.8b](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8b.md).
 
 ## 27.2. Ubicación y sintaxis de Kea
 
@@ -2206,7 +2206,7 @@ Entrega:
 
 ---
 
-## 🔷 v6.5.8a · Laboratorio Tierra Media
+## 🔷 v6.5.8b · Laboratorio Tierra Media
 
 ### Caso integrado
 

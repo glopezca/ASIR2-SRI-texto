@@ -206,7 +206,11 @@ nmcli device status
 nmcli connection show
 ```
 
-## 11. Gestionar servicios
+## 11. Gestionar servicios con systemd y systemctl
+
+`systemctl` **no es una TUI**: es la interfaz CLI principal para consultar y administrar unidades de `systemd`. Por ello se mantiene en esta chuleta de comandos y no en el Anexo XXI.
+
+### Estado de un servicio
 
 ```bash
 systemctl status NOMBRE_SERVICIO
@@ -214,20 +218,76 @@ systemctl is-active NOMBRE_SERVICIO
 systemctl is-enabled NOMBRE_SERVICIO
 ```
 
+Ejemplos del laboratorio:
+
+```bash
+systemctl status ssh
+systemctl status bind9
+systemctl status nginx
+```
+
+### Arrancar, detener y reiniciar
+
 ```bash
 sudo systemctl start NOMBRE_SERVICIO
 sudo systemctl stop NOMBRE_SERVICIO
 sudo systemctl restart NOMBRE_SERVICIO
 sudo systemctl reload NOMBRE_SERVICIO
+```
+
+- `start`: inicia ahora.
+- `stop`: detiene ahora.
+- `restart`: detiene y vuelve a iniciar.
+- `reload`: pide al servicio que recargue su configuración sin reiniciar el proceso, **si el servicio soporta esta operación**.
+
+### Arranque automático
+
+```bash
 sudo systemctl enable NOMBRE_SERVICIO
 sudo systemctl disable NOMBRE_SERVICIO
 ```
 
-Ver servicios instalados:
+Consultar unidades instaladas:
 
 ```bash
 sudo systemctl list-unit-files --type=service --all
 ```
+
+### Diagnóstico: systemctl + journalctl
+
+```bash
+systemctl status NOMBRE_SERVICIO --no-pager
+sudo journalctl -u NOMBRE_SERVICIO -n 50 --no-pager
+sudo journalctl -u NOMBRE_SERVICIO -f
+```
+
+La secuencia recomendada es:
+
+```text
+¿Está activo?      → systemctl is-active
+        ↓
+¿Está habilitado?  → systemctl is-enabled
+        ↓
+¿Qué estado tiene? → systemctl status
+        ↓
+¿Qué ha ocurrido?  → journalctl -u
+        ↓
+¿Escucha?          → ss -lntup
+        ↓
+¿Funciona?         → prueba desde cliente
+```
+
+### NetworkManager
+
+Si el sistema utiliza NetworkManager:
+
+```bash
+systemctl status NetworkManager
+nmcli device status
+nmcli connection show
+```
+
+> **Pro tip:** `systemctl` responde a «¿qué está haciendo systemd con este servicio?»; una TUI como `btop` responde a «¿qué está haciendo el sistema/proceso?». Son herramientas complementarias, no equivalentes.
 
 ## 12. Comprobar el firewall UFW
 

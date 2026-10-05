@@ -8,7 +8,7 @@ Fuente de los scripts:
 
 `https://github.com/glopezca/ASIR2-SRI/tree/main/scripts`
 
-El repositorio identifica `scripts/` como espacio de utilidades y automatización. Antes de instalar o automatizar cualquier script hay que leerlo y comprobar qué modifica. La automatización debe ser el último paso, no el primero. citeturn7search0
+El repositorio identifica `scripts/` como espacio de utilidades y automatización. Antes de instalar o automatizar cualquier script hay que leerlo y comprobar qué modifica. La automatización debe ser el último paso, no el primero.
 
 > **Idea guía:** un script puede vivir en `~/scripts` y estar disponible como cualquier otro comando, pero eso no significa que deba ejecutarse automáticamente al iniciar una sesión. Son dos decisiones distintas: **hacerlo accesible** y **hacerlo persistente**.
 
@@ -674,7 +674,7 @@ Este modelo mantiene separados:
 - el **perfil personal**;
 - la decisión de cargarlo automáticamente.
 
-Los perfiles de PowerShell están diseñados precisamente para personalizar el entorno de una sesión y se consultan mediante `$PROFILE`. citeturn1search0
+Los perfiles de PowerShell están diseñados precisamente para personalizar el entorno de una sesión y se consultan mediante `$PROFILE`.
 
 ---
 

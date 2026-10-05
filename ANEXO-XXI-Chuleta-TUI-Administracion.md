@@ -68,7 +68,7 @@ SSH largo/mantenimiento  → tmux / byobu
 
 ## 3.1. `btop` · la primera TUI que conviene aprender
 
-`btop` proporciona una visión interactiva de CPU, memoria, swap, discos, red y procesos. Es una excelente herramienta para pasar de **«el servidor va lento»** a una primera hipótesis observable. TecMint lo presenta precisamente como un monitor moderno de recursos con procesos, CPU, memoria, disco y red. citeturn0search0turn0search6
+`btop` proporciona una visión interactiva de CPU, memoria, swap, discos, red y procesos. Es una excelente herramienta para pasar de **«el servidor va lento»** a una primera hipótesis observable. TecMint lo presenta precisamente como un monitor moderno de recursos con procesos, CPU, memoria, disco y red.
 
 Instalación en Ubuntu:
 
@@ -128,7 +128,7 @@ kill PID
 
 ## 3.3. `glances` · una «mirada» global
 
-`glances` reúne en una pantalla información de CPU, carga, memoria, red, discos, E/S y procesos. Es una buena herramienta para una **primera inspección transversal**. citeturn2search0turn2search3
+`glances` reúne en una pantalla información de CPU, carga, memoria, red, discos, E/S y procesos. Es una buena herramienta para una **primera inspección transversal**.
 
 ```bash
 sudo apt install glances
@@ -143,7 +143,7 @@ Glances puede ejecutarse en modo servidor web:
 glances -w
 ```
 
-La documentación actual de Glances muestra el acceso mediante navegador en `http://IP_DEL_SERVIDOR:61208`. citeturn2search0turn2search3
+La documentación actual de Glances muestra el acceso mediante navegador en `http://IP_DEL_SERVIDOR:61208`.
 
 Ejemplo:
 
@@ -156,7 +156,7 @@ Ejemplo:
               navegador del técnico
 ```
 
-**Seguridad:** no expongas indiscriminadamente la interfaz a Internet. Usa red de administración, firewall y, cuando proceda, autenticación. Glances permite configurar usuario y contraseña. citeturn2search0
+**Seguridad:** no expongas indiscriminadamente la interfaz a Internet. Usa red de administración, firewall y, cuando proceda, autenticación. Glances permite configurar usuario y contraseña.
 
 > **💡 Pro tip:** `glances -w` es especialmente interesante para una VM servidor porque permite observarla desde otro equipo sin instalar una interfaz gráfica en el servidor.
 
@@ -205,7 +205,7 @@ systemd
 
 ## 4.1. `iftop` · «¿quién está hablando con quién?»
 
-`iftop` muestra en tiempo real las conversaciones y el ancho de banda que atraviesa una interfaz. Es conceptualmente el equivalente de `top` para el tráfico de red. Está disponible como paquete de Ubuntu. citeturn0search3turn2search4
+`iftop` muestra en tiempo real las conversaciones y el ancho de banda que atraviesa una interfaz. Es conceptualmente el equivalente de `top` para el tráfico de red. Está disponible como paquete de Ubuntu.
 
 ```bash
 sudo apt install iftop
@@ -230,7 +230,7 @@ sudo iftop -i INTERFAZ
 
 ## 4.2. `bandwhich` · «¿qué proceso está consumiendo la red?»
 
-`bandwhich` relaciona utilización de red con **proceso, conexión e IP/host remoto**. El proyecto oficial advierte actualmente que se encuentra en mantenimiento pasivo, por lo que conviene comprobar su estado y versión antes de incorporarlo a un entorno productivo. citeturn2search1
+`bandwhich` relaciona utilización de red con **proceso, conexión e IP/host remoto**. El proyecto oficial advierte actualmente que se encuentra en mantenimiento pasivo, por lo que conviene comprobar su estado y versión antes de incorporarlo a un entorno productivo.
 
 ```bash
 sudo bandwhich
@@ -242,7 +242,7 @@ O una interfaz concreta:
 sudo bandwhich -i enp0s3
 ```
 
-El proyecto requiere privilegios para capturar tráfico; ofrece como alternativas `sudo` o capacidades Linux específicas. citeturn2search1
+El proyecto requiere privilegios para capturar tráfico; ofrece como alternativas `sudo` o capacidades Linux específicas.
 
 > **💡 Pro tip:** `iftop` responde mejor a «¿qué conversaciones generan tráfico?»; `bandwhich` a «¿qué proceso lo está generando?».
 
@@ -280,7 +280,7 @@ Por tanto, `nmtui` **no sustituye Netplan** cuando el backend es `systemd-networ
 
 ## 5.1. `lazydocker` · Docker y Compose
 
-`lazydocker` es una TUI para Docker y Docker Compose. Permite observar contenedores, logs, recursos y el despliegue desde una interfaz única. El proyecto se describe explícitamente como una TUI para Docker y Docker Compose. citeturn1search5
+`lazydocker` es una TUI para Docker y Docker Compose. Permite observar contenedores, logs, recursos y el despliegue desde una interfaz única. El proyecto se describe explícitamente como una TUI para Docker y Docker Compose.
 
 ```bash
 lazydocker
@@ -308,13 +308,13 @@ docker inspect CONTENEDOR
 
 ## 5.2. `ctop` · contenedores como un `top`
 
-El proyecto original de `ctop` proporciona una vista compacta de métricas en tiempo real para múltiples contenedores, con soporte para Docker y runC. citeturn1search0
+El proyecto original de `ctop` proporciona una vista compacta de métricas en tiempo real para múltiples contenedores, con soporte para Docker y runC.
 
 ```bash
 ctop
 ```
 
-También permite una vista individual y acciones como filtrado, ordenación y consulta de logs. citeturn1search0
+También permite una vista individual y acciones como filtrado, ordenación y consulta de logs.
 
 > **⚠️ Pro tip:** comprueba siempre la procedencia y mantenimiento de la versión que instales. En una chuleta docente interesa conocer la herramienta; en producción interesa además conocer su ciclo de mantenimiento y el origen del paquete.
 
@@ -420,7 +420,7 @@ logs de ficheros → lnav
 
 # 8. 🌿 Git: `lazygit`
 
-`lazygit` es una TUI para operaciones Git: cambios, staging, commits, ramas, historial, diffs y otras operaciones. El proyecto oficial lo define como una interfaz de terminal para Git. citeturn1search1
+`lazygit` es una TUI para operaciones Git: cambios, staging, commits, ramas, historial, diffs y otras operaciones. El proyecto oficial lo define como una interfaz de terminal para Git.
 
 ```bash
 cd repositorio/
@@ -676,11 +676,11 @@ No todas las herramientas tienen la misma disponibilidad en los repositorios de 
 
 ## Fuentes y referencias técnicas
 
-- `btop`: documentación y proyecto; visión general de monitorización. citeturn0search0turn0search6
-- `glances`: documentación oficial, modo TUI y modo web `-w`. citeturn2search0turn2search3
-- `iftop`: paquete disponible en Ubuntu 24.04 LTS y documentación de uso. citeturn2search4turn0search3
-- `bandwhich`: proyecto oficial y requisitos de privilegios/capacidades. citeturn2search1
-- `lazydocker`: proyecto oficial. citeturn1search5
-- `ctop`: proyecto oficial original. citeturn1search0
-- `lazygit`: proyecto oficial. citeturn1search1
+- `btop`: documentación y proyecto; visión general de monitorización.
+- `glances`: documentación oficial, modo TUI y modo web `-w`.
+- `iftop`: paquete disponible en Ubuntu 24.04 LTS y documentación de uso.
+- `bandwhich`: proyecto oficial y requisitos de privilegios/capacidades.
+- `lazydocker`: proyecto oficial.
+- `ctop`: proyecto oficial original.
+- `lazygit`: proyecto oficial.
 - `Cap.zip`: material visual aportado por el usuario, utilizado únicamente como **referencia de estilo y organización**; las infografías incluidas en este anexo son material visual propio en castellano.

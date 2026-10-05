@@ -1,3 +1,9 @@
+# v6.5.d
+
+- Corrección de sintaxis declarativa de `nftables` para compatibilidad con Webmin: `type`, `hook`, `priority` y `policy` quedan en una única línea de definición de cadena base.
+- Revisados los fragmentos de `input`, `forward`, `output` y `postrouting` de UT1.
+- Añadida comprobación específica y documentación del comportamiento de Webmin.
+
 # Changelog
 
 ## v6.5.5 — 27/09/2026
@@ -66,3 +72,7 @@
 
 - Se documenta y endurece el algoritmo de actualización en `ANEXO-XVII-Algoritmo-Actualizacion.md`.
 - Se añade un actualizador ejecutable en `tools/update_material.py`.
+
+## v6.5.d
+- Limpieza de referencias internas de citación visibles.
+- Corrección visual de las infografías TUI: Pro Tips precedidos por bombilla.

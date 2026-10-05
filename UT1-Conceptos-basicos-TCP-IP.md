@@ -11,7 +11,7 @@
 > Unidad de fundamentos y prerrequisitos para interpretar los resultados de aprendizaje del módulo.
 
 ---
-> 🧭 **Arquitectura común v6.5.8b:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8b.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.5.d:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.d.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 
 
 
@@ -2492,8 +2492,7 @@ flush ruleset
 
 table inet filter {
     chain input {
-        type filter hook input priority 0;
-        policy drop;
+        type filter hook input priority 0; policy drop;
 
         iif "lo" accept
         ct state established,related accept
@@ -2502,8 +2501,7 @@ table inet filter {
     }
 
     chain forward {
-        type filter hook forward priority 0;
-        policy drop;
+        type filter hook forward priority 0; policy drop;
 
         ct state established,related accept
         iifname "enp0s8" oifname "enp0s3" accept
@@ -2511,11 +2509,12 @@ table inet filter {
     }
 
     chain output {
-        type filter hook output priority 0;
-        policy accept;
+        type filter hook output priority 0; policy accept;
     }
 }
 ```
+
+> ⚠️ **Compatibilidad con Webmin:** en una cadena base, mantén `type`, `hook`, `priority` y `policy` en la **misma línea**. La sintaxis de `nftables` permite escribir `policy` en una línea independiente, pero el módulo **Linux Firewall (nftables)** de Webmin puede interpretarla como si fuese una regla. Por ello, en este material se adopta deliberadamente la forma `type filter hook input priority 0; policy drop;`.
 
 ### Leer una regla en lenguaje humano
 
@@ -2546,8 +2545,7 @@ Ahora añadimos una segunda tabla. Su función no es decidir si el tráfico est�
 ```nft
 table ip nat {
     chain postrouting {
-        type nat hook postrouting priority srcnat;
-        policy accept;
+        type nat hook postrouting priority srcnat; policy accept;
 
         oifname "enp0s3" ip saddr {
             192.168.10.0/24,
@@ -2677,6 +2675,14 @@ Apply / cargar ruleset             → Apply Changes
 nft list ruleset                   → comprobar estado
 /etc/nftables.conf                → referencia persistente
 ```
+
+Antes de aplicar un ruleset editado a mano, valida siempre su sintaxis:
+
+```bash
+sudo nft -c -f /etc/nftables.conf
+```
+
+En Webmin, comprueba especialmente que `policy` aparece como **política de la cadena** y no como una regla independiente. Si la interfaz muestra una política como regla, revisa la definición de la cadena y vuelve a dejar `type`, `hook`, `priority` y `policy` en una única línea.
 
 Después de cualquier cambio realizado desde Webmin, vuelve a la CLI para comprobar el resultado:
 
@@ -3462,7 +3468,7 @@ cliente hasta que llega al servidor**, indicando:
 
 ---
 
-## 🔷 v6.5.8b · Laboratorio Tierra Media
+## 🔷 v6.5.d · Laboratorio Tierra Media
 
 ### Caso integrado
 

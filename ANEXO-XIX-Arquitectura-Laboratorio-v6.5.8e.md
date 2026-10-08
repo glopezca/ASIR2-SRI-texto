@@ -1,10 +1,12 @@
-# Anexo XIX · Arquitectura de laboratorio v6.5.8d
+# Anexo XIX · Arquitectura de laboratorio v6.5.8e
 
 ## 1. Principio de continuidad
 
 Las UT1–UT8 comparten una única infraestructura didáctica. Se añaden servicios; no se reinventa la red en cada unidad.
 
-![Topología Tierra Media v6.5.8d](img/topologia-tierramedia-packettracer.png)
+> **Esquema único del entorno de red:** el laboratorio utiliza exclusivamente el PNG mejorado basado en Cisco Packet Tracer. No se incluye el SVG generado posteriormente.
+
+![Topología Tierra Media v6.5.8e](img/topologia-tierramedia-packettracer.png)
 
 ## 2. Tres zonas
 

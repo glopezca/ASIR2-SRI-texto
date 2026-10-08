@@ -1,8 +1,8 @@
-# Informe de integración · v6.5.8d
+# Informe de integración · v6.5.8e
 
 ## Alcance
 
-v6.5.8d es una corrección incremental de v6.5.8b. No cambia la arquitectura didáctica de las UT ni la organización funcional introducida en v6.5.8b.
+v6.5.8e es una corrección incremental de v6.5.8b. No cambia la arquitectura didáctica de las UT ni la organización funcional introducida en v6.5.8b.
 
 ## Cambios integrados
 

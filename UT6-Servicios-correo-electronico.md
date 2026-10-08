@@ -19,7 +19,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 | Debes dominar | Evidencia observable |
 |---
-> 🧭 **Arquitectura común v6.5.8d:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8d.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.5.8e:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8e.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 |---|
 | **SMTP** | Explicación, comando, diagrama o evidencia verificable. |
 | **IMAP/POP** | Explicación, comando, diagrama o evidencia verificable. |
@@ -4626,7 +4626,7 @@ DIAGNÓSTICO
 
 ---
 
-## 🔷 v6.5.8d · Laboratorio Tierra Media
+## 🔷 v6.5.8e · Laboratorio Tierra Media
 
 ### Caso integrado
 

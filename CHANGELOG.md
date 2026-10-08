@@ -1,4 +1,15 @@
-# v6.5.8d
+# v6.5.8e
+
+## Correcciones curriculares y visuales
+
+- Se incorpora de forma explícita la correspondencia curricular del módulo 0375 con los **RA1–RA8**.
+- Se fija la correspondencia: **UT2→RA2, UT3→RA1, UT4→RA4, UT5→RA3, UT6→RA5, UT7→RA6 y UT8→RA7+RA8**.
+- **UT1** queda identificada como unidad de fundamentación transversal y no se fuerza su asignación a un RA.
+- Se recupera como **único esquema del entorno de red del laboratorio** el PNG mejorado basado en Cisco Packet Tracer: `img/topologia-tierramedia-packettracer.png`.
+- Se elimina del repositorio el SVG de topología generado posteriormente.
+- Se actualizan README, matriz curricular, índice, arquitectura y documentación de versión a v6.5.8e.
+
+# v6.5.8e
 
 - Corrección de sintaxis declarativa de `nftables` para compatibilidad con Webmin: `type`, `hook`, `priority` y `policy` quedan en una única línea de definición de cadena base.
 - Revisados los fragmentos de `input`, `forward`, `output` y `postrouting` de UT1.
@@ -73,6 +84,6 @@
 - Se documenta y endurece el algoritmo de actualización en `ANEXO-XVII-Algoritmo-Actualizacion.md`.
 - Se añade un actualizador ejecutable en `tools/update_material.py`.
 
-## v6.5.8d
+## v6.5.8e
 - Limpieza de referencias internas de citación visibles.
 - Corrección visual de las infografías TUI: Pro Tips precedidos por bombilla.

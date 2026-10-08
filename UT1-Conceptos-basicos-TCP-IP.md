@@ -10,8 +10,12 @@
 >
 > Unidad de fundamentos y prerrequisitos para interpretar los resultados de aprendizaje del módulo.
 
+### Correspondencia curricular
+
+UT1 es una **unidad de fundamentación transversal** para el módulo 0375. No se asigna artificialmente a un RA concreto: sus contenidos de TCP/IP, direccionamiento, routing, forwarding, NAT y preparación del laboratorio sirven de base para RA1–RA8. La correspondencia curricular específica comienza en UT2.
+
 ---
-> 🧭 **Arquitectura común v6.5.8d:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8d.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.5.8e:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8e.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 
 
 
@@ -3468,7 +3472,7 @@ cliente hasta que llega al servidor**, indicando:
 
 ---
 
-## 🔷 v6.5.8d · Laboratorio Tierra Media
+## 🔷 v6.5.8e · Laboratorio Tierra Media
 
 ### Caso integrado
 

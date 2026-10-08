@@ -1281,7 +1281,7 @@ En Mordor:
 sudo apt update
 sudo apt install kea-dhcp4-server
 sudo cp /etc/kea/kea-dhcp4.conf /etc/kea/kea-dhcp4.conf.bak
-sudo -e -- /etc/kea/kea-dhcp4.conf
+sudoedit /etc/kea/kea-dhcp4.conf
 ```
 
 Valida el JSON antes de reiniciar:

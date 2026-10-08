@@ -162,11 +162,10 @@ El resultado de `kubectl get nodes` debe mostrar al menos un nodo en estado `Rea
 > No empieces por convertir `compose.yaml`. Primero demuestra que Kubernetes funciona independientemente del proyecto:
 >
 > ```bash
-> kubectl create deployment prueba --image=nginx:alpine
-> kubectl get deployment
-> kubectl get pods -o wide
-> kubectl delete deployment prueba
-> ```
+kubectl create deployment prueba --image=nginx:alpine
+kubectl get deployment
+kubectl get pods -o wide
+kubectl delete deployment prueba```
 >
 > Si esta prueba falla, el problema está en Kubernetes o en el acceso al clúster, no en Compose.
 

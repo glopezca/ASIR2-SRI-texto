@@ -1,6 +1,6 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-## Material docente integral · `ASIR2-SRI-texto` · v6.5.8e
+## Material docente integral · `ASIR2-SRI-texto` · v6.6
 
 **Edición 2026** para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
@@ -14,33 +14,20 @@ Se añaden además plantillas profesionales, matriz curricular, guía de laborat
 
 ## Unidades de trabajo y correspondencia curricular
 
-La organización de las UT no reproduce necesariamente la numeración de los RA. La correspondencia se establece por el **contenido y desempeño evaluable** de cada unidad. La referencia curricular es el módulo profesional **0375 · Servicios de red e Internet** del CFGS de Administración de Sistemas Informáticos en Red, conforme al currículo de Castilla y León (Orden EDU/1287/2024, de 26 de noviembre) y al currículo básico estatal del título.
+La correspondencia entre las unidades de trabajo y los resultados de aprendizaje se establece según el contenido y el desempeño evaluable del módulo profesional **0375 · Servicios de red e Internet**.
 
-| UT | Contenido | RA | Correspondencia curricular |
-|---|---|---|---|
-| UT1 | TCP/IP, direccionamiento, routing, forwarding, NAT/PAT, nftables y preparación del laboratorio | — | **Base transversal** del módulo; no se asigna artificialmente a un RA concreto |
-| UT2 | DHCP, concesiones, relay, Kea y seguridad | **RA2** | Administración de servicios de configuración automática |
-| UT3 | DNS, BIND9, zonas, registros, transferencias y DNSSEC | **RA1** | Administración de servicios de resolución de nombres |
-| UT4 | FTP, FTPS, SFTP, TFTP, permisos y diagnóstico | **RA4** | Administración de servicios de transferencia de archivos |
-| UT5 | HTTP, HTTPS, Apache, Nginx, Virtual Hosts, proxy y observabilidad | **RA3** | Administración de servidores Web |
-| UT6 | SMTP, IMAP, POP3, Postfix, Dovecot, Roundcube y autenticación | **RA5** | Administración de servidores de correo electrónico |
-| UT7 | XMPP, IRC, listas de distribución y NNTP | **RA6** | Administración de mensajería instantánea, noticias y listas de distribución |
-| UT8 | Audio, vídeo, FFmpeg, Icecast, HLS, RTP y videoconferencia | **RA7 + RA8** | Administración de servicios de audio y de vídeo |
+| UT | RA |
+|---|---|
+| **UT1** | — |
+| **UT2** | **RA2** |
+| **UT3** | **RA1** |
+| **UT4** | **RA3** |
+| **UT5** | **RA4** |
+| **UT6** | **RA5** |
+| **UT7** | **RA6** |
+| **UT8** | **RA7 + RA8** |
 
-### Resultados de aprendizaje del módulo 0375
-
-| RA | Resultado de aprendizaje | UT |
-|---|---|---|
-| **RA1** | Administra servicios de resolución de nombres, analizándolos y garantizando la seguridad del servicio. | **UT3** |
-| **RA2** | Administra servicios de configuración automática, identificándolos y verificando la correcta asignación de los parámetros. | **UT2** |
-| **RA3** | Administra servidores Web, aplicando criterios de configuración y asegurando el funcionamiento del servicio. | **UT5** |
-| **RA4** | Administra servicios de transferencia de archivos, asegurando y limitando el acceso a la información. | **UT4** |
-| **RA5** | Administra servidores de correo electrónico, aplicando criterios de configuración y garantizando la seguridad del servicio. | **UT6** |
-| **RA6** | Administra servicios de mensajería instantánea, noticias y listas de distribución, verificando y asegurando el acceso de los usuarios. | **UT7** |
-| **RA7** | Administra servicios de audio, aplicando criterios de configuración y asegurando el funcionamiento del servicio. | **UT8** |
-| **RA8** | Administra servicios de vídeo, aplicando criterios de configuración y asegurando el funcionamiento del servicio. | **UT8** |
-
-**Nota curricular:** UT1 aporta los fundamentos necesarios para desarrollar los RA posteriores, pero no se etiqueta como RA1 para evitar confundir una unidad de fundamentación con el resultado de aprendizaje específico de DNS. UT8 cubre explícitamente **dos RA (RA7 y RA8)**.
+La correspondencia se contrasta con el currículo básico estatal del título y con el currículo de Castilla y León para el módulo 0375.
 
 **Referencias normativas:** [Orden EDU/1287/2024, de 26 de noviembre — currículo de ASIR en Castilla y León](https://bocyl.jcyl.es/boletines/2024/12/02/pdf/BOCYL-D-02122024-3.pdf) · [Real Decreto 1629/2009, de 30 de octubre — título y enseñanzas mínimas](https://www.boe.es/buscar/doc.php?id=BOE-A-2009-19218).
 
@@ -48,11 +35,11 @@ La organización de las UT no reproduce necesariamente la numeración de los RA.
 
 Consulta el **[índice general](INDICE-GENERAL.md)** para acceder directamente a todas las UT, anexos y materiales complementarios.
 
-## Corrección nftables/Webmin en v6.5.8e
+## Corrección nftables/Webmin en v6.6
 
 UT1 revisa la sintaxis de las cadenas base de `nftables` para mantener `type`, `hook`, `priority` y `policy` en una única sentencia. Esto conserva la sintaxis válida de `nftables` y evita que el módulo Linux Firewall (nftables) de Webmin trate una línea independiente `policy ...;` como si fuese una regla.
 
-## Anexos incorporados en v6.5.8e
+## Anexos incorporados en v6.6
 
 - [Anexo XX · Scripts personalizados de ASIR2-SRI](ANEXO-XX-Scripts-Personalizados-ASIR2-SRI.md) — `apt.sh`, scripts de prompt Linux/PowerShell, `PATH`, persistencia, `chmod +x`, `batcat` y, después, Git como generalización.
 - [Anexo XXI · Chuleta de utilidades TUI](ANEXO-XXI-Chuleta-TUI-Administracion.md) — clasificación por funcionalidad: procesos, red, contenedores, ficheros, logs, Git y administración remota; con btop, glances, iftop, bandwhich, k9s, lazydocker, ctop, lazygit, ncdu, broot, mc, tmux y byobu.
@@ -63,20 +50,20 @@ Consulta el **[índice alfabético de conceptos](INDICE-ALFABETICO.md)** para lo
 
 ## Tres entornos de trabajo + Docker como extensión
 
-La v6.5.8e fija **tres entornos primarios y coherentes** para las prácticas: **Cisco Packet Tracer**, **WSL** y **VirtualBox + Ubuntu Server**. Docker Compose queda como extensión reproducible en los anexos y no sustituye al laboratorio principal.
+La v6.6 fija **tres entornos primarios y coherentes** para las prácticas: **Cisco Packet Tracer**, **WSL** y **VirtualBox + Ubuntu Server**. Docker Compose queda como extensión reproducible en los anexos y no sustituye al laboratorio principal.
 
-| Entorno | Papel en v6.5.8e |
+| Entorno | Papel en v6.6 |
 |---|---|
 | 🧪 **Packet Tracer** | Topología, routing y demostración gráfica de DHCP; en UT2 se compara **Arnor (DHCP gráfico)** con **Mordor (DHCP por CLI)**. |
 | 🐧 **WSL + Ubuntu** | Cliente, herramientas de diagnóstico, captura, consultas y automatización. **No se despliega un servidor DHCP en WSL.** |
 | 🖥️ **VirtualBox + Ubuntu Server** | Servidores reales del laboratorio. Las cinco VMs son **Mordor, Gondor, Rohan, Lothlorien y Rivendel**. Mordor presta DHCP; Lothlorien centraliza la práctica de servicios; Rivendel se reserva para configuraciones auxiliares. |
 | 🐳 **Docker Compose** | Extensión opcional para reproducibilidad, tratada en los anexos; no redefine la arquitectura principal. |
 
-### Ecosistema Tierra Media v6.5.8e
+### Ecosistema Tierra Media v6.6
 
 > **Esquema único del entorno de red:** se utiliza exclusivamente el PNG mejorado basado en la topología de Cisco Packet Tracer. No se incluye el SVG generado posteriormente.
 
-![Topología Tierra Media v6.5.8e](img/topologia-tierramedia-packettracer.png)
+![Topología Tierra Media v6.6](img/topologia-tierramedia-packettracer.png)
 
 | Zona | Red | Elementos principales | Papel |
 |---|---|---|---|
@@ -98,9 +85,9 @@ Rivendel     → servidor auxiliar / secundario / pruebas
 
 > **Regla de continuidad:** una UT posterior no inventa una red nueva si puede completar la infraestructura anterior. Cuando el servicio real se despliega en Ubuntu, se centraliza en **Lothlorien** salvo que el objetivo de la práctica exija específicamente **Mordor** o **Rivendel**.
 
-## v6.5.8e · Cambio de arquitectura de laboratorio
+## v6.6 · Cambio de arquitectura de laboratorio
 
-La v6.5.8e fija una arquitectura acumulativa única para las ocho UT. El objetivo es que cada unidad **añada un servicio al mismo escenario**, no que reinicie el laboratorio con una topología distinta.
+La v6.6 fija una arquitectura acumulativa única para las ocho UT. El objetivo es que cada unidad **añada un servicio al mismo escenario**, no que reinicie el laboratorio con una topología distinta.
 
 ### Regla de oro de documentación técnica
 
@@ -117,7 +104,7 @@ Para **cada servicio** se exige:
 9. incorporación de comandos al glosario/chuleta;
 10. módulo Webmin equivalente, cuando exista, y declaración expresa cuando no exista.
 
-La matriz y la arquitectura completa están en [Anexo XIX](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8e.md).
+La matriz y la arquitectura completa están en [Anexo XIX](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md).
 
 ## Cómo está organizada cada UT
 
@@ -141,7 +128,7 @@ La preparación del entorno está en **UT1**, e incluye ficha del puesto, Virtua
 
 ## Material recuperado del CIFP Juan de Colonia
 
-La v6.5.8e vuelve a contrastar el material con el libro **Preparación del entorno** del CIFP Juan de Colonia. Se fusionan y sintetizan sus contenidos útiles con la documentación del repositorio, evitando duplicaciones y manteniendo una única referencia práctica.
+La v6.6 vuelve a contrastar el material con el libro **Preparación del entorno** del CIFP Juan de Colonia. Se fusionan y sintetizan sus contenidos útiles con la documentación del repositorio, evitando duplicaciones y manteniendo una única referencia práctica.
 
 En particular, se amplía la **chuleta de comandos de red de Ubuntu** para cubrir, además de la consulta de interfaces y rutas, conectividad, DNS, puertos y sockets, Netplan, `systemd`, firewall `ufw`, diagnóstico con `nmap`, registros y herramientas auxiliares. También se conserva la preparación común del puesto: identificación del equipo, comprobación TCP/IP, instalación de Ubuntu Server, SSH y comprobación final.
 
@@ -149,7 +136,7 @@ El contenido del libro no se copia de forma literal: se **fusiona, sintetiza y a
 
 ## Fuentes y control de actualidad
 
-`INFORME-REVISION-FUENTES-v6.5.8e.md` documenta qué materiales aportados se integran, cuáles se corrigen y cuáles se conservan únicamente como referencia histórica o pedagógica.
+`INFORME-REVISION-FUENTES-v6.6.md` documenta qué materiales aportados se integran, cuáles se corrigen y cuáles se conservan únicamente como referencia histórica o pedagógica.
 
 El material usa documentación oficial de Ubuntu, BIND9, Kea, Apache, Nginx, Postfix, Dovecot, Mailman 3, Docker, Kubernetes, MDN y RFC Editor como fuentes técnicas primarias.
 
@@ -159,7 +146,7 @@ El material original del repositorio se distribuye bajo **CC BY-SA 4.0**.
 
 **Atribución recomendada:**
 
-> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.5.8e, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
+> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.6, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
 
 Los materiales de terceros mantienen sus propias licencias, marcas y derechos.
 
@@ -190,13 +177,13 @@ El actualizador no reemplaza recetas técnicas mediante búsquedas globales. Sol
 - `ANEXO-XVI-Auditoria-Obsolescencia.md`: criterio de sustitución tecnológica.
 - `ANEXO-XVII-Algoritmo-Actualizacion.md`: procedimiento de futuras iteraciones.
 - `ANEXO-XVIII-Chuleta-Comandos-Red-Ubuntu.md`: consulta rápida de comandos de red para el laboratorio.
-- `ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8e.md`: arquitectura común de Packet Tracer, WSL y VirtualBox.
+- `ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md`: arquitectura común de Packet Tracer, WSL y VirtualBox.
 - `ANEXO-XX-Scripts-Personalizados-ASIR2-SRI.md`: scripts personalizados y su integración en Bash y PowerShell.
 - `ANEXO-XXI-Chuleta-TUI-Administracion.md`: utilidades TUI para administración local y remota.
-- `INFORME-REVISION-FUENTES-v6.5.8e.md`: auditoría de las fuentes aportadas.
+- `INFORME-REVISION-FUENTES-v6.6.md`: auditoría de las fuentes aportadas.
 - `INDICE-ALFABETICO.md`: índice rápido de conceptos.
 
 
 ## Auditoría de continuidad
 
-La integración y no regresión respecto a v6.5.4 se documenta en [INFORME-INTEGRACION-v6.5.8e.md](INFORME-INTEGRACION-v6.5.8e.md).
+La integración y no regresión respecto a v6.5.4 se documenta en [INFORME-INTEGRACION-v6.6.md](INFORME-INTEGRACION-v6.6.md).

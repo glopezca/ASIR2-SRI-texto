@@ -86,7 +86,7 @@ Prueba:
 docker compose exec client nslookup ejemplo.test dns
 ```
 
-## 6. UT4 · Transferencia
+## 6. UT5 · Transferencia
 
 SFTP se basa en SSH. El laboratorio debe mantener el acceso limitado y no publicar credenciales reales.
 
@@ -96,7 +96,7 @@ cliente ── SSH/SFTP ── servidor
 
 Cuando se utilice una imagen de terceros, fijar una versión o digest para hacer reproducible la práctica.
 
-## 7. UT5 · Web
+## 7. UT4 · Web
 
 ```text
 localhost:8080
@@ -195,8 +195,8 @@ Un contenedor ejecutándose no implica que la aplicación esté lista.
 | UT1 | ✓ | ✓ | ✓ | ✓ | ✓ |
 | UT2 | ✓ | ✓ | depende del modo de red | ✓ | ✓ |
 | UT3 | ✓ | ✓ | ✓ | `dig` | ✓ |
-| UT4 | ✓ | ✓ | ✓ | transferencia | ✓ |
-| UT5 | ✓ | ✓ | ✓ | HTTP | ✓ |
+| UT5 | ✓ | ✓ | ✓ | transferencia | ✓ |
+| UT4 | ✓ | ✓ | ✓ | HTTP | ✓ |
 | UT6 | ✓ | ✓ | ✓ | SMTP/IMAP | ✓ |
 | UT7 | ✓ | ✓ | ✓ | sesión | ✓ |
 | UT8 | ✓ | ✓ | ✓ | streaming | ✓ |

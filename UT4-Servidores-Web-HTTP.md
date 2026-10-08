@@ -1,4 +1,4 @@
-# 🌍⚡ Unidad de Trabajo 5 · SERVIDORES WEB Y PROTOCOLO DE TRANSFERENCIA DE HIPERTEXTO (HTTP) ⚡🌍
+# 🌍⚡ Unidad de Trabajo 4 · SERVIDORES WEB Y PROTOCOLO DE TRANSFERENCIA DE HIPERTEXTO (HTTP) ⚡🌍
 
 
 ## 🧭 Guía de aprendizaje de la UT
@@ -19,7 +19,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 | Debes dominar | Evidencia observable |
 |---
-> 🧭 **Arquitectura común v6.5.8e:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8e.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.6:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 |---|
 | **HTTP** | Explicación, comando, diagrama o evidencia verificable. |
 | **cabeceras y códigos** | Explicación, comando, diagrama o evidencia verificable. |
@@ -1670,7 +1670,7 @@ Contenido:
 <html lang="es">
 <head>
     <meta charset="utf-8">
-    <title>ASIR · UT5</title>
+    <title>ASIR · UT4</title>
 </head>
 <body>
     <h1>🌐 Servidor Web ASIR</h1>
@@ -4371,7 +4371,7 @@ d)  El puerto de HTTP.
        │                │                 │
        └────────────────┼─────────────────┘
                         ▼
-                 UT5 ACTUALIZADA
+                 UT4 ACTUALIZADA
                         │
        ┌────────────────┼─────────────────┐
        │                │                 │
@@ -4396,7 +4396,7 @@ Virtual Hosts y ficheros separados para sitios y configuraciones.
 
 # 🏁 73. Resultado esperado
 
-Al finalizar la UT5, el alumno debería poder enfrentarse a:
+Al finalizar la UT4, el alumno debería poder enfrentarse a:
 
 > **«Tengo un Ubuntu Server con una IP y necesito publicar dos sitios,
 > protegerlos con HTTPS, autenticar una zona privada, registrar accesos
@@ -4442,7 +4442,7 @@ DIAGNÓSTICO
 
 ---
 
-## 🔷 v6.5.8e · Laboratorio Tierra Media
+## 🔷 v6.6 · Laboratorio Tierra Media
 
 ### Caso integrado
 

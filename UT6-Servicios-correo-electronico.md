@@ -19,7 +19,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 | Debes dominar | Evidencia observable |
 |---
-> 🧭 **Arquitectura común v6.5.8e:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.5.8e.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.6:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 |---|
 | **SMTP** | Explicación, comando, diagrama o evidencia verificable. |
 | **IMAP/POP** | Explicación, comando, diagrama o evidencia verificable. |
@@ -4527,10 +4527,10 @@ El correo permite integrar prácticamente todo lo estudiado:
                 TLS / seguridad
                       │
                       ▼
-                UT5 · WEB / PKI
+                UT4 · WEB / PKI
 ```
 
-Y se relaciona con UT4 mediante:
+Y se relaciona con UT5 mediante:
 
 ```text
 transferencia de datos
@@ -4626,7 +4626,7 @@ DIAGNÓSTICO
 
 ---
 
-## 🔷 v6.5.8e · Laboratorio Tierra Media
+## 🔷 v6.6 · Laboratorio Tierra Media
 
 ### Caso integrado
 

@@ -873,8 +873,8 @@ La migración de las ocho unidades debe entenderse como una progresión. No todo
 | **UT1** TCP/IP | toolbox de diagnóstico | Pod de herramientas + Services cuando proceda | Ideal para observar red y DNS del clúster; no sustituye Packet Tracer para routing físico/lógico. |
 | **UT2** DHCP | laboratorio controlado | Pod/Deployment posible, pero limitado por la semántica de broadcast y la red del clúster | Mantener la práctica real de DHCP en VirtualBox/Packet Tracer. Kubernetes sirve para estudiar contenedorización, no para fingir una LAN convencional. |
 | **UT3** DNS | BIND + cliente | Deployment/Service de BIND + cliente | Excelente para estudiar DNS interno y Service discovery; separar DNS de aplicación y DNS del clúster. |
-| **UT4** FTP/SFTP | servidor + cliente | Deployment/Service | SFTP suele ser más sencillo de trasladar; FTP requiere especial cuidado con canal de datos, puertos pasivos y NAT. |
-| **UT5** Web | Nginx/Apache + aplicación | Deployment + Service + opcional Ingress | Es el ejemplo ideal para comprender la migración. |
+| **UT5** FTP/SFTP | servidor + cliente | Deployment/Service | SFTP suele ser más sencillo de trasladar; FTP requiere especial cuidado con canal de datos, puertos pasivos y NAT. |
+| **UT4** Web | Nginx/Apache + aplicación | Deployment + Service + opcional Ingress | Es el ejemplo ideal para comprender la migración. |
 | **UT6** Correo | MTA/MDA/IMAP/Webmail | Varios Deployments/Services + almacenamiento persistente | Requiere almacenamiento, DNS, identidad, seguridad y persistencia; no es una migración trivial. |
 | **UT7** Mensajería | XMPP/IRC/listas | Deployments/StatefulSets + Services + almacenamiento según servicio | Adecuado para estudiar Service discovery y persistencia, pero hay que revisar identidad y datos. |
 | **UT8** Audio/vídeo | Icecast/RTMP/HLS | Deployments/Services + almacenamiento/Ingress según arquitectura | El streaming en tiempo real introduce requisitos de red, latencia y persistencia que deben probarse. |
@@ -1050,11 +1050,11 @@ Este procedimiento reproduce la filosofía de diagnóstico aprendida en las UT: 
 
 ---
 
-# 20. Ejercicio guiado: migrar la práctica Web de UT5
+# 20. Ejercicio guiado: migrar la práctica Web de UT4
 
 ## Objetivo
 
-Partir de la práctica Docker Compose de UT5 y obtener una versión Kubernetes que mantenga la misma funcionalidad observable.
+Partir de la práctica Docker Compose de UT4 y obtener una versión Kubernetes que mantenga la misma funcionalidad observable.
 
 ## Fase A · Comprender
 
@@ -1211,7 +1211,7 @@ El flujo profesional básico es:
 ```bash
 git status
 git add k8s/
-git commit -m "Añadir despliegue Kubernetes de UT5"
+git commit -m "Añadir despliegue Kubernetes de UT4"
 git push
 ```
 

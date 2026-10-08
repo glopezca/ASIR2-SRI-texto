@@ -1,4 +1,4 @@
-# Anexo XIX · Arquitectura de laboratorio v6.5.8e
+# Anexo XIX · Arquitectura de laboratorio v6.6
 
 ## 1. Principio de continuidad
 
@@ -6,7 +6,7 @@ Las UT1–UT8 comparten una única infraestructura didáctica. Se añaden servic
 
 > **Esquema único del entorno de red:** el laboratorio utiliza exclusivamente el PNG mejorado basado en Cisco Packet Tracer. No se incluye el SVG generado posteriormente.
 
-![Topología Tierra Media v6.5.8e](img/topologia-tierramedia-packettracer.png)
+![Topología Tierra Media v6.6](img/topologia-tierramedia-packettracer.png)
 
 ## 2. Tres zonas
 
@@ -57,9 +57,9 @@ UT2  → DHCP
  ↓
 UT3  → DNS
  ↓
-UT4  → transferencia de ficheros
+UT5  → transferencia de ficheros
  ↓
-UT5  → web
+UT4  → web
  ↓
 UT6  → correo
  ↓
@@ -114,8 +114,8 @@ Toda práctica de servicio debe poder entregar:
 | UT1 | routing/NAT | diagnóstico | red/router Linux + nftables | Mordor |
 | UT2 | Arnor GUI → Mordor CLI | cliente/captura DHCP | Kea DHCP | Mordor |
 | UT3 | DNS Server-PT | `dig`/captura | BIND9 | Lothlorien |
-| UT4 | FTP/TFTP conceptual | FTP/SFTP/SCP cliente | OpenSSH/vsftpd | Lothlorien |
-| UT5 | HTTP + topología | `curl`/TLS | Apache/Nginx | Lothlorien |
+| UT5 | FTP/TFTP conceptual | FTP/SFTP/SCP cliente | OpenSSH/vsftpd | Lothlorien |
+| UT4 | HTTP + topología | `curl`/TLS | Apache/Nginx | Lothlorien |
 | UT6 | Email Server-PT | SMTP/IMAP/POP3 análisis | Postfix/Dovecot | Lothlorien |
 | UT7 | conectividad/puertos | clientes y captura | Prosody/listas/NNTP | Lothlorien |
 | UT8 | red/puertos | FFmpeg/VLC/captura | Icecast/Nginx RTMP/HLS | Lothlorien |

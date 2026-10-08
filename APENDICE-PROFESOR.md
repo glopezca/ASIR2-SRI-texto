@@ -87,7 +87,7 @@ B. `scp`
 C. `sshd`
 D. `ip link set`
 
-## UT4 · Transferencia de ficheros
+## UT5 · Transferencia de ficheros
 
 **10. ¿Cuál es la característica fundamental de SFTP?**
 
@@ -110,7 +110,7 @@ B. Porque utiliza exclusivamente el puerto 21 para todo.
 C. Porque permite que el cliente inicie también la conexión de datos, facilitando determinados escenarios atravesando firewalls/NAT.
 D. Porque convierte FTP en SFTP.
 
-## UT5 · HTTP
+## UT4 · HTTP
 
 **13. ¿Qué función desempeña un Virtual Host?**
 
@@ -217,12 +217,12 @@ D. Sustituye a los códecs.
 | 7 | **C** | UT3 |
 | 8 | **B** | UT3 |
 | 9 | **A** | UT3 |
-| 10 | **B** | UT4 |
-| 11 | **D** | UT4 |
-| 12 | **C** | UT4 |
-| 13 | **A** | UT5 |
-| 14 | **B** | UT5 |
-| 15 | **A** | UT5 |
+| 10 | **B** | UT5 |
+| 11 | **D** | UT5 |
+| 12 | **C** | UT5 |
+| 13 | **A** | UT4 |
+| 14 | **B** | UT4 |
+| 15 | **A** | UT4 |
 | 16 | **B** | UT6 |
 | 17 | **A** | UT6 |
 | 18 | **C** | UT6 |
@@ -352,8 +352,8 @@ La cobertura de evaluación se mantiene mediante bloques equivalentes:
 | UT1 | arquitectura TCP/IP, IP/IPv6, subredes, transporte, puertos, NAT/PAT, routing y virtualización |
 | UT2 | DHCP, DORA, concesiones, reservas, opciones, relay, DHCPv6 y seguridad |
 | UT3 | DNS, zonas, registros, resolución, BIND9, delegación, transferencia de zona y seguridad |
-| UT4 | FTP, FTPS, TFTP, SFTP/SCP, modos, autenticación, permisos y seguridad |
-| UT5 | WWW, URI/URL, HTTP, MIME, servidores, proxies, Virtual Hosts, HTTPS y logs |
+| UT5 | FTP, FTPS, TFTP, SFTP/SCP, modos, autenticación, permisos y seguridad |
+| UT4 | WWW, URI/URL, HTTP, MIME, servidores, proxies, Virtual Hosts, HTTPS y logs |
 | UT6 | arquitectura de correo, SMTP, IMAP, POP3, MIME, MTA/MUA/MRA, TLS, spam y autenticación |
 | UT7 | mensajería instantánea, XMPP, IRC, listas de distribución, NNTP, servidores y clientes |
 | UT8 | formatos, códecs, contenedores, reproducción, streaming, podcast, VoIP y videoconferencia |

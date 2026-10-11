@@ -1109,6 +1109,8 @@ ip dhcp pool ROHAN
  domain-name tierramedia.jc
 ```
 
+> 🧪 **Si tu versión de Packet Tracer no admite estas reservas**, complétalas en **[netsim DHCP Lab](https://raw.githack.com/glopezca/netsim/main/demo/netsim-dhcp-lab.html)**. Es un simulador web, sin instalación, que acepta toda la sintaxis DHCP de IOS (`host`, `client-identifier`, `hardware-address`, `address … client-id`). Muestra el Client-ID de cada PC para no tener que inventarlo y deja ver el DORA paquete a paquete. Guía de uso y correspondencia con estas prácticas: [Anexo XXII · Simulador netsim](ANEXO-XXII-Simulador-netsim-DHCP.md).
+
 ### 26.3. Comprobación de equivalencia
 
 El resultado de la fase CLI debe ser funcionalmente equivalente a Arnor:

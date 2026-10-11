@@ -17,6 +17,11 @@
 
 # Changelog
 
+## v6.6.1 — 11/10/2026
+
+- Añadido el Anexo XXII · Simulador netsim para DHCP en Cisco IOS, enlazado desde UT2 (Práctica 2, reservas), el índice general, el README y el índice alfabético.
+- Detalle en [CHANGELOG-v6.6.1.md](CHANGELOG-v6.6.1.md).
+
 ## v6.5.5 — 27/09/2026
 
 - Añadido `INDICE-GENERAL.md` como índice de navegación del repositorio.

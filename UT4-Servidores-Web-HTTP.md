@@ -4492,6 +4492,6 @@ sudo ss -lntp | grep -E ':80|:443'
 
 ### Ruta práctica de tres entornos
 
-**Packet Tracer:** representar cliente → switch → Mordor → Lothlorien y utilizar HTTP de Server-PT para observar direccionamiento, puerto 80 y DNS.  
+**Packet Tracer:** representar cliente → switch → Mordor → Lothlorien y utilizar HTTP de Server-PT para observar direccionamiento, puerto 80 y DNS. Alternativa con *handshake* TCP, `GET` y `curl -I` visibles: [Anexo XXII · Simulador netsim](ANEXO-XXII-Simulador-netsim-DHCP.md#2-correspondencia-con-las-prácticas).  
 **WSL:** cliente HTTP/HTTPS con `curl`, `openssl s_client`, `ss` y `tcpdump`.  
 **VirtualBox:** Apache/Nginx en Lothlorien; Rivendel puede actuar como backend para el reverse proxy.

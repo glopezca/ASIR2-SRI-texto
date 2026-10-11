@@ -1009,6 +1009,8 @@ reserva DHCP basada en identidad del cliente
 
 > **Criterio de calidad:** si una función no está disponible en la GUI concreta de Packet Tracer, se documenta la limitación y se demuestra correctamente en el entorno que sí la soporta.
 
+> 🧪 **Reservas por MAC en un servidor gráfico:** el Server-PT del simulador web netsim tiene tabla de reservas. Con él puedes completar esta fase con Gondor `.64` y Rohan `.65` reservados fuera del rango `.1`–`.32`. Pasos en el [Anexo XXII · Simulador netsim](ANEXO-XXII-Simulador-netsim-DHCP.md#4-reservas-dhcp-obtener-el-identificador-sin-inventarlo).
+
 ## 25.4. Probar el ámbito dinámico
 
 Para demostrar la asignación dinámica en esta fase, utiliza un cliente de prueba o cambia temporalmente un equipo no reservado a **Desktop → IP Configuration → DHCP**.
@@ -1109,7 +1111,7 @@ ip dhcp pool ROHAN
  domain-name tierramedia.jc
 ```
 
-> 🧪 **Si tu versión de Packet Tracer no admite estas reservas**, complétalas en **[netsim DHCP Lab](https://raw.githack.com/glopezca/netsim/main/demo/netsim-dhcp-lab.html)**. Es un simulador web, sin instalación, que acepta toda la sintaxis DHCP de IOS (`host`, `client-identifier`, `hardware-address`, `address … client-id`). Muestra el Client-ID de cada PC para no tener que inventarlo y deja ver el DORA paquete a paquete. Guía de uso y correspondencia con estas prácticas: [Anexo XXII · Simulador netsim](ANEXO-XXII-Simulador-netsim-DHCP.md).
+> 🧪 **Si tu versión de Packet Tracer no admite estas reservas**, complétalas en **[netsim DHCP Lab](https://raw.githack.com/glopezca/netsim/main/demo/netsim-dhcp-lab.html)**. Es un simulador web, sin instalación, que acepta toda la sintaxis DHCP de IOS (`host`, `client-identifier`, `hardware-address`, `address … client-id`). Muestra el Client-ID de cada PC para no tener que inventarlo, admite `show running-config | section dhcp` y deja ver el DORA paquete a paquete. Guía de uso y correspondencia con estas prácticas: [Anexo XXII · Simulador netsim](ANEXO-XXII-Simulador-netsim-DHCP.md).
 
 ### 26.3. Comprobación de equivalencia
 

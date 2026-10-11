@@ -60,7 +60,7 @@
 | **NDP** | UT1 | [UT1-Conceptos-basicos-TCP-IP.md](UT1-Conceptos-basicos-TCP-IP.md) |
 | **NNTP** | UT7 | [UT7-Servicios-mensajeria-noticias-listas-distribucion.md](UT7-Servicios-mensajeria-noticias-listas-distribucion.md) |
 | **PAT** | UT1 | [UT1-Conceptos-basicos-TCP-IP.md](UT1-Conceptos-basicos-TCP-IP.md) |
-| **netsim** | UT2 | [ANEXO-XXII-Simulador-netsim-DHCP.md](ANEXO-XXII-Simulador-netsim-DHCP.md) |
+| **netsim** | UT2, UT3, UT4, UT6 | [ANEXO-XXII-Simulador-netsim-DHCP.md](ANEXO-XXII-Simulador-netsim-DHCP.md) |
 | **Pool** | UT2 | [UT2-Servicio-DHCP.md](UT2-Servicio-DHCP.md) |
 | **Presencia** | UT7 | [UT7-Servicios-mensajeria-noticias-listas-distribucion.md](UT7-Servicios-mensajeria-noticias-listas-distribucion.md) |
 | **PTR** | UT3 | [UT3-Servicio-DNS.md](UT3-Servicio-DNS.md) |

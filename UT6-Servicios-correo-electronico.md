@@ -1538,6 +1538,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
+> 🧪 **Alternativa con SMTP, POP3 e IMAP visibles paquete a paquete:** el simulador web netsim tiene un Server-PT de correo. Incluye reenvío por registro MX entre dominios y un laboratorio de ejemplo con cuentas `ana`/`luis`. Guía en el [Anexo XXII · Simulador netsim](ANEXO-XXII-Simulador-netsim-DHCP.md#6-laboratorios-incluidos-y-usuarios-de-ejemplo). Sirve también para la Práctica 6.2.
 
 Construye:
 

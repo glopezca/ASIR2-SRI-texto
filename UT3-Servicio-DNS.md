@@ -1178,6 +1178,13 @@ dns.tierramedia.jc    CNAME    lothlorien.tierramedia.jc
 
 > 💡 Packet Tracer proporciona una implementación DNS simplificada orientada a laboratorio. Esta práctica trabaja con registros y resolución desde clientes; la configuración autoritativa completa con BIND9 se estudia en las prácticas de Ubuntu de esta misma UT.
 
+> 🧪 **Para ver cada consulta paquete a paquete**, reproduce Lothlorien en el simulador web netsim:
+> - mismos registros `A` y `CNAME`;
+> - `nslookup` desde Gondor y `dig`/`host` desde un terminal Linux;
+> - PTR automáticos y respuestas `NXDOMAIN`.
+>
+> Correspondencia en el [Anexo XXII · Simulador netsim](ANEXO-XXII-Simulador-netsim-DHCP.md#2-correspondencia-con-las-prácticas).
+
 ## 2. Configurar el DNS de los clientes
 
 Todos los equipos que deban resolver nombres de Tierra Media utilizarán:

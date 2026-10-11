@@ -1,6 +1,6 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-## Material docente integral · `ASIR2-SRI-texto` · v6.6.1
+## Material docente integral · `ASIR2-SRI-texto` · v6.6.2
 
 **Edición 2026** para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
@@ -35,9 +35,23 @@ La correspondencia se contrasta con el currículo básico estatal del título y 
 
 Consulta el **[índice general](INDICE-GENERAL.md)** para acceder directamente a todas las UT, anexos y materiales complementarios.
 
-## Novedad v6.6.1 · simulador netsim en UT2
+## Novedad v6.6.2 · netsim con Server-PT en UT2, UT3, UT4 y UT6
 
-UT2 enlaza **netsim**, un simulador web de la CLI de Cisco IOS con servidor DHCP completo, para completar las reservas (`client-identifier`, `hardware-address`) que algunas versiones de Packet Tracer no admiten y para observar DORA paquete a paquete. Acceso y guía en el [Anexo XXII](ANEXO-XXII-Simulador-netsim-DHCP.md).
+**netsim** es un simulador web, sin instalación, que se usa como apoyo de Packet Tracer. Reúne:
+- la CLI de Cisco IOS con servidor DHCP completo;
+- servidores tipo Server-PT con DHCP (con reservas por MAC), DNS, HTTP, correo SMTP/POP3/IMAP y SSH;
+- terminales GNU/Linux (`systemctl`, `journalctl`, `ip`, `dig`, `curl`) y Windows, en servidores y PC.
+
+Cada unidad lo enlaza donde Packet Tracer se queda corto:
+
+| Unidad | Para qué se usa netsim |
+|---|---|
+| UT2 | Completar las reservas DHCP, tanto en Arnor (gráfico) como en Mordor (IOS) |
+| UT3 | Ver las consultas DNS paquete a paquete |
+| UT4 | Observar HTTP sobre TCP |
+| UT6 | Seguir SMTP, POP3 e IMAP con reenvío por MX |
+
+Acceso, correspondencia con las prácticas y usuarios de ejemplo en el [Anexo XXII](ANEXO-XXII-Simulador-netsim-DHCP.md).
 
 ## Corrección nftables/Webmin en v6.6
 
@@ -150,7 +164,7 @@ El material original del repositorio se distribuye bajo **CC BY-SA 4.0**.
 
 **Atribución recomendada:**
 
-> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.6.1, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
+> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.6.2, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
 
 Los materiales de terceros mantienen sus propias licencias, marcas y derechos.
 
@@ -184,7 +198,7 @@ El actualizador no reemplaza recetas técnicas mediante búsquedas globales. Sol
 - `ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md`: arquitectura común de Packet Tracer, WSL y VirtualBox.
 - `ANEXO-XX-Scripts-Personalizados-ASIR2-SRI.md`: scripts personalizados y su integración en Bash y PowerShell.
 - `ANEXO-XXI-Chuleta-TUI-Administracion.md`: utilidades TUI para administración local y remota.
-- `ANEXO-XXII-Simulador-netsim-DHCP.md`: simulador web netsim para practicar DHCP en Cisco IOS (UT2).
+- `ANEXO-XXII-Simulador-netsim-DHCP.md`: simulador web netsim: DHCP en Cisco IOS y servicios Server-PT (UT2, UT3, UT4, UT6).
 - `INFORME-REVISION-FUENTES-v6.6.md`: auditoría de las fuentes aportadas.
 - `INDICE-ALFABETICO.md`: índice rápido de conceptos.
 

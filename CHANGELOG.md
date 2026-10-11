@@ -17,6 +17,11 @@
 
 # Changelog
 
+## v6.6.2 — 11/10/2026
+
+- Anexo XXII actualizado a la nueva versión de netsim (Server-PT con DHCP, DNS, HTTP, correo y SSH; terminales Linux y Windows) y enlazado desde UT2 §25.3, UT3, UT4 y UT6.
+- Detalle en [CHANGELOG-v6.6.2.md](CHANGELOG-v6.6.2.md).
+
 ## v6.6.1 — 11/10/2026
 
 - Añadido el Anexo XXII · Simulador netsim para DHCP en Cisco IOS, enlazado desde UT2 (Práctica 2, reservas), el índice general, el README y el índice alfabético.

@@ -4,7 +4,7 @@
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Simulador de redes**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Función curricular
 >
@@ -15,7 +15,7 @@
 UT1 es una **unidad de fundamentación transversal** para el módulo 0375. No se asigna artificialmente a un RA concreto: sus contenidos de TCP/IP, direccionamiento, routing, forwarding, NAT y preparación del laboratorio sirven de base para RA1–RA8. La correspondencia curricular específica comienza en UT2.
 
 ---
-> 🧭 **Arquitectura común v6.6:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.6:** [Tierra Media · Simulador de redes · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 
 
 
@@ -45,7 +45,7 @@ UT1 es una **unidad de fundamentación transversal** para el módulo 0375. No se
 >          ┌───────────────┬─────┴─────┬────────────────┐
 >          │               │           │                │
 >       Entorno I       Entorno II  Entorno III     Entorno IV
->    Packet Tracer       WSL +     VirtualBox +    Docker Compose
+>    Sim. de redes       WSL +     VirtualBox +    Docker Compose
 >                        Ubuntu     Ubuntu Server
 >          │               │           │                │
 >          └───────────────┴───────────┴────────────────┘
@@ -61,7 +61,7 @@ UT1 es una **unidad de fundamentación transversal** para el módulo 0375. No se
 
 > 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
-> **I · Cisco Packet Tracer** — simulación de red y protocolos.  
+> **I · Simulador de redes** — simulación de red y protocolos: Netfix, Cisco Packet Tracer, GNS3 o Boson NetSim ([Anexo XXII](ANEXO-XXII-Simulador-de-redes.md)).  
 > **II · WSL + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
@@ -72,7 +72,7 @@ Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el mode
 
 | Entorno | Función didáctica | Uso recomendado |
 |---|---|---|
-| **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
+| **Entorno I · Simulador de redes** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
 | **Entorno II · WSL + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
 | **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
 | **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
@@ -155,9 +155,20 @@ La clave privada **no se comparte**. La evidencia que se entrega es la configura
 
 WSL se utiliza como entorno cliente y de diagnóstico: `ip`, `ss`, `dig`, `curl`, `tcpdump`, scripts y automatización. No sustituye a VirtualBox para las prácticas que necesiten varias interfaces, routers o topologías completas.
 
-### 6. Cisco Packet Tracer
+### 6. Simulador de redes
 
-Se reserva para simulación de topologías, direccionamiento, routing, VLAN y aquellas prácticas donde el objetivo sea observar el comportamiento de la red sin desplegar un servidor completo.
+Se reserva para simulación de topologías, direccionamiento, routing, VLAN y aquellas prácticas donde el objetivo sea observar el comportamiento de la red sin desplegar un servidor completo. Hay cuatro opciones, por orden de preferencia en este material:
+
+| Opción | Tipo y licencia | Posibilidades | Enlaces |
+|---|---|---|---|
+| **1 · Netfix** (recomendado) | Web, sin instalación ni cuenta; libre (código GPL-3.0-or-later, documentación CC BY-SA 4.0) | CLI de Cisco IOS con servidor DHCP completo (reservas, relay, snooping), NAT/PAT y ACL estándar, gestión web de routers y switches; servidores con DHCP (reservas por MAC o Client-ID), DNS, Apache2, correo SMTP/POP3/IMAP con Roundcube y SSH; terminales GNU/Linux (bash 5.3) y Windows; nube ISP con Internet emulada y DNS públicos 8.8.8.8/8.8.4.4; modo simulación paquete a paquete | [Abrir Netfix Lab](https://raw.githack.com/glopezca/netfix/main/demo/netfix-lab.html) · [Repositorio y documentación](https://github.com/glopezca/netfix) |
+| **2 · Cisco Packet Tracer** | Aplicación de escritorio (Windows, Linux y macOS); gratuita con cuenta de Cisco Networking Academy; propietaria | Simulación de routers y switches Cisco IOS, servidores con servicios básicos (DHCP, DNS, HTTP, Email, FTP/TFTP), IoT y modo Simulación; actividades evaluables `.pka` | [Página oficial](https://www.netacad.com/cisco-packet-tracer) |
+| **3 · GNS3** | Escritorio con servidor local o máquina virtual GNS3 (Windows, macOS y Linux); libre (GPL-3.0) | **Emulación** con imágenes reales: Cisco IOSv/IOSvL2 o Dynamips (las imágenes las aporta el usuario), contenedores Docker y VMs QEMU (Linux y otros fabricantes); puede conectarse a redes reales; necesita más recursos | [gns3.com](https://www.gns3.com/) · [Descargas](https://gns3.com/software) · [Documentación](https://docs.gns3.com/) · [GitHub](https://github.com/GNS3) |
+| **4 · Boson NetSim** | Web (navegador); comercial, suscripción anual | Simulador orientado a certificaciones Cisco (CCNA 200-301, CCNP ENCOR y ENARSI) con laboratorios guiados y corregidos | [Página oficial](https://boson.com/netsim-cisco-network-simulator/) |
+
+> **Criterio:** en el material, **Simulador de redes** designa el Entorno I sea cual sea la herramienta. Las prácticas se redactan con equipos genéricos (router, switch, PC, Server); los nombres de menú como *Configuración IP* o *Servicios* son los de Netfix, con equivalentes directos en Packet Tracer (*Desktop → IP Configuration*, *Services*). En GNS3 los servidores son VMs o contenedores Linux, y en Boson NetSim se trabaja sobre todo la CLI de IOS. Si una función no existe en el simulador elegido, se indica en el informe y se completa con Netfix o en VirtualBox.
+
+Detalle, correspondencia con las prácticas y primer uso en el [Anexo XXII · Simulador de redes](ANEXO-XXII-Simulador-de-redes.md).
 
 ### 7. Docker Compose
 
@@ -317,7 +328,7 @@ Al finalizar esta unidad el alumnado deberá ser capaz de:
     -   `curl`
     -   `nmap`
     -   Wireshark
--   Configurar y verificar redes sencillas en Packet Tracer.
+-   Configurar y verificar redes sencillas en el Simulador de redes.
 -   Configurar redes estáticas y encaminamiento en Ubuntu Server.
 
 ------------------------------------------------------------------------
@@ -1430,7 +1441,7 @@ WSL es especialmente útil para:
 -   practicar Bash y automatización.
 
 No debe utilizarse como sustituto de una topología de routers completa.
-Para eso resulta más apropiado Packet Tracer o varias VMs.
+Para eso resulta más apropiado el Simulador de redes o varias VMs.
 
 ------------------------------------------------------------------------
 
@@ -1528,7 +1539,7 @@ ip route
 resolvectl status
 ```
 
-En WSL parte de la red es gestionada por el propio subsistema. Por ello, para estudiar topologías completas con varias interfaces y routers utilizaremos preferentemente VirtualBox o Packet Tracer.
+En WSL parte de la red es gestionada por el propio subsistema. Por ello, para estudiar topologías completas con varias interfaces y routers utilizaremos preferentemente VirtualBox o el Simulador de redes.
 
 ### 🖥️ Entorno III · VirtualBox + Ubuntu 26.04 Server
 
@@ -1558,7 +1569,7 @@ Webmin puede presentar parte de la configuración de red mediante sus módulos d
 > 👨‍🏫 **Criterio de corrección de las prácticas**
 >
 > La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
-# 🧪 25. PRÁCTICA 1 --- IPv4 y encaminamiento con Cisco Packet Tracer · Tierra Media
+# 🧪 25. PRÁCTICA 1 --- IPv4 y encaminamiento con el Simulador de redes · Tierra Media
 
 ## Objetivo
 
@@ -1566,7 +1577,7 @@ Construir y verificar una topología de tres redes IPv4 utilizando un único rou
 
 ### Topología de referencia
 
-![Topología Tierra Media en Cisco Packet Tracer](img/topologia-tierramedia-packettracer.png)
+![Topología Tierra Media en el Simulador de redes](img/topologia-tierramedia-simulador.png)
 
 La topología está organizada en tres LAN:
 
@@ -1663,7 +1674,7 @@ Repetir con `hostname Hombres` y `hostname Elfos` en los otros dos switches.
 
 > La topología mostrada utiliza switches como elementos de concentración. No es necesario asignarles una dirección IP para que reenvíen tráfico Ethernet. Una IP de gestión sería una ampliación independiente y no forma parte de esta práctica.
 
-`Cloud-PT Cudernas` tampoco necesita configuración IP para demostrar el routing interno solicitado. Puede mantenerse como elemento gráfico de una futura ampliación hacia otra red.
+`Cloud Cudernas` tampoco necesita configuración IP para demostrar el routing interno solicitado. Puede mantenerse como elemento gráfico de una futura ampliación hacia otra red.
 
 ## 25.4. Configuración de los equipos
 
@@ -1935,7 +1946,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 > 🔎 **PISTAS ESPECÍFICAS · -- Tierra Media en VirtualBox**
 >
-> **Qué debes fijar:** no construyas una red nueva para esta práctica. Parte del **ecosistema Tierra Media común** y reproduce en VirtualBox las mismas tres zonas que ya has utilizado en Packet Tracer.
+> **Qué debes fijar:** no construyas una red nueva para esta práctica. Parte del **ecosistema Tierra Media común** y reproduce en VirtualBox las mismas tres zonas que ya has utilizado en el Simulador de redes.
 >
 > **Evidencia:** entrega el esquema de red, la asignación de adaptadores de las cinco VMs, `ip addr`, `ip route`, las pruebas de conectividad y una breve explicación de por qué cada paquete utiliza una determinada interfaz.
 >
@@ -1943,7 +1954,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 ## 1. Partimos del ecosistema Tierra Media
 
-La infraestructura de VirtualBox **no es una topología alternativa**: es la versión Linux de la misma arquitectura didáctica que ya has construido en Packet Tracer.
+La infraestructura de VirtualBox **no es una topología alternativa**: es la versión Linux de la misma arquitectura didáctica que ya has construido en el Simulador de redes.
 
 ```text
                          🟨 RED EXTERNA
@@ -1966,15 +1977,15 @@ La infraestructura de VirtualBox **no es una topología alternativa**: es la ver
                          (servicios)
 ```
 
-La correspondencia con Packet Tracer es:
+La correspondencia con el Simulador de redes es:
 
 | Zona | Red | Gateway Mordor | Equipos principales |
 |---|---|---|---|
-| 🟨 Externa | `10.0.0.0/16` | `10.0.2.15` en PT | Hobbiton `10.0.32.64` |
+| 🟨 Externa | `10.0.0.0/16` | `10.0.2.15` en el simulador | Hobbiton `10.0.32.64` |
 | 🟩 Interna | `192.168.10.0/24` | `192.168.10.254` | Gondor `.64`, Rohan `.65` |
 | 🟧 DMZ | `192.168.20.0/24` | `192.168.20.254` | Lothlorien `.192`, Rivendel `.193` |
 
-> **Importante:** `10.0.2.15` es la dirección de Mordor en el escenario de Packet Tracer. En VirtualBox la interfaz externa puede obtener otra dirección mediante DHCP. **No copies mecánicamente la IP externa de Packet Tracer**; conserva, en cambio, la función de la zona y el direccionamiento interno/DMZ del ecosistema.
+> **Importante:** `10.0.2.15` es la dirección de Mordor en el escenario del Simulador de redes. En VirtualBox la interfaz externa puede obtener otra dirección mediante DHCP. **No copies mecánicamente la IP externa del Simulador de redes**; conserva, en cambio, la función de la zona y el direccionamiento interno/DMZ del ecosistema.
 
 ## 2. Las cinco VMs del laboratorio
 
@@ -1988,7 +1999,7 @@ La arquitectura de VirtualBox queda fijada así:
 | **Lothlorien** | DMZ | `192.168.20.192/24` | servidor principal de servicios y DNS |
 | **Rivendel** | DMZ | `192.168.20.193/24` | servidor auxiliar, secundario y de pruebas |
 
-**Arnor no forma parte de las cinco VMs de VirtualBox.** Se utiliza en Packet Tracer para la primera fase pedagógica de DHCP y después el servicio DHCP real se concentra en Mordor.
+**Arnor no forma parte de las cinco VMs de VirtualBox.** Se utiliza en el Simulador de redes para la primera fase pedagógica de DHCP y después el servicio DHCP real se concentra en Mordor.
 
 ## 3. Diseñar primero las redes de VirtualBox
 
@@ -2234,7 +2245,7 @@ Al finalizar, debes poder responder sin mirar los comandos:
 3. ¿Por qué Mordor necesita tres interfaces?
 4. ¿Por qué una interfaz interna no debe recibir una puerta de enlace adicional?
 5. ¿Qué diferencia hay entre tener una ruta hacia una red y permitir el forwarding?
-6. ¿Qué parte de esta arquitectura es idéntica a Packet Tracer y qué parte cambia al pasar a Ubuntu/VirtualBox?
+6. ¿Qué parte de esta arquitectura es idéntica al Simulador de redes y qué parte cambia al pasar a Ubuntu/VirtualBox?
 
 ------------------------------------------------------------------------
 
@@ -2761,7 +2772,7 @@ Tenemos:
 
 y queremos comprobar la conectividad entre dos hosts.
 
-| Tarea | Packet Tracer | WSL | Ubuntu Server + VirtualBox |
+| Tarea | Simulador de redes | WSL | Ubuntu Server + VirtualBox |
 |---|---|---|---|
 | Configurar IP | GUI/CLI Cisco | `ip` / entorno WSL | Netplan |
 | Ver interfaces | `show ip interface brief` | `ip addr` | `ip addr` |
@@ -2769,7 +2780,7 @@ y queremos comprobar la conectividad entre dos hosts.
 | Ping | `ping` | `ping` | `ping` |
 | Routing | Router Cisco | Limitado como laboratorio | Router Linux |
 | NAT | Router Cisco | No es el entorno principal | Router Linux |
-| Captura | Simulation Mode | `tcpdump` | `tcpdump` / Wireshark |
+| Captura | el modo Simulación | `tcpdump` | `tcpdump` / Wireshark |
 | Topologías complejas | Excelente | Limitado | Excelente |
 
 ------------------------------------------------------------------------
@@ -3012,7 +3023,7 @@ y entender la red proporcionada por WSL.
 Para topologías con varios routers e interfaces se utilizará
 preferentemente:
 
--   Packet Tracer;
+-   Simulador de redes;
 -   varias máquinas virtuales.
 
 ------------------------------------------------------------------------
@@ -3395,7 +3406,7 @@ D. `hostnamectl`
 A. Docker Compose
 B. WSL
 C. VirtualBox
-D. Cisco Packet Tracer
+D. Simulador de redes
 
 ### ✅ Respuestas
 
@@ -3512,11 +3523,11 @@ Muestra `ip addr`, `ip route`, `sysctl net.ipv4.ip_forward`, `nft list ruleset` 
 ### Ruta práctica de tres entornos
 
 ```text
-PACKET TRACER                 WSL                         VIRTUALBOX
+SIM. DE REDES                 WSL                         VIRTUALBOX
 Mordor + 3 redes       →     ip/ss/tcpdump        →     Mordor + clientes
 routing y NAT                diagnóstico                 Netplan + sysctl + nftables
 ```
 
-**Packet Tracer:** direccionamiento, `show ip interface brief`, `show ip route`, ping y traceroute.  
+**Simulador de redes:** direccionamiento, `show ip interface brief`, `show ip route`, ping y traceroute.  
 **WSL:** `ip addr`, `ip route`, `ss`, `tracepath`, `tcpdump`.  
 **VirtualBox:** aplicar Netplan, habilitar forwarding y construir el ruleset nftables de Mordor.

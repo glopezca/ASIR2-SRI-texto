@@ -735,7 +735,7 @@ Los scripts son una capa de automatización transversal a los tres entornos:
                       │
        ┌──────────────┼──────────────┐
        ▼              ▼              ▼
- Packet Tracer       WSL         VirtualBox
+ Sim. de redes       WSL         VirtualBox
                                   │
                            Mordor · Gondor
                            Rohan · Lothlorien

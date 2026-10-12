@@ -33,7 +33,7 @@ Cada UT debe ofrecer: situación de partida, concepto previo antes del salto té
 
 ## 6. Pruebas experimentales
 
-Cuando se disponga de Docker Engine, máquinas Ubuntu o Packet Tracer se ejecutarán las pruebas funcionales. Si un entorno de ejecución no está disponible, el informe debe distinguir claramente **validación estática** de **ejecución experimental**. Nunca se marcará una práctica como ejecutada si no se ha ejecutado.
+Cuando se disponga de Docker Engine, máquinas Ubuntu o el Simulador de redes se ejecutarán las pruebas funcionales. Si un entorno de ejecución no está disponible, el informe debe distinguir claramente **validación estática** de **ejecución experimental**. Nunca se marcará una práctica como ejecutada si no se ha ejecutado.
 
 ## 7. Ejecución local
 

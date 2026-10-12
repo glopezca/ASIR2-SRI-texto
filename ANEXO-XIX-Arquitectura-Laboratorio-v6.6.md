@@ -4,9 +4,9 @@
 
 Las UT1–UT8 comparten una única infraestructura didáctica. Se añaden servicios; no se reinventa la red en cada unidad.
 
-> **Esquema único del entorno de red:** el laboratorio utiliza exclusivamente el PNG mejorado basado en Cisco Packet Tracer. No se incluye el SVG generado posteriormente.
+> **Esquema único del entorno de red:** el laboratorio utiliza exclusivamente el PNG mejorado basado en el Simulador de redes. No se incluye el SVG generado posteriormente.
 
-![Topología Tierra Media v6.6](img/topologia-tierramedia-packettracer.png)
+![Topología Tierra Media v6.6](img/topologia-tierramedia-simulador.png)
 
 ## 2. Tres zonas
 
@@ -16,7 +16,9 @@ Las UT1–UT8 comparten una única infraestructura didáctica. Se añaden servic
 | 🟩 Red interna | `192.168.10.0/24` | clientes y administración |
 | 🟧 DMZ | `192.168.20.0/24` | servidores |
 
-## 3. Packet Tracer
+## 3. Simulador de redes
+
+Opciones, por orden: **[Netfix](https://github.com/glopezca/netfix)** ([abrir en el navegador](https://raw.githack.com/glopezca/netfix/main/demo/netfix-lab.html)), **[Cisco Packet Tracer](https://www.netacad.com/cisco-packet-tracer)**, **[GNS3](https://www.gns3.com/)** y **[Boson NetSim](https://boson.com/netsim-cisco-network-simulator/)**. Comparativa y criterio de uso en el [Anexo XXII](ANEXO-XXII-Simulador-de-redes.md). Las direcciones son las mismas en cualquiera de ellos:
 
 | Equipo | Dirección | Función |
 |---|---|---|
@@ -109,15 +111,15 @@ Toda práctica de servicio debe poder entregar:
 
 ## 10. Matriz UT × entorno
 
-| UT | Packet Tracer | WSL | VirtualBox | Servidor principal |
+| UT | Simulador de redes | WSL | VirtualBox | Servidor principal |
 |---|---|---|---|---|
 | UT1 | routing/NAT | diagnóstico | red/router Linux + nftables | Mordor |
 | UT2 | Arnor GUI → Mordor CLI | cliente/captura DHCP | Kea DHCP | Mordor |
-| UT3 | DNS Server-PT | `dig`/captura | BIND9 | Lothlorien |
+| UT3 | DNS Server | `dig`/captura | BIND9 | Lothlorien |
 | UT5 | FTP/TFTP conceptual | FTP/SFTP/SCP cliente | OpenSSH/vsftpd | Lothlorien |
 | UT4 | HTTP + topología | `curl`/TLS | Apache/Nginx | Lothlorien |
-| UT6 | Email Server-PT | SMTP/IMAP/POP3 análisis | Postfix/Dovecot | Lothlorien |
+| UT6 | Email Server | SMTP/IMAP/POP3 análisis | Postfix/Dovecot | Lothlorien |
 | UT7 | conectividad/puertos | clientes y captura | Prosody/listas/NNTP | Lothlorien |
 | UT8 | red/puertos | FFmpeg/VLC/captura | Icecast/Nginx RTMP/HLS | Lothlorien |
 
-> La columna Packet Tracer indica el **alcance realista del simulador**. Cuando PT no implementa el daemon estudiado, se usa para demostrar la infraestructura de red y el modelo cliente/servidor, mientras que la implementación real se ejecuta en VirtualBox.
+> La columna Simulador de redes indica el **alcance realista del simulador**. Cuando el simulador no implementa el daemon estudiado, se usa para demostrar la infraestructura de red y el modelo cliente/servidor, mientras que la implementación real se ejecuta en VirtualBox.

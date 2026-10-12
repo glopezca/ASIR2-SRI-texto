@@ -2,7 +2,7 @@
 
 ## Anexo XXII
 
-[Anexo XXII · Simulador netsim: DHCP en Cisco IOS y servicios Server-PT](ANEXO-XXII-Simulador-netsim-DHCP.md) actualizado a netsim v0.2.
+[Anexo XXII · Simulador netsim: DHCP en Cisco IOS y servicios Server-PT](ANEXO-XXII-Simulador-de-redes.md) actualizado a netsim v0.2.
 
 - **Server-PT y terminales.** El anexo recoge los servidores Server-PT con DHCP (con reservas por MAC), DNS, HTTP, correo SMTP/POP3/IMAP y SSH. También describe los terminales GNU/Linux y Windows, el navegador y el cliente de correo de los PC.
 - **Correspondencia ampliada** a:

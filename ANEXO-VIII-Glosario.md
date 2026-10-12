@@ -215,6 +215,7 @@
 
 | Término | Explicación |
 |---|---|
+| **Netfix** | Simulador de redes web, libre y sin instalación (antes netsim): CLI de Cisco IOS, servidores con servicios reales simulados, terminales Linux/Windows e Internet emulada. |
 | **Namespace** | Ámbito lógico dentro de un clúster de Kubernetes que permite organizar recursos. |
 | **NAT** | Traducción de direcciones de red: modificación de direcciones IP al atravesar un dispositivo intermedio. |
 | **NAT/PAT** | Combinación de NAT y PAT, habitual cuando varias direcciones privadas comparten una dirección pública. |
@@ -309,6 +310,7 @@
 | **Sampling rate** | Frecuencia de muestreo: número de muestras por segundo utilizadas para representar una señal digital. |
 | **SCP** | Secure Copy: copia de archivos sobre SSH. |
 | **Secret** | Objeto de Kubernetes destinado a almacenar pequeñas cantidades de datos sensibles, como credenciales o tokens. |
+| **Simulador de redes** | Entorno I del laboratorio: herramienta que reproduce routers, switches, PC y servidores para construir topologías y observar protocolos. Opciones, por orden: [Netfix](https://github.com/glopezca/netfix), [Cisco Packet Tracer](https://www.netacad.com/cisco-packet-tracer), [GNS3](https://www.gns3.com/) y [Boson NetSim](https://boson.com/netsim-cisco-network-simulator/) (Anexo XXII). |
 | **Selector** | Criterio utilizado para seleccionar objetos que poseen determinadas labels. |
 | **SERVFAIL** | Respuesta DNS que indica que el servidor no pudo completar correctamente la resolución. |
 | **ServiceAccount** | Identidad que un Pod puede utilizar para autenticarse frente a la API de Kubernetes. |
@@ -431,8 +433,8 @@
 
 ## 🆕 Términos operativos v6.5.6
 
-- **Arnor:** Server-PT usado en Packet Tracer como demostración gráfica inicial del servicio DHCP en la red interna.
-- **Mordor DHCP:** función DHCP del router Packet Tracer y, en VirtualBox, función DHCP de la VM Linux Mordor mediante Kea.
+- **Arnor:** Server usado en el Simulador de redes como demostración gráfica inicial del servicio DHCP en la red interna.
+- **Mordor DHCP:** función DHCP del router del Simulador de redes y, en VirtualBox, función DHCP de la VM Linux Mordor mediante Kea.
 - **Lothlorien:** servidor principal de servicios de la DMZ (`192.168.20.192`).
 - **Rivendel:** servidor auxiliar (`192.168.20.193`) destinado a pruebas, secundarios o funciones complementarias.
 - **nftables table:** contenedor superior de reglas, perteneciente a una familia como `inet` o `ip`.

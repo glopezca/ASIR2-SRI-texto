@@ -19,7 +19,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 | Debes dominar | Evidencia observable |
 |---
-> 🧭 **Arquitectura común v6.6:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.6:** [Tierra Media · Simulador de redes · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 |---|
 | **SMTP** | Explicación, comando, diagrama o evidencia verificable. |
 | **IMAP/POP** | Explicación, comando, diagrama o evidencia verificable. |
@@ -47,7 +47,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Simulador de redes**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultado de aprendizaje trabajado
 >
@@ -74,7 +74,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > 📚 **Organización didáctica**
 >
-> La unidad progresa desde la arquitectura general del correo hasta los protocolos, formatos, seguridad, configuración de clientes, administración de servidores y diagnóstico. La parte práctica se desarrolla con **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose** cuando el servicio resulta adecuado para ese entorno.
+> La unidad progresa desde la arquitectura general del correo hasta los protocolos, formatos, seguridad, configuración de clientes, administración de servidores y diagnóstico. La parte práctica se desarrolla con **el Simulador de redes**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose** cuando el servicio resulta adecuado para ese entorno.
 
 ---
 
@@ -108,7 +108,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
                            ▼
                          MUA
 
-                 🧪 I Packet Tracer · II WSL · III VirtualBox · IV Docker Compose
+                 🧪 I Sim. de redes · II WSL · III VirtualBox · IV Docker Compose
 ```
 
 ---
@@ -116,7 +116,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
-> **I · Cisco Packet Tracer** — simulación de red y protocolos.  
+> **I · Simulador de redes** — simulación de red y protocolos: Netfix, Cisco Packet Tracer, GNS3 o Boson NetSim ([Anexo XXII](ANEXO-XXII-Simulador-de-redes.md)).  
 > **II · WSL + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
@@ -127,7 +127,7 @@ Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el mode
 
 | Entorno | Función didáctica | Uso recomendado |
 |---|---|---|
-| **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
+| **Entorno I · Simulador de redes** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
 | **Entorno II · WSL + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
 | **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
 | **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
@@ -178,7 +178,7 @@ Al finalizar esta unidad deberás ser capaz de:
 - Diagnosticar problemas de conexión.
 - Analizar SMTP, POP3 e IMAP desde terminal.
 - Observar sesiones mediante herramientas de red.
-- Utilizar Packet Tracer para simular un servicio de correo.
+- Utilizar el Simulador de redes para simular un servicio de correo.
 - Utilizar WSL para probar protocolos de correo.
 - Relacionar correo, DNS, TCP/IP y seguridad.
 
@@ -1528,9 +1528,9 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
 
 
-# 🧪 34. PRÁCTICA 6.1 — Correo en Cisco Packet Tracer
+# 🧪 34. PRÁCTICA 6.1 — Correo en el Simulador de redes
 
-> 🔎 **PISTAS ESPECÍFICAS · Correo en Cisco Packet Tracer**
+> 🔎 **PISTAS ESPECÍFICAS · Correo en el Simulador de redes**
 >
 > **Qué debes fijar:** Dibuja la topología y marca IP, máscara, puerta de enlace, interfaz y siguiente salto. No pruebes una capa superior hasta demostrar que la inferior funciona. Dibuja el recorrido MUA → submission/MTA → DNS → MTA destino → buzón/IMAP. Identifica dónde queda el mensaje cuando aparece un error y busca evidencia en cola, sesión, DNS o logs.
 >
@@ -1538,7 +1538,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 >
 > **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
-> 🧪 **Alternativa con SMTP, POP3 e IMAP visibles paquete a paquete:** el simulador web netsim tiene un Server-PT de correo. Incluye reenvío por registro MX entre dominios y un laboratorio de ejemplo con cuentas `ana`/`luis`. Guía en el [Anexo XXII · Simulador netsim](ANEXO-XXII-Simulador-netsim-DHCP.md#6-laboratorios-incluidos-y-usuarios-de-ejemplo). Sirve también para la Práctica 6.2.
+> 🧪 **Alternativa con SMTP, POP3 e IMAP visibles paquete a paquete:** el Simulador de redes Netfix (web, sin instalación) tiene un Server de correo. Incluye reenvío por registro MX entre dominios y un laboratorio de ejemplo con cuentas `ana`/`luis`. Guía en el [Anexo XXII · Simulador de redes](ANEXO-XXII-Simulador-de-redes.md#6-laboratorios-incluidos-y-usuarios-de-ejemplo). Sirve también para la Práctica 6.2.
 
 Construye:
 
@@ -1628,9 +1628,9 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
 
 
-# 🧪 35. PRÁCTICA 6.2 — Analizar el correo en Packet Tracer
+# 🧪 35. PRÁCTICA 6.2 — Analizar el correo en el Simulador de redes
 
-> 🔎 **PISTAS ESPECÍFICAS · Analizar el correo en Packet Tracer**
+> 🔎 **PISTAS ESPECÍFICAS · Analizar el correo en el Simulador de redes**
 >
 > **Qué debes fijar:** Empieza por observar antes de modificar: identifica interlocutores, puertos, protocolo y resultado esperado. Formula qué campo o paquete debería confirmar tu hipótesis. Dibuja la topología y marca IP, máscara, puerta de enlace, interfaz y siguiente salto. No pruebes una capa superior hasta demostrar que la inferior funciona. Dibuja el recorrido MUA → submission/MTA → DNS → MTA destino → buzón/IMAP. Identifica dónde queda el mensaje cuando aparece un error y busca evidencia en cola, sesión, DNS o logs.
 >
@@ -3759,7 +3759,7 @@ Incluye, cuando aporte información, una captura de la topología, del fichero o
                        │
              ┌─────────┴─────────┐
              │                   │
-           WSL              Packet Tracer
+           WSL              Sim. de redes
         Ubuntu 26.04          simulación
              │
              ▼
@@ -4445,7 +4445,7 @@ Incluye, cuando aporte información, una captura de la topología, del fichero o
 ┌─────────────────────────────────────────────────────────────┐
 │                    LABORATORIO ASIR                         │
 ├─────────────────┬─────────────────┬─────────────────────────┤
-│ Packet Tracer   │ WSL            │ VirtualBox              │
+│ Sim. de redes   │ WSL            │ VirtualBox              │
 │                 │                 │                         │
 │ SMTP/POP3       │ Cliente CLI     │ Ubuntu 26.04 Server    │
 │ DNS             │ OpenSSL         │ DNS + servicios         │
@@ -4453,7 +4453,7 @@ Incluye, cuando aporte información, una captura de la topología, del fichero o
 └─────────────────┴─────────────────┴─────────────────────────┘
 ```
 
-### Packet Tracer
+### Simulador de redes
 
 Ideal para:
 
@@ -4663,6 +4663,6 @@ sudo ss -lntp | grep -E ':25|:143|:587|:993'
 
 ### Ruta práctica de tres entornos
 
-**Packet Tracer:** usar el servicio Email de Server-PT para representar el flujo SMTP/POP3 y relacionarlo con DNS y puertos; la simulación no sustituye Postfix/Dovecot.  
+**Simulador de redes:** usar el servicio Email de Server para representar el flujo SMTP/POP3 y relacionarlo con DNS y puertos; la simulación no sustituye Postfix/Dovecot.  
 **WSL:** analizar SMTP/IMAP/POP3 con `openssl s_client`, `nc`, `dig` y `tcpdump`.  
 **VirtualBox:** Postfix + Dovecot en Lothlorien; Rivendel se utiliza para pruebas de relay, MX o cliente auxiliar.

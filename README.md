@@ -1,6 +1,6 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-## Material docente integral · `ASIR2-SRI-texto` · v6.6.2
+## Material docente integral · `ASIR2-SRI-texto` · v6.6.3
 
 **Edición 2026** para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
@@ -35,23 +35,36 @@ La correspondencia se contrasta con el currículo básico estatal del título y 
 
 Consulta el **[índice general](INDICE-GENERAL.md)** para acceder directamente a todas las UT, anexos y materiales complementarios.
 
-## Novedad v6.6.2 · netsim con Server-PT en UT2, UT3, UT4 y UT6
+## Novedad v6.6.3 · Simulador de redes
 
-**netsim** es un simulador web, sin instalación, que se usa como apoyo de Packet Tracer. Reúne:
+El Entorno I pasa a llamarse **Simulador de redes**, sin atarse a un producto. Opciones, por orden:
+
+| Opción | Tipo y licencia | Posibilidades | Enlaces |
+|---|---|---|---|
+| **1 · Netfix** (recomendado) | Web, sin instalación ni cuenta; libre (código GPL-3.0-or-later, documentación CC BY-SA 4.0) | CLI de Cisco IOS con servidor DHCP completo (reservas, relay, snooping), NAT/PAT y ACL estándar, gestión web de routers y switches; servidores con DHCP (reservas por MAC o Client-ID), DNS, Apache2, correo SMTP/POP3/IMAP con Roundcube y SSH; terminales GNU/Linux (bash 5.3) y Windows; nube ISP con Internet emulada y DNS públicos 8.8.8.8/8.8.4.4; modo simulación paquete a paquete | [Abrir Netfix Lab](https://raw.githack.com/glopezca/netfix/main/demo/netfix-lab.html) · [Repositorio y documentación](https://github.com/glopezca/netfix) |
+| **2 · Cisco Packet Tracer** | Aplicación de escritorio (Windows, Linux y macOS); gratuita con cuenta de Cisco Networking Academy; propietaria | Simulación de routers y switches Cisco IOS, servidores con servicios básicos (DHCP, DNS, HTTP, Email, FTP/TFTP), IoT y modo Simulación; actividades evaluables `.pka` | [Página oficial](https://www.netacad.com/cisco-packet-tracer) |
+| **3 · GNS3** | Escritorio con servidor local o máquina virtual GNS3 (Windows, macOS y Linux); libre (GPL-3.0) | **Emulación** con imágenes reales: Cisco IOSv/IOSvL2 o Dynamips (las imágenes las aporta el usuario), contenedores Docker y VMs QEMU (Linux y otros fabricantes); puede conectarse a redes reales; necesita más recursos | [gns3.com](https://www.gns3.com/) · [Descargas](https://gns3.com/software) · [Documentación](https://docs.gns3.com/) · [GitHub](https://github.com/GNS3) |
+| **4 · Boson NetSim** | Web (navegador); comercial, suscripción anual | Simulador orientado a certificaciones Cisco (CCNA 200-301, CCNP ENCOR y ENARSI) con laboratorios guiados y corregidos | [Página oficial](https://boson.com/netsim-cisco-network-simulator/) |
+
+Comparativa, criterio de uso y correspondencia con las prácticas en el [Anexo XXII · Simulador de redes](ANEXO-XXII-Simulador-de-redes.md). El antiguo simulador web **netsim** se llama ahora **Netfix**; sus enlaces están actualizados.
+
+## Novedad v6.6.2 · Netfix con Server en UT2, UT3, UT4 y UT6
+
+**Netfix** es un simulador web, sin instalación, que se usa como Simulador de redes o como apoyo de otro. Reúne:
 - la CLI de Cisco IOS con servidor DHCP completo;
-- servidores tipo Server-PT con DHCP (con reservas por MAC), DNS, HTTP, correo SMTP/POP3/IMAP y SSH;
+- servidores tipo Server con DHCP (con reservas por MAC), DNS, HTTP, correo SMTP/POP3/IMAP y SSH;
 - terminales GNU/Linux (`systemctl`, `journalctl`, `ip`, `dig`, `curl`) y Windows, en servidores y PC.
 
-Cada unidad lo enlaza donde Packet Tracer se queda corto:
+Cada unidad lo enlaza donde otro simulador se queda corto:
 
-| Unidad | Para qué se usa netsim |
+| Unidad | Para qué se usa Netfix |
 |---|---|
 | UT2 | Completar las reservas DHCP, tanto en Arnor (gráfico) como en Mordor (IOS) |
 | UT3 | Ver las consultas DNS paquete a paquete |
 | UT4 | Observar HTTP sobre TCP |
 | UT6 | Seguir SMTP, POP3 e IMAP con reenvío por MX |
 
-Acceso, correspondencia con las prácticas y usuarios de ejemplo en el [Anexo XXII](ANEXO-XXII-Simulador-netsim-DHCP.md).
+Acceso, correspondencia con las prácticas y usuarios de ejemplo en el [Anexo XXII](ANEXO-XXII-Simulador-de-redes.md).
 
 ## Corrección nftables/Webmin en v6.6
 
@@ -68,28 +81,28 @@ Consulta el **[índice alfabético de conceptos](INDICE-ALFABETICO.md)** para lo
 
 ## Tres entornos de trabajo + Docker como extensión
 
-La v6.6 fija **tres entornos primarios y coherentes** para las prácticas: **Cisco Packet Tracer**, **WSL** y **VirtualBox + Ubuntu Server**. Docker Compose queda como extensión reproducible en los anexos y no sustituye al laboratorio principal.
+La v6.6 fija **tres entornos primarios y coherentes** para las prácticas: **Simulador de redes**, **WSL** y **VirtualBox + Ubuntu Server**. Docker Compose queda como extensión reproducible en los anexos y no sustituye al laboratorio principal.
 
 | Entorno | Papel en v6.6 |
 |---|---|
-| 🧪 **Packet Tracer** | Topología, routing y demostración gráfica de DHCP; en UT2 se compara **Arnor (DHCP gráfico)** con **Mordor (DHCP por CLI)**. |
+| 🧪 **Simulador de redes** | Topología, routing y demostración gráfica de DHCP; en UT2 se compara **Arnor (DHCP gráfico)** con **Mordor (DHCP por CLI)**. |
 | 🐧 **WSL + Ubuntu** | Cliente, herramientas de diagnóstico, captura, consultas y automatización. **No se despliega un servidor DHCP en WSL.** |
 | 🖥️ **VirtualBox + Ubuntu Server** | Servidores reales del laboratorio. Las cinco VMs son **Mordor, Gondor, Rohan, Lothlorien y Rivendel**. Mordor presta DHCP; Lothlorien centraliza la práctica de servicios; Rivendel se reserva para configuraciones auxiliares. |
 | 🐳 **Docker Compose** | Extensión opcional para reproducibilidad, tratada en los anexos; no redefine la arquitectura principal. |
 
 ### Ecosistema Tierra Media v6.6
 
-> **Esquema único del entorno de red:** se utiliza exclusivamente el PNG mejorado basado en la topología de Cisco Packet Tracer. No se incluye el SVG generado posteriormente.
+> **Esquema único del entorno de red:** se utiliza exclusivamente el PNG mejorado basado en la topología del Simulador de redes. No se incluye el SVG generado posteriormente.
 
-![Topología Tierra Media v6.6](img/topologia-tierramedia-packettracer.png)
+![Topología Tierra Media v6.6](img/topologia-tierramedia-simulador.png)
 
 | Zona | Red | Elementos principales | Papel |
 |---|---|---|---|
 | 🟨 **Red externa** | `10.0.0.0/16` | Hobbiton `10.0.32.64`, Mordor `10.0.2.15` | Acceso externo / salida |
-| 🟩 **Red interna** | `192.168.10.0/24` | Mordor `192.168.10.254`, Gondor `.64`, Rohan `.65`, Arnor `.192` | Clientes y DHCP en Packet Tracer |
+| 🟩 **Red interna** | `192.168.10.0/24` | Mordor `192.168.10.254`, Gondor `.64`, Rohan `.65`, Arnor `.192` | Clientes y DHCP en el Simulador de redes |
 | 🟧 **DMZ** | `192.168.20.0/24` | Mordor `192.168.20.254`, Lothlorien `.192`, Rivendel `.193` | Servicios publicados |
 
-**Dominio de laboratorio:** `tierramedia.jc` · **DNS:** `192.168.20.192` · **DHCP gráfico PT:** Arnor `192.168.10.192` · **DHCP CLI PT:** Mordor `192.168.10.254`.
+**Dominio de laboratorio:** `tierramedia.jc` · **DNS:** `192.168.20.192` · **DHCP gráfico en el simulador:** Arnor `192.168.10.192` · **DHCP CLI en el simulador:** Mordor `192.168.10.254`.
 
 ### VMs de VirtualBox
 
@@ -138,7 +151,7 @@ La **preparación común de las prácticas aparece una sola vez en cada UT**. Ca
 
 ## Laboratorio base
 
-La preparación del entorno está en **UT1**, e incluye ficha del puesto, VirtualBox + Ubuntu Server 26.04 LTS, Netplan, SSH, WSL, Packet Tracer y orientación sobre Docker Compose. Los anexos contienen la profundidad específica de Docker/Compose, Git, Kubernetes, scripts de automatización y utilidades TUI.
+La preparación del entorno está en **UT1**, e incluye ficha del puesto, VirtualBox + Ubuntu Server 26.04 LTS, Netplan, SSH, WSL, Simulador de redes y orientación sobre Docker Compose. Los anexos contienen la profundidad específica de Docker/Compose, Git, Kubernetes, scripts de automatización y utilidades TUI.
 
 ## Material para el profesor
 
@@ -164,7 +177,7 @@ El material original del repositorio se distribuye bajo **CC BY-SA 4.0**.
 
 **Atribución recomendada:**
 
-> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.6.2, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
+> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.6.3, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
 
 Los materiales de terceros mantienen sus propias licencias, marcas y derechos.
 
@@ -195,10 +208,10 @@ El actualizador no reemplaza recetas técnicas mediante búsquedas globales. Sol
 - `ANEXO-XVI-Auditoria-Obsolescencia.md`: criterio de sustitución tecnológica.
 - `ANEXO-XVII-Algoritmo-Actualizacion.md`: procedimiento de futuras iteraciones.
 - `ANEXO-XVIII-Chuleta-Comandos-Red-Ubuntu.md`: consulta rápida de comandos de red para el laboratorio.
-- `ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md`: arquitectura común de Packet Tracer, WSL y VirtualBox.
+- `ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md`: arquitectura común del Simulador de redes, WSL y VirtualBox.
 - `ANEXO-XX-Scripts-Personalizados-ASIR2-SRI.md`: scripts personalizados y su integración en Bash y PowerShell.
 - `ANEXO-XXI-Chuleta-TUI-Administracion.md`: utilidades TUI para administración local y remota.
-- `ANEXO-XXII-Simulador-netsim-DHCP.md`: simulador web netsim: DHCP en Cisco IOS y servicios Server-PT (UT2, UT3, UT4, UT6).
+- `ANEXO-XXII-Simulador-de-redes.md`: Simulador de redes Netfix (web, sin instalación): DHCP en Cisco IOS y servicios Server (UT2, UT3, UT4, UT6).
 - `INFORME-REVISION-FUENTES-v6.6.md`: auditoría de las fuentes aportadas.
 - `INDICE-ALFABETICO.md`: índice rápido de conceptos.
 

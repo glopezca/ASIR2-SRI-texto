@@ -19,7 +19,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 | Debes dominar | Evidencia observable |
 |---
-> 🧭 **Arquitectura común v6.6:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.6:** [Tierra Media · Simulador de redes · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 |---|
 | **códec/contenedor** | Explicación, comando, diagrama o evidencia verificable. |
 | **bitrate/resolución/FPS** | Explicación, comando, diagrama o evidencia verificable. |
@@ -47,7 +47,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Simulador de redes**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultados de aprendizaje trabajados
 >
@@ -127,7 +127,7 @@ VoIP, videoconferencia y bloques finales de prácticas, resumen y evaluación.
 > - 📺 **Nginx + RTMP** como laboratorio de vídeo en directo
 > - 🌐 **HLS** para distribución HTTP de vídeo
 > - ▶️ **VLC** como cliente multimedia
-> - 🖧 **Cisco Packet Tracer** para representar la infraestructura de red.
+> - 🖧 **Simulador de redes** para representar la infraestructura de red.
 >
 > La elección de estas herramientas es una actualización práctica del
 > contenido, no una reproducción literal de una implementación histórica.
@@ -156,7 +156,7 @@ VoIP, videoconferencia y bloques finales de prácticas, resumen y evaluación.
                           │
                           ▼
                          VLC
-        🧪 I Packet Tracer · II WSL · III VirtualBox · IV Docker Compose
+        🧪 I Sim. de redes · II WSL · III VirtualBox · IV Docker Compose
 ```
 
 ---
@@ -164,7 +164,7 @@ VoIP, videoconferencia y bloques finales de prácticas, resumen y evaluación.
 
 > 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
-> **I · Cisco Packet Tracer** — simulación de red y protocolos.  
+> **I · Simulador de redes** — simulación de red y protocolos: Netfix, Cisco Packet Tracer, GNS3 o Boson NetSim ([Anexo XXII](ANEXO-XXII-Simulador-de-redes.md)).  
 > **II · WSL + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
@@ -175,7 +175,7 @@ Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el mode
 
 | Entorno | Función didáctica | Uso recomendado |
 |---|---|---|
-| **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
+| **Entorno I · Simulador de redes** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
 | **Entorno II · WSL + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
 | **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
 | **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
@@ -3487,8 +3487,8 @@ buffer
 >
 > Todas las prácticas siguen una única rutina profesional: **sitúate → prepara el entorno → formula una predicción → cambia una sola cosa → valida → prueba desde el cliente → diagnostica con evidencias → documenta y revierte si procede**. Esta explicación aparece una sola vez en la UT; cada práctica añade solo sus **pistas específicas**.
 
-# 🧪 82. Práctica de integración con Packet Tracer
-> 🔎 **PISTAS ESPECÍFICAS · 🧪 82. Práctica de integración con Packet Tracer**
+# 🧪 82. Práctica de integración con el Simulador de redes
+> 🔎 **PISTAS ESPECÍFICAS · 🧪 82. Práctica de integración con el Simulador de redes**
 >
 > **Foco:** trabaja sobre **parámetros del flujo audiovisual y evidencia de reproducción** y anota qué comportamiento esperas observar antes de modificar.
 >
@@ -3497,7 +3497,7 @@ buffer
 > **Diagnóstico:** Si falla, vuelve al primer punto comprobable y cambia una sola variable antes de repetir la prueba.
 
 
-Packet Tracer no sustituye a Icecast, Nginx RTMP o FFmpeg.
+El Simulador de redes no sustituye a Icecast, Nginx RTMP o FFmpeg.
 
 Su función aquí es representar:
 
@@ -3562,7 +3562,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
 
 
-# 🧪 83. Topología Packet Tracer
+# 🧪 83. Topología en el Simulador de redes
 ### 🧭 Guía de resolución y comprobación
 
 **Puntos a conseguir:** dejar el sistema en el estado solicitado, poder explicar qué protocolo interviene, comprobarlo desde un cliente y aportar evidencias reproducibles.
@@ -3577,7 +3577,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 #### Solución de referencia
 
-La evidencia mínima es `show ip interface brief`, `show ip route`, la configuración relevante y una prueba extremo a extremo. En Packet Tracer, utiliza Simulation Mode cuando necesites demostrar el recorrido de los paquetes y no solo el resultado del `ping`.
+La evidencia mínima es `show ip interface brief`, `show ip route`, la configuración relevante y una prueba extremo a extremo. En Simulador de redes, utiliza el modo Simulación cuando necesites demostrar el recorrido de los paquetes y no solo el resultado del `ping`.
 
 
 ### 📸 Evidencias y capturas
@@ -4986,6 +4986,6 @@ Para Nginx puede utilizarse **Servers → Nginx Webserver**. Para Icecast no se 
 
 ### Ruta práctica de tres entornos
 
-**Packet Tracer:** representar la red cliente → Mordor → Lothlorien y demostrar conectividad, puertos y rutas. PT no sustituye a Icecast, FFmpeg ni Nginx RTMP.  
+**Simulador de redes:** representar la red cliente → Mordor → Lothlorien y demostrar conectividad, puertos y rutas. El simulador no sustituye a Icecast, FFmpeg ni Nginx RTMP.  
 **WSL:** estación de análisis con `ffprobe`, `ffmpeg`, `curl`, VLC y `tcpdump`.  
 **VirtualBox:** Icecast y Nginx/RTMP/HLS en Lothlorien; Rivendel queda disponible para pruebas de cliente/servidor auxiliares.

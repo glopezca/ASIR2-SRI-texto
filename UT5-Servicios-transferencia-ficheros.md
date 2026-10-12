@@ -19,7 +19,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 | Debes dominar | Evidencia observable |
 |---
-> 🧭 **Arquitectura común v6.6:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.6:** [Tierra Media · Simulador de redes · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 |---|
 | **FTP y canales** | Explicación, comando, diagrama o evidencia verificable. |
 | **modo pasivo** | Explicación, comando, diagrama o evidencia verificable. |
@@ -47,7 +47,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Simulador de redes**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultado de aprendizaje trabajado
 >
@@ -77,7 +77,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 >
 > El laboratorio actual utiliza herramientas y sistemas contemporáneos, manteniendo los conceptos fundamentales:
 >
-> - 🧪 **Cisco Packet Tracer**
+> - 🧪 **Simulador de redes**
 > - 🐧 **WSL + Ubuntu 26.04**
 > - 🖥️ **VirtualBox + Ubuntu 26.04 Server**
 >
@@ -111,7 +111,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
                        ▼
                   🛡️ SEGURIDAD
 ┌──────────────────────────────────────────────────────────────────────┐
-│ 🧪 ENTORNOS · I Packet Tracer · II WSL · III VirtualBox · IV Compose │
+│ 🧪 ENTORNOS · I Sim. de redes · II WSL · III VirtualBox · IV Compose │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -119,7 +119,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
-> **I · Cisco Packet Tracer** — simulación de red y protocolos.  
+> **I · Simulador de redes** — simulación de red y protocolos: Netfix, Cisco Packet Tracer, GNS3 o Boson NetSim ([Anexo XXII](ANEXO-XXII-Simulador-de-redes.md)).  
 > **II · WSL + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
@@ -130,7 +130,7 @@ Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el mode
 
 | Entorno | Función didáctica | Uso recomendado |
 |---|---|---|
-| **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
+| **Entorno I · Simulador de redes** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
 | **Entorno II · WSL + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
 | **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
 | **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
@@ -176,7 +176,7 @@ Al finalizar esta unidad deberás ser capaz de:
 -   Instalar y configurar `vsftpd`.
 -   Instalar y utilizar OpenSSH para SFTP/SCP.
 -   Analizar transferencias con Wireshark.
--   Configurar y probar FTP/TFTP en Packet Tracer.
+-   Configurar y probar FTP/TFTP en el Simulador de redes.
 -   Diagnosticar problemas de conectividad, autenticación, permisos y
     firewall.
 -   Documentar una instalación de transferencia de ficheros.
@@ -1222,9 +1222,9 @@ Puede utilizarse en determinados escenarios para:
 >
 > TFTP es deliberadamente sencillo: utiliza UDP y carece de mecanismos propios de autenticación comparables a FTP o SSH. Se emplea principalmente en escenarios controlados, como transferencia de firmware o archivos de arranque.
 
-# 🧪 29. PRÁCTICA 4.2 --- TFTP en Cisco Packet Tracer
+# 🧪 29. PRÁCTICA 4.2 --- TFTP en el Simulador de redes
 
-> 🔎 **PISTAS ESPECÍFICAS · -- TFTP en Cisco Packet Tracer**
+> 🔎 **PISTAS ESPECÍFICAS · -- TFTP en el Simulador de redes**
 >
 > **Qué debes fijar:** Dibuja la topología y marca IP, máscara, puerta de enlace, interfaz y siguiente salto. No pruebes una capa superior hasta demostrar que la inferior funciona. Separa autenticación, canal de control/datos, permisos y transporte seguro. Comprueba primero quién puede entrar y después qué operación puede realizar.
 >
@@ -1242,7 +1242,7 @@ PC ───── SWITCH ───── ROUTER
                     TFTP SERVER
 ```
 
-Configura un servidor TFTP en Packet Tracer.
+Configura un servidor TFTP en el Simulador de redes.
 
 Desde un dispositivo Cisco:
 
@@ -1308,9 +1308,9 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
 
 
-# 🧪 30. PRÁCTICA 4.3 --- FTP en Cisco Packet Tracer
+# 🧪 30. PRÁCTICA 4.3 --- FTP en el Simulador de redes
 
-> 🔎 **PISTAS ESPECÍFICAS · -- FTP en Cisco Packet Tracer**
+> 🔎 **PISTAS ESPECÍFICAS · -- FTP en el Simulador de redes**
 >
 > **Qué debes fijar:** Dibuja la topología y marca IP, máscara, puerta de enlace, interfaz y siguiente salto. No pruebes una capa superior hasta demostrar que la inferior funciona. Separa autenticación, canal de control/datos, permisos y transporte seguro. Comprueba primero quién puede entrar y después qué operación puede realizar.
 >
@@ -1319,12 +1319,12 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 > **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
 
 
-Packet Tracer permite simular un servidor FTP.
+El Simulador de redes permite simular un servidor FTP.
 
 ## Topología
 
 ```text
-PC1 ───── SWITCH ───── SERVER-PT
+PC1 ───── SWITCH ───── SERVER   
                            │
                           FTP
 ```
@@ -3733,7 +3733,7 @@ d)  `data_min` / `data_max`
                        │
        ┌───────────────┼────────────────┐
        │               │                │
- Packet Tracer       Ubuntu 26.04     OpenSSH
+ Sim. de redes       Ubuntu 26.04     OpenSSH
        │               │                │
      FTP/TFTP        vsftpd          SFTP/SCP
                        │                │
@@ -3869,6 +3869,6 @@ Webmin dispone de **SSH Server**; úsalo para relacionar directivas con `sshd_co
 
 ### Ruta práctica de tres entornos
 
-**Packet Tracer:** utilizar las funciones FTP/TFTP disponibles en Server-PT para comprender cliente, servidor, puerto y flujo; no presentarlas como sustituto de SFTP real.  
+**Simulador de redes:** utilizar las funciones FTP/TFTP disponibles en Server para comprender cliente, servidor, puerto y flujo; no presentarlas como sustituto de SFTP real.  
 **WSL:** actuar como cliente con `ftp`, `sftp`, `scp`, `curl` y `tcpdump`.  
 **VirtualBox:** centralizar el servidor real en Lothlorien con OpenSSH/SFTP y, cuando la práctica lo requiera, vsftpd; Rivendel sirve como segundo extremo de prueba.

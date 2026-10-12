@@ -5,7 +5,7 @@
 - Se incorpora de forma explícita la correspondencia curricular del módulo 0375 con los **RA1–RA8**.
 - Se fija la correspondencia: **UT2→RA2, UT3→RA1, UT4→RA3, UT5→RA4, UT6→RA5, UT7→RA6 y UT8→RA7+RA8**.
 - **UT1** queda identificada como unidad de fundamentación transversal y no se fuerza su asignación a un RA.
-- Se recupera como **único esquema del entorno de red del laboratorio** el PNG mejorado basado en Cisco Packet Tracer: `img/topologia-tierramedia-packettracer.png`.
+- Se recupera como **único esquema del entorno de red del laboratorio** el PNG mejorado basado en Cisco Packet Tracer: `img/topologia-tierramedia-simulador.png`.
 - Se elimina del repositorio el SVG de topología generado posteriormente.
 - Se actualizan README, matriz curricular, índice, arquitectura y documentación de versión a v6.6.
 
@@ -16,6 +16,10 @@
 - Añadida comprobación específica y documentación del comportamiento de Webmin.
 
 # Changelog
+
+## v6.6.3 — 12/10/2026
+
+- El Entorno I pasa a llamarse **Simulador de redes**, con las opciones Netfix, Cisco Packet Tracer, GNS3 y Boson NetSim, por ese orden, con sus enlaces. Detalle en [CHANGELOG-v6.6.3.md](CHANGELOG-v6.6.3.md).
 
 ## v6.6.2 — 11/10/2026
 

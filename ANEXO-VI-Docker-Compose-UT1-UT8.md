@@ -39,11 +39,11 @@ docker compose exec toolbox ss -lntup
 docker compose down
 ```
 
-Para prácticas de routing real se mantiene VirtualBox/Packet Tracer.
+Para prácticas de routing real se mantiene VirtualBox/Simulador de redes.
 
 ## 4. UT2 · DHCP
 
-DHCP requiere cuidado con broadcast, interfaces y privilegios. Compose sirve para laboratorios controlados, pero las pruebas que necesitan una LAN real se realizarán en VirtualBox o Packet Tracer.
+DHCP requiere cuidado con broadcast, interfaces y privilegios. Compose sirve para laboratorios controlados, pero las pruebas que necesitan una LAN real se realizarán en VirtualBox o el Simulador de redes.
 
 Kea debe validarse antes de iniciar:
 

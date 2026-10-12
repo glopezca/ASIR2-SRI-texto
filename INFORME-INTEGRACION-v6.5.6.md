@@ -33,7 +33,7 @@ Esta versión parte de **v6.5.5** y audita explícitamente las mejoras introduci
 - No existen referencias activas a `la denominación anterior` en el material principal.
 - No se mantiene un segundo anexo la denominación anterior duplicado.
 - Los enlaces internos del índice general apuntan a los nombres canónicos.
-- La topología gráfica existe en `img/topologia-tierramedia-packettracer.png`.
+- La topología gráfica existe en `img/topologia-tierramedia-simulador.png`.
 - `UT1` contiene la práctica Tierra Media completa de Packet Tracer.
 - `UT2` contiene Arnor → Mordor CLI → Kea.
 - `UT3` contiene la práctica DNS de Packet Tracer en Lothlorien.

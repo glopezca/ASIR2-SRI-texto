@@ -19,7 +19,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 | Debes dominar | Evidencia observable |
 |---
-> 🧭 **Arquitectura común v6.6:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.6:** [Tierra Media · Simulador de redes · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 |---|
 | **jerarquía DNS** | Explicación, comando, diagrama o evidencia verificable. |
 | **recursión e iteración** | Explicación, comando, diagrama o evidencia verificable. |
@@ -47,7 +47,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Simulador de redes**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultado de aprendizaje trabajado
 >
@@ -111,7 +111,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
                              │
                    DNSSEC · TSIG · TKEY
 ┌──────────────────────────────────────────────────────────────────────┐
-│ 🧪 ENTORNOS · I Packet Tracer · II WSL · III VirtualBox · IV Compose │
+│ 🧪 ENTORNOS · I Sim. de redes · II WSL · III VirtualBox · IV Compose │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -119,7 +119,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
-> **I · Cisco Packet Tracer** — simulación de red y protocolos.  
+> **I · Simulador de redes** — simulación de red y protocolos: Netfix, Cisco Packet Tracer, GNS3 o Boson NetSim ([Anexo XXII](ANEXO-XXII-Simulador-de-redes.md)).  
 > **II · WSL + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
@@ -130,7 +130,7 @@ Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el mode
 
 | Entorno | Función didáctica | Uso recomendado |
 |---|---|---|
-| **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
+| **Entorno I · Simulador de redes** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
 | **Entorno II · WSL + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
 | **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
 | **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
@@ -1122,15 +1122,15 @@ En Webmin, el módulo **Servers → BIND DNS Server** permite inspeccionar y edi
 > 👨‍🏫 **Criterio de corrección de las prácticas**
 >
 > La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
-# 🧪 PRÁCTICA INTEGRADORA --- DNS en Cisco Packet Tracer · Tierra Media
+# 🧪 PRÁCTICA INTEGRADORA --- DNS en el Simulador de redes · Tierra Media
 
 ## Objetivo
 
-Completar la topología acumulativa de UT1 y UT2 incorporando el servicio DNS en **Lothlorien**. Arnor `192.168.10.192` ya existe como servidor DHCP didáctico de UT2, pero el DNS permanece centralizado en Lothlorien. El dominio de laboratorio será `tierramedia.jc` y Lothlorien será su servidor DNS principal en Packet Tracer.
+Completar la topología acumulativa de UT1 y UT2 incorporando el servicio DNS en **Lothlorien**. Arnor `192.168.10.192` ya existe como servidor DHCP didáctico de UT2, pero el DNS permanece centralizado en Lothlorien. El dominio de laboratorio será `tierramedia.jc` y Lothlorien será su servidor DNS principal en el Simulador de redes.
 
 ### Topología
 
-![Topología Tierra Media en Cisco Packet Tracer](img/topologia-tierramedia-packettracer.png)
+![Topología Tierra Media en el Simulador de redes](img/topologia-tierramedia-simulador.png)
 
 Servidor DNS:
 
@@ -1144,7 +1144,7 @@ FQDN: lothlorien.tierramedia.jc
 
 ## 1. Preparar Lothlorien
 
-En **Server-PT Lothlorien → Desktop → IP Configuration**:
+En **Server Lothlorien → Desktop → IP Configuration**:
 
 ``` text
 IP Address:      192.168.20.192
@@ -1176,14 +1176,14 @@ Como alias opcional para identificar el servidor DNS:
 dns.tierramedia.jc    CNAME    lothlorien.tierramedia.jc
 ```
 
-> 💡 Packet Tracer proporciona una implementación DNS simplificada orientada a laboratorio. Esta práctica trabaja con registros y resolución desde clientes; la configuración autoritativa completa con BIND9 se estudia en las prácticas de Ubuntu de esta misma UT.
+> 💡 El Simulador de redes proporciona una implementación DNS simplificada orientada a laboratorio. Esta práctica trabaja con registros y resolución desde clientes; la configuración autoritativa completa con BIND9 se estudia en las prácticas de Ubuntu de esta misma UT.
 
-> 🧪 **Para ver cada consulta paquete a paquete**, reproduce Lothlorien en el simulador web netsim:
+> 🧪 **Para ver cada consulta paquete a paquete**, reproduce Lothlorien en el Simulador de redes Netfix (web, sin instalación):
 > - mismos registros `A` y `CNAME`;
 > - `nslookup` desde Gondor y `dig`/`host` desde un terminal Linux;
 > - PTR automáticos y respuestas `NXDOMAIN`.
 >
-> Correspondencia en el [Anexo XXII · Simulador netsim](ANEXO-XXII-Simulador-netsim-DHCP.md#2-correspondencia-con-las-prácticas).
+> Correspondencia en el [Anexo XXII · Simulador de redes](ANEXO-XXII-Simulador-de-redes.md#2-correspondencia-con-las-prácticas).
 
 ## 2. Configurar el DNS de los clientes
 
@@ -3251,11 +3251,11 @@ La configuración persistente es la que permanece en `/etc/bind/`; la respuesta 
 ### Ruta práctica de tres entornos
 
 ```text
-PACKET TRACER                  WSL                         VIRTUALBOX
-Lothlorien Server-PT DNS  →    dig / nslookup        →     Lothlorien BIND9
+SIM. DE REDES                  WSL                         VIRTUALBOX
+Lothlorien Server    DNS  →    dig / nslookup        →     Lothlorien BIND9
 Rivendel auxiliar              tcpdump DNS                 Rivendel secundario
 ```
 
-**Packet Tracer:** zona simplificada `tierramedia.jc` y consultas desde Gondor/Hobbiton.  
+**Simulador de redes:** zona simplificada `tierramedia.jc` y consultas desde Gondor/Hobbiton.  
 **WSL:** `dig`, `host`, `resolvectl` y captura DNS.  
 **VirtualBox:** BIND9 autoritativo en Lothlorien, zona inversa y Rivendel como secundario cuando proceda.

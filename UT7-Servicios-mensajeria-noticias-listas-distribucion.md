@@ -19,7 +19,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 | Debes dominar | Evidencia observable |
 |---
-> 🧭 **Arquitectura común v6.6:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.6:** [Tierra Media · Simulador de redes · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 |---|
 | **XMPP** | Explicación, comando, diagrama o evidencia verificable. |
 | **IRC** | Explicación, comando, diagrama o evidencia verificable. |
@@ -47,7 +47,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Simulador de redes**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultado de aprendizaje trabajado
 >
@@ -890,18 +890,18 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 # 6. 🧪 Arquitectura de laboratorio
 
-La unidad se trabajará mediante cuatro entornos complementarios: simulación de red con Packet Tracer, herramientas y clientes en WSL, servidores completos en VirtualBox y despliegues reproducibles con Docker Compose.
+La unidad se trabajará mediante cuatro entornos complementarios: simulación de red con el Simulador de redes, herramientas y clientes en WSL, servidores completos en VirtualBox y despliegues reproducibles con Docker Compose.
 
 ```text
               🧪 ENTORNOS DE PRÁCTICAS
                        │
        ┌───────────────┼───────────────┬───────────────┐
        ▼               ▼               ▼               ▼
- Packet Tracer       WSL          VirtualBox      Docker Compose
+ Sim. de redes       WSL          VirtualBox      Docker Compose
  simulación       clientes/tools    servidores      servicios
 ```
 
-## 6.1 Cisco Packet Tracer
+## 6.1 Simulador de redes
 
 Se utilizará para representar:
 
@@ -1000,7 +1000,7 @@ Diseñar la infraestructura necesaria para desplegar los servicios de la unidad.
 
 ### Tareas
 
-1. Crear la topología en Cisco Packet Tracer.
+1. Crear la topología en el Simulador de redes.
 2. Asignar direccionamiento.
 3. Configurar gateway.
 4. Verificar conectividad.
@@ -2881,7 +2881,7 @@ D. Utilizar siempre contraseñas triviales
 
 > 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
-> **I · Cisco Packet Tracer** — simulación de red y protocolos.  
+> **I · Simulador de redes** — simulación de red y protocolos: Netfix, Cisco Packet Tracer, GNS3 o Boson NetSim ([Anexo XXII](ANEXO-XXII-Simulador-de-redes.md)).  
 > **II · WSL + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
@@ -2892,7 +2892,7 @@ Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el mode
 
 | Entorno | Función didáctica | Uso recomendado |
 |---|---|---|
-| **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
+| **Entorno I · Simulador de redes** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
 | **Entorno II · WSL + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
 | **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
 | **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
@@ -2989,6 +2989,6 @@ No se debe inventar un módulo Webmin específico para Prosody, IRC, Mailman o I
 
 ### Ruta práctica de tres entornos
 
-**Packet Tracer:** representar la conectividad de los clientes con Lothlorien y documentar IP, puertos y rutas; los servicios XMPP/IRC/NNTP se ejecutan fuera de PT.  
+**Simulador de redes:** representar la conectividad de los clientes con Lothlorien y documentar IP, puertos y rutas; los servicios XMPP/IRC/NNTP se ejecutan fuera del simulador.  
 **WSL:** utilizar clientes CLI, `nc`, `ss` y `tcpdump` para observar los protocolos.  
 **VirtualBox:** desplegar Prosody y los servicios de listas/noticias en Lothlorien; Rivendel sirve como cliente o nodo auxiliar.

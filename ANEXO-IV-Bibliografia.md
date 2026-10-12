@@ -129,7 +129,11 @@ La documentación oficial del proyecto es la referencia primaria. Las fuentes se
 
 ## 14. 🧪 Redes y simulación
 
-- Cisco Packet Tracer: https://www.netacad.com/courses/packet-tracer
+- Simulador de redes (por orden):
+  - Netfix: https://raw.githack.com/glopezca/netfix/main/demo/netfix-lab.html · https://github.com/glopezca/netfix
+  - Cisco Packet Tracer: https://www.netacad.com/cisco-packet-tracer
+  - GNS3: https://www.gns3.com/ · https://docs.gns3.com/ · https://github.com/GNS3
+  - Boson NetSim: https://boson.com/netsim-cisco-network-simulator/
 - Wireshark: https://www.wireshark.org/docs/
 - tcpdump: https://www.tcpdump.org/manpages/tcpdump.1.html
 

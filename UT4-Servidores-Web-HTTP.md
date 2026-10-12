@@ -19,7 +19,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 | Debes dominar | Evidencia observable |
 |---
-> 🧭 **Arquitectura común v6.6:** [Tierra Media · Packet Tracer · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
+> 🧭 **Arquitectura común v6.6:** [Tierra Media · Simulador de redes · WSL · VirtualBox](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md). La práctica de esta UT se construye sobre el estado alcanzado en la UT anterior.
 |---|
 | **HTTP** | Explicación, comando, diagrama o evidencia verificable. |
 | **cabeceras y códigos** | Explicación, comando, diagrama o evidencia verificable. |
@@ -47,7 +47,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Simulador de redes**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultado de aprendizaje trabajado
 >
@@ -76,7 +76,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 >
 > El enfoque práctico actual utiliza versiones y herramientas contemporáneas, manteniendo los conceptos fundamentales:
 >
-> - 🧪 **Cisco Packet Tracer** para la parte de red y servicios básicos.
+> - 🧪 **Simulador de redes** para la parte de red y servicios básicos.
 > - 🐧 **WSL + Ubuntu 26.04** como cliente y entorno de pruebas.
 > - 🖥️ **VirtualBox + Ubuntu 26.04 Server** como plataforma principal de servidor.
 >
@@ -117,7 +117,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
                      │
           TLS · permisos · logs
 ┌──────────────────────────────────────────────────────────────────────┐
-│ 🧪 ENTORNOS · I Packet Tracer · II WSL · III VirtualBox · IV Compose │
+│ 🧪 ENTORNOS · I Sim. de redes · II WSL · III VirtualBox · IV Compose │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -125,7 +125,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
-> **I · Cisco Packet Tracer** — simulación de red y protocolos.  
+> **I · Simulador de redes** — simulación de red y protocolos: Netfix, Cisco Packet Tracer, GNS3 o Boson NetSim ([Anexo XXII](ANEXO-XXII-Simulador-de-redes.md)).  
 > **II · WSL + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
@@ -136,7 +136,7 @@ Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el mode
 
 | Entorno | Función didáctica | Uso recomendado |
 |---|---|---|
-| **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
+| **Entorno I · Simulador de redes** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
 | **Entorno II · WSL + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
 | **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
 | **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
@@ -4384,7 +4384,7 @@ d)  El puerto de HTTP.
                         │
         ┌───────────────┼────────────────┐
         │               │                │
-      WSL          VirtualBox       Packet Tracer
+      WSL          VirtualBox       Sim. de redes
     cliente        Ubuntu Server      red/simulación
 ```
 
@@ -4492,6 +4492,6 @@ sudo ss -lntp | grep -E ':80|:443'
 
 ### Ruta práctica de tres entornos
 
-**Packet Tracer:** representar cliente → switch → Mordor → Lothlorien y utilizar HTTP de Server-PT para observar direccionamiento, puerto 80 y DNS. Alternativa con *handshake* TCP, `GET` y `curl -I` visibles: [Anexo XXII · Simulador netsim](ANEXO-XXII-Simulador-netsim-DHCP.md#2-correspondencia-con-las-prácticas).  
+**Simulador de redes:** representar cliente → switch → Mordor → Lothlorien y utilizar HTTP de Server para observar direccionamiento, puerto 80 y DNS. Alternativa con *handshake* TCP, `GET` y `curl -I` visibles: [Anexo XXII · Simulador de redes](ANEXO-XXII-Simulador-de-redes.md#2-correspondencia-con-las-prácticas).  
 **WSL:** cliente HTTP/HTTPS con `curl`, `openssl s_client`, `ss` y `tcpdump`.  
 **VirtualBox:** Apache/Nginx en Lothlorien; Rivendel puede actuar como backend para el reverse proxy.

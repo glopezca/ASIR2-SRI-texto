@@ -45,7 +45,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > **SERVICIOS DE RED E INTERNET · CFGS ASIR · Material docente integral · 2026**
 >
-> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Cisco Packet Tracer**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
+> Material autónomo actualizado para el perfil profesional de Técnico Superior en Administración de Sistemas Informáticos en Red. Laboratorio de referencia: **Simulador de redes**, **WSL + Ubuntu 26.04**, **VirtualBox + Ubuntu 26.04 Server** y **Docker Compose**.
 >
 > ### 🎯 Resultado de aprendizaje trabajado
 >
@@ -98,10 +98,10 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
                            │
               ┌────────────┼────────────┐
               │            │            │
-         Packet Tracer   Ubuntu 26.04   Wireshark
+         Sim. de redes   Ubuntu 26.04   Wireshark
                           + Kea
 ┌──────────────────────────────────────────────────────────────────────┐
-│ 🧪 ENTORNOS · I Packet Tracer · II WSL · III VirtualBox · IV Compose │
+│ 🧪 ENTORNOS · I Sim. de redes · II WSL · III VirtualBox · IV Compose │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -109,7 +109,7 @@ Responde sin consultar la teoría. No es una nota: sirve para decidir qué prerr
 
 > 🧪 **LOS CUATRO ENTORNOS DE PRÁCTICAS**
 >
-> **I · Cisco Packet Tracer** — simulación de red y protocolos.  
+> **I · Simulador de redes** — simulación de red y protocolos: Netfix, Cisco Packet Tracer, GNS3 o Boson NetSim ([Anexo XXII](ANEXO-XXII-Simulador-de-redes.md)).  
 > **II · WSL + Ubuntu 26.04** — herramientas, clientes y diagnóstico.  
 > **III · VirtualBox + Ubuntu 26.04 Server** — administración de servidores completos.  
 > **IV · Docker Compose** — infraestructura reproducible y multicontenedor.
@@ -120,7 +120,7 @@ Las cuatro opciones son **entornos hermanos**. Cambia la herramienta, no el mode
 
 | Entorno | Función didáctica | Uso recomendado |
 |---|---|---|
-| **Entorno I · Cisco Packet Tracer** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
+| **Entorno I · Simulador de redes** | Simulación de topologías y comportamiento de red | Fundamentos, routing, direccionamiento y DHCP cuando proceda |
 | **Entorno II · WSL + Ubuntu 26.04** | CLI, clientes, scripts y diagnóstico | `curl`, `dig`, `ss`, `tcpdump` y pruebas |
 | **Entorno III · VirtualBox + Ubuntu 26.04 Server** | Administración de servidores | Instalación, configuración, permisos, servicios y logs |
 | **Entorno IV · Docker Compose** | Despliegue reproducible | Redes, puertos, volúmenes y healthchecks cuando sea portable |
@@ -922,9 +922,9 @@ Si la instalación dispone de un módulo DHCP compatible, localízalo en **Serve
 > 👨‍🏫 **Criterio de corrección de las prácticas**
 >
 > La solución de referencia no se reduce a una configuración final. Se valoran el proceso, la capacidad para localizar ficheros, validar la sintaxis, comprobar puertos y conectividad, interpretar logs y justificar técnicamente cada decisión. Cuando el ejercicio admita varias soluciones, cualquier solución equivalente y correctamente justificada es válida.
-# 🧪 25. PRÁCTICA 1 --- DHCP gráfico en Packet Tracer · Arnor
+# 🧪 25. PRÁCTICA 1 --- DHCP gráfico en el Simulador de redes · Arnor
 
-> **Escenario v6.6:** Arnor es el primer servidor DHCP de la red interna. Se configura exclusivamente mediante la interfaz gráfica de **Server-PT** para que el alumno comprenda el ámbito, las opciones y las reservas antes de trasladar exactamente el mismo servicio al router Mordor mediante CLI.
+> **Escenario v6.6:** Arnor es el primer servidor DHCP de la red interna. Se configura exclusivamente mediante la interfaz gráfica de **Server** para que el alumno comprenda el ámbito, las opciones y las reservas antes de trasladar exactamente el mismo servicio al router Mordor mediante CLI.
 
 ## Objetivo
 
@@ -984,11 +984,11 @@ Domain Name:       tierramedia.jc
 
 4. Guarda con **Add**.
 
-El objetivo es que el ámbito dinámico cubra `.1`–`.32`. Si la versión de Packet Tracer no muestra un campo de dominio, se documentará esa limitación y se conservarán gateway y DNS como opciones obligatorias.
+El objetivo es que el ámbito dinámico cubra `.1`–`.32`. Si la versión del Simulador de redes no muestra un campo de dominio, se documentará esa limitación y se conservarán gateway y DNS como opciones obligatorias.
 
 ## 25.3. Direcciones ya establecidas: Gondor y Rohan
 
-La interfaz gráfica estándar de **Server-PT** de Packet Tracer permite crear ámbitos DHCP, pero no ofrece en todas las versiones una tabla de reservas por MAC equivalente a la de un servidor DHCP completo. Por tanto, en esta **primera fase visual** no se debe simular una reserva que la herramienta no implementa.
+La interfaz gráfica estándar de **Server** del Simulador de redes permite crear ámbitos DHCP, pero no ofrece en todas las versiones una tabla de reservas por MAC equivalente a la de un servidor DHCP completo. Por tanto, en esta **primera fase visual** no se debe simular una reserva que la herramienta no implementa.
 
 Mantén temporalmente las direcciones ya establecidas de los clientes como configuración estática:
 
@@ -1007,9 +1007,9 @@ IP estática del cliente
 reserva DHCP basada en identidad del cliente
 ```
 
-> **Criterio de calidad:** si una función no está disponible en la GUI concreta de Packet Tracer, se documenta la limitación y se demuestra correctamente en el entorno que sí la soporta.
+> **Criterio de calidad:** si una función no está disponible en la GUI concreta del Simulador de redes, se documenta la limitación y se demuestra correctamente en el entorno que sí la soporta.
 
-> 🧪 **Reservas por MAC en un servidor gráfico:** el Server-PT del simulador web netsim tiene tabla de reservas. Con él puedes completar esta fase con Gondor `.64` y Rohan `.65` reservados fuera del rango `.1`–`.32`. Pasos en el [Anexo XXII · Simulador netsim](ANEXO-XXII-Simulador-netsim-DHCP.md#4-reservas-dhcp-obtener-el-identificador-sin-inventarlo).
+> 🧪 **Reservas por MAC en un servidor gráfico:** el Server del Simulador de redes Netfix (web, sin instalación) tiene tabla de reservas. Con él puedes completar esta fase con Gondor `.64` y Rohan `.65` reservados fuera del rango `.1`–`.32`. Pasos en el [Anexo XXII · Simulador de redes](ANEXO-XXII-Simulador-de-redes.md#4-reservas-dhcp-obtener-el-identificador-sin-inventarlo).
 
 ## 25.4. Probar el ámbito dinámico
 
@@ -1033,7 +1033,7 @@ ping 192.168.10.254
 ping 192.168.20.192
 ```
 
-En **Simulation Mode**, filtra `DHCP` y observa:
+En **el modo Simulación**, filtra `DHCP` y observa:
 
 ```text
 DHCPDISCOVER → DHCPOFFER → DHCPREQUEST → DHCPACK
@@ -1046,14 +1046,14 @@ DHCPDISCOVER → DHCPOFFER → DHCPREQUEST → DHCPACK
 - direcciones estáticas `.64` y `.65` de Gondor/Rohan;
 - concesión dinámica de un cliente de prueba;
 - `ipconfig /all` de ambos clientes;
-- secuencia DORA en Simulation Mode;
+- secuencia DORA en el modo Simulación;
 - conectividad con gateway y DNS.
 
 ---
 
 # 🧪 26. PRÁCTICA 2 --- Sustituir Arnor por DHCP en Mordor (CLI)
 
-> **Mismo servicio, otra capa de administración:** ahora se elimina la función DHCP de Arnor y se configura **Mordor**, el Router-PT, para proporcionar exactamente el mismo ámbito, opciones y reservas.
+> **Mismo servicio, otra capa de administración:** ahora se elimina la función DHCP de Arnor y se configura **Mordor**, el Router, para proporcionar exactamente el mismo ámbito, opciones y reservas.
 
 ## 26.1. Desactivar Arnor
 
@@ -1084,7 +1084,7 @@ Mordor# copy running-config startup-config
 
 ### Reservas
 
-Cisco IOS permite definir reservas mediante pools host. La forma exacta del `client-identifier` depende de la identificación DHCP que utilice Packet Tracer. Por ello, primero se obtiene la información del cliente y después se construye la reserva; nunca se inventa el identificador.
+Cisco IOS permite definir reservas mediante pools host. La forma exacta del `client-identifier` depende de la identificación DHCP que utilice el simulador elegido. Por ello, primero se obtiene la información del cliente y después se construye la reserva; nunca se inventa el identificador.
 
 ```text
 Mordor# show ip dhcp binding
@@ -1093,7 +1093,7 @@ Mordor# show ip dhcp conflict
 Mordor# show running-config | section dhcp
 ```
 
-Cuando la versión de Packet Tracer admita el identificador de cliente:
+Cuando la versión del Simulador de redes admita el identificador de cliente:
 
 ```text
 ip dhcp pool GONDOR
@@ -1111,7 +1111,7 @@ ip dhcp pool ROHAN
  domain-name tierramedia.jc
 ```
 
-> 🧪 **Si tu versión de Packet Tracer no admite estas reservas**, complétalas en **[netsim DHCP Lab](https://raw.githack.com/glopezca/netsim/main/demo/netsim-dhcp-lab.html)**. Es un simulador web, sin instalación, que acepta toda la sintaxis DHCP de IOS (`host`, `client-identifier`, `hardware-address`, `address … client-id`). Muestra el Client-ID de cada PC para no tener que inventarlo, admite `show running-config | section dhcp` y deja ver el DORA paquete a paquete. Guía de uso y correspondencia con estas prácticas: [Anexo XXII · Simulador netsim](ANEXO-XXII-Simulador-netsim-DHCP.md).
+> 🧪 **Si tu versión del Simulador de redes no admite estas reservas**, complétalas en **[Netfix Lab](https://raw.githack.com/glopezca/netfix/main/demo/netfix-lab.html)**. Es un simulador web, sin instalación, que acepta toda la sintaxis DHCP de IOS (`host`, `client-identifier`, `hardware-address`, `address … client-id`). Muestra el Client-ID de cada PC para no tener que inventarlo, admite `show running-config | section dhcp` y deja ver el DORA paquete a paquete. Guía de uso y correspondencia con estas prácticas: [Anexo XXII · Simulador de redes](ANEXO-XXII-Simulador-de-redes.md).
 
 ### 26.3. Comprobación de equivalencia
 
@@ -1635,7 +1635,7 @@ Mordor (DHCP) → DHCPDISCOVER
                  cliente
 ```
 
-> WSL sirve aquí para **observar y diagnosticar**; el servidor DHCP real de la práctica se encuentra en Mordor (VirtualBox) o en Mordor (Packet Tracer).
+> WSL sirve aquí para **observar y diagnosticar**; el servidor DHCP real de la práctica se encuentra en Mordor (VirtualBox) o en Mordor (Simulador de redes).
 
 # 🧭 Guía de resolución y comprobación
 
@@ -2048,7 +2048,7 @@ varias LAN?
 
 Porque WSL proporciona un entorno Linux integrado con una arquitectura
 de red propia; para estudiar varias LAN, routers, relay e interfaces
-virtuales independientes resulta más controlable utilizar Packet Tracer
+virtuales independientes resulta más controlable utilizar el Simulador de redes
 o máquinas virtuales con VirtualBox.
 
 ------------------------------------------------------------------------
@@ -2217,8 +2217,8 @@ Entrega:
 La secuencia de DHCP es deliberadamente comparativa:
 
 ```text
-1. Arnor → DHCP gráfico en Packet Tracer
-2. Mordor → mismo servicio mediante CLI de Router-PT
+1. Arnor → DHCP gráfico en el Simulador de redes
+2. Mordor → mismo servicio mediante CLI de Router
 3. Mordor → DHCP real con Kea en VirtualBox
 4. WSL → solo cliente/análisis; nunca servidor DHCP
 ```
@@ -2244,11 +2244,11 @@ Añadir al inventario: `kea-dhcp4-server`, `journalctl -u`, `ss -lunp`, `tcpdump
 ### Ruta práctica de tres entornos
 
 ```text
-PACKET TRACER                         VIRTUALBOX                         WSL
+SIM. DE REDES                         VIRTUALBOX                         WSL
 Arnor GUI DHCP → Mordor CLI DHCP  →  Mordor + Kea DHCP             →  cliente/análisis
      .1-.32             .64/.65        .1-.32 + reservas .64/.65       tcpdump DORA
 ```
 
-**Packet Tracer:** primero Arnor gráfico; después apagar DHCP en Arnor y reproducir el mismo servicio desde Mordor CLI.  
+**Simulador de redes:** primero Arnor gráfico; después apagar DHCP en Arnor y reproducir el mismo servicio desde Mordor CLI.  
 **VirtualBox:** DHCP real con Kea en Mordor; Gondor y Rohan reciben sus reservas.  
 **WSL:** solo cliente y análisis; no se instala ningún servidor DHCP.

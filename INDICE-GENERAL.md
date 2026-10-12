@@ -29,7 +29,7 @@
 - [Anexo XIX · Arquitectura de laboratorio v6.6](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md)
 - [Anexo XX · Scripts personalizados de ASIR2-SRI](ANEXO-XX-Scripts-Personalizados-ASIR2-SRI.md)
 - [Anexo XXI · Chuleta de utilidades TUI](ANEXO-XXI-Chuleta-TUI-Administracion.md)
-- [Anexo XXII · Simulador netsim: DHCP en Cisco IOS y servicios Server-PT](ANEXO-XXII-Simulador-netsim-DHCP.md)
+- [Anexo XXII · Simulador de redes: DHCP en Cisco IOS y servicios Server](ANEXO-XXII-Simulador-de-redes.md)
 
 ### Referencia, seguridad y metodología
 

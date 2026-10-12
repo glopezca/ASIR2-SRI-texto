@@ -58,9 +58,9 @@
 | **MX** | UT3 | [UT3-Servicio-DNS.md](UT3-Servicio-DNS.md) |
 | **NAT** | UT1 | [UT1-Conceptos-basicos-TCP-IP.md](UT1-Conceptos-basicos-TCP-IP.md) |
 | **NDP** | UT1 | [UT1-Conceptos-basicos-TCP-IP.md](UT1-Conceptos-basicos-TCP-IP.md) |
+| **Netfix** | UT2, UT3, UT4, UT6 | [ANEXO-XXII-Simulador-de-redes.md](ANEXO-XXII-Simulador-de-redes.md) |
 | **NNTP** | UT7 | [UT7-Servicios-mensajeria-noticias-listas-distribucion.md](UT7-Servicios-mensajeria-noticias-listas-distribucion.md) |
 | **PAT** | UT1 | [UT1-Conceptos-basicos-TCP-IP.md](UT1-Conceptos-basicos-TCP-IP.md) |
-| **netsim** | UT2, UT3, UT4, UT6 | [ANEXO-XXII-Simulador-netsim-DHCP.md](ANEXO-XXII-Simulador-netsim-DHCP.md) |
 | **Pool** | UT2 | [UT2-Servicio-DHCP.md](UT2-Servicio-DHCP.md) |
 | **Presencia** | UT7 | [UT7-Servicios-mensajeria-noticias-listas-distribucion.md](UT7-Servicios-mensajeria-noticias-listas-distribucion.md) |
 | **PTR** | UT3 | [UT3-Servicio-DNS.md](UT3-Servicio-DNS.md) |
@@ -78,6 +78,7 @@
 | **SCP** | UT5 | [UT5-Servicios-transferencia-ficheros.md](UT5-Servicios-transferencia-ficheros.md) |
 | **SFTP** | UT5 | [UT5-Servicios-transferencia-ficheros.md](UT5-Servicios-transferencia-ficheros.md) |
 | **Sieve** | UT6 | [UT6-Servicios-correo-electronico.md](UT6-Servicios-correo-electronico.md) |
+| **Simulador de redes** | UT1–UT8 | [ANEXO-XXII-Simulador-de-redes.md](ANEXO-XXII-Simulador-de-redes.md) |
 | **SIP** | UT8 | [UT8-Servicios-audio-video.md](UT8-Servicios-audio-video.md) |
 | **SNI** | UT4 | [UT4-Servidores-Web-HTTP.md](UT4-Servidores-Web-HTTP.md) |
 | **SOA** | UT3 | [UT3-Servicio-DNS.md](UT3-Servicio-DNS.md) |
@@ -102,7 +103,7 @@
 
 ## 🆕 Entradas v6.5.5
 
-- **Arnor** → UT2 · DHCP gráfico en Packet Tracer.
+- **Arnor** → UT2 · DHCP gráfico en el Simulador de redes.
 - **Kea** → UT2 · DHCP en VirtualBox/Mordor · `/etc/kea/kea-dhcp4.conf`.
 - **nftables** → UT1 · `/etc/nftables.conf` · tablas, cadenas y reglas.
 - **Lothlorien** → arquitectura común · servidor principal de servicios.

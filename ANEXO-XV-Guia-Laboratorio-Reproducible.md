@@ -36,7 +36,7 @@ Una práctica es reproducible cuando otro alumno puede reconstruir el estado ini
 
 ## 5. Paridad entre entornos
 
-| Objetivo | I Packet Tracer | II WSL | III VirtualBox | IV Compose |
+| Objetivo | I Simulador de redes | II WSL | III VirtualBox | IV Compose |
 |---|---|---|---|---|
 | topología | excelente | limitada | excelente | redes virtuales |
 | cliente CLI | limitada | excelente | excelente | excelente |

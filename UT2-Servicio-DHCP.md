@@ -414,18 +414,35 @@ determinada.
 En Kea una reserva puede asociarse, entre otros identificadores, a una
 dirección MAC mediante `hw-address`.
 
-Ejemplo:
+Ejemplo completo de `/etc/kea/kea-dhcp4.conf` (la reserva va **dentro de la subred** a la que pertenece la
+dirección y, como buena práctica, **fuera del pool** dinámico):
 
 ``` json
 {
-  "reservations": [
-    {
-      "hw-address": "00:11:22:33:44:55",
-      "ip-address": "192.168.10.50"
-    }
-  ]
+  "Dhcp4": {
+    "interfaces-config": { "interfaces": [ "enp0s8" ] },
+    "lease-database": { "type": "memfile", "persist": true, "name": "/var/lib/kea/kea-leases4.csv" },
+    "valid-lifetime": 3600,
+    "subnet4": [
+      {
+        "id": 1,
+        "subnet": "192.168.10.0/24",
+        "pools": [ { "pool": "192.168.10.100-192.168.10.199" } ],
+        "reservations": [
+          {
+            "hw-address": "00:11:22:33:44:55",
+            "ip-address": "192.168.10.50",
+            "hostname": "cliente-a"
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
+
+> 🧩 Un bloque `{ "reservations": [...] }` suelto no es una configuración que Kea pueda cargar: necesita el
+> objeto `Dhcp4`, la interfaz, la base de concesiones y una subred con su identificador `id`.
 
 > ⚠️ Una reserva **no es lo mismo que configurar manualmente la IP en el
 > cliente**.
@@ -729,20 +746,26 @@ Entre las opciones habituales:
 
 En Kea se pueden establecer mediante `option-data`.
 
-Ejemplo:
+Ejemplo completo (las opciones definidas en la subred se entregan a todos sus clientes):
 
 ``` json
 {
-  "option-data": [
-    {
-      "name": "routers",
-      "data": "192.168.10.1"
-    },
-    {
-      "name": "domain-name-servers",
-      "data": "192.168.10.10"
-    }
-  ]
+  "Dhcp4": {
+    "interfaces-config": { "interfaces": [ "enp0s8" ] },
+    "lease-database": { "type": "memfile", "persist": true, "name": "/var/lib/kea/kea-leases4.csv" },
+    "valid-lifetime": 3600,
+    "subnet4": [
+      {
+        "id": 1,
+        "subnet": "192.168.10.0/24",
+        "pools": [ { "pool": "192.168.10.100-192.168.10.199" } ],
+        "option-data": [
+          { "name": "routers", "data": "192.168.10.1" },
+          { "name": "domain-name-servers", "data": "192.168.10.10" }
+        ]
+      }
+    ]
+  }
 }
 ```
 
@@ -1221,7 +1244,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 > **Arquitectura v6.6:** en VirtualBox no se utiliza Arnor como servidor DHCP. La función DHCP se concentra en la VM **Mordor**. Gondor y Rohan son clientes; Lothlorien es el servidor de servicios; Rivendel queda reservado para tareas auxiliares.
 
-## 27.1. Inventario de las cinco VMs
+## 28.1. Inventario de las cinco VMs
 
 | VM | IP | Papel |
 |---|---|---|
@@ -1233,7 +1256,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 
 La topología física/virtual se documenta en el [Anexo de arquitectura v6.6](ANEXO-XIX-Arquitectura-Laboratorio-v6.6.md).
 
-## 27.2. Ubicación y sintaxis de Kea
+## 28.2. Ubicación y sintaxis de Kea
 
 La configuración IPv4 está en:
 
@@ -1247,11 +1270,13 @@ Es un fichero **JSON**. La estructura fundamental es:
 Dhcp4
  ├── interfaces-config
  ├── lease-database
- ├── subnet4
- │    ├── subnet
- │    ├── pools
- │    └── option-data
- └── reservations
+ ├── valid-lifetime
+ └── subnet4
+      ├── id            → obligatorio desde Kea 2.6 (número único por subred)
+      ├── subnet
+      ├── pools
+      ├── option-data
+      └── reservations  → reservas de esa subred
 ```
 
 Ejemplo de ámbito didáctico:
@@ -1260,14 +1285,21 @@ Ejemplo de ámbito didáctico:
 {
   "Dhcp4": {
     "interfaces-config": { "interfaces": [ "enp0s8" ] },
+    "lease-database": { "type": "memfile", "persist": true, "name": "/var/lib/kea/kea-leases4.csv" },
+    "valid-lifetime": 86400,
     "subnet4": [
       {
+        "id": 10,
         "subnet": "192.168.10.0/24",
         "pools": [ { "pool": "192.168.10.1-192.168.10.32" } ],
         "option-data": [
           { "name": "routers", "data": "192.168.10.254" },
           { "name": "domain-name-servers", "data": "192.168.20.192" },
           { "name": "domain-name", "data": "tierramedia.jc" }
+        ],
+        "reservations": [
+          { "hw-address": "08:00:27:00:00:64", "ip-address": "192.168.10.64", "hostname": "gondor" },
+          { "hw-address": "08:00:27:00:00:65", "ip-address": "192.168.10.65", "hostname": "rohan" }
         ]
       }
     ]
@@ -1275,9 +1307,15 @@ Ejemplo de ámbito didáctico:
 }
 ```
 
-Las reservas `.64` y `.65` se añaden en la sección `reservations` utilizando la identificación real de los clientes.
+Las reservas `.64` y `.65` están en la sección `reservations` de la subred. Las MAC `08:00:27:00:00:64` y
+`08:00:27:00:00:65` son de ejemplo (prefijo de VirtualBox): **sustitúyelas por la MAC real** de la interfaz de
+Gondor y de Rohan en la red interna (`ip -br link` en cada cliente o *Configuración → Red* de la VM).
 
-## 27.3. Instalar y configurar
+> ⚠️ **`id` es obligatorio:** desde Kea 2.6 (Ubuntu 26.04 trae Kea 3.0) una subred sin `"id"` no se carga:
+> `kea-dhcp4 -t` responde `subnet configuration failed: missing parameter 'id'` y el servicio no arranca.
+> El número es libre, pero único por subred y estable: las concesiones guardadas lo usan.
+
+## 28.3. Instalar y configurar
 
 En Mordor:
 
@@ -1288,10 +1326,11 @@ sudo cp /etc/kea/kea-dhcp4.conf /etc/kea/kea-dhcp4.conf.bak
 sudoedit /etc/kea/kea-dhcp4.conf
 ```
 
-Valida el JSON antes de reiniciar:
+Valida el JSON y después la configuración de Kea antes de reiniciar (`json.tool` solo comprueba la sintaxis JSON: no detecta, por ejemplo, una subred sin `id`):
 
 ```bash
 python3 -m json.tool /etc/kea/kea-dhcp4.conf >/dev/null
+sudo kea-dhcp4 -t /etc/kea/kea-dhcp4.conf
 ```
 
 Después:
@@ -1305,7 +1344,7 @@ sudo journalctl -u kea-dhcp4-server -b --no-pager
 
 > **Persistencia:** en Ubuntu, el cambio persistente es el fichero JSON; `systemctl enable` hace persistente el arranque del servicio. Primero valida y prueba; después persiste.
 
-## 27.4. Pruebas
+## 28.4. Pruebas
 
 En Gondor y Rohan:
 
@@ -1331,7 +1370,7 @@ DNS    → 192.168.20.192
 GW     → 192.168.10.254
 ```
 
-## 27.5. Webmin
+## 28.5. Webmin
 
 Webmin dispone de un módulo **DHCP Server**, pero su documentación oficial describe el módulo para el servidor ISC DHCP, no como editor universal de Kea. Por tanto:
 
@@ -1361,14 +1400,17 @@ La configuración mínima de Kea debe contener una subred y un pool coherentes c
 ```json
 {
   "Dhcp4": {
-    "interfaces-config": {"interfaces": ["<interfaz>"]},
+    "interfaces-config": { "interfaces": [ "enp0s8" ] },
+    "lease-database": { "type": "memfile", "persist": true, "name": "/var/lib/kea/kea-leases4.csv" },
+    "valid-lifetime": 3600,
     "subnet4": [
       {
+        "id": 1,
         "subnet": "192.168.10.0/24",
-        "pools": [{"pool": "192.168.10.100-192.168.10.199"}],
+        "pools": [ { "pool": "192.168.10.100-192.168.10.199" } ],
         "option-data": [
-          {"name": "routers", "data": "192.168.10.1"},
-          {"name": "domain-name-servers", "data": "192.168.10.10"}
+          { "name": "routers", "data": "192.168.10.1" },
+          { "name": "domain-name-servers", "data": "192.168.10.10" }
         ]
       }
     ]
@@ -1376,7 +1418,7 @@ La configuración mínima de Kea debe contener una subred y un pool coherentes c
 }
 ```
 
-Adapta interfaz, red, pool, gateway y DNS a la topología real. Después valida la configuración, reinicia o recarga el servicio y demuestra la concesión desde un cliente.
+Este fichero pasa `kea-dhcp4 -t` tal cual. Adapta interfaz (`enp0s8` es la segunda tarjeta de la VM), red, pool, gateway y DNS a la topología real, manteniendo el `id` de la subred. Después valida la configuración, reinicia o recarga el servicio y demuestra la concesión desde un cliente.
 
 
 ### 📸 Evidencias y capturas
@@ -1472,16 +1514,29 @@ MAC: 00:11:22:33:44:55
 IP reservada: 192.168.10.50
 ```
 
-Ejemplo:
+Ejemplo completo:
 
 ``` json
 {
-  "reservations": [
-    {
-      "hw-address": "00:11:22:33:44:55",
-      "ip-address": "192.168.10.50"
-    }
-  ]
+  "Dhcp4": {
+    "interfaces-config": { "interfaces": [ "enp0s8" ] },
+    "lease-database": { "type": "memfile", "persist": true, "name": "/var/lib/kea/kea-leases4.csv" },
+    "valid-lifetime": 3600,
+    "subnet4": [
+      {
+        "id": 1,
+        "subnet": "192.168.10.0/24",
+        "pools": [ { "pool": "192.168.10.100-192.168.10.199" } ],
+        "reservations": [
+          {
+            "hw-address": "00:11:22:33:44:55",
+            "ip-address": "192.168.10.50",
+            "hostname": "cliente-a"
+          }
+        ]
+      }
+    ]
+  }
 }
 ```
 

@@ -1,6 +1,6 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-## Material docente integral · `ASIR2-SRI-texto` · v6.6.3
+## Material docente integral · `ASIR2-SRI-texto` · v6.6.4
 
 **Edición 2026** para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
@@ -34,6 +34,10 @@ La correspondencia se contrasta con el currículo básico estatal del título y 
 ## Índice general
 
 Consulta el **[índice general](INDICE-GENERAL.md)** para acceder directamente a todas las UT, anexos y materiales complementarios.
+
+## Novedad v6.6.4 · Ejemplos de Kea ejecutables
+
+Los ejemplos de Kea de la UT2 son ahora ficheros `kea-dhcp4.conf` completos que pasan `kea-dhcp4 -t` con Kea 3.0 (Ubuntu 26.04): todas las subredes llevan su `id`, obligatorio desde Kea 2.6. Detalle en [CHANGELOG-v6.6.4.md](CHANGELOG-v6.6.4.md).
 
 ## Novedad v6.6.3 · Simulador de redes
 
@@ -177,7 +181,7 @@ El material original del repositorio se distribuye bajo **CC BY-SA 4.0**.
 
 **Atribución recomendada:**
 
-> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.6.3, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
+> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.6.4, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
 
 Los materiales de terceros mantienen sus propias licencias, marcas y derechos.
 

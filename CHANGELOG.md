@@ -17,6 +17,10 @@
 
 # Changelog
 
+## v6.6.4 — 21/10/2026
+
+- UT2: los ejemplos de Kea pasan a ser configuraciones completas y ejecutables (subred con `id`, base de concesiones, reservas dentro de la subred). Detalle en [CHANGELOG-v6.6.4.md](CHANGELOG-v6.6.4.md).
+
 ## v6.6.3 — 12/10/2026
 
 - El Entorno I pasa a llamarse **Simulador de redes**, con las opciones Netfix, Cisco Packet Tracer, GNS3 y Boson NetSim, por ese orden, con sus enlaces. Detalle en [CHANGELOG-v6.6.3.md](CHANGELOG-v6.6.3.md).

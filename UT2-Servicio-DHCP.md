@@ -1495,66 +1495,7 @@ Seguir:
 
 ------------------------------------------------------------------------
 
-# 🧷 30. PRÁCTICA 4 --- Reservas DHCP con Kea
-
-> 🔎 **PISTAS ESPECÍFICAS · -- Reservas DHCP con Kea**
->
-> **Qué debes fijar:** Distingue cliente, servidor, ámbito, reserva y relay. Comprueba la concesión real y no des por válida la configuración hasta verificar las opciones recibidas.
->
-> **Evidencia:** La evidencia mínima debe mostrar la configuración concedida al cliente y, cuando sea posible, el intercambio o la concesión en el servidor.
->
-> **Pista de troubleshooting:** si el resultado no coincide con tu predicción, vuelve al último punto demostrado, conserva la evidencia y modifica una sola variable antes de repetir la prueba.
-
-
-Configura:
-
-```text
-Cliente A
-MAC: 00:11:22:33:44:55
-IP reservada: 192.168.10.50
-```
-
-Ejemplo completo:
-
-``` json
-{
-  "Dhcp4": {
-    "interfaces-config": { "interfaces": [ "enp0s8" ] },
-    "lease-database": { "type": "memfile", "persist": true, "name": "/var/lib/kea/kea-leases4.csv" },
-    "valid-lifetime": 3600,
-    "subnet4": [
-      {
-        "id": 1,
-        "subnet": "192.168.10.0/24",
-        "pools": [ { "pool": "192.168.10.100-192.168.10.199" } ],
-        "reservations": [
-          {
-            "hw-address": "00:11:22:33:44:55",
-            "ip-address": "192.168.10.50",
-            "hostname": "cliente-a"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-### Comprobaciones
-
-1.  Arrancar cliente.
-2.  Solicitar configuración DHCP.
-3.  Verificar que recibe `.50`.
-4.  Liberar la concesión.
-5.  Volver a solicitar configuración.
-6.  Comprobar que continúa recibiendo `.50`.
-
-La documentación de Kea permite reservas mediante `hw-address`,
-`client-id`, DUID y otros identificadores. 
-
-------------------------------------------------------------------------
-
-# 📡 31. PRÁCTICA 5 --- Analizar DHCP con Wireshark
+# 📡 30. PRÁCTICA 5 --- Analizar DHCP con Wireshark
 
 > 🔎 **PISTAS ESPECÍFICAS · -- Analizar DHCP con Wireshark**
 >
@@ -1616,7 +1557,7 @@ Identifica en una captura:
 
 ------------------------------------------------------------------------
 
-# 🌉 32. PRÁCTICA 6 --- DHCP Relay
+# 🌉 31. PRÁCTICA 6 --- DHCP Relay
 
 > 🔎 **PISTAS ESPECÍFICAS · -- DHCP Relay**
 >
@@ -1660,7 +1601,7 @@ a `192.168.10.0/24`.
 
 ------------------------------------------------------------------------
 
-# 🧪 33. PRÁCTICA 7 --- WSL como cliente y analizador DHCP
+# 🧪 32. PRÁCTICA 7 --- WSL como cliente y analizador DHCP
 
 WSL **no se utilizará como servidor DHCP**. Su papel en esta UT es analizar y comprobar la red desde el punto de vista de un cliente Linux.
 
@@ -1725,7 +1666,7 @@ Esta práctica se considera resuelta cuando puedes **explicar y demostrar** el r
 | **Total** | **10** | **Superación recomendada: ≥ 5 puntos y práctica funcional.** |
 
 
-# 🧰 34. Herramientas fundamentales
+# 🧰 33. Herramientas fundamentales
 
 ## `ip addr`
 
@@ -1773,7 +1714,7 @@ Permite analizar el intercambio DHCP paquete a paquete.
 
 ------------------------------------------------------------------------
 
-# 🚨 35. Errores frecuentes
+# 🚨 34. Errores frecuentes
 
 ### ❌ El cliente obtiene `169.254.x.x`
 
@@ -1825,7 +1766,7 @@ Comprobar qué servidores están respondiendo.
 
 ------------------------------------------------------------------------
 
-# 🔎 36. Diagnóstico sistemático
+# 🔎 35. Diagnóstico sistemático
 
 Utiliza siempre este árbol:
 
@@ -1858,7 +1799,7 @@ Utiliza siempre este árbol:
 
 ------------------------------------------------------------------------
 
-# 📚 37. DHCP y otros servicios
+# 📚 36. DHCP y otros servicios
 
 DHCP suele trabajar conjuntamente con:
 
@@ -1920,7 +1861,7 @@ Estos ejercicios complementan las prácticas. Se pueden utilizar para clase, tra
 
 **Solución de referencia:** Identificar un dato estable del cliente, asociarlo a una IP fuera de conflictos y validar la concesión y su renovación.
 
-# 🧠 38. Resumen
+# 🧠 37. Resumen
 
 ```text
                     DHCP
@@ -1960,7 +1901,7 @@ Las ideas fundamentales son:
 
 ------------------------------------------------------------------------
 
-# ❓ 39. Autoevaluación
+# ❓ 38. Autoevaluación
 
 1.  ¿Qué problema principal resuelve DHCP?
 2.  ¿Qué parámetros puede recibir un cliente DHCP?
@@ -2207,7 +2148,7 @@ D. Dovecot
 | 9 | **C** |
 | 10 | **B** |
 
-# 🏆 40. Reto final --- Diseña una infraestructura DHCP
+# 🏆 39. Reto final --- Diseña una infraestructura DHCP
 
 Construye una infraestructura con:
 

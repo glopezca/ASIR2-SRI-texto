@@ -17,6 +17,10 @@
 
 # Changelog
 
+## v6.6.5 — 21/10/2026
+
+- UT2: se elimina el apartado 30 («PRÁCTICA 4 — Reservas DHCP con Kea»), que repetía las reservas del §7 y de la práctica de Kea en VirtualBox (§28); los apartados 31–40 pasan a 30–39. Detalle en [CHANGELOG-v6.6.5.md](CHANGELOG-v6.6.5.md).
+
 ## v6.6.4 — 21/10/2026
 
 - UT2: los ejemplos de Kea pasan a ser configuraciones completas y ejecutables (subred con `id`, base de concesiones, reservas dentro de la subred). Detalle en [CHANGELOG-v6.6.4.md](CHANGELOG-v6.6.4.md).

@@ -1,6 +1,6 @@
 # 🌐 Servicios de Red e Internet · ASIR
 
-## Material docente integral · `ASIR2-SRI-texto` · v6.6.4
+## Material docente integral · `ASIR2-SRI-texto` · v6.6.5
 
 **Edición 2026** para el módulo profesional **0375 · Servicios de red e Internet** del **CFGS Técnico Superior en Administración de Sistemas Informáticos en Red (ASIR)**.
 
@@ -181,7 +181,7 @@ El material original del repositorio se distribuye bajo **CC BY-SA 4.0**.
 
 **Atribución recomendada:**
 
-> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.6.4, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
+> **Germán López Castro**, *Servicios de Red e Internet · ASIR2-SRI-texto*, v6.6.5, https://github.com/glopezca/ASIR2-SRI-texto, licencia CC BY-SA 4.0.
 
 Los materiales de terceros mantienen sus propias licencias, marcas y derechos.
 
